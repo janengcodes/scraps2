@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scraps</title>
+  </head>
+  <body>
+    {% for recipe in saved_recipes %}
+    <!--TODO: update onClick-->
+    <!-- name of root = saved_recipe -->
+    <div id="saved_recipe">
+      <h1>{{ recipe.name }}</h1>
+      <img src="{{ recipe.filename }}" />
+      
+      <script type="text/javascript" src="{{ url_for('static', filename='js/bundle.js') }}"></script>
+    </div>
+    {% endfor %}
+  </body>
+</html>

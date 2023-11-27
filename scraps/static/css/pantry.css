@@ -1,0 +1,16 @@
+body {
+  background-color: beige;
+}
+h1 {
+  color: blue;
+  width: 300px;
+  margin: auto;
+
+}
+p {
+  color: red;
+}
+.category h2{
+    width: 300px;
+    margin: auto;
+}
