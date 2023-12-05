@@ -4,12 +4,13 @@ import scraps
 
 
 @scraps.app.route('/api/v1/user/<string:username>', methods=['GET'])
-def get_user(username):
+def get_user():
     connection = scraps.model.get_db()
+    username = scraps.model.get_logname()
 
     cur = connection.execute(
         """
-        SELECT fullname, filename, email, username, email
+        SELECT fullname, filename, email, username
         FROM users
         WHERE username = ?
         """,
@@ -21,52 +22,24 @@ def get_user(username):
     if not user:
         flask.abort(404)
 
-    return flask.jsonify(**user)r<string:usernameuser_calendarusername
-(
-        """
-        SELECT recipe_id, meal_time
-        FROM calendar_events
-        WHERE username = ?
-        """,
-        (username, )
-    )
+    return flask.jsonify(**user)
+# <string:usernameuser_calendarusername
 
-    temp = curr.fetchall()
-
-    meals = []
-    for i in temp:
-        cur = connection.execute(
-        "SELECT name, filename, cook_time "
-        "FROM recipes "
-        "WHERE recipe_id = ? ",
-        (temp['recipe_id'], )
-        )
-        temp = cur.fetchall()
-        comments.append(single_comment)
 
 @scraps.app.route('api/v1/<string:username', methods=['GET'])
 def get_user_saved(username):
     connection = scraps.model.get_db()
-    
+
     curr = connection.execute(
         """
-        SELECT recipe_id, meal_time
-        FROM calendar_events
+        SELECT C.recipe_id, c.meal_time, R.name, R.filename, R.cook_time
+        FROM calendar_events C
+        LEFT JOIN recipes R ON C.recipe_id = R.recipe_id
         WHERE username = ?
         """,
         (username, )
     )
 
-    temp = curr.fetchall()
+    rec = curr.fetchall()
 
-    meals = []
-    for i in temp:
-        cur = connection.execute(
-        "SELECT name, filename, cook_time "
-        "FROM recipes "
-        "WHERE recipe_id = ? ",
-        (temp['recipe_id'], )
-        )
-        temp = cur.fetchall()
-        comments.append(single_comment)
-
+    return flask.jsonify(**rec)

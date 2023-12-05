@@ -1,0 +1,304 @@
+.sign-up-page {
+  background-color: #fff9e9;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.sign-up-page .div {
+  background-color: #fff9e9;
+  width: 1280px;
+  height: 1032px;
+  position: relative;
+}
+
+.sign-up-page .navigation-bar {
+  position: absolute;
+  width: 228px;
+  height: 36px;
+  top: 46px;
+  left: 44px;
+}
+
+.sign-up-page .scraps-logo {
+  position: relative;
+  width: 230px;
+  height: 36px;
+}
+
+.sign-up-page .carrot {
+  position: absolute;
+  width: 45px;
+  height: 39px;
+  top: -2px;
+  left: 185px;
+}
+
+.sign-up-page .text-wrapper {
+  position: absolute;
+  width: 179px;
+  top: 7px;
+  left: 0;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 500;
+  color: #000000;
+  font-size: 45px;
+  letter-spacing: 0.23px;
+  line-height: 16px;
+}
+
+.sign-up-page .group {
+  position: absolute;
+  width: 452px;
+  height: 584px;
+  top: 222px;
+  left: 420px;
+}
+
+.sign-up-page .overlap-group {
+  position: absolute;
+  width: 440px;
+  height: 510px;
+  top: 0;
+  left: 0;
+  background-color: #ffffff;
+  border-radius: 30px;
+  box-shadow: 0px 10px 20px 10px #00000040;
+}
+
+.sign-up-page .text-wrapper-2 {
+  position: absolute;
+  top: 265px;
+  left: 200px;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 22px;
+  letter-spacing: 0;
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+.sign-up-page .social-button-groups {
+  flex-direction: column;
+  width: 360px;
+  position: absolute;
+  top: 318px;
+  left: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.sign-up-page .social-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 10px 16px;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  flex: 0 0 auto;
+  background-color: var(--white);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid;
+  border-color: var(--gray-300);
+  box-shadow: var(--shadow-xs);
+}
+
+.sign-up-page .social-icon {
+  position: relative;
+  width: 24px;
+  height: 24px;
+}
+
+.sign-up-page .text {
+  position: relative;
+  width: fit-content;
+  margin-top: -1px;
+  font-family: var(--text-md-semibold-font-family);
+  font-weight: var(--text-md-semibold-font-weight);
+  color: var(--gray-700);
+  font-size: var(--text-md-semibold-font-size);
+  letter-spacing: var(--text-md-semibold-letter-spacing);
+  line-height: var(--text-md-semibold-line-height);
+  white-space: nowrap;
+  font-style: var(--text-md-semibold-font-style);
+}
+
+.sign-up-page .social-button-2 {
+  padding: 10px 16px;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  flex: 0 0 auto;
+  background-color: #1877f2;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.sign-up-page .text-2 {
+  position: relative;
+  width: fit-content;
+  margin-top: -1px;
+  font-family: var(--text-md-semibold-font-family);
+  font-weight: var(--text-md-semibold-font-weight);
+  color: var(--white);
+  font-size: var(--text-md-semibold-font-size);
+  letter-spacing: var(--text-md-semibold-letter-spacing);
+  line-height: var(--text-md-semibold-line-height);
+  white-space: nowrap;
+  font-style: var(--text-md-semibold-font-style);
+}
+
+.sign-up-page .social-button-3 {
+  padding: 10px 16px;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  flex: 0 0 auto;
+  background-color: var(--black);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.sign-up-page .text-wrapper-3 {
+  position: absolute;
+  top: 56px;
+  left: 36px;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 500;
+  color: #000000;
+  font-size: 30px;
+  letter-spacing: 0;
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+.sign-up-page .overlap {
+  position: absolute;
+  width: 347px;
+  height: 56px;
+  top: 112px;
+  left: 46px;
+  border-radius: 15px;
+  border: 1px solid;
+  border-color: #000000;
+}
+
+.sign-up-page .text-wrapper-4 {
+  position: absolute;
+  top: 15px;
+  left: 14px;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 25px;
+  letter-spacing: 0;
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+.sign-up-page .div-wrapper {
+  position: absolute;
+  width: 347px;
+  height: 56px;
+  top: 181px;
+  left: 46px;
+  border-radius: 15px;
+  border: 1px solid;
+  border-color: #000000;
+}
+
+.sign-up-page .line {
+  left: 26px;
+  position: absolute;
+  width: 155px;
+  height: 1px;
+  top: 276px;
+  object-fit: cover;
+}
+
+.sign-up-page .img {
+  left: 238px;
+  position: absolute;
+  width: 155px;
+  height: 1px;
+  top: 276px;
+  object-fit: cover;
+}
+
+.sign-up-page .text-wrapper-5 {
+  position: absolute;
+  top: 560px;
+  left: 15px;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 30px;
+  letter-spacing: 0;
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+.sign-up-page .text-wrapper-6 {
+  position: absolute;
+  top: 559px;
+  left: 345px;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 500;
+  color: #000000;
+  font-size: 30px;
+  letter-spacing: 0;
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+.sign-up-page .overlap-2 {
+  position: absolute;
+  width: 1280px;
+  height: 70px;
+  top: 962px;
+  left: 0;
+  background-color: #93806a;
+}
+
+.sign-up-page .text-wrapper-7 {
+  position: absolute;
+  top: 26px;
+  left: 66px;
+  font-family: "Lusitana", Helvetica;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 20px;
+  letter-spacing: 0.1px;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.sign-up-page .text-wrapper-8 {
+  position: absolute;
+  top: 24px;
+  left: 970px;
+  font-family: "Lusitana", Helvetica;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 20px;
+  letter-spacing: 0.1px;
+  line-height: 16px;
+  white-space: nowrap;
+}

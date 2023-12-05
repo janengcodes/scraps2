@@ -1,7 +1,52 @@
 """Insta485 model (database) API."""
+import hashlib
 import sqlite3
 import flask
 import scraps
+
+
+def authenticate_user():
+    """Check if user is logged in, and redirect if not."""
+    logname = flask.session['username']
+    context = {"logname": logname}
+
+    # Connect to database
+    connection = scraps.model.get_db()
+    return logname, context, connection
+
+
+def http_authenticate(connection, input_password, input_username):
+    """Authenticate for Rest API."""
+    # check cookie
+    cookie_login = False
+    logname = ""
+    if flask.session.get('username') is None:
+        cookie_login = False
+    else:
+        cookie_login = True
+        logname = flask.session['username']
+    # check http header
+    http_login = False
+    if input_username is not None and input_password is not None:
+        # get user password from database
+        temp = get_pass(connection, input_username)
+        if temp is not None:
+            password_has = temp['password']
+            password_part = password_has.split("$")
+            algorithm = password_part[0]
+            salt = password_part[1]
+            hash_ob = hashlib.new(algorithm)
+            input_password_salted = salt + input_password
+            hash_ob.update(input_password_salted.encode('utf-8'))
+            input_password_hash = hash_ob.hexdigest()
+
+            if input_password_hash == password_part[2]:
+                http_login = True
+                logname = input_username
+
+    if not cookie_login and not http_login:
+        flask.abort(403)
+    return logname
 
 
 def dict_factory(cursor, row):
@@ -43,3 +88,28 @@ def close_db(error):
     if sqlite_db is not None:
         sqlite_db.commit()
         sqlite_db.close()
+
+
+def get_pass(connection, input_username):
+    """Get password."""
+    cur = connection.execute(
+        "SELECT password "
+        "FROM users "
+        "WHERE username = ?",
+        (input_username, )
+    )
+    temp = cur.fetchone()
+    return temp
+
+
+def get_logname():
+    """Get logname."""
+    if flask.request.authorization is None:
+        username = ""
+        password = ""
+    else:
+        username = flask.request.authorization['username']
+        password = flask.request.authorization['password']
+    connection = get_db()
+    logname = http_authenticate(connection, password, username)
+    return logname

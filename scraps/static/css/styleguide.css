@@ -1,0 +1,15 @@
+:root {
+  --gray-700: rgba(52, 64, 84, 1);
+  --white: rgba(255, 255, 255, 1);
+  --gray-300: rgba(208, 213, 221, 1);
+  --black: rgba(0, 0, 0, 1);
+  --gray-50: rgba(249, 250, 251, 1);
+  --text-md-semibold-font-family: "Inter-SemiBold", Helvetica;
+  --text-md-semibold-font-weight: 600;
+  --text-md-semibold-font-size: 16px;
+  --text-md-semibold-letter-spacing: 0px;
+  --text-md-semibold-line-height: 24px;
+  --text-md-semibold-font-style: normal;
+  --shadow-xs: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+  --shadow-xs-focused-4px-gray-100: 0px 0px 0px 4px rgba(242, 244, 247, 1), 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+}

@@ -1,0 +1,268 @@
+.pantry {
+  background-color: #fff9e9;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.pantry .div {
+  background-color: #fff9e9;
+  overflow: hidden;
+  width: 1280px;
+  height: 1150px;
+  position: relative;
+}
+
+.pantry .navigation-bar {
+  position: absolute;
+  width: 1242px;
+  height: 36px;
+  top: 46px;
+  left: 44px;
+}
+
+.pantry .text-wrapper {
+  position: absolute;
+  width: 212px;
+  top: 13px;
+  left: 1024px;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 25px;
+  letter-spacing: 0.12px;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.pantry .text-wrapper-2 {
+  position: absolute;
+  width: 178px;
+  top: 13px;
+  left: 809px;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 25px;
+  letter-spacing: 0.12px;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.pantry .text-wrapper-3 {
+  position: absolute;
+  width: 129px;
+  top: 12px;
+  left: 649px;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 25px;
+  letter-spacing: 0.12px;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.pantry .scraps-logo {
+  position: absolute;
+  width: 230px;
+  height: 36px;
+  top: 0;
+  left: 0;
+}
+
+.pantry .carrot {
+  position: absolute;
+  width: 45px;
+  height: 39px;
+  top: -2px;
+  left: 185px;
+}
+
+.pantry .text-wrapper-4 {
+  position: absolute;
+  width: 179px;
+  top: 7px;
+  left: 0;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 500;
+  color: #000000;
+  font-size: 45px;
+  letter-spacing: 0.23px;
+  line-height: 16px;
+}
+
+.pantry .overlap-group {
+  position: absolute;
+  width: 610px;
+  height: 354px;
+  top: 224px;
+  left: 650px;
+  background-color: #dbebca;
+  border-radius: 20px;
+}
+
+.pantry .text-wrapper-5 {
+  position: absolute;
+  top: 168px;
+  left: 226px;
+  font-family: "Lusitana", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 45px;
+  letter-spacing: 0.23px;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.pantry .overlap {
+  position: absolute;
+  width: 610px;
+  height: 354px;
+  top: 602px;
+  left: 650px;
+  background-color: #f5cdbb;
+  border-radius: 20px;
+}
+
+.pantry .text-wrapper-6 {
+  position: absolute;
+  top: 168px;
+  left: 239px;
+  font-family: "Lusitana", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 45px;
+  letter-spacing: 0.23px;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.pantry .div-wrapper {
+  position: absolute;
+  width: 610px;
+  height: 354px;
+  top: 602px;
+  left: 20px;
+  background-color: #d7ecff;
+  border-radius: 20px;
+}
+
+.pantry .text-wrapper-7 {
+  position: absolute;
+  top: 160px;
+  left: 250px;
+  font-family: "Lusitana", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 45px;
+  letter-spacing: 0.23px;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.pantry .overlap-2 {
+  position: absolute;
+  width: 610px;
+  height: 354px;
+  top: 224px;
+  left: 20px;
+  background-color: #f5cdbb;
+  border-radius: 20px;
+}
+
+.pantry .text-wrapper-8 {
+  position: absolute;
+  top: 168px;
+  left: 225px;
+  font-family: "Lusitana", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 45px;
+  letter-spacing: 0.23px;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.pantry .frame {
+  left: 1013px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  position: absolute;
+  top: 135px;
+  border: 1px solid;
+  border-color: #000000;
+}
+
+.pantry .text-wrapper-9 {
+  position: relative;
+  width: fit-content;
+  margin-top: -1px;
+  font-family: "Lusitana", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 30px;
+  letter-spacing: 0.15px;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.pantry .frame-2 {
+  left: 692px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  position: absolute;
+  top: 135px;
+  border: 1px solid;
+  border-color: #000000;
+}
+
+.pantry .overlap-3 {
+  position: absolute;
+  width: 1299px;
+  height: 70px;
+  top: 1080px;
+  left: 0;
+  background-color: #93806a;
+}
+
+.pantry .text-wrapper-10 {
+  position: absolute;
+  top: 26px;
+  left: 66px;
+  font-family: "Lusitana", Helvetica;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 20px;
+  letter-spacing: 0.1px;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.pantry .text-wrapper-11 {
+  position: absolute;
+  top: 24px;
+  left: 970px;
+  font-family: "Lusitana", Helvetica;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 20px;
+  letter-spacing: 0.1px;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.pantry .build-your-next-meal {
+  position: absolute;
+  width: 408px;
+  height: 72px;
+  top: 986px;
+  left: 436px;
+}
