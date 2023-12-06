@@ -4,45 +4,83 @@
     <link rel="stylesheet" href="/static/css/globals.css" />
     <link rel="stylesheet" href="/static/css/styleguide.css" />
     <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="stylesheet" href="/static/css/sign-in.css" />
   </head>
   <body>
     <div class="log-in-page">
       <div class="div">
         <div class="navigation-bar">
           <div class="scraps-logo">
-            <img class="carrot" src="img/carrot.png" />
-            <div class="text-wrapper">Scraps</div>
+            <img class="carrot" src="/static/images/carrot.png" />
+            <div class="text-wrapper">
+              <a href="\">Scraps</a>
+            </div>
           </div>
         </div>
         <div class="group">
           <div class="overlap-group">
-            <div class="text-wrapper-2">or</div>
+
+            <div class="text-wrapper-2">or
+              
+            </div>
             <div class="social-button-groups">
               <div class="social-button">
-                <img class="social-icon" src="img/social-icon-128.svg" />
-                <div class="text">Sign in with Google</div>
+                <img class="social-icon" src="/static/images/social-icon-128.svg" />
+                <div class="text">Sign in with Google
+
+                </div>
               </div>
               <div class="social-button-2">
-                <img class="social-icon" src="img/social-icon-127.svg" />
-                <div class="text-2">Sign in with Facebook</div>
+                <img class="social-icon" src="/static/images/social-icon-127.svg" />
+                <div class="text-2">Sign in with Facebook
+
+                </div>
               </div>
               <div class="social-button-3">
-                <img class="social-icon" src="img/social-icon-126.svg" />
-                <div class="text-2">Sign in with Apple</div>
+                <img class="social-icon" src="/static/images/social-icon-126.svg" />
+                <div class="text-2">Sign in with Apple
+
+                </div>
               </div>
             </div>
             <div class="text-wrapper-3">Log-In</div>
-            <div class="overlap"><div class="text-wrapper-4">Email or Phone</div></div>
-            <div class="div-wrapper"><div class="text-wrapper-4">Password</div></div>
-            <img class="line" src="img/line-1.svg" />
-            <img class="img" src="img/line-2.svg" />
+            
+            <div class="overlap">
+              <div class="text-wrapper-4">Email or Phone
+              </div>
+            </div>
+            <div class="div-wrapper">
+              <div class="text-wrapper-4">Password
+
+              </div>
+            </div>
+            <div class="overlap">
+              <form action="/accounts/?target=/" method="post"
+                 enctype="multipart/form-data">
+                 <input type="text" name="username" class="text-wrapper-4" placeholder="Email" required/>
+                 <input type="password" name="password" class="text-wrapper-4" placeholder="Password" required/>
+                 <input type="submit" value="login"/>
+                 <input type="hidden" name="operation" value="login"/>
+             </form>
+            </div>
+            <img class="line" src="/static/images/line-1.svg" />
+            <img class="img" src="/static/images/line-2.svg" />
           </div>
-          <div class="text-wrapper-5">New to Scraps?</div>
-          <div class="text-wrapper-6">Join Now!</div>
+          <div class="text-wrapper-5">New to Scraps?
+
+          </div>
+          <div class="text-wrapper-6">
+            <a href="/sign_up/">Join Now!</a>
+            
+          </div>
         </div>
         <div class="overlap-2">
-          <div class="text-wrapper-7">Scraps 2023</div>
-          <div class="text-wrapper-8">Contact us: scraps@email.com</div>
+          <div class="text-wrapper-7">Scraps 2023
+
+          </div>
+          <div class="text-wrapper-8">Contact us: scraps@email.com
+
+          </div>
         </div>
       </div>
     </div>

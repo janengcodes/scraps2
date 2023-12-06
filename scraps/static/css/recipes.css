@@ -1,0 +1,574 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+@import url("https://fonts.googleapis.com/css?family=IBM+Plex+Sans:700,400");
+* {
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0px;
+  height: 100%;
+}
+/* a blue color as a generic focus style */
+button:focus-visible {
+  outline: 2px solid #4a90e2 !important;
+  outline: -webkit-focus-ring-color auto 5px !important;
+}
+a {
+  text-decoration: none;
+}
+.recipe-results {
+  background-color: #fff9e9;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.recipe-results .div {
+  background-color: #fff9e9;
+  overflow: hidden;
+  border: 1px solid;
+  border-color: #000000;
+  width: 1280px;
+  height: 2307px;
+  position: relative;
+}
+
+.recipe-results .scraps-logo {
+  position: absolute;
+  width: 222px;
+  height: 58px;
+  top: 51px;
+  left: 105px;
+}
+
+.recipe-results .carrot {
+  position: absolute;
+  width: 54px;
+  height: 61px;
+  top: -2px;
+  left: 167px;
+}
+
+.recipe-results .text-wrapper {
+  position: absolute;
+  width: 159px;
+  top: 25px;
+  left: 0;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 700;
+  color: #000000;
+  font-size: 45px;
+  letter-spacing: 0.23px;
+  line-height: 16px;
+}
+
+.recipe-results .nav-bar {
+  position: absolute;
+  width: 553px;
+  height: 17px;
+  top: 84px;
+  left: 713px;
+}
+
+.recipe-results .text-wrapper-2 {
+  position: absolute;
+  top: 0;
+  left: 359px;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 30px;
+  letter-spacing: 0.15px;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.recipe-results .text-wrapper-3 {
+  position: absolute;
+  top: 1px;
+  left: 158px;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 30px;
+  letter-spacing: 0.15px;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.recipe-results .text-wrapper-4 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 32px;
+  letter-spacing: 0.16px;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.recipe-results .text-wrapper-5 {
+  position: absolute;
+  top: 209px;
+  left: 491px;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 48px;
+  letter-spacing: 0.24px;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.recipe-results .text-wrapper-6 {
+  position: absolute;
+  top: 1372px;
+  left: 531px;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 48px;
+  letter-spacing: 0.24px;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.recipe-results .spotlight-meals {
+  position: absolute;
+  width: 1124px;
+  height: 1003px;
+  top: 272px;
+  left: 103px;
+}
+
+.recipe-results .meal-card {
+  position: absolute;
+  width: 242px;
+  height: 305px;
+  top: 0;
+  left: 4px;
+}
+
+.recipe-results .rectangle {
+  height: 240px;
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 238px;
+}
+
+.recipe-results .text-wrapper-7 {
+  position: absolute;
+  width: 156px;
+  top: 260px;
+  left: 0;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 30px;
+  letter-spacing: 0.15px;
+  line-height: 16px;
+}
+
+.recipe-results .text-wrapper-8 {
+  position: absolute;
+  width: 146px;
+  top: 289px;
+  left: 0;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 20px;
+  letter-spacing: 0.1px;
+  line-height: 16px;
+}
+
+.recipe-results .meal-card-2 {
+  height: 305px;
+  top: 348px;
+  left: 4px;
+  position: absolute;
+  width: 242px;
+}
+
+.recipe-results .text-wrapper-9 {
+  width: 206px;
+  top: 289px;
+  left: 0;
+  position: absolute;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 20px;
+  letter-spacing: 0.1px;
+  line-height: 16px;
+}
+
+.recipe-results .meal-card-3 {
+  height: 299px;
+  top: 6px;
+  left: 565px;
+  position: absolute;
+  width: 242px;
+}
+
+.recipe-results .text-wrapper-10 {
+  position: absolute;
+  width: 70px;
+  top: 249px;
+  left: 0;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 30px;
+  letter-spacing: 0.15px;
+  line-height: 16px;
+}
+
+.recipe-results .text-wrapper-11 {
+  width: 217px;
+  top: 283px;
+  left: 0;
+  position: absolute;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 20px;
+  letter-spacing: 0.1px;
+  line-height: 16px;
+}
+
+.recipe-results .meal-card-4 {
+  height: 299px;
+  top: 354px;
+  left: 565px;
+  position: absolute;
+  width: 242px;
+}
+
+.recipe-results .text-wrapper-12 {
+  width: 149px;
+  top: 283px;
+  left: 0;
+  position: absolute;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 20px;
+  letter-spacing: 0.1px;
+  line-height: 16px;
+}
+
+.recipe-results .text-wrapper-13 {
+  top: 254px;
+  left: 2px;
+  position: absolute;
+  width: 70px;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 30px;
+  letter-spacing: 0.15px;
+  line-height: 16px;
+}
+
+.recipe-results .meal-card-5 {
+  height: 299px;
+  top: 6px;
+  left: 276px;
+  position: absolute;
+  width: 242px;
+}
+
+.recipe-results .text-wrapper-14 {
+  position: absolute;
+  width: 95px;
+  top: 254px;
+  left: 0;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 30px;
+  letter-spacing: 0.15px;
+  line-height: 16px;
+}
+
+.recipe-results .text-wrapper-15 {
+  width: 190px;
+  top: 283px;
+  left: 0;
+  position: absolute;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 20px;
+  letter-spacing: 0.1px;
+  line-height: 16px;
+}
+
+.recipe-results .meal-card-6 {
+  height: 299px;
+  top: 354px;
+  left: 276px;
+  position: absolute;
+  width: 242px;
+}
+
+.recipe-results .text-wrapper-16 {
+  width: 119px;
+  position: absolute;
+  top: 254px;
+  left: 0;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 30px;
+  letter-spacing: 0.15px;
+  line-height: 16px;
+}
+
+.recipe-results .text-wrapper-17 {
+  width: 203px;
+  top: 283px;
+  left: 0;
+  position: absolute;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 20px;
+  letter-spacing: 0.1px;
+  line-height: 16px;
+}
+
+.recipe-results .meal-card-7 {
+  height: 299px;
+  top: 6px;
+  left: 832px;
+  position: absolute;
+  width: 242px;
+}
+
+.recipe-results .text-wrapper-18 {
+  position: absolute;
+  width: 235px;
+  top: 254px;
+  left: 3px;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 30px;
+  letter-spacing: 0.15px;
+  line-height: 16px;
+}
+
+.recipe-results .text-wrapper-19 {
+  width: 215px;
+  top: 283px;
+  left: 3px;
+  position: absolute;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 20px;
+  letter-spacing: 0.1px;
+  line-height: 16px;
+}
+
+.recipe-results .img {
+  height: 240px;
+  top: 354px;
+  left: 832px;
+  position: absolute;
+  width: 238px;
+}
+
+.recipe-results .text-wrapper-20 {
+  width: 235px;
+  top: 608px;
+  left: 835px;
+  position: absolute;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 30px;
+  letter-spacing: 0.15px;
+  line-height: 16px;
+}
+
+.recipe-results .text-wrapper-21 {
+  width: 174px;
+  top: 637px;
+  left: 835px;
+  position: absolute;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 20px;
+  letter-spacing: 0.1px;
+  line-height: 16px;
+}
+
+.recipe-results .meal-card-8 {
+  height: 305px;
+  top: 698px;
+  left: 0;
+  position: absolute;
+  width: 242px;
+}
+
+.recipe-results .text-wrapper-22 {
+  position: absolute;
+  width: 218px;
+  top: 260px;
+  left: 0;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 30px;
+  letter-spacing: 0.15px;
+  line-height: 16px;
+}
+
+.recipe-results .text-wrapper-23 {
+  width: 229px;
+  top: 289px;
+  left: 0;
+  position: absolute;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 20px;
+  letter-spacing: 0.1px;
+  line-height: 16px;
+}
+
+.recipe-results .meal-card-9 {
+  position: absolute;
+  width: 296px;
+  height: 299px;
+  top: 704px;
+  left: 828px;
+}
+
+.recipe-results .text-wrapper-24 {
+  width: 289px;
+  top: 254px;
+  left: 3px;
+  position: absolute;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 30px;
+  letter-spacing: 0.15px;
+  line-height: 16px;
+}
+
+.recipe-results .text-wrapper-25 {
+  width: 194px;
+  top: 283px;
+  left: 3px;
+  position: absolute;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 20px;
+  letter-spacing: 0.1px;
+  line-height: 16px;
+}
+
+.recipe-results .meal-card-10 {
+  position: absolute;
+  width: 242px;
+  height: 299px;
+  top: 704px;
+  left: 561px;
+}
+
+.recipe-results .text-wrapper-26 {
+  top: 251px;
+  left: 0;
+  position: absolute;
+  width: 70px;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 30px;
+  letter-spacing: 0.15px;
+  line-height: 16px;
+}
+
+.recipe-results .text-wrapper-27 {
+  width: 206px;
+  top: 283px;
+  left: 0;
+  position: absolute;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 20px;
+  letter-spacing: 0.1px;
+  line-height: 16px;
+}
+
+.recipe-results .meal-card-11 {
+  position: absolute;
+  width: 242px;
+  height: 299px;
+  top: 704px;
+  left: 272px;
+}
+
+.recipe-results .text-wrapper-28 {
+  width: 168px;
+  position: absolute;
+  top: 254px;
+  left: 0;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 30px;
+  letter-spacing: 0.15px;
+  line-height: 16px;
+}
+
+.recipe-results .text-wrapper-29 {
+  width: 207px;
+  top: 283px;
+  left: 0;
+  position: absolute;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 20px;
+  letter-spacing: 0.1px;
+  line-height: 16px;
+}
+
+.recipe-results .spotlight-meals-2 {
+  position: absolute;
+  width: 1124px;
+  height: 1003px;
+  top: 1456px;
+  left: 103px;
+}
+
+.recipe-results .rectangle-2 {
+  height: 153px;
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 238px;
+}
+
+.recipe-results .rectangle-3 {
+  position: absolute;
+  width: 238px;
+  height: 147px;
+  top: 0;
+  left: 0;
+}
+

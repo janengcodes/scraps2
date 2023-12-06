@@ -9,33 +9,97 @@
 # import hashlib
 # import pathlib
 # import os
-# import flask
-# import scraps
-# from scraps.views.index import check_login
+import flask
+import scraps
 
 
-# @scraps.app.route('/accounts/', methods=['POST'])
-# def post_accounts():
-#     """Process POST requests of type /accounts/<operation>/."""
-#     op_name = flask.request.form.get('operation', 'create')
-#     match op_name:
-#         case 'login':
-#             login()
-#         case 'create':
-#             create_account()
-#         case 'delete':
-#             delete_account()
-#             return flask.redirect('/accounts/create/')
-#         case 'edit_account':
-#             edit_account()
-#         case 'update_password':
-#             update_password()
-#             return flask.redirect('/accounts/edit/')
+@scraps.app.route("/accounts/login/", methods=["GET"])
+def show_accounts_login():
+    """Display /accounts/login/ route."""
+    # Redirect to index if logged in
+    if 'username' in flask.session:
+        return flask.redirect(flask.url_for('index'))
+    return flask.render_template("sign-in.html", **{})
 
-#     target = flask.request.args.get('target', '/')
 
-#     # Always redirects to target after above logic
-#     return flask.redirect(target)
+@scraps.app.route('/accounts/', methods=['POST'])
+def post_accounts():
+    """Process POST requests of type /accounts/<operation>/."""
+    op_name = flask.request.form.get('operation')
+    match op_name:
+        case 'create':
+            create()
+        case 'login':
+            login()
+        case 'logout':
+            logout()
+
+    target = flask.request.args.get('target', '/')
+
+    # Always redirects to target after above logic
+    return flask.redirect(target)
+
+
+def create():
+    """Create an account."""
+    # Connect to database
+    connection = scraps.model.get_db()
+
+    username = flask.request.form["username"]
+    password = flask.request.form["password"]
+
+    # If any fields are empty, abort
+    if not username or not password:
+        flask.abort(400)
+
+    # Check for existing account
+    cur = connection.execute(
+        """
+        SELECT username
+            FROM users
+            WHERE username = ?
+        """,
+        (username, )
+    )
+
+    # If an existing user already exists, abort
+    if len(cur.fetchall()) > 0:
+        flask.abort(409)
+
+    # Generate password hash
+    password_db_string = scraps.model.gen_password_hash(password)
+
+    # Create user in database
+    # TODO: add more values to database entry
+    connection.execute(
+        """
+        INSERT INTO users(username, password)
+            VALUES (?, ?)
+        """,
+        (username, password_db_string)
+    )
+
+    # Log user in
+    flask.session['username'] = username
+
+
+def login():
+    """Authenticate a login into an account."""
+    username = flask.request.form["username"]
+    password = flask.request.form["password"]
+
+    # authenticate with given username and password
+    logname = scraps.model.http_authenticate(flask.model.get_db,
+                                             username,
+                                             password)
+
+    # log user in
+    flask.session['username'] = logname
+
+
+def logout():
+    """Logout and clear cookies from an account."""
+    flask.session.clear()
 
 
 # def login():

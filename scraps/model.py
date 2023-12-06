@@ -3,16 +3,7 @@ import hashlib
 import sqlite3
 import flask
 import scraps
-
-
-def authenticate_user():
-    """Check if user is logged in, and redirect if not."""
-    logname = flask.session['username']
-    context = {"logname": logname}
-
-    # Connect to database
-    connection = scraps.model.get_db()
-    return logname, context, connection
+import uuid
 
 
 def http_authenticate(connection, input_password, input_username):
@@ -98,13 +89,12 @@ def get_pass(connection, input_username):
         "WHERE username = ?",
         (input_username, )
     )
-    temp = cur.fetchone()
-    return temp
+    return cur.fetchone()
 
 
 def get_logname():
     """Get logname."""
-    if flask.request.authorization is None:
+    if flask.request.authorization is not None:
         username = ""
         password = ""
     else:
@@ -113,3 +103,14 @@ def get_logname():
     connection = get_db()
     logname = http_authenticate(connection, password, username)
     return logname
+
+
+def gen_password_hash(password):
+    """Generate a salted SHA-512 hash given a password string."""
+    salt = uuid.uuid4().hex
+    sha_hash = hashlib.sha512()
+    salted_password = salt + password
+    sha_hash.update(salted_password.encode('utf-8'))
+    password_hash = sha_hash.hexdigest()
+
+    return "$".join(["sha512", salt, password_hash])

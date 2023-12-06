@@ -3,18 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/css/globals.css" />
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="stylesheet" href="/static/css/styleguide.css" />
+    <link rel="stylesheet" href="/static/css/saved-recipes.css" />
     <title>Scraps</title>
   </head>
   <body>
     {% for recipe in saved_recipes %}
     <!--TODO: update onClick-->
     <!-- name of root = saved_recipe -->
-    <div id="saved_recipe">
+    <div class="one-recipe">
       <h1>{{ recipe.name }}</h1>
       <img src="{{ recipe.filename }}" />
       
       <script type="text/javascript" src="{{ url_for('static', filename='js/bundle.js') }}"></script>
     </div>
     {% endfor %}
+    <div class="overlap-3">
+      <div class="text-wrapper-10">Scraps 2023</div>
+      <div class="text-wrapper-11">Contact us: scraps@email.com</div>
+    </div>
+    <img class="build-your-next-meal" src="/static/images/build-recipes.png" />
+  </div>
   </body>
 </html>

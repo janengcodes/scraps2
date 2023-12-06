@@ -2,6 +2,7 @@ from flask import Flask, render_template
 import scraps
 app = Flask(__name__)
 
+
 @scraps.app.route('/recipe/')
 def recipe():
     context = {

@@ -3,7 +3,7 @@ import scraps
 app = Flask(__name__)
 
 
-@scraps.app.route('/index2/')
+@scraps.app.route('/')
 def index2():
     context = {
         'example_variable': 'Hello, World!'

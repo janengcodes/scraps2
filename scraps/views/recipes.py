@@ -3,12 +3,12 @@ import scraps
 app = Flask(__name__)
 
 
-@scraps.app.route('/index2/')
-def index():
+@scraps.app.route('/recipes/')
+def get_recipes():
     context = {
         'example_variable': 'Hello, World!'
     }
-    return render_template('index.html', **context)
+    return render_template('recipes.html', **context)
 
 
 if __name__ == '__main__':

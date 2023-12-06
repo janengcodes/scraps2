@@ -26,11 +26,11 @@ def get_user():
 # <string:usernameuser_calendarusername
 
 
-@scraps.app.route('api/v1/<string:username', methods=['GET'])
+@scraps.app.route('/api/v1/<string:username>', methods=['GET'])
 def get_user_saved(username):
     connection = scraps.model.get_db()
 
-    curr = connection.execute(
+    cur = connection.execute(
         """
         SELECT C.recipe_id, c.meal_time, R.name, R.filename, R.cook_time
         FROM calendar_events C
@@ -40,6 +40,6 @@ def get_user_saved(username):
         (username, )
     )
 
-    rec = curr.fetchall()
+    rec = cur.fetchall()
 
     return flask.jsonify(**rec)
