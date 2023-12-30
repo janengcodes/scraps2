@@ -11,7 +11,7 @@ def show_accounts_login():
     # Redirect to index if logged in
     if 'username' in flask.session:
         return flask.redirect(flask.url_for('index'))
-    return flask.render_template("sign-in.html", **{})
+    return flask.render_template("login.html", **{})
 
 
 @scraps.app.route('/accounts/', methods=['POST'])
@@ -30,6 +30,15 @@ def post_accounts():
 
     # Always redirects to target after above logic
     return flask.redirect(target)
+
+
+@scraps.app.route("/accounts/sign_up/", methods=["GET"])
+def show_accounts_sign_up():
+    """Display /accounts/login/ route."""
+    # Redirect to index if logged in
+    if 'username' in flask.session:
+        return flask.redirect(flask.url_for('index'))
+    return flask.render_template("sign-up.html", **{})
 
 
 def create():
