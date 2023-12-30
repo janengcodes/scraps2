@@ -1,14 +1,6 @@
-# """
-# scraps accounts view.
-
-# URLs include:
-# /accounts/login/
-# /accounts/auth/
-# """
-# import uuid
-# import hashlib
-# import pathlib
-# import os
+"""
+Scraps accounts view.
+"""
 import flask
 import scraps
 
