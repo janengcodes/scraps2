@@ -17,12 +17,12 @@ DEBUG_EXAMPLES = 10
 
 def load_dataset(silent=False):
     dataset_file_names = [
-        # 'recipes_raw_nosource_ar.json',
-        # 'recipes_raw_nosource_epi.json',
-        # 'recipes_raw_nosource_fn.json',
-        '.recipes_raw_nosource_ar.icloud',
-        '.recipes_raw_nosource_epi.icloud',
-        '.recipes_raw_nosource_fn.icloud',
+        'recipes_raw_nosource_ar.json',
+        'recipes_raw_nosource_epi.json',
+        'recipes_raw_nosource_fn.json',
+        # '.recipes_raw_nosource_ar.icloud',
+        # '.recipes_raw_nosource_epi.icloud',
+        # '.recipes_raw_nosource_fn.icloud',
     ]
     dataset = []
     for dataset_file_name in dataset_file_names:
