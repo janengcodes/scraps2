@@ -20,9 +20,6 @@ def load_dataset(silent=False):
         'recipes_raw_nosource_ar.json',
         'recipes_raw_nosource_epi.json',
         'recipes_raw_nosource_fn.json',
-        # '.recipes_raw_nosource_ar.icloud',
-        # '.recipes_raw_nosource_epi.icloud',
-        # '.recipes_raw_nosource_fn.icloud',
     ]
     dataset = []
     for dataset_file_name in dataset_file_names:
@@ -50,10 +47,10 @@ def load_dataset(silent=False):
 
 
 dataset_raw = load_dataset()
-print('Total number of raw examples: ', len(dataset_raw))
+# print('Total number of raw examples: ', len(dataset_raw))
+# Total number of raw examples is 125,164
 
-
-# Filters out recipes which don't have either title or ingredients or instructions.
+# # Filters out recipes which don't have either title or ingredients or instructions.
 def recipe_validate_required_fields(recipe):
     required_keys = ['title', 'ingredients', 'instructions']
 
@@ -72,12 +69,14 @@ def recipe_validate_required_fields(recipe):
 
 dataset_validated = [recipe for recipe in dataset_raw if recipe_validate_required_fields(recipe)]
 
-print('Dataset size BEFORE validation', len(dataset_raw))
-print('Dataset size AFTER validation', len(dataset_validated))
-print('Number of invalid recipes', len(dataset_raw) - len(dataset_validated))
+# print('Dataset size BEFORE validation', len(dataset_raw))
+# print('Dataset size AFTER validation', len(dataset_validated))
+# print('Number of invalid recipes', len(dataset_raw) - len(dataset_validated))
+# Dataset size BEFORE validation 125164
+# Dataset size AFTER validation 122938
+# Number of invalid recipes 2226
 
-
-# Converts recipe object to string (sequence of characters) for later usage in RNN input.
+# # Converts recipe object to string (sequence of characters) for later usage in RNN input.
 def recipe_to_string(recipe):
     # This string is presented as a part of recipes so we need to clean it up.
     noize_string = 'ADVERTISEMENT'
@@ -97,22 +96,25 @@ def recipe_to_string(recipe):
         instruction = instruction.replace(noize_string, '')
         if instruction:
             instructions_string += f'▪︎ {instruction}\n'
-
+    # Put all strings into one f string with stop words to make landmarks 
     return f'{STOP_WORD_TITLE}{title}\n{STOP_WORD_INGREDIENTS}{ingredients_string}{STOP_WORD_INSTRUCTIONS}{instructions_string}'
 
 
 dataset_stringified = [recipe_to_string(recipe) for recipe in dataset_validated]
 
 
-print('Stringified dataset size: ', len(dataset_stringified))
+# print('Stringified dataset size: ', len(dataset_stringified))
+# Stringified dataset size:  122938
 
+# Number the recipes and print the first 10
 for recipe_index, recipe_string in enumerate(dataset_stringified[:10]):
     print('Recipe #{}\n---------'.format(recipe_index + 1))
     print(recipe_string)
     print('\n')
 
-print(dataset_stringified[50000])
+# print(dataset_stringified[50000])
 
+# Filter out recipes with large number of characters.
 recipes_lengths = []
 for recipe_text in dataset_stringified:
     recipes_lengths.append(len(recipe_text))
@@ -131,22 +133,29 @@ def filter_recipes_by_length(recipe_test):
 
 dataset_filtered = [recipe_text for recipe_text in dataset_stringified if filter_recipes_by_length(recipe_text)]
 
-print('Dataset size BEFORE filtering: ', len(dataset_stringified))
-print('Dataset size AFTER filtering: ', len(dataset_filtered))
-print('Number of etiminated recipes: ', len(dataset_stringified) - len(dataset_filtered))
+# print('Dataset size BEFORE filtering: ', len(dataset_stringified))
+# print('Dataset size AFTER filtering: ', len(dataset_filtered))
+# print('Number of etiminated recipes: ', len(dataset_stringified) - len(dataset_filtered))
 
 
+# Dataset size BEFORE filtering:  122938
+# Dataset size AFTER filtering:  100212
+# Number of etiminated recipes:  22726
 
+# Summarize the parameters of the data set
 if DEBUG:
     dataset_filtered = dataset_filtered[:DEBUG_EXAMPLES]
     print('dataset_filtered.shape, ', len(dataset_filtered))
 
 TOTAL_RECIPES_NUM = len(dataset_filtered)
 
-print('MAX_RECIPE_LENGTH: ', MAX_RECIPE_LENGTH)
-print('TOTAL_RECIPES_NUM: ', TOTAL_RECIPES_NUM)
+# print('MAX_RECIPE_LENGTH: ', MAX_RECIPE_LENGTH)
+# print('TOTAL_RECIPES_NUM: ', TOTAL_RECIPES_NUM)
+# MAX_RECIPE_LENGTH:  2000
+# TOTAL_RECIPES_NUM:  100212
 
-# Batch size.
+# Create a vocabulary out of recipes texts
+# # Batch size.
 BATCH_SIZE = 64
 
 if DEBUG:
@@ -182,7 +191,10 @@ tokenizer.get_config()
 # @see: https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/text/Tokenizer
 VOCABULARY_SIZE = len(tokenizer.word_counts) + 1
 
+# ended here 
+
 print('VOCABULARY_SIZE: ', VOCABULARY_SIZE)
+VOCABULARY_SIZE:  176
 
 print(tokenizer.index_word[5])
 print(tokenizer.index_word[20])
