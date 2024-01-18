@@ -14,22 +14,22 @@ def show_accounts_login():
     return flask.render_template("login.html", **{})
 
 
-@scraps.app.route('/accounts/', methods=['POST'])
-def post_accounts():
-    """Process POST requests of type /accounts/<operation>/."""
-    op_name = flask.request.form.get('operation')
-    match op_name:
-        case 'create':
-            create()
-        case 'login':
-            login()
-        case 'logout':
-            logout()
+# @scraps.app.route('/accounts/', methods=['POST'])
+# def post_accounts():
+#     """Process POST requests of type /accounts/<operation>/."""
+#     op_name = flask.request.form.get('operation')
+#     match op_name:
+#         case 'create':
+#             create()
+#         case 'login':
+#             login()
+#         case 'logout':
+#             logout()
 
-    target = flask.request.args.get('target', '/')
+#     target = flask.request.args.get('target', '/')
 
-    # Always redirects to target after above logic
-    return flask.redirect(target)
+#     # Always redirects to target after above logic
+#     return flask.redirect(target)
 
 
 @scraps.app.route("/accounts/sign_up/", methods=["GET"])

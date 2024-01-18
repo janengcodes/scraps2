@@ -193,13 +193,14 @@ VOCABULARY_SIZE = len(tokenizer.word_counts) + 1
 
 # ended here 
 
-print('VOCABULARY_SIZE: ', VOCABULARY_SIZE)
-VOCABULARY_SIZE:  176
+# print('VOCABULARY_SIZE: ', VOCABULARY_SIZE)
+# VOCABULARY_SIZE:  176
 
-print(tokenizer.index_word[5])
-print(tokenizer.index_word[20])
+# print(tokenizer.index_word[5])
+# print(tokenizer.index_word[20])
 
-tokenizer.word_index['r']
+# # r is the 8 character of the vocabulary
+# tokenizer.word_index['r']
 
 # For demo application we need to have an array of characters as vocabulary.
 # js_vocabulary = tokenizer.sequences_to_texts([[word_index]
@@ -208,16 +209,19 @@ tokenizer.word_index['r']
 # Create a list of characters as vocabulary
 js_vocabulary = tokenizer.sequences_to_texts([[i] for i in range(1, VOCABULARY_SIZE)])
 
-print([char for char in js_vocabulary])
+# print([char for char in js_vocabulary])
 
-# Test proper conversion from text to indices.
-# This is needed for debugging a demo app.
+# # Test proper conversion from text to indices.
+# # This is needed for debugging a demo app.
 tokenizer.texts_to_sequences(['📗 yes'])
+
+# now we have the relations: character --> code and code --> character relations
 
 def recipe_sequence_to_string(recipe_sequence):
     recipe_stringified = tokenizer.sequences_to_texts([recipe_sequence])[0]
     recipe_stringified = recipe_stringified.replace('   ', '_').replace(' ', '').replace('_', ' ')
     print(recipe_stringified)
+
 
 dataset_vectorized = tokenizer.texts_to_sequences(dataset_filtered)
 print('Vectorized dataset size', len(dataset_vectorized))
@@ -228,7 +232,8 @@ max_values = [np.max(sequence) for sequence in dataset_vectorized]
 
 # print('Maximum value within each sequence:', max_values)
 
-recipe_sequence_to_string(dataset_vectorized[0])
+# # we can reconvert the vectorized dataset to string
+# recipe_sequence_to_string(dataset_vectorized[0])
 
 # adding padding 
 for recipe_index, recipe in enumerate(dataset_vectorized[:10]):
@@ -252,6 +257,7 @@ dataset_vectorized_padded = tf.keras.preprocessing.sequence.pad_sequences(
     value=tokenizer.texts_to_sequences([STOP_SIGN])[0]
 )
 
+# add padding so that all recipe lengths are the same
 for recipe_index, recipe in enumerate(dataset_vectorized_padded[:10]):
     print('Recipe #{} length: {}'.format(recipe_index, len(recipe)))
 
@@ -283,7 +289,7 @@ def split_input_target(recipe):
 
 dataset_targeted = dataset.map(split_input_target)
 
-print(dataset_targeted)
+# print(dataset_targeted)
 
 for input_example, target_example in dataset_targeted.take(1):
     print('Input sequence size:', repr(len(input_example.numpy())))
@@ -459,6 +465,8 @@ print('Input:\n', repr(''.join(tokenizer.sequences_to_texts([input_example_batch
 print()
 print('Next char prediction:\n', repr(''.join(tokenizer.sequences_to_texts([sampled_indices[:50]]))))
 
+# trying the model 
+
 for input_example_batch_custom, target_example_batch_custom in dataset_train.take(1):
     random_input = np.zeros(shape=(BATCH_SIZE, 10))
     example_batch_predictions_custom = model_1(random_input)
@@ -531,3 +539,197 @@ def model_weights_from_latest_checkpoint(model):
     model.load_weights(latest_checkpoint_path)
 
     return model
+
+def initial_epoch_from_latest_checkpoint():
+    latest_checkpoint_path = tf.train.latest_checkpoint(checkpoint_dir)
+
+    if not latest_checkpoint_path:
+        print('Latest checkpoint was not found. Starting from epoch #0')
+        return 0
+
+    print('latest_checkpoint_path: ', latest_checkpoint_path)
+
+    latest_checkpoint_name = os.path.split(latest_checkpoint_path)[-1]
+    print('latest_checkpoint_name: ', latest_checkpoint_name)
+
+    latest_checkpoint_num = latest_checkpoint_name.split('_')[-1]
+    print('latest_checkpoint_num: ', latest_checkpoint_num)
+
+    return int(latest_checkpoint_num)
+
+
+def unzip_checkpoint(checkpoint_zip_path):
+    if not os.path.exists(checkpoint_zip_path):
+        print('Cannot find a specified file')
+        return
+
+    os.makedirs(checkpoint_dir, exist_ok=True)
+    with zipfile.ZipFile(checkpoint_zip_path, 'r') as zip_obj:
+        zip_obj.extractall(checkpoint_dir)
+
+    # %ls -la ./tmp/checkpoints
+    files = os.listdir('./tmp/checkpoints')
+    print(files)
+
+
+early_stopping_callback = tf.keras.callbacks.EarlyStopping(
+    patience=5,
+    monitor='loss',
+    restore_best_weights=True,
+    verbose=1
+)
+
+checkpoint_prefix = os.path.join(checkpoint_dir, 'ckpt_{epoch}')
+checkpoint_callback=tf.keras.callbacks.ModelCheckpoint(
+    filepath=checkpoint_prefix,
+    save_weights_only=True
+)
+
+
+# execute the trainiing
+
+INITIAL_EPOCH  = initial_epoch_from_latest_checkpoint()
+EPOCHS_DELTA = 1
+EPOCHS = INITIAL_EPOCH + EPOCHS_DELTA
+STEPS_PER_EPOCH = 1500
+
+print('\n')
+print('INITIAL_EPOCH:   ', INITIAL_EPOCH)
+print('EPOCHS_DELTA:    ', EPOCHS_DELTA)
+print('EPOCHS:          ', EPOCHS)
+print('STEPS_PER_EPOCH: ', STEPS_PER_EPOCH)
+
+history_1 = {}
+# history_1 = {} if not history_1 else history_1
+print(history_1)
+
+
+history_1[INITIAL_EPOCH] = model_1.fit(
+    x=dataset_train,
+    epochs=EPOCHS,
+    steps_per_epoch=STEPS_PER_EPOCH,
+    initial_epoch=INITIAL_EPOCH,
+    callbacks=[
+        checkpoint_callback,
+        early_stopping_callback
+    ]
+)
+
+model_name = 'recipe_generation_rnn_raw_' + str(INITIAL_EPOCH) + '.h5'
+model_1.save(model_name, save_format='h5')
+
+download_latest_checkpoint(zip_only=True)
+
+print(history_1)
+
+#  Downloading latest checkpoint - skipped 
+
+#  Visualizing training progress
+
+
+def render_training_history(training_history):
+    if 'history' in training_history:
+        loss = training_history.history['loss']
+    else:
+        loss = []
+        for initial_epoch in training_history:
+            loss += training_history[initial_epoch].history['loss']
+
+    plt.title('Loss')
+    plt.xlabel('Epoch')
+    plt.ylabel('Loss')
+    plt.plot(loss, label='Training set')
+    plt.legend()
+    plt.grid(linestyle='--', linewidth=1, alpha=0.5)
+    plt.show()
+
+
+render_training_history(history_1)
+
+# Restore the latest checkpoint
+
+tf.train.latest_checkpoint(checkpoint_dir)
+
+simplified_batch_size = 1
+
+model_1_simplified = build_model_1(vocab_size, embedding_dim, rnn_units, simplified_batch_size)
+
+model_1_simplified.load_weights(tf.train.latest_checkpoint(checkpoint_dir))
+
+model_1_simplified.build(tf.TensorShape([simplified_batch_size, None]))
+
+model_1_simplified.summary()
+
+model_1_simplified.input_shape
+
+# The prediction loop
+
+# num_generate
+# - number of characters to generate.
+#
+# temperature
+# - Low temperatures results in more predictable text.
+# - Higher temperatures results in more surprising text.
+# - Experiment to find the best setting.
+
+
+def generate_text(model, start_string, num_generate = 1000, temperature=1.0):
+    # Evaluation step (generating text using the learned model)
+
+    padded_start_string = STOP_WORD_TITLE + start_string
+
+    # Converting our start string to numbers (vectorizing).
+    input_indices = np.array(tokenizer.texts_to_sequences([padded_start_string]))
+
+    # Empty string to store our results.
+    text_generated = []
+
+    # Here batch size == 1.
+    model.reset_states()
+    for char_index in range(num_generate):
+        predictions = model(input_indices)
+        # remove the batch dimension
+        predictions = tf.squeeze(predictions, 0)
+
+        # Using a categorical distribution to predict the character returned by the model.
+        predictions = predictions / temperature
+        predicted_id = tf.random.categorical(
+            predictions,
+            num_samples=1
+        )[-1,0].numpy()
+
+        # We pass the predicted character as the next input to the model
+        # along with the previous hidden state.
+        input_indices = tf.expand_dims([predicted_id], 0)
+
+        next_character = tokenizer.sequences_to_texts(input_indices.numpy())[0]
+
+        text_generated.append(next_character)
+
+    return (padded_start_string + ''.join(text_generated))
+
+
+def generate_combinations(model):
+    recipe_length = 1000
+    try_letters = ['', '\n', 'A', 'B', 'C', 'O', 'L', 'Mushroom', 'Apple', 'Slow', 'Christmass', 'The', 'Banana', 'Homemade']
+    try_temperature = [1.0, 0.8, 0.4, 0.2]
+
+    for letter in try_letters:
+        for temperature in try_temperature:
+            generated_text = generate_text(
+                model,
+                start_string=letter,
+                num_generate = recipe_length,
+                temperature=temperature
+            )
+            print(f'Attempt: "{letter}" + {temperature}')
+            print('-----------------------------------')
+            print(generated_text)
+            print('\n\n')
+
+
+generate_combinations(model_1_simplified)
+
+# # save the model 
+# model_name = 'recipe_generation_rnn.h5'
+# model_1_simplified.save(model_name, save_format='h5')
