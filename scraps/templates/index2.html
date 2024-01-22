@@ -18,7 +18,14 @@
           <div class="navigation-bar">
             <div class="text-wrapper-3">
               <a href="/accounts/login/">Login/Sign Up</a>
-                 
+              {% if logname == username %}
+                <div class="edit">
+                    <a href= "/accounts/edit/">Edit profile</a>
+                </div>
+                <form action="{{url_for('logout')}}" method="post" enctype="multipart/form-data">
+                    <input type="submit" name="logout" value="Logout"/>
+                </form>
+              {% endif %}
             </div>
             <div class="scraps-logo"><div class="text-wrapper-4">
               <a href="/">Scraps</a>
