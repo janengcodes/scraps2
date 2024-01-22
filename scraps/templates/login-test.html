@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <form action="/accounts/?target=/" method="post"
+        enctype="multipart/form-data">
+            <input type="text" name="username"
+            required placeholder = "username"/>
+            <input type="password" name="password"
+            required placeholder = "password"/>
+            <input type="submit" value="login"/>
+            <input type="hidden" name="operation" value="login"/>
+    </form>
+    Don't have an account?
+    <a href="/accounts/signup/">Sign up</a>
+
+</body>
+</html>
