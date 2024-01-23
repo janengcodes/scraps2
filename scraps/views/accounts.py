@@ -6,7 +6,7 @@ import uuid
 import os
 import hashlib
 import flask
-from flask import request, abort
+from flask import request, abort, render_template
 import scraps
 
 
@@ -16,7 +16,7 @@ def show_accounts_login():
     """Display /accounts/login/ route."""
     # Redirect to index if logged in
     if 'username' in flask.session:
-        return flask.redirect(flask.url_for('index'))
+        return flask.redirect(flask.url_for('index2'))
     return flask.render_template("login-test.html", **{})
 
 
@@ -164,17 +164,23 @@ def login():
 
     # set a session cookie
     flask.session['username'] = username
+    logname = username
+    context = {
+        'logname': logname,
+    }
+    # target = flask.request.args.get('target', '/')
+    # return flask.redirect(target)
+    return render_template('index2.html', **context)
 
-    target = flask.request.args.get('target', '/')
-    return flask.redirect(target)
-    # Handle other cases (e.g., invalid login)
 
 
-@scraps.app.route('/accounts/logout/', methods=['POST'])
-def logout():
-    if 'username' in flask.session:
-        flask.session.clear()
-    # return flask.redirect(flask.url_for('show_index'))
-    target = flask.request.args.get('target', '/')
-    return flask.redirect(target)
+
+# @scraps.app.route('/accounts/logout/', methods=['POST'])
+# def logout():
+#     if 'username' in flask.session:
+#         flask.session.clear()
+#         flask.session['username'] = None
+#     # return flask.redirect(flask.url_for('show_index'))
+#     # target = flask.request.args.get('target', '/')
+#     return flask.redirect(logout)
 

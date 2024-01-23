@@ -17,15 +17,18 @@
         <div class="overlap">
           <div class="navigation-bar">
             <div class="text-wrapper-3">
-              <a href="/accounts/login/">Login/Sign Up</a>
-              {% if logname == username %}
-                <div class="edit">
-                    <a href= "/accounts/edit/">Edit profile</a>
-                </div>
+
+              {% if logname is not none %}
                 <form action="{{url_for('logout')}}" method="post" enctype="multipart/form-data">
                     <input type="submit" name="logout" value="Logout"/>
                 </form>
+              {% else %}
+               <form action="{{url_for('show_accounts_sign_up')}}" method="get" enctype="multipart/form-data">
+                    <input type="submit" name="create" value="Create An Account"/> </form>
+                <form action="{{url_for('show_accounts_login')}}" method="get" enctype="multipart/form-data">
+                    <input type="submit" name="login" value="Login"/> </form>
               {% endif %}
+
             </div>
             <div class="scraps-logo"><div class="text-wrapper-4">
               <a href="/">Scraps</a>
