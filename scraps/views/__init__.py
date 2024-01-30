@@ -13,3 +13,4 @@ from scraps.views.accounts import show_accounts_login, show_accounts_sign_up, lo
 from scraps.views.accounts import show_accounts_login
 from scraps.views.recipes import get_recipes
 from scraps.views.logout import logout
+from scraps.views.calendar import calendar
