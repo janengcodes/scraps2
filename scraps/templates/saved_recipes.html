@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/static/css/globals.css" />
     <link rel="stylesheet" href="/static/css/style.css" />
     <link rel="stylesheet" href="/static/css/styleguide.css" />
-    <link rel="stylesheet" href="/static/css/saved-recipes.css" />
+    <link rel="stylesheet" href="/static/css/saved_recipes.css" />
     <title>Scraps</title>
   </head>
   <body>
@@ -25,6 +25,35 @@
       <div class="text-wrapper-11">Contact us: scraps@email.com</div>
     </div>
     <img class="build-your-next-meal" src="/static/images/build-recipes.png" />
+  </div>
+  <div class="all-recipes">
+    <div class="breakfast_recipes"> 
+      {% for item in breakfast %}
+        <div class="recipe_card">
+          <p>words</p>
+          <p>item.name </p>
+          <p> item.description </p>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="lunch_recipes">
+      {% for item in lunch %} 
+      <div class="recipe_card">
+        <p>words</p>
+        <p>item.name </p>
+        <p> item.description </p>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="dinner_recipes">
+      {% for item in dinner %}
+      <div class="recipe_card">
+        <p>words</p>
+        <p>item.name </p>
+        <p> item.description </p>
+      </div>
+      {% endfor %}
+    </div>
   </div>
   </body>
 </html>

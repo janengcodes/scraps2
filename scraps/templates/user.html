@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Scraps</title>
+    <title>Scraps Profile</title>
   </head>
   <body>
     <div id="header">
@@ -15,10 +15,13 @@
             <p>MY PANTRY</p>
         </div>
         <!--TODO: update onClick-->
-        <div id="recipes" onClick="">
-            <p>RECIPES</p>
+        <div id="recipes">
+          <a href = "{{url_for('saved_recipes')}}">SAVED RECIPES</a>
         </div>
+
     </div>
+    <h1>Profile</h1>
+    <h2>Hello, </h2>
     <div id="week-view">
         <!--TODO: add each day and associated calender events-->
     </div>

@@ -14,3 +14,11 @@ from scraps.views.accounts import show_accounts_login
 from scraps.views.recipes import get_recipes
 from scraps.views.logout import logout
 from scraps.views.calendar import calendar
+from scraps.views.frontend_test import frontend_test
+from scraps.views.proteins import proteins
+from scraps.views.produce import produce
+from scraps.views.dairy import dairy
+from scraps.views.grains import grains
+from scraps.views.dietarypreferences import dietarypreferences
+from scraps.views.buildrecipes import buildrecipes
+from scraps.views.allergens import allergens

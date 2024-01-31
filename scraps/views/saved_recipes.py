@@ -5,8 +5,23 @@ app = Flask(__name__)
 
 @scraps.app.route('/saved_recipes/')
 def saved_recipes():
+    breakfast = [
+
+        ]
+    
+    lunch = [
+
+        ]
+
+    dinner = [
+
+        ]
+
+
     context = {
-        'example_variable': 'Hello, World!'
+        "breakfast:": breakfast,
+        "lunch": lunch,
+        "dinner": dinner
     }
     return render_template('saved_recipes.html', **context)
 

@@ -1,0 +1,33 @@
+body {
+    background-color: beige;
+}
+
+.all_recipes {
+  display:flex;
+  column-gap: 40px;
+}
+
+/* .breakfast_recipes {
+  background-color: gray;
+  border-radius: 15px;
+
+}
+
+.lunch_recipes {
+  background-color: gray;
+  border-radius: 15px;
+
+}
+
+.dinner_recipes {
+  background-color: gray;
+  border-radius: 15px;
+
+} */
+
+.recipe_card {
+    background-color: gray;
+    border-radius: 15px;
+    background-size: 50px;
+  
+  }

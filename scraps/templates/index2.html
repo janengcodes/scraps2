@@ -22,6 +22,7 @@
                 <form action="{{url_for('logout')}}" method="post" enctype="multipart/form-data">
                     <input type="submit" name="logout" value="Logout"/>
                 </form>
+                <a href="{{url_for('show_user')}}"> Profile </a>
               {% else %}
                <form action="{{url_for('show_accounts_sign_up')}}" method="get" enctype="multipart/form-data">
                     <input type="submit" name="create" value="Create An Account"/> </form>
@@ -30,9 +31,12 @@
               {% endif %}
               <a href="{{url_for('calendar')}}">calendar</a>
 
+              <!-- <a href="{{url_for('frontend_test')}}">front end test</a> -->
+
             </div>
             <div class="scraps-logo"><div class="text-wrapper-4">
               <a href="/">Scraps</a>
+              <a href="{{url_for('frontend_test')}}">front end test</a>
             </div>
           </div>
           </div>
