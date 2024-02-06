@@ -1,25 +1,18 @@
-import { useState } from 'react';
+import React from "react";
+import { createRoot } from "react-dom/client";
+import Button from "react-bootstrap/Button"; // we can import elements like Button to the
+import "bootstrap/dist/css/bootstrap.min.css";
 
-export default function App() {
+const root = createRoot(document.getElementById("reactEntry")); // Use createRoot directly
+const SimpleComponent = () => {
   return (
     <div>
-      <h1>Counters that update separately</h1>
-      <MyButton />
-      <MyButton />
+      <div>Hello, I'm a simple component!</div>
+      <div>
+        <Button>Test</Button>
+      </div>
     </div>
   );
-}
+};
 
-function MyButton() {
-  const [count, setCount] = useState(0);
-
-  function handleClick() {
-    setCount(count + 1);
-  }
-
-  return (
-    <button onClick={handleClick}>
-      Clicked {count} times
-    </button>
-  );
-}
+root.render(<SimpleComponent />);
