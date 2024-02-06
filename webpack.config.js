@@ -34,7 +34,7 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.(sass|css|scss)$/,
+        test: /\.(sass|scss)$/,
         use: [
           "style-loader",
           "css-loader",
@@ -46,6 +46,11 @@ module.exports = {
           },
           "sass-loader",
         ],
+      },
+      {
+        // Add a new rule to handle CSS files
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
       },
     ],
   },
