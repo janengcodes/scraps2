@@ -306,3 +306,39 @@
   position: absolute;
   right: 200px;
 }
+
+.home-page .logout-button input{
+  position: absolute;
+  /* left: 150px; */
+  border:none; 
+  outline:none;
+  background-color: #fff8e8;
+  font-size:25px;
+  /* position: absolute; */
+  /* width: 218px;*/
+
+  left: 100px;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  letter-spacing: 0.12px;
+  line-height: 16px;
+  white-space: nowrap;
+  cursor: pointer;
+  padding: 7px;
+}
+.home-page .sign-in input{
+  display: block;
+  border:none; 
+  outline:none;
+  background-color: #fff8e8;
+  font-size:25px;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  letter-spacing: 0.12px;
+  line-height: 16px;
+  white-space: nowrap;
+  cursor: pointer;
+  padding: 7px;
+}
