@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Scraps Profile</title>
+    <title>Scraps</title>
   </head>
   <body>
     <div id="header">
@@ -12,12 +12,13 @@
         </div>
         <!--TODO: update onClick-->
         <div id="my-pantry" onClick="">
-            <p>MY PANTRY</p>
+            <a href = "{{url_for('pantry_main')}}">MY Pantry</a>
         </div>
         <!--TODO: update onClick-->
         <div id="recipes">
           <a href = "{{url_for('saved_recipes')}}">SAVED RECIPES</a>
         </div>
+
 
     </div>
     <h1>Profile</h1>

@@ -8,7 +8,7 @@ def dietarypreferences():
     context = {
         'example_variable': 'Hello, World!'
     }
-    return render_template('dietarypreferences.html', **context)
+    return render_template('dietarypref.html', **context)
 
 
 if __name__ == '__main__':

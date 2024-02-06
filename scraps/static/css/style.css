@@ -302,4 +302,7 @@
   left: 65px;
 }
 
-
+.front-end-test{
+  position: absolute;
+  right: 200px;
+}

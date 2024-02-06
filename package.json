@@ -1,9 +1,9 @@
 {
-  "name": "insta485",
+  "name": "scraps",
   "version": "1.0.0",
-  "description": "insta485 front end",
-  "main": "insta485/js/main.jsx",
-  "author": "awdeorio",
+  "description": "scraps front end",
+  "main": "scraps/js/main.jsx",
+  "author": "ecodata",
   "license": "MIT",
   "repository": {},
   "devDependencies": {

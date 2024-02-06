@@ -3,7 +3,7 @@ import scraps
 app = Flask(__name__)
 
 
-@scraps.app.route('/dairy')
+@scraps.app.route('/dairy/')
 def dairy():
     context = {
         'example_variable': 'Hello, World!'

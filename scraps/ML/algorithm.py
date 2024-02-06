@@ -121,7 +121,7 @@ for recipe_text in dataset_stringified:
 
 # plt.hist(recipes_lengths, bins=50)
 # plt.show()
-MAX_RECIPE_LENGTH = 2000
+MAX_RECIPE_LENGTH = 300
 
 if DEBUG:
     MAX_RECIPE_LENGTH = 500
@@ -491,7 +491,7 @@ print("Prediction shape: ", example_batch_predictions.shape, " # (batch_size, se
 print("scalar_loss.shape:      ", example_batch_loss.shape)
 print("scalar_loss:      ", example_batch_loss.numpy().mean())
 
-adam_optimizer = tf.keras.optimizers.Adam(learning_rate=0.001)
+adam_optimizer = tf.keras.optimizers.legacy.Adam(learning_rate=0.001)
 
 model_1.compile(
     optimizer=adam_optimizer,

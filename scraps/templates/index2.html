@@ -29,15 +29,19 @@
                 <form action="{{url_for('show_accounts_login')}}" method="get" enctype="multipart/form-data">
                     <input type="submit" name="login" value="Login"/> </form>
               {% endif %}
-              <a href="{{url_for('calendar')}}">calendar</a>
+              <!-- <a href="{{url_for('calendar')}}">calendar</a> -->
 
               <!-- <a href="{{url_for('frontend_test')}}">front end test</a> -->
 
             </div>
             <div class="scraps-logo"><div class="text-wrapper-4">
               <a href="/">Scraps</a>
+              
+            </div>
+            <div class="front-end-test">
               <a href="{{url_for('frontend_test')}}">front end test</a>
             </div>
+            
           </div>
           </div>
           <img class="carrot" src="/static/images/carrot.png" />

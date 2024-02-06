@@ -212,7 +212,20 @@
   letter-spacing: 0;
   line-height: 24px;
   white-space: nowrap;
+  
 }
+input{
+  outline:none;
+  border:none;
+  font-family: "IBM Plex Sans", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 25px;
+  line-height: 24px;
+  white-space: nowrap;
+
+}
+
 
 .log-in-page .div-wrapper {
   position: absolute;
@@ -303,3 +316,10 @@
   line-height: 16px;
   white-space: nowrap;
 }
+.log-in-page .login{
+  position: absolute;
+  right: 200px;
+  top: 240px;
+  left: 190px;
+}
+

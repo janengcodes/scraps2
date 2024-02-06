@@ -1,16 +1,23 @@
-import React, { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import MyComponent from "./saved_recipes";
-import 'bootstrap/dist/css/bootstrap.css';
+import React from "react";
+import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
+// import SimpleComponent from './SimpleComponent.js';
+// import Post from './post'
+
+// const root = createRoot(document.getElementById('reactEntry'));
+const root = ReactDOM.createRoot(document.getElementById('reactEntry'));
+const SimpleComponent = () => {
+  return (<div>Hello, I'm a simple component!</div>);
+};
 
 
-// Create a root
-const root = createRoot(document.getElementById("saved_recipe"));
-
-// This method is only called once
-// Insert the post component into the DOM
+// im sad and confused 
+// dont be sad we will figure this out 
 root.render(
-  <StrictMode>
-    <MyComponent/>
-  </StrictMode>,
+    <SimpleComponent />
 );
+
+// root.render(
+//     <SimpleComponent />
+//     {/* <Post /> */}
+// );

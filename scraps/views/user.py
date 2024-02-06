@@ -6,9 +6,9 @@ import scraps
 def show_user():
     # create a connection to the database in order to access the info
     # add some sql queries here 
-    username = flask.session['username']
+    # username = flask.session['username']
 
     context = {
-        ""
+        "user": "example"
     }
     return flask.render_template('user.html', **context)

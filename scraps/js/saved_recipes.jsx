@@ -1,17 +1,12 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import 'bootstrap/dist/css/bootstrap.css';
+import { createRoot } from 'react-dom/client';
+// import SimpleComponent from './SimpleComponent.js';
+// import Post from './post'
+const root = createRoot(document.getElementById('reactEntry2'));
 
+const SimpleComponent = () => {
+  return (<div>Hello, I'm a simple component!</div>);
+};
 
-// Define a simple React component
-function MyComponent() {
-  return (
-    <div>
-      <h1>Hello, React!</h1>
-      <p>This is a basic JSX template.</p>
-    </div>
-  );
-}
-
-// Render the component to the DOM
-// ReactDOM.render(<MyComponent />, document.getElementById("saved_recipe"));
+root.render(
+    <SimpleComponent />
+);

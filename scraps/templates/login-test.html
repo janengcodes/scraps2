@@ -3,21 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/globals.css" />
+    <link rel="stylesheet" href="/static/css/styleguide.css" />
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="stylesheet" href="/static/css/sign-in.css" />
     <title>Document</title>
 </head>
 <body>
+    <div class="log-in-page">
+        <div class="div">
+            <div class="navigation-bar">
+                <div class="scraps-logo">
+                <img class="carrot" src="/static/images/carrot.png" />
+                <div class="text-wrapper">
+                    <a href="\">Scraps</a>
+                </div>
+                </div>
+            </div>
+            <div class="group">
+                <div class="overlap-group">
+                    <div class="text-wrapper-2">or</div>
+                    <div class="social-button-groups">
+                    <div class="social-button">
+                        <img
+                        class="social-icon"
+                        src="/static/images/social-icon-128.svg"
+                        />
+                        <div class="text">Sign in with Google</div>
+                    </div>
+                    <div class="social-button-2">
+                        <img
+                        class="social-icon"
+                        src="/static/images/social-icon-127.svg"
+                        />
+                        <div class="text-2">Sign in with Facebook</div>
+                    </div>
+                    <div class="social-button-3">
+                        <img
+                        class="social-icon"
+                        src="/static/images/social-icon-126.svg"
+                        />
+                        <div class="text-2">Sign in with Apple</div>
+                    </div>
+                    </div>
+                    <div class="text-wrapper-3">Log-In</div>
+                    
+                    <form action="/accounts/?target=/" method="post"enctype="multipart/form-data">
+                        <div class="overlap">
+                            <div class="text-wrapper-4">
+                                <input type="text" name="username"
+                                required placeholder = "username"/>
+                            </div>
+                        </div>
+                        <div class="div-wrapper">
+                            <div class="text-wrapper-4">
+                                <input type="password" name="password"
+                                required placeholder = "password"/>
+                            </div>
+                        </div>
+                        <div class="login">
+                            <input type="submit" value="login"/>
+                            <input type="hidden" name="operation" value="login"/>
+                        </div>
 
-    <form action="/accounts/?target=/" method="post"
-        enctype="multipart/form-data">
-            <input type="text" name="username"
-            required placeholder = "username"/>
-            <input type="password" name="password"
-            required placeholder = "password"/>
-            <input type="submit" value="login"/>
-            <input type="hidden" name="operation" value="login"/>
-    </form>
-    Don't have an account?
-    <a href="/accounts/signup/">Sign up</a>
+                    </form>
+                    <img class="line" src="/static/images/line-1.svg" />
+                    <img class="img" src="/static/images/line-2.svg" />  
+                </div>
+                <div class="text-wrapper-5">New to Scraps?</div>
+                <div class="text-wrapper-6">
+                    <a href="/accounts/signup/">Join Now!</a>
+                </div>
+            </div>
+        </div>   
+    </div>
+    
+    
+    <!-- Don't have an account?
+    <a href="/accounts/signup/">Sign up</a> -->
+
+    
 
 </body>
 </html>
