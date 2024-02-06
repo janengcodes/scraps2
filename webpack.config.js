@@ -18,9 +18,7 @@ module.exports = {
   module: {
     rules: [
       {
-        // Test for js or jsx files
         test: /\.(js|jsx)$/,
-        // Exclude external modules from loader tests
         exclude: /node_modules/,
         loader: "babel-loader",
         options: {
@@ -28,10 +26,13 @@ module.exports = {
         },
       },
       {
-        // Support for TypeScript in optional .ts or .tsx files
         test: /\.(ts|tsx)$/,
         use: "ts-loader",
         exclude: /node_modules/,
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
       },
       {
         test: /\.(sass|scss)$/,
@@ -46,11 +47,6 @@ module.exports = {
           },
           "sass-loader",
         ],
-      },
-      {
-        // Add a new rule to handle CSS files
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"],
       },
     ],
   },
