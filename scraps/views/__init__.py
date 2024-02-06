@@ -20,5 +20,5 @@ from scraps.views.produce import produce
 from scraps.views.dairy import dairy
 from scraps.views.grains import grains
 from scraps.views.dietarypreferences import dietarypreferences
-from scraps.views.buildrecipes import buildrecipes
+from scraps.views.build_recipes import build_recipes
 from scraps.views.allergens import allergens

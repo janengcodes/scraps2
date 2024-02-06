@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 
 @scraps.app.route('/buildrecipes/')
-def buildrecipes():
+def build_recipes():
     context = {
         'example_variable': 'Hello, World!'
     }
