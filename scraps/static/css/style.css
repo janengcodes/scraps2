@@ -1,5 +1,5 @@
 .home-page {
-  background-color: #fff8e8;
+  background-color: #F8F0E5;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -7,7 +7,7 @@
 }
 
 .home-page .div {
-  background-color: #fff8e8;
+  background-color: #F8F0E5;
   overflow: hidden;
   width: 1279px;
   height: 1635px;
@@ -212,7 +212,7 @@
   height: 70px;
   top: 1565px;
   left: -1px;
-  background-color: #93806a;
+  background-color: #C6CD81;
 }
 
 .home-page .background-color {
@@ -221,7 +221,7 @@
   height: 70px;
   top: 0;
   left: 0;
-  background-color: #93806a;
+  background-color: #C6CD81;
 }
 
 .home-page .text-wrapper-7 {
