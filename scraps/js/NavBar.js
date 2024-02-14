@@ -12,7 +12,7 @@ function LoggedInNavBar() {
     <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
       <Container>
         <Navbar.Brand href="/index2">
-          Scraps <img class="carrot" src="/static/images/carrot.png" style={{ width: "50px", height: "50px" }}/>{" "}
+          Scraps <img src="/static/images/carrot.png" className="carrot" style={{ width: "50px", height: "50px" }}/>{" "}
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">

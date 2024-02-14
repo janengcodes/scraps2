@@ -1,0 +1,20 @@
+body {
+  background-color: #ffeede;
+}
+
+.strawberry {
+  width: 7%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3%;
+}
+
+.scraps {
+  width: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3%;
+}
+
