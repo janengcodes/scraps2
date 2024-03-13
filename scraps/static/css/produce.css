@@ -1,7 +1,49 @@
 .checkboxes {
-    display: block;
-    background-color: aliceblue;
-    margin-top: 10%;
-    font-family: "Lusitana", Helvetica;
-
+  display: block;
+  background-color: lightpink;
+  /* margin-top: 10%; */
+  font-family: Arial, Helvetica, sans-serif;
 }
+
+h1 {
+  font-size: 100px;
+  color: lightpink;
+  margin-top: 8%;
+  text-align: center;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.produce-checkbox1 {
+  font-size: 27px;
+  background-color: lightpink;
+  /* display: inline-block; */
+  /*padding: 30px; */
+  /* margin-right: 10px;
+  margin-left: 10px;  */
+  /* Space between checkbox containers */
+  /* border-radius: 10px;  */
+  /* margin: 10px; */
+}
+
+/* .container {
+  display: flex;
+
+  flex-wrap: wrap;
+  /* justify-content: start; */
+  /* align-items: stretch;
+  /* gap: 10px; */
+  /* gap: 10px 20px; */
+  /* column-gap: 20px;
+  /* grid-row: 20px; */
+  /* flex-direction: column */
+  /* | row-reverse | column | column-reverse; */
+/*}  */
+
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 40px 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+}
+
+

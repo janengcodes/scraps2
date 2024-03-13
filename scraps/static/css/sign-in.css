@@ -15,6 +15,7 @@
 }
 
 .log-in-page .navigation-bar {
+  display: block;
   position: absolute;
   width: 228px;
   height: 36px;

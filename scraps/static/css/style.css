@@ -91,6 +91,7 @@
 
 .home-page .navigation-bar {
   position: absolute;
+  display: block;
   width: 1184px;
   height: 20px;
   top: 13px;

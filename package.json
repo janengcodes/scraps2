@@ -39,7 +39,7 @@
     "style-loader": "^3.3.4",
     "tmp": "^0.2.1",
     "webpack": "^5.90.1",
-    "webpack-cli": ">=5.1.4"
+    "webpack-cli": "^5.1.4"
   },
   "dependencies": {
     "bootstrap": "^5.3.2",

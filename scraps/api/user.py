@@ -1,45 +1,28 @@
-"""REST API for user."""
+"""REST API for likes."""
+import hashlib
+from flask import jsonify
 import flask
 import scraps
 
+from scraps.api.exceptions import AuthException
+from scraps.api.exceptions import check_auth
 
-@scraps.app.route('/api/v1/user/<string:username>', methods=['GET'])
-def get_user():
+import requests
+
+@scraps.app.route('/api/check-auth', methods=['GET'])
+def check_login():
+    """Check if a user is logged in"""
+    logname = check_auth()
+
     connection = scraps.model.get_db()
-    username = scraps.model.get_logname()
-
-    cur = connection.execute(
-        """
-        SELECT fullname, filename, email, username
+    # Grab the name of the current user
+    full_name = connection.execute('''
+        SELECT fullname
         FROM users
         WHERE username = ?
-        """,
-        (username, )
-    )
+    ''', (logname,)).fetchone()
 
-    user = cur.fetchone()
-
-    if not user:
-        flask.abort(404)
-
-    return flask.jsonify(**user)
-# <string:usernameuser_calendarusername
-
-
-@scraps.app.route('/api/v1/<string:username>', methods=['GET'])
-def get_user_saved(username):
-    connection = scraps.model.get_db()
-
-    cur = connection.execute(
-        """
-        SELECT C.recipe_id, c.meal_time, R.name, R.filename, R.cook_time
-        FROM calendar_events C
-        LEFT JOIN recipes R ON C.recipe_id = R.recipe_id
-        WHERE username = ?
-        """,
-        (username, )
-    )
-
-    rec = cur.fetchall()
-
-    return flask.jsonify(**rec)
+    context = {
+        "fullname": full_name["fullname"],
+    } 
+    return flask.jsonify(**context), 201

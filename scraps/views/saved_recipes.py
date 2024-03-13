@@ -1,25 +1,41 @@
-from flask import Flask, render_template
+import flask
+from flask import redirect, render_template, Flask
 import scraps
 app = Flask(__name__)
 
 
 @scraps.app.route('/saved_recipes/')
 def saved_recipes():
+    # breakfast = [
+    #     {
+    #         "name": "hashbrowns",
+    #         "description": "potato"
+    #     },
+    #     {
+    #         "name": "huevos rancheros",
+    #         "description": "eggs and stuff"
+    #     },
+    #     {
+    #         "name": "huevos rancheros",
+    #         "description": "eggs and stuff"
+    #     }
+    # ]
+        
     breakfast = [
         {
-            "name": "hashbrowns",
-            "description": "potato"
+            "name": "burgers and fries",
+            "description": "potato and meat"
         },
         {
-            "name": "huevos rancheros",
-            "description": "eggs and stuff"
+            "name": "sandwich",
+            "description": "peanut butter and jelly"
         },
         {
-            "name": "huevos rancheros",
-            "description": "eggs and stuff"
+            "name": "poke",
+            "description": "spicy tuna, mayo, edamame"
         }
     ]
-    
+
     lunch = [
         {
             "name": "burgers and fries",
@@ -51,13 +67,13 @@ def saved_recipes():
     ]
     
     if 'username' not in flask.session:
-        return flask.redirect(flask.url_for('login'))
+        return flask.redirect(flask.url_for('show_accounts_login'))
     
     logname = flask.session.get('username')
     
     context = {
-        "breakfast:": breakfast,
         "lunch": lunch,
+        "breakfast:": breakfast,
         "dinner": dinner,
         "logname": logname
     }

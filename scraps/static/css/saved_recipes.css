@@ -3,11 +3,14 @@ body {
 }
 
 .all_recipes {
-  display:flex;
-  column-gap: 40px;
+  display:grid;
+  grid-gap: 1em;
+  grid-template-columns: 1fr 2fr 2fr 2fr 1fr;
+  align-items: start;
+  background-color: antiquewhite;
 }
 
-/* .breakfast_recipes {
+.breakfast_recipes {
   background-color: gray;
   border-radius: 15px;
 
@@ -23,11 +26,12 @@ body {
   background-color: gray;
   border-radius: 15px;
 
-} */
+}
 
 .recipe_card {
     background-color: gray;
     border-radius: 15px;
     background-size: 50px;
+    border-bottom: 30px;
   
   }

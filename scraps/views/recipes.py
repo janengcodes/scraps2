@@ -1,10 +1,17 @@
-from flask import Flask, render_template
+import flask
+from flask import redirect, render_template, Flask
 import scraps
 app = Flask(__name__)
 
 
+
 @scraps.app.route('/recipes/')
 def get_recipes():
+    if 'username' not in flask.session:
+        return flask.redirect(flask.url_for('show_accounts_login'))
+    
+    logname = flask.session.get('username')
+    
     context = {
         'example_variable': 'Hello, World!'
     }

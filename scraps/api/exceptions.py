@@ -59,7 +59,9 @@ def check_auth():
         # password = flask.request.authorization['password']
         # do this: check password
     # Else redirect because you're not authenticated
-    raise AuthException('Forbidden', status_code=403)
+    return None
+    # TODO: Raise Exception in other parts of code except navbar 
+    # raise AuthException('Forbidden', status_code=403)
 
 
 class AuthException(Exception):

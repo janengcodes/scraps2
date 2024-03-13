@@ -1,7 +1,26 @@
 .checkboxes {
-    display: block;
-    background-color: aliceblue;
-    margin-top: 10%;
-    font-family: "Lusitana", Helvetica;
+  display: block;
+  background-color: aliceblue;
+  margin-top: 10%;
+  font-family: "Lusitana", Helvetica;
+}
 
+h1 {
+  font-size: 100px;
+  color: lightpink;
+  margin-top: 8%;
+  text-align: center;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.produce-checkbox1 {
+  font-size: 27px;
+  background-color: lightpink;
+  display: inline-block;
+  padding: 30px;
+  /* margin-right: 10px; */
+  /* margin-left: 10px;  */
+  /* Space between checkbox containers */
+  border-radius: 10px; /* Optional: for rounded corners */
+  margin: 10px;
 }
