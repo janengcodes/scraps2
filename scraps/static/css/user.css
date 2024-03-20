@@ -1,0 +1,32 @@
+.header{
+    grid-area: header;
+    background-color: #98fb98;
+    padding: 30px;
+    text-align: center;
+    font-size: 35px;
+}
+
+
+.grid-container {
+display: grid;
+grid-template-columns: auto auto auto auto auto auto auto;
+background-color: #98fb98;
+padding: 40px;
+column-gap: 30px;
+grid-template-rows: 200px 300px;
+align-content: space-evenly;
+}
+
+.grid-item {
+background-color: rgb(234, 242, 215, 1);
+border: 2px solid rgba(0, 0, 0, 0.8);
+padding: 20px;
+font-size: 30px;
+text-align: center;
+border-top-left-radius: 5px;
+border-top-right-radius: 5px;
+border-bottom-left-radius: 5px;
+border-bottom-right-radius: 5px;
+height: 500px;
+grid-column-start: 0;
+}

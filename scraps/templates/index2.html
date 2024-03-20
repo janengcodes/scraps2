@@ -1,97 +1,25 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
   <head>
-    <link rel="stylesheet" href="/static/css/globals.css" />
-    <link rel="stylesheet" href="/static/css/style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/css/frontend-test.css" />
+    <title>Scraps</title>
   </head>
   <body>
-    <div class="home-page">
-      <div class="div">
-        <div class="main-content">
-          <img class="rectangle" src="/static/images/rectangle-33.png" />
-          <p class="text-wrapper">Turn your kitchen scraps into gourmet delights!</p>
-          <p class="p">Turn culinary chaos into tasty masterpieces!</p>
-          <div class="text-wrapper-2">Leftover magic, served fresh</div>
-          <a href="/pantry_main/"><img class="build-your-next-meal" src="/static/images/build-ur-next-meal.png" /></a>
-        </div>
-        <div class="overlap">
-          <div class="navigation-bar">
-            <div class="text-wrapper-3">
-
-              {% if logname is not none %}
-                <div class="logout-button">
-                  <form action="{{url_for('logout')}}" method="post" enctype="multipart/form-data">
-                      <input type="submit" name="logout" value="Logout"/>
-                  </form>
-                </div>
-                <a href="{{url_for('show_user')}}"> Profile </a>
-              {% else %}
-                <div class="sign-in">
-                  <form action="{{url_for('show_accounts_sign_up')}}" method="get" enctype="multipart/form-data">
-                        <input type="submit" name="create" value="Create An Account"/> </form>
-                    <form action="{{url_for('show_accounts_login')}}" method="get" enctype="multipart/form-data">
-                        <input type="submit" name="login" value="Login"/> </form>
-                </div>
-              {% endif %}
-              <!-- <a href="{{url_for('calendar')}}">calendar</a> -->
-
-              <!-- <a href="{{url_for('frontend_test')}}">front end test</a> -->
-
-            </div>
-            <div class="scraps-logo"><div class="text-wrapper-4">
-              <a href="/">Scraps</a>
-              
-            </div>
-            <div class="front-end-test">
-              <a href="{{url_for('frontend_test')}}">front end test</a>
-            </div>
-            
-          </div>
-          </div>
-          <img class="carrot" src="/static/images/carrot.png" />
-        </div>
-        <div class="overlap-group">
-          <div class="our-mission">
-            <div class="overlap-group-2">
-              <p class="text-wrapper-5">
-                Our mission at Scraps is to reduce food waste and ignite culinary creativity. We empower individuals to
-                turn leftovers and random ingredients into delightful, sustainable meals through innovative recipe
-                suggestions, fostering a world where every scrap counts in the pursuit of flavorful, Eco-conscious
-                dining.
-              </p>
-              <div class="text-wrapper-6">Our Mission</div>
-            </div>
-          </div>
-          <div class="our-mission">
-            <div class="overlap-2">
-              <p class="text-wrapper-5">
-                Our mission at Scraps is to reduce food waste and ignite culinary creativity. We empower individuals to
-                turn leftovers and random ingredients into delightful, sustainable meals through innovative recipe
-                suggestions, fostering a world where every scrap counts in the pursuit of flavorful, Eco-conscious
-                dining.
-              </p>
-              <div class="text-wrapper-6">Our Mission</div>
-              <!-- <img class="img" src="/static/images/carrot.png" /> -->
-            </div>
-          </div>
-        </div>
-        <div class="overlap-3">
-          <div class="background-color"></div>
-          <div class="text-wrapper-7">Scraps 2023</div>
-          <div class="text-wrapper-8">Contact us: scraps@email.com</div>
-        </div>
-        <div class="about-us">
-          <div class="overlap-4">
-            <p class="text-wrapper-9">
-              Our mission at Scraps is to reduce food waste and ignite culinary creativity. We empower individuals to
-              turn leftovers and random ingredients into delightful, sustainable meals through innovative recipe
-              suggestions, fostering a world where every scrap counts in the pursuit of flavorful, Eco-conscious dining.
-            </p>
-            <div class="text-wrapper-10">About Us</div>
-            <img class="photo-grid" src="/static/images/photo-grid.png" />
-          </div>
-        </div>
-      </div>
+    <div id="reactEntry">
+      Loading...
     </div>
+    <!-- Load JavaScript -->
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='js/bundle.js') }}"
+    ></script>
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+    crossorigin="anonymous"
+    />
   </body>
 </html>

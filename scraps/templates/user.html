@@ -1,34 +1,40 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/css/globals.css" />
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="stylesheet" href="/static/css/user.css" />
+
     <title>Scraps</title>
   </head>
   <body>
-      
     <div id="header">
-        <div id="date-range">
-            <!--TODO: add date range UI-->
-        </div>
-        <!--TODO: update onClick-->
-        <div id="my-pantry" onClick="">
-            <a href = "{{url_for('pantry_main')}}">MY Pantry</a>
-        </div>
-        <!--TODO: update onClick-->
-        <div id="recipes">
-          <a href = "{{url_for('saved_recipes')}}">SAVED RECIPES</a>
-        </div>
+      <div id="date-range">
+        <!--TODO: add date range UI-->
+      </div>
+      <!--TODO: update onClick-->
+      <div id="my-pantry" onClick="">
+        <a href="{{url_for('pantry_main')}}">MY Pantry</a>
+      </div>
+      <!--TODO: update onClick-->
+      <div id="recipes">
+        <a href="{{url_for('saved_recipes')}}">SAVED RECIPES</a>
+      </div>
+    </div>
 
+    <div class="header">Weekly Planner</div>
+    <div class="grid-container">
+      <div class="grid-item"></div>
+      <div class="grid-item"></div>
+      <div class="grid-item"></div>  
+      <div class="grid-item"></div>
+      <div class="grid-item"></div>
+      <div class="grid-item"></div>  
+      <div class="grid-item"></div>
+    </div>
+    
 
-    </div>
-    <h1>Profile</h1>
-    <h2>Hello, </h2>
-    <div id="week-view">
-        <!--TODO: add each day and associated calender events-->
-    </div>
-    <div id="main-view">
-        <!--TODO: add mypantry/recipes view-->
-    </div>
   </body>
 </html>
