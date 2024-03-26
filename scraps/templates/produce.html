@@ -9,200 +9,277 @@
     <link rel="stylesheet" href="/static/css/style.css" />
     <link rel="stylesheet" href="/static/css/pantry-main.css" />
     <link rel="stylesheet" href="/static/css/produce.css" />
+    <script src="/static/js/ingredients.js"></script>
+    <!-- scraps/static/js/ingredients.js -->
   </head>
   <body>
-    <a href="/">Scraps</a>
-    <div class="pantry">
-      <div class="div">
-        <div class="navigation-bar">
-          <div class="text-wrapper">
-            <a href="/user/">My Profile</a>
-          </div>
-          <div class="text-wrapper-2">
-            <a href="/saved_recipes/">Saved Recipes</a>
-          </div>
-          <div class="text-wrapper-3">
-            <a href="/recipes/">Recipes</a>
-          </div>
-          <div class="scraps-logo">
-            <img class="carrot" src="/static/images/carrot.png" />
-            <div class="text-wrapper-4">
-              <a href="/">Scraps</a>
-            </div>
-          </div>
-        </div>
+    <div class="reactEntry">Loading...</div>
+    <!-- Load JavaScript -->
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='js/bundle.js') }}"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
 
-        <!-- <h1>Produce</h1> -->
+
+    <button onclick="tabFunction()">Produce</button>
+    <button onclick="tabFunction()">Protein</button>
+    <button onclick="tabFunction()">Dairy</button>
+    <button onclick="tabFunction()">Grains</button>
+
         <h1>Produce</h1>
-        <!--  -->
-        <form action="/produce_checkbox" method="post">
-        <div class="outer-grid-container">
-          <div class="grid-container">
-            <div>
-              <!-- <div class="grid-item">1</div> -->
+        <form action="/ingredient_checkbox" method="post">
+          <div class="outer-grid-container">
+            <div class="grid-container">
               <div class="produce-checkbox1">
                 <input
                   type="checkbox"
                   id="1"
-                  name="produce_ingredient"
+                  name="ingredient"
                   value="Cucumbers"
                 />
                 <label for="vehicle1"> Cucumbers </label><br />
               </div>
-            </div>
 
-            <!-- <div class="grid-item">2</div> -->
-            <div>
+              <!-- <div class="grid-item">5</div> -->
+
               <div class="produce-checkbox1">
-                <input type="checkbox" id="2" name="produce_ingredient" value="Carrots" />
-                <label for="vehicle1"> Carrots </label><br />
+                <input
+                  type="checkbox"
+                  id="5"
+                  name="ingredient"
+                  value="Tomatoes"
+                />
+                <label for="vehicle1"> Tomatoes</label><br />
               </div>
-            </div>
 
-            <!-- <div class="grid-item">3</div>
-      <div class="produce-checkbox1">
-      <input type="checkbox" id="3" name="spinach" value="Spinach" />
-      <label for="vehicle1"> Spinach</label><br />
-      </div>
-    </div> -->
-
-            <div>
-              <div>
-                <!-- <div class="grid-item">4</div> -->
-                <div class="produce-checkbox1">
-                  <input
-                    type="checkbox"
-                    id="4"
-                    name="produce_ingredient"
-                    value="Lettuce"
-                  />
-                  <label for="vehicle1"> Lettuce</label><br />
-                </div>
+              <!-- <div class="grid-item">6</div> -->
+              <div class="produce-checkbox1">
+                <input
+                  type="checkbox"
+                  id="6"
+                  name="ingredient"
+                  value="Potatoes"
+                />
+                <label for="vehicle1"> Potatoes</label><br />
+                <!-- </div> -->
+                <!-- </div> -->
               </div>
-            </div>
 
-            <!-- <div class="grid-item">5</div> -->
-
-            <div class="produce-checkbox1">
-              <input type="checkbox" id="5" name="produce_ingredient" value="Tomatoes" />
-              <label for="vehicle1"> Tomatoes</label><br />
-              <!-- </div> -->
-            </div>
-
-            <!-- <div class="grid-item">6</div> -->
-            <div class="produce-checkbox1">
-              <input type="checkbox" id="6" name="produce_ingredient" value="Potatoes" />
-              <label for="vehicle1"> Potatoes</label><br />
-              <!-- </div> -->
-              <!-- </div> -->
-            </div>
-
-            <div>
               <!-- <div class="grid-item">7</div> -->
               <div class="produce-checkbox1">
-                <input type="checkbox" id="7" name="produce_ingredient" value="Cabbage" />
+                <input
+                  type="checkbox"
+                  id="7"
+                  name="ingredient"
+                  value="Cabbage"
+                />
                 <label for="vehicle1"> Cabbage</label><br />
               </div>
-            </div>
-            <!-- <div class="grid-item">8</div> -->
-            <div class="produce-checkbox1">
-              <input type="checkbox" id="8" name="produce_ingredient" value="Arugula" />
-              <label for="vehicle2"> Arugula </label><br />
-              <!-- </div> -->
-            </div>
-            <!-- <div class="grid-item">9</div> -->
-            <div class="produce-checkbox1">
-              <input type="checkbox" id="9" name="produce_ingredient" value="Cilantro" />
-              <label for="vehicle3"> Cilantro</label><br />
+
+              <div class="produce-checkbox1">
+                <input
+                  type="checkbox"
+                  id="8"
+                  name="ingredient"
+                  value="Arugula"
+                />
+                <label for="vehicle2"> Arugula </label><br />
+              </div>
+
+              <!-- <div class="grid-item">9</div> -->
+              <div class="produce-checkbox1">
+                <input
+                  type="checkbox"
+                  id="9"
+                  name="ingredient"
+                  value="Cilantro"
+                />
+                <label for="vehicle3"> Cilantro</label><br />
+              </div>
             </div>
           </div>
-        </div>
-      </form>
+
+          <h1>Protein</h1>
+
+          <div class="outer-grid-container">
+            <div class="grid-container">
+              <div class="produce-checkbox1">
+                <input
+                  type="checkbox"
+                  id="8"
+                  name="ingredient"
+                  value="Chicken"
+                />
+                <label for="vehicle2"> Chicken </label><br />
+              </div>
+
+              <div class="produce-checkbox1">
+                <input type="checkbox" id="8" name="ingredient" value="Beef" />
+                <label for="vehicle2"> Beef </label><br />
+              </div>
+
+              <div class="produce-checkbox1">
+                <input type="checkbox" id="8" name="ingredient" value="Bacon" />
+                <label for="vehicle2"> Bacon </label><br />
+              </div>
+
+              <div class="produce-checkbox1">
+                <input
+                  type="checkbox"
+                  id="8"
+                  name="ingredient"
+                  value="Turkey"
+                />
+                <label for="vehicle2"> Turkey </label><br />
+              </div>
+
+              <div class="produce-checkbox1">
+                <input type="checkbox" id="8" name="ingredient" value="Lamb" />
+                <label for="vehicle2"> Lamb </label><br />
+              </div>
+
+              <div class="produce-checkbox1">
+                <input type="checkbox" id="8" name="ingredient" value="Tofu" />
+                <label for="vehicle2"> Tofu </label><br />
+              </div>
+            </div>
+          </div>
+
+          <h1>Dairy</h1>
+          <div class="outer-grid-container">
+            <div class="grid-container">
+              <div class="produce-checkbox1">
+                <input type="checkbox" id="1" name="ingredient" value="Milk" />
+                <label for="vehicle1"> Milk </label><br />
+              </div>
+
+              <div class="produce-checkbox1">
+                <input
+                  type="checkbox"
+                  id="1"
+                  name="ingredient"
+                  value="Yogurt"
+                />
+                <label for="vehicle1"> Yogurt </label><br />
+              </div>
+
+              <div class="produce-checkbox1">
+                <input
+                  type="checkbox"
+                  id="1"
+                  name="ingredient"
+                  value="Heavy Cream"
+                />
+                <label for="vehicle1"> Heavy Cream </label><br />
+              </div>
+
+              <div class="produce-checkbox1">
+                <input
+                  type="checkbox"
+                  id="1"
+                  name="ingredient"
+                  value="Butter"
+                />
+                <label for="vehicle1"> Butter </label><br />
+              </div>
+
+              <div class="produce-checkbox1">
+                <input
+                  type="checkbox"
+                  id="1"
+                  name="ingredient"
+                  value="Sour Cream"
+                />
+                <label for="vehicle1"> Sour Cream </label><br />
+              </div>
+
+              <div class="produce-checkbox1">
+                <input
+                  type="checkbox"
+                  id="1"
+                  name="ingredient"
+                  value="Condensed Milk"
+                />
+                <label for="vehicle1"> Condensed Milk </label><br />
+              </div>
+            </div>
+          </div>
+
+          <h1>Grains</h1>
+          <div class="outer-grid-container">
+            <div class="grid-container">
+              <div class="produce-checkbox1">
+                <input 
+                  type="checkbox" 
+                  id="1" 
+                  name="ingredient" 
+                  value="Pasta" />
+                <label for="vehicle1"> Pasta </label><br />
+              </div>
+
+              <div class="produce-checkbox1">
+                <input 
+                  type="checkbox" 
+                  id="1" 
+                  name="ingredient" 
+                  value="Rice" />
+                <label for="vehicle1"> Rice </label><br />
+              </div>
+
+              <div class="produce-checkbox1">
+                <input 
+                  type="checkbox" 
+                  id="1" 
+                  name="ingredient" 
+                  value="Oats" />
+                <label for="vehicle1"> Oats </label><br />
+              </div>
+
+              <div class="produce-checkbox1">
+                <input 
+                  type="checkbox" 
+                  id="1" 
+                  name="ingredient" 
+                  value="Bread" />
+                <label for="vehicle1"> Bread </label><br />
+              </div>
+
+              <div class="produce-checkbox1">
+                <input
+                  type="checkbox"
+                  id="1"
+                  name="ingredient"
+                  value="Quinoa"
+                />
+                <label for="vehicle1"> Quinoa </label><br />
+              </div>
+
+              <div class="produce-checkbox1">
+                <input 
+                  type="checkbox" 
+                  id="1" 
+                  name="ingredient" 
+                  value="Corn" />
+                <label for="vehicle1"> Corn </label><br />
+              </div>
+            </div>
+          </div>
+
+          <input type="submit" value="Submit" />
+        </form>
       </div>
-
-      <!-- 
-
-    
-
-
-
-
-  <div class="grid-item">10</div>
-    <div class="produce-checkbox1">
-    <input type="checkbox" id="10" name="parsley" value="Parsley" />
-    <label for="vehicle1"> Parsley</label><br />
-  </div>
-</div>
-  
-  <div class="grid-item">11</div>
-    <div class="produce-checkbox1">
-    <input type="checkbox" id="11" name="muchrooms" value="Mushrooms" />
-    <label for="vehicle1"> Mushrooms</label><br />
-    </div>
-  </div>
-
-  <div class="grid-item">12</div>
-    <div class="produce-checkbox1">
-    <input type="checkbox" id="12" name="onions" value="Onions" />
-    <label for="vehicle1"> Onions</label><br />
-    </div>
-  </div>
-
-  <div class="grid-item">13</div>
-    <div class="produce-checkbox1">
-    <input type="checkbox" id="13" name="asparagus" value="Asparagus" />
-    <label for="vehicle1"> Asparagus</label><br />
-    </div>
-  </div>
-  
-  <div class="grid-item">14</div>
-    <div class="produce-checkbox1">
-    <input type="checkbox" id="14" name="olives" value="Olives" />
-    <label for="vehicle1"> Olives</label><br />
-    </div>
-  </div>
-  
-  <div class="grid-item">15</div>
-    <div class="produce-checkbox1">
-    <input type="checkbox" id="15" name="green beans" value="Green beans" />
-    <label for="vehicle1"> Green beans</label><br />
-    </div>
-  </div>
-
-  <div class="grid-item">16</div>
-    <div class="produce-checkbox1">
-    <input type="checkbox" id="16" name="kidney beans" value="Kidney beans" />
-    <label for="vehicle1"> Kidney beans</label><br />
-    </div>
-  </div>
-  
-  <div class="grid-item">17</div>
-    <div class="produce-checkbox1">
-    <input type="checkbox" id="17" name="" value="Garlic" />
-    <label for="vehicle1"> Garlic</label><br />  
-    </div>
-  </div>
-
-  <div class="grid-item">18</div>
-    <div class="produce-checkbox1">
-    <input type="checkbox" id="18" name="peppers" value="Peppers" />
-    <label for="vehicle1"> Peppers</label><br />
-    </div>
-  </div>
-
-  <div class="grid-item">19</div>
-    <div class="produce-checkbox1">
-    <input type="checkbox" id="19" name="parsley" value="Parsley" />
-    <label for="vehicle1"> Parsley</label><br />
-    </div>
-  </div> -->
     </div>
 
-    <!-- <div class="produce-checkbox1"> -->
-    <form action="/action_page.php">
+    <!-- <form action="/action_page.php">
       <input type="button" value="Back to Pantry" />
       <input type="button" value="Build Recipes" />
-      <!-- </div> -->
-    </form>
+
+    </form> -->
   </body>
 </html>

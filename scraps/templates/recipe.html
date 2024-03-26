@@ -9,23 +9,18 @@
     <title>Scraps</title>
 </head>
 <body>
-<h1>Scraps~Results<h1>
-<h2>Super Yummy Cake</h2>
-<img src="cake.jpg" alt="Image of cake">
-
-<p>Ingredients</p>
-<ol>
-    <li>Milk</li>
-    <li>Eggs</li>
-    <li>Flour</li>
-</ol>
-<dl>
-    <dt>Preparation Time:</dt>
-    <dd>15 minutes</dd>
-    <dt>Serves:</dd>
-    <dd> 2-3 people</dd>
-    <dt>Description:<dt>
-    <dd>description of how yummy and delicious and easy this cake is! im so excited to bake!</dd>
-</dl>
-</body>
+    <div class="reactEntry">Loading...</div>
+    <!-- Load JavaScript -->
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='js/bundle.js') }}"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <h1> Recipe </h1>
+  </body>
 </html>

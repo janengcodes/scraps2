@@ -51,7 +51,7 @@ export default function LoggedInNavBar({}) {
   return (
     <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
       <Container>
-        <Navbar.Brand href="/index2">
+        <Navbar.Brand href="/">
           Scraps{" "}
           {/* <img
             src="/static/images/carrot.png"

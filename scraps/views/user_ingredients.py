@@ -4,18 +4,17 @@ import scraps
 app = Flask(__name__)
 
 
-@scraps.app.route('/grains_checkbox/', methods=['POST'])
-def grain():
-    selected_grains = request.form.getlist('grain_ingredient')
+# @scraps.app.route('/grains_checkbox', methods=['POST'])
+# def grain():
+#     selected_grains = request.form.getlist('grain_ingredient')
 
-@scraps.app.route('/produce_checkbox/', methodus=['POST'])
-def produce():
-    selected_produce = request.form.getlist('produce_ingredient')
+#     # target = flask.request.args.get('target', '/produce')
+#     return flask.redirect('/produce')
 
-@scraps.app.route('/dairy_checkbox/', methods=['POST'])
-def dairy():
-    selected_dairy = request.form.getlist('dairy_ingredient')
+@scraps.app.route('/ingredient_checkbox/', methods=['POST'])
+def ingredient_selection():
+    selected_ingredients = request.form.getlist('ingredient')
+    print(selected_ingredients)
 
-@scraps.app.route('/protein_checkbox/', methods=['POST'])
-def protein():
-    selected_protein = request.form.getlist('protein_ingredient')
+    # target = flask.request.args.get('target', '/produce')
+    return flask.redirect('/recipe')

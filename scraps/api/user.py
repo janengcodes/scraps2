@@ -21,7 +21,8 @@ def check_login():
         FROM users
         WHERE username = ?
     ''', (logname,)).fetchone()
-
+    # if full_name is not None:
+    #     full_name
     context = {
         "fullname": full_name["fullname"],
     } 

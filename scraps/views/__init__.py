@@ -22,3 +22,5 @@ from scraps.views.grains import grains
 from scraps.views.dietarypreferences import dietarypreferences
 from scraps.views.build_recipes import build_recipes
 from scraps.views.allergens import allergens
+from scraps.views.user_ingredients import ingredient_selection
+from scraps.views.index2 import index2
