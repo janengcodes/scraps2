@@ -121,7 +121,7 @@ for recipe_text in dataset_stringified:
 
 # plt.hist(recipes_lengths, bins=50)
 # plt.show()
-MAX_RECIPE_LENGTH = 300
+MAX_RECIPE_LENGTH = 500
 
 if DEBUG:
     MAX_RECIPE_LENGTH = 500
@@ -349,16 +349,20 @@ for input_text, target_text in dataset_train.take(1):
 # It takes several char indices sequences (batch) as an input.
 # It encodes every character of every sequence to a vector of tmp_embeding_size length.
 tmp_vocab_size = 10
-tmp_embeding_size = 5
+tmp_embedding_size = 5
 tmp_input_length = 8
 tmp_batch_size = 2
 
-tmp_model = tf.keras.models.Sequential()
-tmp_model.add(tf.keras.layers.Embedding(
-  input_dim=tmp_vocab_size,
-  output_dim=tmp_embeding_size,
-  input_length=tmp_input_length
-))
+# tmp_model = tf.keras.models.Sequential()
+# tmp_model.add(tf.keras.layers.Embedding(
+#   tmp_vocab_size,
+#   tmp_embeding_size,
+#   input_length=8
+# ))
+tmp_model = tf.keras.Sequential([
+    tf.keras.layers.Embedding(tmp_vocab_size, tmp_embedding_size),
+    # Add other layers as needed
+])
 # The model will take as input an integer matrix of size (batch, input_length).
 # The largest integer (i.e. word index) in the input should be no larger than 9 (tmp_vocab_size).
 # Now model.output_shape == (None, 10, 64), where None is the batch dimension.
@@ -393,7 +397,7 @@ def build_model_1(vocab_size, embedding_dim, rnn_units, batch_size):
     model.add(tf.keras.layers.Embedding(
         input_dim=vocab_size,
         output_dim=embedding_dim,
-        batch_input_shape=[batch_size, None]
+        # removed the batch_size argument because the layer does not accept it
     ))
 
     model.add(tf.keras.layers.LSTM(
@@ -491,7 +495,7 @@ print("Prediction shape: ", example_batch_predictions.shape, " # (batch_size, se
 print("scalar_loss.shape:      ", example_batch_loss.shape)
 print("scalar_loss:      ", example_batch_loss.numpy().mean())
 
-adam_optimizer = tf.keras.optimizers.legacy.Adam(learning_rate=0.001)
+adam_optimizer = tf.keras.optimizers.Adam(learning_rate=0.001)
 
 model_1.compile(
     optimizer=adam_optimizer,
@@ -579,10 +583,10 @@ early_stopping_callback = tf.keras.callbacks.EarlyStopping(
     verbose=1
 )
 
-checkpoint_prefix = os.path.join(checkpoint_dir, 'ckpt_{epoch}')
+checkpoint_prefix = os.path.join(checkpoint_dir, 'ckpt_{epoch}.weights.h5')
 checkpoint_callback=tf.keras.callbacks.ModelCheckpoint(
     filepath=checkpoint_prefix,
-    save_weights_only=True
+    save_weights_only=True,
 )
 
 

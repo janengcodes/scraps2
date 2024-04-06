@@ -22,6 +22,9 @@ def check_login():
         WHERE username = ?
     ''', (logname,)).fetchone()
 
+    if fullname is None:
+        fullname = "NotLoggedIn"
+    
     context = {
         "fullname": fullname,
     }
