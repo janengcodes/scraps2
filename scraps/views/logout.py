@@ -20,7 +20,7 @@ def logout():
     """
     context = {
             'logname': None,
-        }
+    }
     if 'username' in flask.session:
         flask.session.clear()
         return render_template('index2.html', **context)

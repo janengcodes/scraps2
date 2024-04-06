@@ -22,6 +22,11 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
+    
+    <form action="{{url_for('logout')}}" method="post" enctype="multipart/form-data">
+      <input type="submit" name="logout" value="Logout"/>
+    </form>
+
     <div id="header">
       <div id="date-range">
         <!--TODO: add date range UI-->
