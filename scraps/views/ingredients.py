@@ -3,12 +3,12 @@ import scraps
 app = Flask(__name__)
 
 
-@scraps.app.route('/dairy/')
-def dairy():
+@scraps.app.route('/ingredients/')
+def ingredients():
     context = {
         'example_variable': 'Hello, World!'
     }
-    return render_template('dairy.html', **context)
+    return render_template('ingredients.html', **context)
 
 
 if __name__ == '__main__':

@@ -15,12 +15,9 @@ from scraps.views.recipes import get_recipes
 from scraps.views.logout import logout
 from scraps.views.calendar import calendar
 from scraps.views.frontend_test import frontend_test
-from scraps.views.proteins import proteins
-from scraps.views.produce import produce
-from scraps.views.dairy import dairy
-from scraps.views.grains import grains
 from scraps.views.dietarypreferences import dietarypreferences
 from scraps.views.build_recipes import build_recipes
 from scraps.views.allergens import allergens
+from scraps.views.ingredients import ingredients 
 from scraps.views.user_ingredients import ingredient_selection
 from scraps.views.index2 import index2

@@ -32,17 +32,6 @@
   padding-right: 1%;
 }
 
-.orange-rectangle {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 1300px;
-  height: 400px;
-  background-color: #f9b89a;
-  border-radius: 20px;
-  padding-bottom: 5%;
-}
-
 .home2 {
   width: 100%; 
   height: 900px; 
@@ -63,4 +52,27 @@
 .home3 h5 {
   font-size: 80px;
   margin-left: 60%;
+}
+
+.green-box {
+  background-color: #D6FFD2;
+  border: 2px solid #4B2F0E;
+  padding: 20px;
+  margin-right: 20px;
+  width: 250px;
+}
+
+.green-box h2 {
+  color: #4B2F0E;
+  margin-top: 0;
+}
+
+.green-box h3 {
+  color: #4B2F0E;
+  margin-top: 0;
+}
+
+.green-box p {
+  color: #000;
+  margin-top: 10px;
 }

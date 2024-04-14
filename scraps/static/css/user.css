@@ -1,20 +1,34 @@
 .header{
     grid-area: header;
-    background-color: #98fb98;
+    background-color: rgb(245, 245, 220);
     padding: 30px;
     text-align: center;
+    height: 1300px;
     font-size: 35px;
+}
+
+.circle{
+    height: 263px;
+    width: 263px;
+    background-color: #F9B89A;
+    border-radius: 50%
 }
 
 
 .grid-container {
 display: grid;
 grid-template-columns: auto auto auto auto auto auto auto;
+border: 2px solid rgba(0, 0, 0, 0.8);
 background-color: #98fb98;
 padding: 40px;
 column-gap: 30px;
 grid-template-rows: 200px 300px;
 align-content: space-evenly;
+border-top-left-radius: 10px;
+border-top-right-radius: 10px;
+border-bottom-left-radius: 10px;
+border-bottom-right-radius: 10px;
+
 }
 
 .grid-item {
@@ -23,10 +37,11 @@ border: 2px solid rgba(0, 0, 0, 0.8);
 padding: 20px;
 font-size: 30px;
 text-align: center;
-border-top-left-radius: 5px;
-border-top-right-radius: 5px;
-border-bottom-left-radius: 5px;
-border-bottom-right-radius: 5px;
-height: 500px;
+border-top-left-radius: 10px;
+border-top-right-radius: 10px;
+border-bottom-left-radius: 10px;
+border-bottom-right-radius: 10px;
+height: 450px;
 grid-column-start: 0;
 }
+
