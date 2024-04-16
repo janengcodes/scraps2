@@ -2,14 +2,7 @@
 
 * {
   font-family: "Be Vietnam Pro", sans-serif;
-  background-color: #fff9e9;
-}
 
-.logo-homepage {
-  display: block;
-  width: 4%;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .scraps-homepage {
@@ -21,27 +14,6 @@
   padding-bottom: 1%;
 }
 
-.home-navbar {
-  display: flex;
-  justify-content: center;
-  padding-bottom: 2%;
-}
-
-.home-navbar > h4 {
-  padding-left: 1%;
-  padding-right: 1%;
-}
-
-.orange-rectangle {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 1300px;
-  height: 400px;
-  background-color: #f9b89a;
-  border-radius: 20px;
-  padding-bottom: 5%;
-}
 
 .home2 {
   width: 100%; 
@@ -52,15 +24,64 @@
 .home2 h5 {
   background-color: #e7dcff;
   font-size: 80px;
-  margin-left: 10%;
+  margin-left: 5%;
   padding-top: 5%;
 }
 
 .home3 {
+  margin-top: 10%;
     height: 500px; 
 }
 
 .home3 h5 {
   font-size: 80px;
   margin-left: 60%;
+}
+
+
+/* CSS */
+.button-74 {
+  background-color: #fbeee0;
+  border: 2px solid #422800;
+  border-radius: 30px;
+  box-shadow: #422800 4px 4px 0 0;
+  color: #422800;
+  cursor: pointer;
+  display: block;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 0 18px;
+  line-height: 50px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 180px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 4%;
+  margin-bottom: 5%;
+}
+
+.heading1 {
+  text-align: center;
+  margin-top: 2%;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+.button-74:hover {
+  background-color: #fff;
+}
+
+.button-74:active {
+  box-shadow: #422800 2px 2px 0 0;
+  transform: translate(2px, 2px);
+}
+
+@media (min-width: 768px) {
+  .button-74 {
+    min-width: 120px;
+    padding: 0 25px;
+  }
 }

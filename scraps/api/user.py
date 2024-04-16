@@ -16,14 +16,20 @@ def check_login():
 
     connection = scraps.model.get_db()
     # Grab the name of the current user
-    full_name = connection.execute('''
+    full_name_row2 = {}
+    full_name_row = connection.execute('''
         SELECT fullname
         FROM users
         WHERE username = ?
     ''', (logname,)).fetchone()
-    # if full_name is not None:
-    #     full_name
+
+    if full_name_row is not None:
+        full_name = full_name_row["fullname"]
+    else:
+        return flask.redirect('/accounts/login')
+
+
     context = {
-        "fullname": full_name["fullname"],
+        "fullname": full_name,
     } 
     return flask.jsonify(**context), 201
