@@ -20,9 +20,9 @@ def logout():
     """
     context = {
             'logname': None,
-        }
-    if 'username' in flask.session:
-        flask.session.clear()
-        return render_template('index2.html', **context)
-    else:
-        return render_template('index2.html', **context)
+    }
+
+    flask.session.clear()
+    # return render_template('index.html', **context)
+    return flask.redirect(flask.url_for('show_accounts_login'))
+

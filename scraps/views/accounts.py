@@ -180,7 +180,7 @@ def login():
 #     if 'username' in flask.session:
 #         flask.session.clear()
 #         flask.session['username'] = None
-#     # return flask.redirect(flask.url_for('show_index'))
+#     return flask.redirect(flask.url_for('show_index'))
 #     # target = flask.request.args.get('target', '/')
-#     return flask.redirect(logout)
+#     # return flask.redirect(logout)
 

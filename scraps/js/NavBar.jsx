@@ -64,10 +64,12 @@ export default function LoggedInNavBar({}) {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto"></Nav>
           <Nav>
-            <Nav.Link href="/recipes">Select Ingredients</Nav.Link>
-            <Nav.Link eventKey={2} href="/saved_recipes">
+            <Nav.Link href="/select_ingredients">Select Ingredients</Nav.Link>
+            <Nav.Link eventKey={2} href="/select_ingredients">
             </Nav.Link>
-            <Nav.Link href="/recipes">Pantry</Nav.Link>
+            
+            <Nav.Link href="/pantry">Pantry</Nav.Link>
+
             <Nav.Link eventKey={2} href="/saved_recipes">
               Saved Recipes
             </Nav.Link>
@@ -86,32 +88,3 @@ export default function LoggedInNavBar({}) {
     </Navbar>
   );
 }
-
-// export default NavBar;
-
-// function LoggedInNavBar() {
-//    return (
-//      <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
-//        <Container>
-//          <Navbar.Brand href="/index2">
-//            Scraps <img src="/static/images/carrot.png" className="carrot" style={{ width: "50px", height: "50px" }}/>{" "}
-//          </Navbar.Brand>
-//          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-//          <Navbar.Collapse id="responsive-navbar-nav">
-//          <Nav className="me-auto"></Nav>
-//            <Nav>
-//              <Nav.Link href="/recipes">Recipes</Nav.Link>
-//              <Nav.Link eventKey={2} href="/saved_recipes">
-//                Saved Recipes
-//              </Nav.Link>
-//              <Nav.Link eventKey={3} href="/user">
-//                My Profile
-//              </Nav.Link>
-//            </Nav>
-//          </Navbar.Collapse>
-//        </Container>
-//      </Navbar>
-//    );
-// }
-
-// export default LoggedInNavBar;

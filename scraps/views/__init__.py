@@ -24,3 +24,4 @@ from scraps.views.build_recipes import build_recipes
 from scraps.views.allergens import allergens
 from scraps.views.user_ingredients import ingredient_selection
 from scraps.views.index2 import index2
+from scraps.views.select_ingredients import show_select_ingredients
