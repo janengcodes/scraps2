@@ -64,11 +64,13 @@ export default function LoggedInNavBar({}) {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto"></Nav>
           <Nav>
-            <Nav.Link href="/recipes">Recipes</Nav.Link>
+            <Nav.Link href="/recipes">Select Ingredients</Nav.Link>
+            <Nav.Link eventKey={2} href="/saved_recipes">
+            </Nav.Link>
+            <Nav.Link href="/recipes">Pantry</Nav.Link>
             <Nav.Link eventKey={2} href="/saved_recipes">
               Saved Recipes
             </Nav.Link>
-            
             {user ? (
               <Nav.Link eventKey={3} href="/user">
                 Welcome, {user}
