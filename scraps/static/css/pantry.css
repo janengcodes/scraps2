@@ -6,12 +6,16 @@ h1 {
   width: 300px;
   margin: auto;
 
+
 }
 p {
   color: red;
 }
 .category h2{
-    width: 300px;
-    margin: auto;
+  width: 300px;
+  margin: auto;
+  color: pink;
+
+  
 }
 
