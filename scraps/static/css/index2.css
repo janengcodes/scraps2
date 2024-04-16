@@ -64,3 +64,11 @@
   font-size: 80px;
   margin-left: 60%;
 }
+
+.green-box {
+  background-color: green;
+      border: 2px solid brown;
+      color: white;
+      padding: 10px;
+      margin-top: 20px;
+}

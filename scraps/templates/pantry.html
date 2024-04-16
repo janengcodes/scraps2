@@ -23,8 +23,7 @@
       crossorigin="anonymous"
     />
 
-
-    <h1>Pantry</h1>
+    <h1 >Pantry</h1>
     
     <nav>
       <ul>
@@ -37,40 +36,66 @@
       <p>Choose your ingredients:</p>
 
       <div class="category">
-        <h2>Protein</h2>
+        <h2 class="left-aligned">Protein</h2>
         <img class="cover-img" src="jinja" alt="protein picture" />
 
+
+
+        <div class="checkboxes">
+    
         {% for item in protein %}
+        
+        <div class="produce-checkbox1">
           <li><input type="checkbox" name="ingredient" value="{{ item.id }}"> {{ item.name }} </li>
+        </div>
+
         {% endfor %}
       </div>
+    </div>
 
       <div class="category">
         <h2>Produce</h2>
         <img class="cover-img" src="jinja" alt="produce picture" />
 
+        <div class="checkboxes">
+
         {% for item in produce %}
+        <div class="produce-checkbox1">
           <li><input type="checkbox" name="ingredient" value="{{ item.id }}"> {{ item.name }} </li>
+        </div>
         {% endfor %}
       </div>
+    </div>
 
       <div class="category">
         <h2>Dairy</h2>
         <img class="cover-img" src="jinja" alt="dairy picture" />
 
+        <div class="checkboxes">
+
         {% for item in dairy %}
+        <div class="produce-checkbox1">
           <li><input type="checkbox" name="ingredient" value="{{ item.id }}"> {{ item.name }} </li>
+        </div>
         {% endfor %}
       </div>
+    </div>
 
       <div class="category">
         <h2>Grain</h2>
         <img class="cover-img" src="jinja" alt="grain picture" />
+        <div class="checkboxes">
 
         {% for item in grains %}
+        <div class="produce-checkbox1">
           <li><input type="checkbox" name="ingredient" value="{{ item.id }}"> {{ item.name }} </li>
+        </div>
         {% endfor %}
       </div>
+    </div>
+  </div>
+</div>
+
 
       <button type="submit">Submit</button>
     </form>

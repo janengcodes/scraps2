@@ -8,23 +8,28 @@
 }
 
 h1 {
-  font-size: 100px;
+  font-size: 50px;
   color: lightpink;
   margin-top: 8%;
   text-align: center;
-  font-family: "Times New Roman", Times, serif;
+  font-family: "Be Vietnam Pro", sans-serif; 
 }
 
+h2 {
+  text-align: left;
+}
 .produce-checkbox1 {
   font-family: "Be Vietnam Pro", sans-serif;
   font-weight: 100;
   font-style: normal;
   font-size: 27px;
-  background-color: lightpink;
+  background-color: #D9EDD7;
   padding: 0px;
   margin: 2px;
-  border: 3px solid rgb(135, 85, 93);
-  border-radius: 10px;
+  /* border: 3px solid rgb(135, 85, 93); */
+  border-radius: 15px;
+  padding: 5px 35px;
+
 }
 
 /* .container {
@@ -45,6 +50,8 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  /* background-color: #D9EDD7; */
 }
 
 .grid-container {
@@ -53,9 +60,29 @@ h1 {
   grid-template-columns: 300px 300px 300px;
   grid-template-rows: 50px 50px;
   align-content: space-around;
+
+  background-color: white; 
+}
+
+.button {
+  background-color: #93806A;
+  border: none;
+  color: white;
+  padding: 10px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 15px 15px 15px 15px;
+  font-family: "Be Vietnam Pro", sans-serif; 
+  font-weight: 200;
+  font-style: normal;
 }
 
 .headings {
+
   display: none;
 }
 

@@ -1,53 +1,47 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="static/css/index.css" />
-    <title>Scraps</title>
-  </head>
-  <body>
-    
-    <!-- REAL HOMEPAGE! -->
-    <!-- REAL HOMEPAGE! -->
-    <!-- REAL HOMEPAGE! -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="static/css/index.css" />
+  <title>Scraps</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <style>
 
-    <div class="reactEntry">Loading...</div>
-    <!-- Load JavaScript -->
-    <script
-      type="text/javascript"
-      src="{{ url_for('static', filename='js/bundle.js') }}"
-    ></script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-      crossorigin="anonymous"
-    />
+  </style>
+</head>
+<body>
+  <!-- REAL HOMEPAGE! -->
+  <!-- REAL HOMEPAGE! -->
+  <!-- REAL HOMEPAGE! -->
 
-    
+  <div class="reactEntry">Loading...</div>
+  <!-- Load JavaScript -->
+  <script type="text/javascript" src="{{ url_for('static', filename='js/bundle.js') }}"></script>
 
-    <div class="home1">
-      <img class="scraps-homepage" src="static/images/scraps.png" />
-    </div>
-
-    <h1 class="heading1">Transform kitchen scraps into home-cooked delights 
-      with the power of AI.</h1>
-
-    <!-- <button class="button-74" role="button" href="/user">Get Started</button> -->
-    <!-- button that goes to login page -->
-    <a class="button-74" role="button" href="/select_ingredients">Get Started</a>
-
-
-    <div class="home2">
-      <h5>Our Mission</h5>
-      <div class="green-box">
-        This is our mission statement.
-    </div>
+  <div class="home1">
+    <img class="scraps-homepage" src="static/images/scraps.png" />
   </div>
 
-    <div class="home3">
-      <h5>About Us</h5>
+  <h1 class="heading1">Transform kitchen scraps into home-cooked delights 
+    with the power of AI.</h1>
+
+  <!-- <button class="button-74" role="button" href="/user">Get Started</button> -->
+  <!-- button that goes to login page -->
+  <a class="button-74" role="button" href="/select_ingredients">Get Started</a>
+
+  <div class="home2">
+    <h5>Our Mission</h5>
+    <div class="green-box">
+      Help People... <br> <br>
+      <span class="italic">Reduce Food Waste</span> <br>
+      <span class="roboto">Our AI algorithm works with ingredients you already have, generating creative recipes so that you can use your ingredients to the fullest.</span> <br>
     </div>
-  </body>
+    <a class="button-74 missionButton" role="button" href="/select_ingredients">Get Started</a>
+  </div>
+  
+  <div class="home3">
+    <h5>About Us</h5>
+  </div>
+</body>
 </html>

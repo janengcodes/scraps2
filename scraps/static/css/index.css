@@ -4,6 +4,29 @@
   font-family: "Be Vietnam Pro", sans-serif;
 
 }
+.green-box {
+  background-color: #D6FFD2;
+  border: 2px solid #4B2F0E;
+  color: black;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 15px;
+  width: 45%;
+  margin: 50px auto;
+  text-align: left;
+  margin-left: 70px;
+  font-family: inherit;
+  font-size: 34px;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.roboto {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 18px;
+}
 
 .scraps-homepage {
   display: block;
@@ -84,4 +107,8 @@
     min-width: 120px;
     padding: 0 25px;
   }
+}
+
+.missionButton {
+  margin-left: 70px; 
 }

@@ -1,5 +1,5 @@
 .log-in-page {
-  background-color: #fff9e9;
+  background-color: white;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -7,7 +7,7 @@
 }
 
 .log-in-page .div {
-  background-color: #fff9e9;
+  background-color: white;
   overflow: hidden;
   width: 1280px;
   height: 1032px;
@@ -54,8 +54,10 @@
   position: absolute;
   width: 452px;
   height: 586px;
-  top: 250px;
+  top: 50px;
   left: 420px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .log-in-page .overlap-group {
@@ -138,7 +140,7 @@
   align-self: stretch;
   width: 100%;
   flex: 0 0 auto;
-  background-color: #1877f2;
+  background-color: pink;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: var(--shadow-xs);
@@ -322,5 +324,13 @@ input{
   right: 200px;
   top: 240px;
   left: 190px;
+}
+
+.login{
+  position: absolute;
+  /* margin-left: 2%; */
+  margin-right: 70%;
+
+  width: 300px;
 }
 

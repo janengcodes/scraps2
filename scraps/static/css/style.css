@@ -1,5 +1,5 @@
 .home-page {
-  background-color: #F8F0E5;
+  background-color: white;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -7,7 +7,7 @@
 }
 
 .home-page .div {
-  background-color: #F8F0E5;
+  background-color: white;
   overflow: hidden;
   width: 1279px;
   height: 1635px;
@@ -332,7 +332,7 @@
   display: block;
   border:none; 
   outline:none;
-  background-color: #fff8e8;
+  background-color: white;
   font-size:25px;
   font-family: "IBM Plex Sans", Helvetica;
   font-weight: 400;

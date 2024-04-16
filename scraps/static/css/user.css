@@ -3,9 +3,16 @@
     background-color: #FFF9E9;
     padding: 30px;
     text-align: center;
-    font-size: 50px;
+    font-size: 40px;
     height: 400px;
+}
 
+.circle{
+    height: 263px;
+    width: 263px;
+    background-color: #F9B89A;
+    border-radius: 50%;
+    margin-top: 0px;
 }
 
 .header{
@@ -14,7 +21,7 @@
     padding: 30px;
     text-align: center;
     font-size: 35px;
-    height: 1200px;
+    height: 1300px;
 }
 
 
@@ -43,6 +50,8 @@ border-top-left-radius: 10px;
 border-top-right-radius: 10px;
 border-bottom-left-radius: 10px;
 border-bottom-right-radius: 10px;
-height: 500px;
+height: 400px;
 grid-column-start: 0;
+margin-top: 100px;
+padding-top: 20px;
 }
