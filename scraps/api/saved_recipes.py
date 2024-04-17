@@ -6,7 +6,7 @@ from scraps.api.exceptions import AuthException
 from scraps.api.exceptions import check_auth
 
 
-@scraps.app.route('/api/v1/saved_recipes/', methods=['GET'])
+@scraps.app.route('/api/v1/saved_recipes/', methods=['POST'])
 def api_saved_recipes():
     
     logname = check_auth()
@@ -19,7 +19,7 @@ def api_saved_recipes():
         "saved_recipes": "omg hi im a recipe",
         "logname": logname
     }
-   
+    # redirect to user page or saved recipes screen
     return flask.jsonify(**context)
 
 

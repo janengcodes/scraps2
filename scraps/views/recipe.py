@@ -1,25 +1,48 @@
-from flask import Flask, render_template
+import flask
+from flask import redirect, render_template, Flask
 import scraps
+import json
+import google.generativeai as genai
 app = Flask(__name__)
 
-'''
+# flask --app scraps --debug run --host 0.0.0.0 --port 8000
+GOOGLE_API_KEY = 'AIzaSyCGu2PKA-ly-HGgkuiyswIPoVIUo64M9b4'
 
-CREATE TABLE recipes(
-    recipe_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name VARCHAR(64) NOT NULL,
-    filename VARCHAR(64) NOT NULL,
-    ingredient_ids_json TEXT NOT NULL, /* JSON data */
-    instructions TEXT NOT NULL,
-    cook_time INT NOT NULL /* in minutes */
-);
+model = None
 
-'''
+def initialize_generative_model():
+    """Initialize the GenerativeModel with the specified character."""
+    global model
+    genai.configure(api_key=GOOGLE_API_KEY)
+    model = genai.GenerativeModel(
+        "models/gemini-1.5-pro-latest"
+    )
 
-
-@scraps.app.route('/recipe/')
+@scraps.app.route('/recipe/', methods=['POST'])
 def recipe():
+
+    initialize_generative_model()
+    # global ingredients 
+    ingredients = flask.request.form.getlist('ingredient')
+    print(ingredients)
+    output = ""
+    json = []
+    if (len(ingredients) != 0):
+        response = model.generate_content("generate a recipe around these specific ingredients: "+ str(ingredients))
+        print(response)
+        output = response.text
+        # generate a json object based 
+        if response:
+            db_json = model.generate_content("generate json based on this recipe: " + str(ingredients) + ". the keys are 'name', 'instructions', and 'ingredients'")
+            # classify the meal 
+            json = db_json.text
+            json = model.generate_content("add a new key called 'meal_time' to this json and the value will be either be 'breakfast', 'lunch', or 'dinner' and assign a value based on this recipe " + str(response))
+            print(json)
+            # json.jsonify()
+
     context = {
-        'example_variable': 'Hello, World!'
+        'recipe': output,
+        'json': json.text
     }
     return render_template('recipe.html', **context)
 
