@@ -26,7 +26,8 @@
     {{ recipe }}
     
     <form action="/api/v1/saved_recipes/" method="post">
-      <button type="submit" value={{json}}>Save</button>
+      <input type="hidden" name="json_data" value="{{ json }}">
+      <button type="submit">Save</button>
       <!-- value is the json object -->
     </form>
   </body>

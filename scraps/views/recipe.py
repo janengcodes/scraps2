@@ -1,5 +1,5 @@
 import flask
-from flask import redirect, render_template, Flask
+from flask import redirect, render_template, Flask, jsonify
 import scraps
 import json
 import google.generativeai as genai
@@ -24,7 +24,7 @@ def recipe():
         return flask.redirect(flask.url_for('show_accounts_login'))
     
     logname = flask.session.get('username')
-    
+
     initialize_generative_model()
     # global ingredients 
     ingredients = flask.request.form.getlist('ingredient')
@@ -37,16 +37,19 @@ def recipe():
         output = response.text
         # generate a json object based 
         if response:
-            db_json = model.generate_content("generate json based on this recipe: " + str(ingredients) + ". the keys are 'name', 'instructions', and 'ingredients'")
+            db_json = model.generate_content("generate JSON object based on this recipe: " + str(response) + ". the keys are 'name', 'instructions', and 'ingredients' . do not add any extra characters that are '*', '#'. do not shorten or summarize the instructions ")
             # classify the meal 
             json = db_json.text
-            json = model.generate_content("add a new key called 'meal_time' to this json and the value will be either be 'breakfast', 'lunch', or 'dinner' and assign a value based on this recipe " + str(response))
-            print(json)
-            # json.jsonify()
+            json = model.generate_content("add a new key called 'meal_time' to this existing json: " + json +" and the value will be either be 'breakfast', 'lunch', or 'dinner' and assign a value based on this recipe " + str(response))
+            # jsonify in api 
+            json_data = json.text
+            # clean text and pass relevant information into context
+            print(json_data)
+            
 
     context = {
         'recipe': output,
-        'json': json.text
+        'json': json_data
     }
     return render_template('recipe.html', **context)
 
