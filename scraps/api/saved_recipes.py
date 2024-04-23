@@ -1,6 +1,7 @@
 """REST API for likes."""
 import flask
 import scraps
+import json
 
 from scraps.api.exceptions import AuthException
 from scraps.api.exceptions import check_auth
@@ -11,18 +12,21 @@ def api_saved_recipes():
     
     logname = check_auth()
 
-    json = flask.request.form['json_data']
-    json_data = clean_and_extract_text(json)
-    # data_dict = json.loads(json)
+    json_string = flask.request.form['json_data']
+    json_data = clean_and_extract_text(json_string)
+    data_dict = json.loads(json_data)
 
     print(json)
 
     context = {
-        "name": json_data
+        # "name": json_data
         # "ingredients": extracted["ingredients"],
         # "instructions": extracted["instructions"],
         # "meal_time": extracted["meal_time"]
-   
+        "name": data_dict["name"],
+        "ingredients": data_dict["ingredients"],
+        "instructions": data_dict["instructions"],
+        "meal_time": data_dict["meal_time"]
     }
  
     return flask.jsonify(**context)

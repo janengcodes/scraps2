@@ -23,7 +23,22 @@
     />
     <h1> Recipe </h1>
 
-    {{ recipe }}
+    <h2>{{ name }} </h2>
+    <h3>Ingredients</h3>
+    {%for item in ingredients_list%}
+    <li>{{item}}</li>
+    {%endfor%}
+
+    <h3>Instructions</h3>
+    <ol>
+    {%for item in instructions_list%}
+    <li>{{ loop.index }}. {{item}}</li>
+    {%endfor%}
+    </ol>
+    <p>Meal: {{meal_time}}</p>
+
+
+
     
     <form action="/api/v1/saved_recipes/" method="post">
       <input type="hidden" name="json_data" value="{{ json }}">
