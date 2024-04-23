@@ -1,3 +1,6 @@
+.login {
+  visibility: hidden;
+}
 .log-in-page {
   background-color: white;
   display: flex;

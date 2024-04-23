@@ -4,19 +4,76 @@
   font-family: "Be Vietnam Pro", sans-serif;
 
 }
+
+.col-grid {
+  display: grid;
+  grid-template-columns: 60% 40%; /* Set the column widths */
+  grid-gap: 10px; /* Set the gap between columns */
+}
+
+.about-us-grid {
+  display: grid;
+  grid-template-columns: 55% 45%; /* Set the column widths */
+  grid-gap: 10px; /* Set the gap between columns */
+}
+
+.about-us-grid img {
+  margin-left: 20%;
+  margin-bottom: 20%;
+}
+
+.col-grid > div {
+  /* border: 1px solid #000; Just for visualization */
+  padding: 10px; 
+}
+
+
 .green-box {
   background-color: #D6FFD2;
-  border: 2px solid #4B2F0E;
   color: black;
-  padding: 20px;
   margin-top: 20px;
   border-radius: 15px;
-  width: 45%;
-  margin: 50px auto;
+  width: 700px;
+  height: 350px;
   text-align: left;
-  margin-left: 70px;
+  margin-left: 8%;
   font-family: inherit;
-  font-size: 34px;
+  border: 5px solid #4B2F0E;
+  padding: 90px;
+}
+
+
+
+.green-box-2 {
+  background-color: #D6FFD2;
+  color: #000000;
+  margin-top: 50px;
+  border-radius: 15px;
+  width: 500px;
+  height: 350px;
+  /* text-align: left; */
+   /* Adjusted margin */
+  font-family: inherit;
+  border: 5px solid #4B2F0E;
+  padding: 40px;
+  float: right; /* Float to the right */
+  margin-right: 300px;
+  margin-bottom: 20%;
+}
+
+.green-box h2, .green-box h4, .green-box h6 {
+  margin-top: 10px; /* Remove default margin for the h2 */
+  margin-left: 10px;
+}
+
+.earth {
+  width: 50%;
+  margin-left: 10%;
+
+}
+
+.first-part { 
+  margin-bottom: 100px;
 }
 
 .italic {
@@ -27,6 +84,8 @@
   font-family: 'Roboto Mono', monospace;
   font-size: 18px;
 }
+
+
 
 .scraps-homepage {
   display: block;
@@ -65,7 +124,7 @@
 /* CSS */
 .button-74 {
   background-color: #fbeee0;
-  border: 2px solid #422800;
+  border: 3px solid #422800;
   border-radius: 30px;
   box-shadow: #422800 4px 4px 0 0;
   color: #422800;
@@ -83,7 +142,7 @@
   width: 180px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 4%;
+  margin-top: 1%;
   margin-bottom: 5%;
 }
 
