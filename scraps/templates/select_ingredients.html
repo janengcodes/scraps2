@@ -25,20 +25,20 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
+    <br>
+    <h3 class="select-heading">Select the ingredients that you have in your pantry in order to generate a recipe. </h3>
+    <br>
 
+    <div class="buttons">
+      <button class="button-2 produce-init" onclick="deleteGrids(this)" id = "produceButton"><h5>Produce</h5></button>
+      <button class="button-2" onclick="deleteGrids(this)" id = "proteinButton"><h5>Protein</h5></button>
+      <button class="button-2" onclick="deleteGrids(this)" id = "dairyButton"><h5>Dairy</h5></button>
+      <button class="button-2" onclick="deleteGrids(this)" id = "grainsButton"><h5>Grains</h5></button>
+    </div>
 
-    <button onclick="deleteGrids(this)" id = "produceButton">Produce</button>
-    <button onclick="deleteGrids(this)" id = "proteinButton">Protein</button>
-    <button onclick="deleteGrids(this)" id = "dairyButton">Dairy</button>
-    <button onclick="deleteGrids(this)" id = "grainsButton">Grains</button>
-<!-- 
-    <button id = "produceButton">Produce</button>
-    <button id = "proteinButton">Protein</button>
-    <button id = "dairyButton">Dairy</button>
-    <button id = "grainsButton">Grains</button> -->
         
         <form action="/recipe/" method="post">
-          <h1 id = "produceHeading">Produce</h1>
+          <h1 id = "produceHeading"></h1>
           <div class="outer-grid-container">
             <div class="grid-container" id = "produce">
               <div class="produce-checkbox1">
@@ -261,7 +261,7 @@
             </div>
           </div>
 
-          <h1 id = "proteinHeading" class="headings">Protein</h1>
+          <h1 id = "proteinHeading" class="headings"></h1>
           <div class="outer-grid-container">
             <div class="grid-container" id = "protein">
               <div class="produce-checkbox1">
@@ -427,7 +427,7 @@
             </div>
           </div>
 
-          <h1 id = "dairyHeading" class="headings">Dairy</h1>
+          <h1 id = "dairyHeading" class="headings"></h1>
           <div class="outer-grid-container">
             <div class="grid-container" id = "dairy">
               <div class="produce-checkbox1">
@@ -487,7 +487,7 @@
             </div>
           </div>
 
-          <h1 id = "grainsHeading" class="headings">Grains</h1>
+          <h1 id = "grainsHeading" class="headings"></h1>
           <div class="outer-grid-container">
             <div class="grid-container" id = "grains">
               <div class="produce-checkbox1">
@@ -546,10 +546,12 @@
               </div>
             </div>
           </div>
+          <div class="buttons buttons-bottom">
+            <input type="button" class="button" value="Dietary Preferences">
+            <input type="button" class="button" value="Allergens">
+            <input type="submit" class ="button" value="Submit" />
+          </div>
           
-          <input type="button" class="button" value="Dietary Preferences">
-          <input type="button" class="button" value="Allergens">
-          <input type="submit" class ="button" value="Submit" />
         </form>
       </div>
     </div>
