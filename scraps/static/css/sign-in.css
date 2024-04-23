@@ -327,10 +327,11 @@ input{
 }
 
 .login{
-  position: absolute;
-  /* margin-left: 2%; */
-  margin-right: 70%;
+  visibility: hidden;
+  position: block;
+  margin-top: 2%;
 
-  width: 300px;
+
+
 }
 

@@ -49,10 +49,6 @@ export default function LoggedInNavBar({}) {
             </Nav.Link>
             
             <Nav.Link href="/pantry">Pantry</Nav.Link>
-
-            <Nav.Link eventKey={2} href="/saved_recipes">
-              Saved Recipes
-            </Nav.Link>
             {user ? (
               <Nav.Link eventKey={3} href="/user">
                 Welcome, {user}
