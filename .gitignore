@@ -17,6 +17,8 @@ scraps/api/__pycache__/__init__.cpython-312.pyc
 scraps/api/__pycache__/exceptions.cpython-312.pyc
 scraps/api/__pycache__/saved_recipes.cpython-312.pyc
 scraps/api/__pycache__/user.cpython-312.pyc
+scraps/views/__pycache__/
+
 scraps/views/__pycache__/__init__.cpython-312.pyc
 scraps/views/__pycache__/accounts.cpython-312.pyc
 scraps/views/__pycache__/allergens.cpython-312.pyc
