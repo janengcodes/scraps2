@@ -13,8 +13,8 @@ def api_saved_recipes():
     logname = check_auth()
 
     json_string = flask.request.form['json_data']
-    json_data = clean_and_extract_text(json_string)
-    data_dict = json.loads(json_data)
+    # json_data = clean_and_extract_text(json_string)
+    data_dict = json.loads(json_string)
 
     print(json)
 
@@ -33,17 +33,17 @@ def api_saved_recipes():
 
 
 
-def clean_and_extract_text(input_text):
-    # Remove newline (\n) and carriage return (\r) characters
-    cleaned_text = input_text.replace('\n', '').replace('\r', '').replace('\\', '')
+# def clean_and_extract_text(input_text):
+#     # Remove newline (\n) and carriage return (\r) characters
+#     cleaned_text = input_text.replace('\n', '').replace('\r', '').replace('\\', '')
 
-    # Find the start and end indices of the content within curly braces ({})
-    start_index = cleaned_text.find('{')
-    end_index = cleaned_text.rfind('}') + 1
+#     # Find the start and end indices of the content within curly braces ({})
+#     start_index = cleaned_text.find('{')
+#     end_index = cleaned_text.rfind('}') + 1
 
-    # Extract the text within curly braces
-    extracted_text = cleaned_text[start_index:end_index].strip()
+#     # Extract the text within curly braces
+#     extracted_text = cleaned_text[start_index:end_index].strip()
 
-    return extracted_text
+#     return extracted_text
 
 

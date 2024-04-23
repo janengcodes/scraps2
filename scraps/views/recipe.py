@@ -37,7 +37,7 @@ def recipe():
         output = response.text
         # generate a json object based 
         if response:
-            db_json = model.generate_content("based on this recipe: " + str(response) + " separate the recipe information into the format of a JSON object. the keys are 'name', 'instructions', and 'ingredients' . do not add any extra characters that are '*', '#' or quotes for the value ")
+            db_json = model.generate_content("based on this recipe: " + str(response) + " separate the recipe information into the format of a JSON object. the keys are 'name', 'instructions', and 'ingredients'. the values for 'ingredients' and 'instructions' should be formatted as a python list. do not add any extra characters that are '*', '#' or quotes for the value ")
             # classify the meal 
             json_string = db_json.text
             json_string = model.generate_content("add a new key called 'meal_time' to this existing json: " + json_string +" and the value will be either be 'breakfast', 'lunch', or 'dinner' and assign a value based on this recipe " + str(response))
@@ -47,20 +47,13 @@ def recipe():
             # clean text and pass relevant information into context
             json_data = clean(json_data)
             data_dict = json.loads(json_data)
-            
-
-            ingredients_list = clean_ingredients(data_dict["ingredients"])
-            print("ingredients")
-            print(ingredients_list)
-
-            instructions_list = clean_instructions(data_dict["instructions"])
-    
-
+            print("dict")
+            print(data_dict)
     
     context = {
         "name": data_dict["name"],
-        "ingredients_list": ingredients_list,
-        "instructions_list": instructions_list,
+        "ingredients_list": data_dict["ingredients"],
+        "instructions_list": data_dict["instructions"],
         "meal_time": data_dict["meal_time"],
         'json': json_data
     }
@@ -79,39 +72,6 @@ def clean(input_text):
 
     return extracted_text
 
-def clean_ingredients(text):
-    # Remove leading and trailing brackets [ ] and strip any extra whitespace
-    cleaned_text = text.strip('[]').strip()
-
-    # Initialize variables
-    items_list = []
-    current_item = ''
-
-    # Iterate through each character in the cleaned text
-    for char in cleaned_text:
-        if char.isdigit():  # Check if the character is a digit (part of a number)
-            if current_item:  # If there's an existing item, add it to the list
-                items_list.append(current_item.strip())
-            # Start a new item with the found digit as the delimiter
-            current_item = char
-        else:
-            current_item += char  # Add character to the current item
-
-    # Add the last item to the list
-    if current_item:
-        items_list.append(current_item.strip())
-
-    return items_list
-
-def clean_instructions(text):
-    # Remove leading and trailing brackets [ ] and strip any extra whitespace
-    cleaned_text = text.strip('[]').strip()
-
-    # Split the cleaned text into individual items based on commas and trim whitespace
-    items_list = [item.strip().strip("'") for item in cleaned_text.split('.')]
-
-    return items_list
-    
 
 
 if __name__ == '__main__':

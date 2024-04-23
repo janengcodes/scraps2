@@ -13,7 +13,7 @@ h1 {
 
 .buttons {
     margin-left:350px;
-    margin-bottom: 0px;
+    margin-bottom:0px;
 }
 
 /* CSS */
@@ -30,7 +30,9 @@ h1 {
   line-height: 20px;
   list-style: none;
 
-  padding: 10px 12px;
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 25px;
   text-align: center;
   transition: all 200ms;
   vertical-align: baseline;
