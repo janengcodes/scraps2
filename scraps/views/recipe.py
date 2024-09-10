@@ -5,6 +5,10 @@ import json
 import google.generativeai as genai
 app = Flask(__name__)
 
+from google.api_core.exceptions import InternalServerError
+import requests  # Assuming you're using requests for HTTP requests
+
+
 # flask --app scraps --debug run --host 0.0.0.0 --port 8000
 GOOGLE_API_KEY = 'AIzaSyDGLjSn7rKYIX_L990wAeMcYiWrmkzm3Mk'
 
@@ -37,18 +41,33 @@ def recipe():
         output = response.text
         # generate a json object based 
         if response:
-            db_json = model.generate_content("based on this recipe: " + str(response) + " separate the recipe information into the format of a JSON object. the keys are 'name', 'instructions', and 'ingredients'. the values for 'ingredients' and 'instructions' should be formatted as a python list. do not add any extra characters that are '*', '#' or quotes for the value ")
-            # classify the meal 
-            json_string = db_json.text
-            json_string = model.generate_content("add a new key called 'meal_time' to this existing json: " + json_string +" and the value will be either be 'breakfast', 'lunch', or 'dinner' and assign a value based on this recipe " + str(response))
-            # jsonify in api 
-            json_data = json_string.text
-            print(json_data)
-            # clean text and pass relevant information into context
-            json_data = clean(json_data)
-            data_dict = json.loads(json_data)
-            print("dict")
-            print(data_dict)
+            try: 
+                db_json = model.generate_content("Based on this recipe: " + str(response) + ", separate the recipe information into the format of a JSON object. the keys are 'name', 'instructions', and 'ingredients'. the values for 'ingredients' and 'instructions' should be formatted as a python list. do not add any extra characters that are '*', '#' or quotes for the value ")
+                # classify the meal 
+                json_string = db_json.text
+                json_string = model.generate_content("Please add a new key called 'meal_time' to this existing json: " + json_string +" and the value will be either be 'breakfast', 'lunch', or 'dinner' and assign a value based on this recipe." + str(response))
+                # jsonify in api 
+                json_data = json_string.text
+                print(json_data)
+                # clean text and pass relevant information into context
+                json_data = clean(json_data)
+                data_dict = json.loads(json_data)
+                print("dict")
+                print(data_dict)
+
+            except InternalServerError as e:
+                db_json = model.generate_content("Based on this recipe: " + str(response) + ", separate the recipe information into the format of a JSON object. the keys are 'name', 'instructions', and 'ingredients'. the values for 'ingredients' and 'instructions' should be formatted as a python list. do not add any extra characters that are '*', '#' or quotes for the value ")
+                # classify the meal 
+                json_string = db_json.text
+                json_string = model.generate_content("Please add a new key called 'meal_time' to this existing json: " + json_string +" and the value will be either be 'breakfast', 'lunch', or 'dinner' and assign a value based on this recipe." + str(response))
+                # jsonify in api 
+                json_data = json_string.text
+                print(json_data)
+                # clean text and pass relevant information into context
+                json_data = clean(json_data)
+                data_dict = json.loads(json_data)
+                print("dict")
+                print(data_dict)
     
     context = {
         "name": data_dict["name"],
