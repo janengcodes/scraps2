@@ -6,7 +6,7 @@ import google.generativeai as genai
 app = Flask(__name__)
 
 # flask --app scraps --debug run --host 0.0.0.0 --port 8000
-GOOGLE_API_KEY = 'AIzaSyCGu2PKA-ly-HGgkuiyswIPoVIUo64M9b4'
+GOOGLE_API_KEY = 'AIzaSyDGLjSn7rKYIX_L990wAeMcYiWrmkzm3Mk'
 
 model = None
 
