@@ -1,7 +1,7 @@
-"""This module provides the API functionality for the Insta485 project.
+"""This module provides the API functionality for the scraps project.
 
 This module contains classes and functions for interacting
-with the API of the Insta485
+with the API of the scraps
 application. It handles various API endpoints and provides
 exceptions for error handling.
 

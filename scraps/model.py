@@ -1,4 +1,4 @@
-"""Insta485 model (database) API."""
+"""scraps model (database) API."""
 import hashlib
 import sqlite3
 import flask
