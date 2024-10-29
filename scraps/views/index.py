@@ -4,11 +4,11 @@ app = Flask(__name__)
 
 
 @scraps.app.route('/')
-def index2():
+def index():
     context = {
         'example_variable': 'Hello, World!'
     }
-    return render_template('index2.html', **context)
+    return render_template('index.html', **context)
 
 
 if __name__ == '__main__':
