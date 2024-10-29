@@ -33,12 +33,6 @@ export default function LoggedInNavBar({}) {
       <Container>
         <Navbar.Brand href="/">
           Scraps{" "}
-          {/* <img
-            src="/static/images/carrot.png"
-            className="carrot"
-            style={{ width: "50px", height: "50px" }}
-            alt="carrot icon"
-          /> */}
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">

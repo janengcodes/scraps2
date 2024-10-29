@@ -10,6 +10,7 @@
     <title>Scraps</title>
   </head>
   <body>
+    
     <div class="reactEntry">Loading...</div>
     <!-- Load JavaScript -->
     <script
@@ -22,40 +23,5 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
-
-
-    <div class="all_recipes">
-      <div class="filler"></div>
-      <div class="breakfast_recipes">
-        {% for item in breakfast %}
-        <div class="recipe_card">
-          <p>{{item.name }}</p>
-          <p>{{item.description}}</p>
-        </div>
-        {% endfor %}
-      </div>
-      <div class="lunch_recipes">
-        {% for item in lunch %}
-        <div class="recipe_card">
-          <!-- <p>words</p> -->
-          <p>{{item.name }}</p>
-          <p>{{item.description}}</p>
-        </div>
-        {% endfor %}
-      </div>
-      <div class="dinner_recipes">
-        {% for item in dinner %}
-        <div class="recipe_card">
-          <!-- <p>words</p> -->
-          <p>{{item.name}}</p>
-          <p>{{item.description}}</p>
-        </div>
-        {% endfor %}
-      </div>
-    </div>
-    <div id="reactEntry2">
-      react entry point
-      <script src="{{ url_for('static', filename='js/bundle.js') }}"></script>
-    </div>
   </body>
 </html>
