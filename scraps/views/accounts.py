@@ -16,8 +16,8 @@ def show_accounts_login():
     """Display /accounts/login/ route."""
     # Redirect to index if logged in
     if 'username' in flask.session:
-        return flask.redirect(flask.url_for('index2'))
-    return flask.render_template("login-test.html", **{})
+        return flask.redirect(flask.url_for('index'))
+    return flask.render_template("login.html", **{})
 
 
 @scraps.app.route("/accounts/signup/", methods=["GET"])
@@ -170,7 +170,7 @@ def login():
     }
     # target = flask.request.args.get('target', '/')
     # return flask.redirect(target)
-    return render_template('index2.html', **context)
+    return render_template('index.html', **context)
 
 
 
