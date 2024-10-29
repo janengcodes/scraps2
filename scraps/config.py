@@ -1,4 +1,4 @@
-"""Insta485 development configuration."""
+"""scraps development configuration."""
 
 import pathlib
 

@@ -1,5 +1,5 @@
 """
-Insta485 logout view.
+scraps logout view.
 
 URLs include:
 /login/
