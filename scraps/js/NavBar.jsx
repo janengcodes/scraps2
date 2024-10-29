@@ -38,8 +38,8 @@ export default function LoggedInNavBar({}) {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto"></Nav>
           <Nav>
-            <Nav.Link href="/select_ingredients">Select Ingredients</Nav.Link>
-            <Nav.Link eventKey={2} href="/select_ingredients">
+            {/* <Nav.Link href="/select_ingredients">Select Ingredients</Nav.Link> */}
+            <Nav.Link eventKey={2} href="/select_ingredients">Select Ingredients
             </Nav.Link>
             
             <Nav.Link href="/pantry">Pantry</Nav.Link>
