@@ -10,4 +10,5 @@ from scraps.views.logout import logout
 from scraps.views.calendar import calendar
 from scraps.views.frontend_test import frontend_test
 from scraps.views.select_ingredients import show_select_ingredients
+from scraps.views.pantry import pantry
 from scraps.views.test import test

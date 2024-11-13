@@ -9,6 +9,6 @@ def show_user():
     # username = flask.session['username']
 
     context = {
-        "user": "example"
+        "logname": "jane"
     }
     return flask.render_template('user.html', **context)
