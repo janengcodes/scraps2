@@ -1,52 +1,53 @@
-body {
-  background-color: beige;
+
+
+.pantry-header {
+  margin-left: 120px;
 }
 
-h1 {
-  color: blue;
-  width: 300px;
-  margin: auto;
-
-
+.ingredient-header {
+  margin-top: 50px;
+  margin-left: 120px;
+  font-size: 20px;
 }
 
-p {
-  color: red;
-}
-
-.category h2{
-  width: 300px;
-  margin: auto;
-  color: rgb(135, 85, 93);
-
-
-}
-
-.produce-checkbox1 {
-  font-family: "Be Vietnam Pro", sans-serif;
-  font-weight: 100;
-  font-style: normal;
-  font-size: 27px;
-  background-color: lightpink;
-  padding: 4px;
-  margin: 2px;
-  border: 3px solid rgb(135, 85, 93);
-  border-radius: 10px;
-  justify-content: center;
-  align-items: center;
-}
-
-.outer-grid-container {
+.in-season-box {
   display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: auto;
+  width: 1250px;
+  height: 250px;
+  background-color: rgb(205, 242, 205);
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.ingredient-container {
+  background-color: white;
+  border-radius: 10px;
+  width: 150px;
+  height: 130px;
+  padding-top: 3px;
+  padding-left: 3px;
+  padding-right: 3px;
+  padding-bottom: 3px;
   justify-content: center;
   align-items: center;
 }
 
-.grid-container {
-  display: none;
+.ingredient-container:hover {
+  border-style: solid;
+  border-width: 2px;
+  background-color: rgb(224, 224, 224);
+  transition: border-width 0.1s ease, border-color 0.1s ease, background-color 0.1s ease;;
+  cursor: pointer;
+}
 
-  grid-template-columns: 300px 300px 300px;
-  grid-template-rows: 50px 50px; 
-  align-content: space-around;
-
-  background-color: #D9EDD7; }
+.ingredient-container:active {
+  cursor: pointer;
+  background-color: rgb(190, 190, 190);
+  transition: background-color 0.3s ease;
+}

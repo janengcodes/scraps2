@@ -26,7 +26,7 @@ def show_accounts_sign_up():
     # Redirect to index if logged in
     if 'username' in flask.session:
         return flask.redirect(flask.url_for('index'))
-    return flask.render_template("signup-test.html", **{})
+    return flask.render_template("sign-up.html", **{})
 
 
 # HANDLE POST REQUESTS

@@ -11,16 +11,14 @@ CREATE TABLE users(
 CREATE TABLE recipes(
     recipe_id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(64) NOT NULL,
-    filename VARCHAR(64) NOT NULL,
-    ingredient_ids_json TEXT NOT NULL, /* JSON data */
-    instructions TEXT NOT NULL,
-    cook_time INT NOT NULL /* in minutes */
+    ingredients_json TEXT NOT NULL,
+    measurements_json TEXT NOT NULL,
+    instructions TEXT NOT NULL
 );
 
 CREATE TABLE saved_recipes(
     username VARCHAR(20) NOT NULL,
     recipe_id INTEGER NOT NULL,
-    meal_time TEXT CHECK (meal_time IN ('breakfast', 'lunch', 'dinner')),
 
     FOREIGN KEY(username)
         REFERENCES users(username)
@@ -33,13 +31,20 @@ CREATE TABLE saved_recipes(
 
 CREATE TABLE ingredients(
     ingredient_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name VARCHAR(64) NOT NULL
-    /* TODO: Add more metadata */
+    name VARCHAR(64) NOT NULL,
+    pantry_id INTEGER,
+
+    FOREIGN KEY(pantry_id)
+        REFERENCES pantry(pantry_id)
+
+    meal_time VARCHAR(64) TEXT CHECK (meal_time IN ('spring', 'summer', 'fall', 'winter')),
+    food_group VARCHAR(64) TEXT CHECK (meal_time IN ('meat', 'fruit', 'veggies', 'grains')), NOT NULL 
 );
+
 
 CREATE TABLE pantry(
     username VARCHAR(20) NOT NULL,
-    ingredient_id INTEGER NOT NULL,
+    pantry_id INTEGER PRIMARY KEY AUTOINCREMENT,
     
     FOREIGN KEY(username)
         REFERENCES users(username)

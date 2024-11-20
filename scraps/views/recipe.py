@@ -43,9 +43,10 @@ def recipe():
         if response:
             try: 
                 db_json = model.generate_content("Based on this recipe: " + str(response) + ", separate the recipe information into the format of a JSON object. the keys are 'name', 'instructions', and 'ingredients'. the values for 'ingredients' and 'instructions' should be formatted as a python list. do not add any extra characters that are '*', '#' or quotes for the value ")
-                # classify the meal 
+                # separate measurements from ingredients
                 json_string = db_json.text
-                json_string = model.generate_content("Please add a new key called 'meal_time' to this existing json: " + json_string +" and the value will be either be 'breakfast', 'lunch', or 'dinner' and assign a value based on this recipe." + str(response))
+                print(json_string)
+                json_string = model.generate_content("Please add a two new keys called 'measurements' and 'ingredients_list' to this existing json: " + json_string +" The measurement list should contain the numerical amount of each respective ingredient.")
                 # jsonify in api 
                 json_data = json_string.text
                 print(json_data)
@@ -59,7 +60,7 @@ def recipe():
                 db_json = model.generate_content("Based on this recipe: " + str(response) + ", separate the recipe information into the format of a JSON object. the keys are 'name', 'instructions', and 'ingredients'. the values for 'ingredients' and 'instructions' should be formatted as a python list. do not add any extra characters that are '*', '#' or quotes for the value ")
                 # classify the meal 
                 json_string = db_json.text
-                json_string = model.generate_content("Please add a new key called 'meal_time' to this existing json: " + json_string +" and the value will be either be 'breakfast', 'lunch', or 'dinner' and assign a value based on this recipe." + str(response))
+                json_string = model.generate_content("Please add a two new keys called 'measurements' and 'ingredients_list' to this existing json: " + json_string +" Each measurement should match its respective ingredient at each index.")
                 # jsonify in api 
                 json_data = json_string.text
                 print(json_data)
@@ -73,8 +74,10 @@ def recipe():
         "name": data_dict["name"],
         "ingredients_list": data_dict["ingredients"],
         "instructions_list": data_dict["instructions"],
-        "meal_time": data_dict["meal_time"],
-        'json': json_data
+        "measurements": data_dict["measurements"],
+        "items": data_dict["ingredients_list"],
+        'json': json_data,
+        'output': output
     }
     return render_template('recipe.html', **context)
             
@@ -90,10 +93,6 @@ def clean(input_text):
     extracted_text = cleaned_text[start_index:end_index].strip()
 
     return extracted_text
-
-
-
-
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000, debug=True)
