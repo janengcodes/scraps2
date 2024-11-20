@@ -15,8 +15,6 @@ def api_saved_recipes():
     json_string = flask.request.form['json_data']
     data_dict = json.loads(json_string)
 
-    # print(json)
-
     context = {
         "name": data_dict["name"],
         "ingredients": data_dict["ingredients"],
@@ -25,9 +23,24 @@ def api_saved_recipes():
         "items": data_dict["ingredients_list"]
     }
 
+    # NEED TO FIND RECIPE ID
+
     # insert into database 
+    connection = scraps.model.get_db()
 
+    # problem: when do we add a recipe into the database and how do we account for re-generated recipes to avoid duplicates
 
+    connection.execute(
+        '''
+        INSERT INTO saved_recipes()
+        VALUES ()
+        ''', ()
+    )
+
+# connection.execute('''
+#         INSERT INTO users(username, password, fullname, email, filename)
+#         VALUES (?, ?, ?, ?, ?)
+#     ''', (username, password_db_string, fullname, email, uuid_basename))
     # stay on recipe page 
  
     return flask.jsonify(**context)

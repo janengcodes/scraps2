@@ -15,6 +15,7 @@
     <script
       type="text/javascript"
       src="{{ url_for('static', filename='js/bundle.js') }}"
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
     ></script>
     <link
       rel="stylesheet"
@@ -26,6 +27,19 @@
     <div class="main-container">
 
       <h2 class="ingredient-header">In Season Ingredients for California, USA</h2>
+
+      <div class="btn-group">
+        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          select ingredient type
+        </button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Separated link</a>
+        </div>
+      </div>
 
       <div class="in-season-box">
         <div class="ingredient-container">

@@ -68,14 +68,12 @@ def recipe():
                 json_data = clean(json_data)
                 data_dict = json.loads(json_data)
                 print("dict")
-                print(data_dict)
+                print(data_dict)    
     
     context = {
         "name": data_dict["name"],
         "ingredients_list": data_dict["ingredients"],
         "instructions_list": data_dict["instructions"],
-        "measurements": data_dict["measurements"],
-        "items": data_dict["ingredients_list"],
         'json': json_data,
         'output': output
     }
@@ -93,6 +91,18 @@ def clean(input_text):
     extracted_text = cleaned_text[start_index:end_index].strip()
 
     return extracted_text
+
+'''
+    clean algorithm pseudocode 
+
+    based on output string 
+
+    look for ** <text> ** 
+        - make <text> the key
+        - grab everything that follows and make that the value 
+
+    then have the api write the html for each dictionary item?
+'''
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000, debug=True)

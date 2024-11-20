@@ -13,7 +13,10 @@ CREATE TABLE recipes(
     name VARCHAR(64) NOT NULL,
     ingredients_json TEXT NOT NULL,
     measurements_json TEXT NOT NULL,
-    instructions TEXT NOT NULL
+    instructions TEXT NOT NULL,
+    serving_size INTEGER NOT NULL,
+    cook_time INTEGER NOT NULL,
+    prep_time INTEGER NOT NULL
 );
 
 CREATE TABLE saved_recipes(
@@ -38,7 +41,7 @@ CREATE TABLE ingredients(
         REFERENCES pantry(pantry_id)
 
     meal_time VARCHAR(64) TEXT CHECK (meal_time IN ('spring', 'summer', 'fall', 'winter')),
-    food_group VARCHAR(64) TEXT CHECK (meal_time IN ('meat', 'fruit', 'veggies', 'grains')), NOT NULL 
+    food_group VARCHAR(64) TEXT CHECK (food_group IN ('meat', 'fruit', 'veggies', 'grains')), NOT NULL 
 );
 
 
