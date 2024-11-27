@@ -7,8 +7,10 @@ def show_user(username):
     # create a connection to the database in order to access the info
     # add some sql queries here 
     # username = flask.session['username']
+    
     if 'username' not in flask.session:
-        return flask.redirect(flask.url_for('login'))
+        return flask.redirect(flask.url_for('show_accounts_login'))
+    
     connect = scraps.model.get_db()
     fullname = connect.execute(
         "SELECT f.fullname "
@@ -17,6 +19,6 @@ def show_user(username):
         (username,),).fetchall()
 
     context = {
-        "logname": "jane"
+        "logname": "username"
     }
     return flask.render_template('user.html', **context)

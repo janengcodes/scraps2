@@ -35,21 +35,35 @@ export default function LoggedInNavBar() {
   return () => {
     ignoreStaleRequest = true;
   };
-}, []);
+  }, []);
+
+  const handleLogout = () => {
+    fetch("/api/logout", { method: "POST", credentials: "same-origin" })
+      .then((response) => {
+        if (response.ok) {
+          setUser(""); // Clear the user state
+          localStorage.removeItem("user"); // Remove user info from local storage
+          // Optional: Redirect to home or login page
+          window.location.href = "/";
+        } else {
+          console.error("Failed to log out");
+        }
+      })
+      .catch((error) => console.log("Logout error:", error));
+  };
+
   return (
     <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
       <Container>
         <Navbar.Brand href="/">SCRAPS</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link eventKey={1} href="/select_ingredients">
-              Select Ingredients
-            </Nav.Link>
-          </Nav>
-          <Nav>
+          <Nav className="ms-auto">
             {user ? (
               <>
+                <Nav.Link eventKey={1} href="/select_ingredients">
+                  Select Ingredients
+                </Nav.Link>
                 <Nav.Link eventKey={2} href={`/pantry/${user}`}>
                   Pantry
                 </Nav.Link>
@@ -57,8 +71,11 @@ export default function LoggedInNavBar() {
                   Saved Recipes
                 </Nav.Link>
                 <Nav.Link eventKey={4} href={`/user/${user}`}>
-                  Welcome, {user}
+                  My Profile
                 </Nav.Link>
+                <Button class="btn btn-light" onClick={handleLogout}>
+                  Log Out
+                </Button>
               </>
             ) : (
               <>
