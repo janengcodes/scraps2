@@ -32,29 +32,25 @@ export default function LoggedInNavBar({}) {
     <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
       <Container>
         <Navbar.Brand href="/">
-          Scraps{" "}
-          {/* <img
-            src="/static/images/carrot.png"
-            className="carrot"
-            style={{ width: "50px", height: "50px" }}
-            alt="carrot icon"
-          /> */}
+        SCRAPS{" "}
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto"></Nav>
           <Nav>
-            <Nav.Link href="/select_ingredients">Select Ingredients</Nav.Link>
-            <Nav.Link eventKey={2} href="/select_ingredients">
+            <Nav.Link eventKey={1} href="/select_ingredients">
+              Select Ingredients
             </Nav.Link>
             
-            <Nav.Link href={`/pantry/${user}`}>Pantry</Nav.Link>
+            <Nav.Link eventKey={2} href={`/pantry/${user}`}>
+              Pantry
+            </Nav.Link>
 
-            <Nav.Link eventKey={2} href="/saved_recipes">
+            <Nav.Link eventKey={3} href="/saved_recipes">
               Saved Recipes
             </Nav.Link>
             {user ? (
-              <Nav.Link eventKey={3} href={`/user/${user}`}>
+              <Nav.Link eventKey={4} href={`/user/${user}`}>
                 Welcome, {user}
               </Nav.Link>
             ) : (
