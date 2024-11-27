@@ -32,7 +32,7 @@ def api_saved_recipes():
 
     connection.execute(
         '''
-        INSERT INTO saved_recipes()
+        INSERT INTO saved_recipes(username, recipe_id)
         VALUES ()
         ''', ()
     )
