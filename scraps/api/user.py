@@ -42,5 +42,4 @@ def api_logout():
     # Clear the session data
     if 'username' in flask.session:
         flask.session.clear()
-    # return render_template('index.html', **context)
     return flask.redirect(flask.url_for('show_accounts_login'))

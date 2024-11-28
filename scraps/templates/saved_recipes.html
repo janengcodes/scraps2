@@ -3,16 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/static/css/globals.css" />
+    <!-- <link rel="stylesheet" href="/static/css/globals.css" />
     <link rel="stylesheet" href="/static/css/style.css" />
-    <link rel="stylesheet" href="/static/css/styleguide.css" />
+    <link rel="stylesheet" href="/static/css/styleguide.css" /> -->
     <link rel="stylesheet" href="/static/css/saved_recipes.css" />
+    <script src="/static/js/saved_recipes.js"></script>
     <title>Scraps</title>
   </head>
   <body>
-    <div class="reactEntry"></div>
+    <!-- <div class="reactEntry"></div> -->
     <!-- Load JavaScript -->
-    <script
+    <!-- <script
       type="text/javascript"
       src="{{ url_for('static', filename='js/bundle.js') }}"
     ></script>
@@ -21,40 +22,66 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
-    />
+    /> -->
 
     <div class="all_recipes">
-      <div class="filler"></div>
-      <div class="breakfast_recipes">
-        {% for item in breakfast %}
-        <div class="recipe_card">
-          <p>{{item.name }}</p>
-          <p>{{item.description}}</p>
+
+
+      <div class="recipe-row">
+
+        <h2>Breakfast</h2>
+
+        <div class="recipe-row-container">
+            {% for item in breakfast %}
+            <div class="recipe_card" onclick="maximizeRecipe(this)">
+              <h3>{{item.name }}</h3>
+              <h4>Ingredients</h4>
+              <p>{{item.description}}</p>
+              <h4>Time</h4>
+              <p>{{item.time}}</p>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
+
       </div>
-      <div class="lunch_recipes">
+
+      <div class="recipe-row">
+
+        <h2>Lunch</h2>
+
+        <div class="recipe-row-container">
         {% for item in lunch %}
         <div class="recipe_card">
-          <!-- <p>words</p> -->
-          <p>{{item.name }}</p>
+          <h3>{{item.name }}</h3>
+          <h4>Ingredients</h4>
           <p>{{item.description}}</p>
         </div>
         {% endfor %}
+        </div>
+
       </div>
-      <div class="dinner_recipes">
+      
+      <div class="recipe-row">
+
+        <h2>Dinner</h2>
+
+        <div class="recipe-row-container">
         {% for item in dinner %}
         <div class="recipe_card">
           <!-- <p>words</p> -->
-          <p>{{item.name}}</p>
+          <h3>{{item.name }}</h3>
           <p>{{item.description}}</p>
         </div>
         {% endfor %}
+        </div>
+
       </div>
     </div>
+
     <div id="reactEntry2">
       react entry point
       <script src="{{ url_for('static', filename='js/bundle.js') }}"></script>
     </div>
+    
   </body>
 </html>

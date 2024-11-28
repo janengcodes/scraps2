@@ -40,7 +40,7 @@ CREATE TABLE ingredients(
     FOREIGN KEY(pantry_id)
         REFERENCES pantry(pantry_id)
 
-    meal_time VARCHAR(64) TEXT CHECK (meal_time IN ('spring', 'summer', 'fall', 'winter')),
+    season VARCHAR(64) TEXT CHECK (season IN ('spring', 'summer', 'fall', 'winter')),
     food_group VARCHAR(64) TEXT CHECK (food_group IN ('meat', 'fruit', 'veggies', 'grains')), NOT NULL 
 );
 

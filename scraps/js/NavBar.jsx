@@ -3,6 +3,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Button } from "react-bootstrap";
+import '../static/css/navbar.css'
 
 export default function LoggedInNavBar() {
   const [user, setUser] = useState("");
@@ -43,8 +44,6 @@ export default function LoggedInNavBar() {
         if (response.ok) {
           setUser(""); // Clear the user state
           localStorage.removeItem("user"); // Remove user info from local storage
-          // Optional: Redirect to home or login page
-          window.location.href = "/";
         } else {
           console.error("Failed to log out");
         }
@@ -58,7 +57,7 @@ export default function LoggedInNavBar() {
         <Navbar.Brand href="/">SCRAPS</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="ms-auto">
+          <Nav className="ms-auto gap-3">
             {user ? (
               <>
                 <Nav.Link eventKey={1} href="/select_ingredients">
