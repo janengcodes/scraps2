@@ -26,9 +26,9 @@ export default function LoggedInNavBar() {
       return response.json();
     })
     .then((data) => {
-      if (!ignoreStaleRequest && data.fullname) {
-        setUser(data.fullname);
-        localStorage.setItem("user", data.fullname); // Store user info in local storage
+      if (!ignoreStaleRequest && data.username) {
+        setUser(data.username);
+        localStorage.setItem("user", data.username); // Store user info in local storage
       }
     })
     .catch((error) => console.log("Error checking authentication:", error));

@@ -1,8 +1,8 @@
 CREATE TABLE users(
     username VARCHAR(20) NOT NULL,  /* VARCHAR means it can be any number of characters up to the num in parenthesis */
-    fullname VARCHAR(40) NOT NULL,
+    first_name VARCHAR(40) NOT NULL,
+    last_name VARCHAR(40) NOT NULL,
     email VARCHAR(40) NOT NULL,
-    filename VARCHAR(64) NOT NULL,
     password VARCHAR(40) NOT NULL,
     PRIMARY KEY(username)
 );

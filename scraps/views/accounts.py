@@ -25,6 +25,7 @@ def show_accounts_sign_up():
     """Display /accounts/login/ route."""
     # Redirect to index if logged in
     if 'username' in flask.session:
+        print("{} in session", flask.session['username'])
         return flask.redirect(flask.url_for('index'))
     return flask.render_template("sign-up.html", **{})
 
@@ -52,7 +53,9 @@ def create():
     """Create an account."""
     # Connect to database
     connection = scraps.model.get_db()
-    fullname = flask.request.form["fullname"]
+    first_name = flask.request.form["first_name"]
+    last_name = flask.request.form["last_name"]
+    print(" received is", first_name, last_name)
     email = flask.request.form["email"]
     username = flask.request.form["username"]
     password = flask.request.form["password"]
@@ -80,24 +83,14 @@ def create():
 
     # Set up flask session and log the user in
     flask.session['username'] = username
-    fileobj = flask.request.files["file"]
-    filename = fileobj.filename
 
-    stem = uuid.uuid4().hex
-    suffix = pathlib.Path(filename).suffix.lower()
-    uuid_basename = f"{stem}{suffix}"
-
-    # Save to disk
-    # TODO: Do we need to set an upload folder?
-    path = scraps.app.config["UPLOAD_FOLDER"]/uuid_basename
-    fileobj.save(path)
-
-    # Check if any of fields are empty --> abort 404
+  
     if len(username) == 0 or len(password) == 0:
         abort(404)
-    if len(fullname) == 0 or len(email) == 0 or not filename:
+    if len(first_name) == 0 or len(last_name) == 0 or len(email) == 0:
         abort(404)
 
+    # Generate password hash
     hash_obj = hashlib.new('sha512')
     password_salted = uuid.uuid4().hex + password
     hash_obj.update(password_salted.encode('utf-8'))
@@ -109,10 +102,11 @@ def create():
 
     # Create user in database
     # TODO: add more values to database entry
+
     connection.execute('''
-        INSERT INTO users(username, password, fullname, email, filename)
+        INSERT INTO users(username, first_name, last_name, email, password)
         VALUES (?, ?, ?, ?, ?)
-    ''', (username, password_db_string, fullname, email, uuid_basename))
+    ''', (username, first_name, last_name, email, password_db_string))
 
 
 
@@ -168,6 +162,7 @@ def login():
     context = {
         'logname': logname,
     }
+    print("logname is", logname)
     # target = flask.request.args.get('target', '/')
     # return flask.redirect(target)
     return render_template('index.html', **context)

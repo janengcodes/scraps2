@@ -22,15 +22,16 @@
     
     <form action="/accounts/?target=/" method="post"
     enctype="multipart/form-data">
-        <input type="file" name="file" required/><br>
-        <input type="text" name="fullname" required
-        placeholder="Full Name"/><br>
+        <input type="text" name="first_name" required
+        placeholder="First Name"/><br>
+        <input type="text" name="last_name" required
+        placeholder="Last Name"/><br>
         <input type="text" name="username" required
-        placeholder="username"/><br>
+        placeholder="Username"/><br>
         <input type="text" name="email" required
-        placeholder="email"/><br>
+        placeholder="Email"/><br>
         <input type="password" name="password" required
-        placeholder="password"/><br>
+        placeholder="Password"/><br>
         <input type="submit" name="signup" value="sign up"/>
         <input type="hidden" name="operation" value="create"/>
     </form>
