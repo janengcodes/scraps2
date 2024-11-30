@@ -37,10 +37,4 @@ def api_saved_recipes():
         ''', ()
     )
 
-# connection.execute('''
-#         INSERT INTO users(username, password, fullname, email, filename)
-#         VALUES (?, ?, ?, ?, ?)
-#     ''', (username, password_db_string, fullname, email, uuid_basename))
-    # stay on recipe page 
- 
     return flask.jsonify(**context)
