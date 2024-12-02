@@ -20,15 +20,11 @@ CREATE TABLE saved_recipes(
         ON DELETE CASCADE
 );
 
-CREATE TABLE recipes(
+
+CREATE TABLE recipes (
     recipe_id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(64) NOT NULL,
-    ingredients_json TEXT NOT NULL,
-    measurements_json TEXT NOT NULL,
-    instructions TEXT NOT NULL,
-    serving_size INTEGER NOT NULL,
-    cook_time INTEGER NOT NULL,
-    prep_time INTEGER NOT NULL
+    instructions JSON
 );
 
 CREATE TABLE ingredients(

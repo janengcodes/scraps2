@@ -4,37 +4,45 @@ import scraps
 import json
 
 from scraps.api.exceptions import AuthException
-from scraps.api.exceptions import check_auth
+from scraps.api.user import check_login
 
 
 @scraps.app.route('/api/v1/saved_recipes/', methods=['POST'])
 def api_saved_recipes():
-    
-    logname = check_auth()
+    # Ensure that the user is logged in 
+    check_login()
 
+    # Parse the incoming JSON data
     json_string = flask.request.form['json_data']
     data_dict = json.loads(json_string)
 
+
+    serialized_instructions = json.dumps(data_dict['instructions'])
+
+    # Prepare the context for the response
     context = {
         "name": data_dict["name"],
         "ingredients": data_dict["ingredients"],
         "instructions": data_dict["instructions"],
         "measurements": data_dict["measurements"],
-        "items": data_dict["ingredients_list"]
+        "items": data_dict["ingredients_list"]  # Ensure this is JSON serializable
     }
 
-    # NEED TO FIND RECIPE ID
-
-    # insert into database 
+    # Insert data into the database
     connection = scraps.model.get_db()
+    cursor = connection.execute('''
+        INSERT INTO recipes(name, instructions)
+        VALUES (?, ?)
+    ''', (data_dict['name'], serialized_instructions))
+    
+    # Fetch the auto-generated recipe ID
+    recipe_id = cursor.lastrowid
 
-    # problem: when do we add a recipe into the database and how do we account for re-generated recipes to avoid duplicates
+    # Add the recipe ID to the context
+    context["recipe_id"] = recipe_id
 
-    connection.execute(
-        '''
-        INSERT INTO saved_recipes(username, recipe_id)
-        VALUES ()
-        ''', ()
-    )
+    # Commit the changes to the database
+    connection.commit()
 
-    return flask.jsonify(**context)
+    # Return the JSON response
+    return flask.jsonify(**context), 201
