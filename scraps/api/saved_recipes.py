@@ -45,4 +45,7 @@ def api_saved_recipes():
     connection.commit()
 
     # Return the JSON response
+    # Current endpoint: http://localhost:8000/api/v1/saved_recipes/
+    # Want the endpoint to be in users/saved_recipes or smth
+    
     return flask.jsonify(**context), 201
