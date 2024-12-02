@@ -33,10 +33,7 @@ def check_login():
 
 @scraps.app.route('/api/logout', methods=['POST'])
 def api_logout():
-    context = {
-            'logname': None,
-    }
     # Clear the session data
     if 'username' in flask.session:
         flask.session.clear()
-    return flask.redirect(flask.url_for('show_accounts_login'))
+    return flask.render_template("login.html", **{})

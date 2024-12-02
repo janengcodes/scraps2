@@ -7,17 +7,6 @@ CREATE TABLE users(
     PRIMARY KEY(username)
 );
 
-CREATE TABLE recipes(
-    recipe_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name VARCHAR(64) NOT NULL,
-    ingredients_json TEXT NOT NULL,
-    measurements_json TEXT NOT NULL,
-    instructions TEXT NOT NULL,
-    serving_size INTEGER NOT NULL,
-    cook_time INTEGER NOT NULL,
-    prep_time INTEGER NOT NULL
-);
-
 CREATE TABLE saved_recipes(
     username VARCHAR(20) NOT NULL,
     recipe_id INTEGER NOT NULL,
@@ -29,6 +18,17 @@ CREATE TABLE saved_recipes(
     FOREIGN KEY(recipe_id)
         REFERENCES recipes(recipe_id)
         ON DELETE CASCADE
+);
+
+CREATE TABLE recipes(
+    recipe_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name VARCHAR(64) NOT NULL,
+    ingredients_json TEXT NOT NULL,
+    measurements_json TEXT NOT NULL,
+    instructions TEXT NOT NULL,
+    serving_size INTEGER NOT NULL,
+    cook_time INTEGER NOT NULL,
+    prep_time INTEGER NOT NULL
 );
 
 CREATE TABLE ingredients(
@@ -43,6 +43,19 @@ CREATE TABLE ingredients(
         REFERENCES pantry(pantry_id)
 );
 
+CREATE TABLE recipe_ingredients (
+    recipe_id INTEGER NOT NULL, 
+    ingredient_id INTEGER NOT NULL,
+    quantity DOUBLE(4, 2) NOT NULL, 
+    unit VARCHAR(40) NOT NULL,
+
+    FOREIGN KEY(recipe_id)
+        REFERENCES recipes(recipe_id)
+        ON DELETE CASCADE,
+    FOREIGN KEY(ingredient_id) 
+        REFERENCES ingredients(ingredient_id)
+        ON DELETE CASCADE
+);
 
 CREATE TABLE pantry(
     username VARCHAR(20) NOT NULL,

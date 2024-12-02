@@ -6,20 +6,6 @@ app = Flask(__name__)
 
 @scraps.app.route('/saved_recipes/')
 def saved_recipes():
-    # breakfast = [
-    #     {
-    #         "name": "hashbrowns",
-    #         "description": "potato"
-    #     },
-    #     {
-    #         "name": "huevos rancheros",
-    #         "description": "eggs and stuff"
-    #     },
-    #     {
-    #         "name": "huevos rancheros",
-    #         "description": "eggs and stuff"
-    #     }
-    # ]
 
     breakfast = [
         {
