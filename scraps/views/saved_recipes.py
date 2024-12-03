@@ -22,15 +22,16 @@ def saved_recipes():
         where r.username = ?
     ''', (logname,)).fetchall()
 
-    # print("saved recipes db result", saved_recipes)
-
     unique_results = []
     seen_names = set()
-
+    recipe_counter = 0
     for entry in saved_recipes:
         if entry['name'] not in seen_names:
-            unique_results.append(entry)
+            recipe_counter +=1
+            unique_results.append({'name': entry['name'], 'ingredients': [entry['ingredient_name']], 'instructions': entry['instructions']})
             seen_names.add(entry['name'])
+        else:
+            unique_results[recipe_counter - 1]['ingredients'].append(entry['ingredient_name'])
 
     print("unique results", unique_results)
     

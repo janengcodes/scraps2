@@ -32,6 +32,9 @@
                 <!-- make name a link -->
                 <h3>{{ recipe.name }}</h3>
                 
+                {% for ingredient in recipe.ingredients %}
+                {{ingredient}},
+                {% endfor %}
 
               </div>
             {% endfor %}
@@ -40,7 +43,6 @@
     </div>
 
     <div id="reactEntry2">
-      react entry point
       <script src="{{ url_for('static', filename='js/bundle.js') }}"></script>
     </div>
     
