@@ -8,4 +8,4 @@ INSERT INTO pantry(username, pantry_id)
 VALUES('user', 1);
 
 INSERT INTO ingredients(ingredient_name, pantry_id, season, food_group) 
-VALUES('Banana', 1, 'summer', 'fruit');
+VALUES('Banana', 1, 'summer', 'produce');
