@@ -8,6 +8,7 @@
     <title>Scraps</title>
   </head>
   <body>
+
     <div class="reactEntry"></div> 
     <!-- Load JavaScript -->
     <script
@@ -26,13 +27,11 @@
       <div class="recipe-row">
 
         <div class="recipe-row-container">
-            {% for recipe in saved_recipes %}
+            {% for recipe in recipes %}
               <div class="recipe_card" onclick="maximizeRecipe(this)">
                 <!-- make name a link -->
-
-                <!-- <a href="{{ flask.url_for('show_recipe', {{ recipe }}) }}"> {{ recipe.name }}</a> -->
-
                 <h3>{{ recipe.name }}</h3>
+                
 
               </div>
             {% endfor %}
