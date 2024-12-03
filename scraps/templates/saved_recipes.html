@@ -3,14 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <link rel="stylesheet" href="/static/css/globals.css" />
-    <link rel="stylesheet" href="/static/css/style.css" />
-    <link rel="stylesheet" href="/static/css/styleguide.css" /> -->
     <link rel="stylesheet" href="/static/css/saved_recipes.css" />
     <script src="/static/js/saved_recipes.js"></script>
     <title>Scraps</title>
   </head>
   <body>
+
     <div class="reactEntry"></div> 
     <!-- Load JavaScript -->
     <script
@@ -26,60 +24,25 @@
 
     <div class="all_recipes">
 
-
       <div class="recipe-row">
 
-        <h2>Breakfast</h2>
-
         <div class="recipe-row-container">
-            {% for item in breakfast %}
-            <div class="recipe_card" onclick="maximizeRecipe(this)">
-              <h3>{{item.name }}</h3>
-              <h4>Ingredients</h4>
-              <p>{{item.description}}</p>
-              <h4>Time</h4>
-              <p>{{item.time}}</p>
-            </div>
+            {% for recipe in recipes %}
+              <div class="recipe_card" onclick="maximizeRecipe(this)">
+                <!-- make name a link -->
+                <h3>{{ recipe.name }}</h3>
+                
+                {% for ingredient in recipe.ingredients %}
+                {{ingredient}},
+                {% endfor %}
+
+              </div>
             {% endfor %}
         </div>
-
-      </div>
-
-      <div class="recipe-row">
-
-        <h2>Lunch</h2>
-
-        <div class="recipe-row-container">
-        {% for item in lunch %}
-        <div class="recipe_card">
-          <h3>{{item.name }}</h3>
-          <h4>Ingredients</h4>
-          <p>{{item.description}}</p>
-        </div>
-        {% endfor %}
-        </div>
-
-      </div>
-      
-      <div class="recipe-row">
-
-        <h2>Dinner</h2>
-
-        <div class="recipe-row-container">
-        {% for item in dinner %}
-        <div class="recipe_card">
-          <!-- <p>words</p> -->
-          <h3>{{item.name }}</h3>
-          <p>{{item.description}}</p>
-        </div>
-        {% endfor %}
-        </div>
-
       </div>
     </div>
 
     <div id="reactEntry2">
-      react entry point
       <script src="{{ url_for('static', filename='js/bundle.js') }}"></script>
     </div>
     

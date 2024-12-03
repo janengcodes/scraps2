@@ -54,16 +54,19 @@
 }
 
 .ingredients, .instructions{
-  background-color: #e7dcff;
+  /* background-color: #e7dcff; */
+  background-color: white;
 
 }
-.ingredients{
+.ingredients, .instructions, .disclaimer{
   padding: 30px;
 }
-.instructions{
-  padding: 30px;
-}
+
 .button{
   margin-top:30px;
   margin-left:100px;
+}
+
+.disclaimer{
+  background-color: lightblue;
 }

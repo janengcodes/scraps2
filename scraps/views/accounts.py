@@ -108,6 +108,12 @@ def create():
         VALUES (?, ?, ?, ?, ?)
     ''', (username, first_name, last_name, email, password_db_string))
 
+    # create a pantry for new user
+    connection.execute('''
+        INSERT INTO pantry(username)
+        VALUES (?)
+    ''', (username,))
+
 
 
 def login():

@@ -60,7 +60,7 @@ def recipe():
                 db_json = model.generate_content("Based on this recipe: " + str(response) + ", separate the recipe information into the format of a JSON object. the keys are 'name', 'instructions', and 'ingredients'. the values for 'ingredients' and 'instructions' should be formatted as a python list. do not add any extra characters that are '*', '#' or quotes for the value ")
                 # classify the meal 
                 json_string = db_json.text
-                json_string = model.generate_content("Please add a two new keys called 'measurements' and 'ingredients_list' to this existing json: " + json_string +" Each measurement should match its respective ingredient at each index.")
+                json_string = model.generate_content("Please add a two new keys called 'measurements' and 'ingredients_list' to this existing json: " + json_string +" Each measurement and it's unit of measurement (if there is one) should match its respective ingredient at each index. the ingredients_list should not include any measurements or units of measurement.")
                 # jsonify in api 
                 json_data = json_string.text
                 print(json_data)
@@ -92,17 +92,11 @@ def clean(input_text):
 
     return extracted_text
 
-'''
-    clean algorithm pseudocode 
-
-    based on output string 
-
-    look for ** <text> ** 
-        - make <text> the key
-        - grab everything that follows and make that the value 
-
-    then have the api write the html for each dictionary item?
-'''
+def show_recipe(json_data):
+    context = {
+        "json_data": json_data
+    }
+    return render_template('recipe.html', **context)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000, debug=True)
