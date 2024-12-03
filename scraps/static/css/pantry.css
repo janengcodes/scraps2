@@ -51,10 +51,11 @@
   cursor: pointer;
 }
 
-.ingredient-container:active {
-  cursor: pointer;
-  background-color: rgb(190, 190, 190);
-  transition: background-color 0.3s ease;
+.ingredient-container.active {
+  border-style: solid;
+  border-width: 2px;
+  background-color: rgb(224, 224, 224);
+  border-color: black;
 }
 
 .dropdown .btn {
@@ -86,7 +87,7 @@
   border-style: solid;
   border-color: black;
   border-radius: 10px;
-  margin-top: 2%;
+  margin-top: 8px;
   font-size: 18px;
 }
 

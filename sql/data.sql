@@ -8,4 +8,17 @@ INSERT INTO pantry(username, pantry_id)
 VALUES('user', 1);
 
 INSERT INTO ingredients(ingredient_name, pantry_id, season, food_group) 
-VALUES('Banana', 1, 'summer', 'fruit');
+VALUES('Pomegranate', 1, 'winter', 'fruit');
+
+INSERT INTO ingredients(ingredient_name, pantry_id, season, food_group) 
+VALUES('Squash', 1, 'winter', 'fruit');
+
+INSERT INTO ingredients(ingredient_name, pantry_id, season, food_group) 
+VALUES('Clementines', 1, 'winter', 'fruit');
+
+INSERT INTO ingredients(ingredient_name, pantry_id, season, food_group) 
+VALUES('Kiwi', 1, 'winter', 'fruit');
+
+
+INSERT INTO ingredients(ingredient_name, pantry_id, season, food_group) 
+VALUES('Tomatoes', 1, 'winter', 'fruit');
