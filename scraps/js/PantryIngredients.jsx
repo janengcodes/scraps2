@@ -11,12 +11,20 @@ import axios from 'axios';
 export default function UserPantryIngredients() {
     console.log("Pantry Ingredients called")
 
-    // Handle when buttons have been clicked
+    // State for when ingredient containers have been clicked
     const [activeContainers, setActiveContainers] = useState({})
 
-    // Handle ingredient data 
+    // State for ingredient data 
     const [ingredients, setIngredients] = useState([])
+
+    // State for the filtered ingredients based on dropdown
+    const [filteredIngredients, setFilteredIngredients] = useState([])
+
+    // State for the dropdown
+    const [selectedFoodGroup, setSelectedFoodGroup] = useState("");
+
     const username = localStorage.getItem("user");
+
     const inSeasonFoodGroup = "";
     // Active state for when a button is clicked on 
     const buttonActive = (index) => {
@@ -28,9 +36,13 @@ export default function UserPantryIngredients() {
     };
 
     const dropDownClicked = (food_group) => {
-        console.log("Drop down clicked");
-        inSeasonFoodGroup = food_group;
-
+        console.log("Drop down clicked", food_group);
+        setSelectedFoodGroup(food_group)
+        // Filter the ingredients based on the food group
+        const filtered = ingredients.filter(
+            (ingredient) => ingredient.food_group.toLowerCase() === food_group.toLowerCase()
+        );
+        setFilteredIngredients(filtered);
     };
 
     // Fetch user's pantry data from the API 
@@ -60,15 +72,15 @@ export default function UserPantryIngredients() {
                     Select Ingredient Type
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <li><a class="dropdown-item" href="#" onClick={() => dropDownClicked("Vegtables")}>Vegetables</a></li>
-                    <li><a class="dropdown-item" href="#">Fruits</a></li>
-                    <li><a class="dropdown-item" href="#">Protein</a></li>
+                    <li><a class="dropdown-item" href="#" onClick={() => dropDownClicked("veggies")}>Vegetables</a></li>
+                    <li><a class="dropdown-item" href="#" onClick={() => dropDownClicked("fruit")}>Fruits</a></li>
+                    <li><a class="dropdown-item" href="#" onClick={() => dropDownClicked("protein")}>Protein</a></li>
                 </ul>
             </div>
 
         
             <div className="in-season-box">
-                {Array.isArray(ingredients) && ingredients.map((ingredient, index) => (
+                {Array.isArray(filteredIngredients) && filteredIngredients.map((ingredient, index) => (
                     <div
                         key={index}
                         // Append the active class if the ingredient container is clicked
