@@ -12,6 +12,8 @@ def pantry(username):
     if 'username' not in flask.session:
         return flask.redirect(flask.url_for('show_accounts_login'))
     
+
+    
     return render_template('pantry.html', **context)
 
 

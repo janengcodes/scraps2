@@ -23,13 +23,14 @@ CREATE TABLE saved_recipes(
 
 CREATE TABLE recipes (
     recipe_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
     name VARCHAR(64) NOT NULL,
     instructions JSON
 );
 
 CREATE TABLE ingredients(
     ingredient_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name VARCHAR(64) NOT NULL,
+    ingredient_name VARCHAR(64) NOT NULL,
     pantry_id INTEGER,
 
     season VARCHAR(64) CHECK (season IN ('spring', 'summer', 'fall', 'winter')) NOT NULL,
@@ -38,6 +39,8 @@ CREATE TABLE ingredients(
     FOREIGN KEY(pantry_id)
         REFERENCES pantry(pantry_id)
 );
+
+
 
 CREATE TABLE recipe_ingredients (
     recipe_id INTEGER NOT NULL, 

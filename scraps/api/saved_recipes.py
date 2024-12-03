@@ -6,7 +6,17 @@ import json
 from scraps.api.exceptions import AuthException
 from scraps.api.user import check_login
 
+# GET method for the saved recipes 
+@scraps.app.route('/api/v1/saved/saved_recipes/', methods=['GET'])
+def get_saved_recipes():
+    print("Get saved recipes called")
+    ''' 
+    Get all recipes in the database that have the same user id as the user
+    Get all ingredients associated with the recipe 
+    '''
 
+
+# POST method for the saved recipes 
 @scraps.app.route('/api/v1/saved_recipes/', methods=['POST'])
 def api_saved_recipes():
     # Ensure that the user is logged in 
@@ -47,5 +57,5 @@ def api_saved_recipes():
     # Return the JSON response
     # Current endpoint: http://localhost:8000/api/v1/saved_recipes/
     # Want the endpoint to be in users/saved_recipes or smth
-    
+
     return flask.jsonify(**context), 201

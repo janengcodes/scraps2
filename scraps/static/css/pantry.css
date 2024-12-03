@@ -8,8 +8,8 @@
 }
 
 .ingredient-header {
-  padding-top: 20px;
-  padding-bottom: 8px;
+  margin: auto;
+  margin-left: 5%;
   font-size: 20px;
 }
 
@@ -18,19 +18,19 @@
   align-items: center;
   justify-content: space-around;
   margin: auto;
-  width: 1250px;
-  height: 250px;
+  flex-wrap: wrap;
+  gap: 2%;
+  width: 95%;
   background-color: rgb(205, 242, 205);
-  border-style: solid;
-  border-width: 2px;
-  border-radius: 10px;  
-  padding-left: 20px;
-  padding-right: 20px;
+  border: 2px solid black;
+  border-radius: 7px; 
+  margin-top: 2%;
 }
 
 .ingredient-container {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   background-color: white;
@@ -38,10 +38,7 @@
   border-radius: 10px;
   width: 150px;
   height: 130px;
-  padding-top: 3px;
-  padding-left: 3px;
-  padding-right: 3px;
-  padding-bottom: 3px;
+  margin: 3%;
 }
 
 .ingredient-container:hover {
@@ -70,9 +67,10 @@
 .header-container {
   display: flex;
   justify-content: space-between;
-  margin-left: 120px;
-  margin-right: 120px;
-  margin-top: 20px;
+  flex-wrap: wrap;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 5%;
 }
 
 .submit {
