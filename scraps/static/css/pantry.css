@@ -9,6 +9,7 @@
 
 .ingredient-header {
   margin: auto;
+  margin-top: 2%;
   margin-left: 5%;
   font-size: 20px;
 }
@@ -17,14 +18,15 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  margin: auto;
   flex-wrap: wrap;
   gap: 2%;
-  width: 95%;
+  width: 90%;
   background-color: rgb(205, 242, 205);
   border: 2px solid black;
   border-radius: 7px; 
   margin-top: 2%;
+  margin-left: 5%;
+  margin-right: 10%;
 }
 
 .ingredient-container {
@@ -61,7 +63,6 @@
   border-width: 2px;
   border-color: black;
   color: black;
-  margin-top: 10px;
 }
 
 .header-container {
@@ -75,7 +76,7 @@
 
 .submit {
   position: absolute;
-  right: 115px;
+  right: 5%;
   background-color: black;
   color: white;
   padding-left: 40px;
@@ -85,7 +86,7 @@
   border-style: solid;
   border-color: black;
   border-radius: 10px;
-  margin-top: 8px;
+  margin-top: 2%;
   font-size: 18px;
 }
 

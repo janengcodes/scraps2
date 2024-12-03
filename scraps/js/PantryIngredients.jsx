@@ -31,6 +31,7 @@ export default function UserPantryIngredients() {
                 <div class="ingredient-container"></div>
                 <div class="ingredient-container"></div>
                 <div class="ingredient-container"></div>
+                <div class="ingredient-container"></div>
             </div>
         
         <button type="submit" class="submit">Add to My Pantry</button>
