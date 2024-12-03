@@ -45,8 +45,6 @@ def api_saved_recipes():
         "items": data_dict["ingredients_list"]  # Ensure this is JSON serializable
     }
 
-    # print("measurements", data_dict["measurements"])
-
     # Insert recipe into the database
     connection = scraps.model.get_db()
     # NEED TO RESET DB
@@ -80,14 +78,6 @@ def api_saved_recipes():
         INSERT INTO recipe_ingredients(recipe_id, ingredient_id)
         VALUES (?, ?)
     ''', (recipe_id, ingredient_id))
-
-
-    
-    # Fetch the auto-generated recipe ID
-    # recipe_id = cursor.lastrowid
-
-    # Add the recipe ID to the context
-    context["recipe_id"] = recipe_id
 
     # Commit the changes to the database
     connection.commit()

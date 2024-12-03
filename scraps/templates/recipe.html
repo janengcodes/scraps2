@@ -50,29 +50,12 @@
   While efforts are made to ensure accuracy, the content may contain errors, inaccuracies, or omissions.
   Please verify critical information with trusted sources and do not solely rely on this content for decision-making.
 
-
-  <div class="debug" style="background-color: lightblue;">
-  <H1>DEBUG</H1>
-  <!-- <p> {{output}} </p> -->
-   <p>{{ food_groups }}</p>
-   <p>{{ seasons }}</p>
-   <BR>
-    <BR>
-      <BR>
-        <BR>
-          {{ json }}
-  </div>
-
   <div >
     <form action="/api/v1/saved_recipes/" method="post">
     <input type="hidden" name="json_data" value="{{ json }}">
     <button type="submit">Save Recipe</button>
     </form>
 
-    <!-- <form action="/api/v1/saved_recipes/?target=/saved_recipes/" method="post">
-      <input type="hidden" name="json_data" value="{{ json }}">
-      <button type="submit">Save Recipe</button>
-    </form> -->
   </div>
 </body>
 </html>
