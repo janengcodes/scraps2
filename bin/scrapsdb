@@ -22,10 +22,8 @@ case $1 in
 	    echo "Error: database already exists"
 	    exit 1 
 	fi 
-	mkdir -p var/uploads
 	sqlite3 var/scraps.sqlite3 < sql/schema.sql
 	sqlite3 var/scraps.sqlite3 < sql/data.sql
-	cp sql/uploads/* var/uploads/
     ;;
 
   "destroy")
@@ -33,16 +31,16 @@ case $1 in
     ;;
 
   "reset")
-    rm -rf var/scraps.sqlite3 var/uploads
-    mkdir -p var/uploads
+    sqlite3 var/scraps.sqlite3 < sql/resetdb.sql
+    echo "reseting..."
+    echo "recreating..."
     sqlite3 var/scraps.sqlite3 < sql/schema.sql
     sqlite3 var/scraps.sqlite3 < sql/data.sql
-    cp sql/uploads/* var/uploads/
     ;;
 
   "dump")
-    # sqlite3 -batch -line var/scraps.sqlite3 'SELECT * FROM recipes'
-    sqlite3 -batch -line var/scraps.sqlite3 'SELECT * FROM recipe_ingredients'
+    sqlite3 -batch -line var/scraps.sqlite3 'SELECT * FROM recipes'
+    # sqlite3 -batch -line var/scraps.sqlite3 'SELECT * FROM recipe_ingredients'
     # sqlite3 -batch -line var/scraps.sqlite3 'SELECT * FROM pantry'
     # sqlite3 -batch -line var/scraps.sqlite3 'SELECT * FROM ingredients'
     # sqlite3 -batch -line var/scraps.sqlite3 'SELECT * FROM users'
