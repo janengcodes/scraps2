@@ -8,4 +8,46 @@ INSERT INTO pantry(username, pantry_id)
 VALUES('user', 1);
 
 INSERT INTO ingredients(ingredient_name, pantry_id, season, food_group) 
-VALUES('Banana', 1, 'summer', 'produce');
+VALUES('Pomegranate', 1, 'winter', 'fruit');
+
+INSERT INTO ingredients(ingredient_name, pantry_id, season, food_group) 
+VALUES('Squash', 1, 'winter', 'fruit');
+
+INSERT INTO ingredients(ingredient_name, pantry_id, season, food_group) 
+VALUES('Clementines', 1, 'winter', 'fruit');
+
+INSERT INTO ingredients(ingredient_name, pantry_id, season, food_group) 
+VALUES('Kiwi', 1, 'winter', 'fruit');
+
+
+
+INSERT INTO ingredients(ingredient_name, pantry_id, season, food_group) 
+VALUES('Chicken', 1, 'winter', 'protein');
+
+INSERT INTO ingredients(ingredient_name, pantry_id, season, food_group) 
+VALUES('Chickpeas', 1, 'winter', 'protein');
+
+INSERT INTO ingredients(ingredient_name, pantry_id, season, food_group) 
+VALUES('Salmon', 1, 'winter', 'protein');
+
+INSERT INTO ingredients(ingredient_name, pantry_id, season, food_group) 
+VALUES('Tofu', 1, 'winter', 'protein');
+
+INSERT INTO ingredients(ingredient_name, pantry_id, season, food_group) 
+VALUES('Black Beans', 1, 'winter', 'protein');
+
+
+INSERT INTO ingredients(ingredient_name, pantry_id, season, food_group) 
+VALUES('Romaine', 1, 'winter', 'veggies');
+
+INSERT INTO ingredients(ingredient_name, pantry_id, season, food_group) 
+VALUES('Carrots', 1, 'winter', 'veggies');
+
+INSERT INTO ingredients(ingredient_name, pantry_id, season, food_group) 
+VALUES('Spinach', 1, 'winter', 'veggies');
+
+INSERT INTO ingredients(ingredient_name, pantry_id, season, food_group) 
+VALUES('Beets', 1, 'winter', 'veggies');
+
+INSERT INTO ingredients(ingredient_name, pantry_id, season, food_group) 
+VALUES('Leeks', 1, 'winter', 'veggies');

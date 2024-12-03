@@ -29,9 +29,12 @@ CREATE TABLE ingredients(
     ingredient_id INTEGER PRIMARY KEY AUTOINCREMENT,
     ingredient_name VARCHAR(64) NOT NULL,
     pantry_id INTEGER,
-    season VARCHAR(64) CHECK (season IN ('spring', 'summer', 'fall', 'winter')),
-    food_group VARCHAR(64) CHECK (food_group IN ('protein', 'produce', 'dairy', 'grains')),
-    FOREIGN KEY (pantry_id) REFERENCES pantry (pantry_id) ON DELETE CASCADE 
+
+    season VARCHAR(64) CHECK (season IN ('spring', 'summer', 'fall', 'winter')) NOT NULL,
+    food_group VARCHAR(64) CHECK (food_group IN ('meat', 'fruit', 'veggies', 'grains', 'protein')) NOT NULL,
+
+    FOREIGN KEY(pantry_id)
+        REFERENCES pantry(pantry_id)
 );
 
 -- saved ingredients as json?
