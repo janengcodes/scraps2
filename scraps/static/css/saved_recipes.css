@@ -7,16 +7,17 @@ body {
 }
 
 .all_recipes {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
   grid-gap: 1em;
   grid-template-rows: 1fr 1fr 1fr;
   align-items: start;
 }
 
 .recipe-row {
-  background-color: rgb(118, 194, 215);
   border-radius: 5px;
   border: 1px black solid;
+  margin-top: 5%;
   margin-left: 5%;
   margin-right: 5%;
 }

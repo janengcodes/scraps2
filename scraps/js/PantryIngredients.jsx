@@ -40,7 +40,7 @@ export default function UserPantryIngredients() {
         setSelectedFoodGroup(food_group)
         // Filter the ingredients based on the food group
         const filtered = ingredients.filter(
-            (ingredient) => ingredient.food_group.toLowerCase() === food_group.toLowerCase()
+            (ingredient) => ingredient.food_group === food_group
         );
         setFilteredIngredients(filtered);
     };
