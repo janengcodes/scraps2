@@ -1,78 +1,78 @@
-import flask
-from flask import redirect, render_template, Flask, jsonify
-import scraps
-import json
-import google.generativeai as genai
-app = Flask(__name__)
+# import flask
+# from flask import redirect, render_template, Flask, jsonify
+# import scraps
+# import json
+# import google.generativeai as genai
+# app = Flask(__name__)
 
-# flask --app scraps --debug run --host 0.0.0.0 --port 8000
-GOOGLE_API_KEY = 'AIzaSyCGu2PKA-ly-HGgkuiyswIPoVIUo64M9b4'
+# # flask --app scraps --debug run --host 0.0.0.0 --port 8000
+# GOOGLE_API_KEY = 'AIzaSyCGu2PKA-ly-HGgkuiyswIPoVIUo64M9b4'
 
-model = None
+# model = None
 
-def initialize_generative_model():
-    """Initialize the GenerativeModel with the specified character."""
-    global model
-    genai.configure(api_key=GOOGLE_API_KEY)
-    model = genai.GenerativeModel(
-        "models/gemini-1.5-pro-latest"
-    )
+# def initialize_generative_model():
+#     """Initialize the GenerativeModel with the specified character."""
+#     global model
+#     genai.configure(api_key=GOOGLE_API_KEY)
+#     model = genai.GenerativeModel(
+#         "models/gemini-1.5-pro-latest"
+#     )
 
-@scraps.app.route('/recipe/', methods=['POST'])
-def recipe():
-    if 'username' not in flask.session:
-        return flask.redirect(flask.url_for('show_accounts_login'))
+# @scraps.app.route('/recipe/', methods=['POST'])
+# def recipe():
+#     if 'username' not in flask.session:
+#         return flask.redirect(flask.url_for('show_accounts_login'))
     
-    logname = flask.session.get('username')
+#     logname = flask.session.get('username')
 
-    initialize_generative_model()
-    # global ingredients 
-    ingredients = flask.request.form.getlist('ingredient')
-    print(ingredients)
-    output = ""
-    json_string = []
-    if (len(ingredients) != 0):
-        response = model.generate_content("generate a recipe around these specific ingredients: "+ str(ingredients))
-        print(response)
-        output = response.text
-        # generate a json object based 
-        if response:
-            db_json = model.generate_content("based on this recipe: " + str(response) + " separate the recipe information into the format of a JSON object. the keys are 'name', 'instructions', and 'ingredients'. the values for 'ingredients' and 'instructions' should be formatted as a python list. do not add any extra characters that are '*', '#' or quotes for the value ")
-            # classify the meal 
-            json_string = db_json.text
-            json_string = model.generate_content("add a new key called 'meal_time' to this existing json: " + json_string +" and the value will be either be 'breakfast', 'lunch', or 'dinner' and assign a value based on this recipe " + str(response))
-            # jsonify in api 
-            json_data = json_string.text
-            print(json_data)
-            # clean text and pass relevant information into context
-            json_data = clean(json_data)
-            data_dict = json.loads(json_data)
-            print("dict")
-            print(data_dict)
+#     initialize_generative_model()
+#     # global ingredients 
+#     ingredients = flask.request.form.getlist('ingredient')
+#     print(ingredients)
+#     output = ""
+#     json_string = []
+#     if (len(ingredients) != 0):
+#         response = model.generate_content("generate a recipe around these specific ingredients: "+ str(ingredients))
+#         print(response)
+#         output = response.text
+#         # generate a json object based 
+#         if response:
+#             db_json = model.generate_content("based on this recipe: " + str(response) + " separate the recipe information into the format of a JSON object. the keys are 'name', 'instructions', and 'ingredients'. the values for 'ingredients' and 'instructions' should be formatted as a python list. do not add any extra characters that are '*', '#' or quotes for the value ")
+#             # classify the meal 
+#             json_string = db_json.text
+#             json_string = model.generate_content("add a new key called 'meal_time' to this existing json: " + json_string +" and the value will be either be 'breakfast', 'lunch', or 'dinner' and assign a value based on this recipe " + str(response))
+#             # jsonify in api 
+#             json_data = json_string.text
+#             print(json_data)
+#             # clean text and pass relevant information into context
+#             json_data = clean(json_data)
+#             data_dict = json.loads(json_data)
+#             print("dict")
+#             print(data_dict)
     
-    context = {
-        "name": data_dict["name"],
-        "ingredients_list": data_dict["ingredients"],
-        "instructions_list": data_dict["instructions"],
-        "meal_time": data_dict["meal_time"],
-        'json': json_data
-    }
-    return render_template('recipe.html', **context)
+#     context = {
+#         "name": data_dict["name"],
+#         "ingredients_list": data_dict["ingredients"],
+#         "instructions_list": data_dict["instructions"],
+#         "meal_time": data_dict["meal_time"],
+#         'json': json_data
+#     }
+#     return render_template('recipe.html', **context)
             
-def clean(input_text):
-    # Remove newline (\n) and carriage return (\r) characters
-    cleaned_text = input_text.replace('\n', '').replace('\r', '').replace('\\', '')
+# def clean(input_text):
+#     # Remove newline (\n) and carriage return (\r) characters
+#     cleaned_text = input_text.replace('\n', '').replace('\r', '').replace('\\', '')
 
-    # Find the start and end indices of the content within curly braces ({})
-    start_index = cleaned_text.find('{')
-    end_index = cleaned_text.rfind('}') + 1
+#     # Find the start and end indices of the content within curly braces ({})
+#     start_index = cleaned_text.find('{')
+#     end_index = cleaned_text.rfind('}') + 1
 
-    # Extract the text within curly braces
-    extracted_text = cleaned_text[start_index:end_index].strip()
+#     # Extract the text within curly braces
+#     extracted_text = cleaned_text[start_index:end_index].strip()
 
-    return extracted_text
+#     return extracted_text
 
 
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000, debug=True)
+# if __name__ == '__main__':
+#     app.run(host='0.0.0.0', port=8000, debug=True)

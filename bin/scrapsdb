@@ -42,9 +42,10 @@ case $1 in
 
   "dump")
     # sqlite3 -batch -line var/scraps.sqlite3 'SELECT * FROM recipes'
+    sqlite3 -batch -line var/scraps.sqlite3 'SELECT * FROM recipe_ingredients'
     # sqlite3 -batch -line var/scraps.sqlite3 'SELECT * FROM pantry'
     # sqlite3 -batch -line var/scraps.sqlite3 'SELECT * FROM ingredients'
-    sqlite3 -batch -line var/scraps.sqlite3 'SELECT * FROM users'
+    # sqlite3 -batch -line var/scraps.sqlite3 'SELECT * FROM users'
     ;;
 esac
 

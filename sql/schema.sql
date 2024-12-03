@@ -7,23 +7,9 @@ CREATE TABLE users(
     PRIMARY KEY(username)
 );
 
-CREATE TABLE saved_recipes(
-    username VARCHAR(20) NOT NULL,
-    recipe_id INTEGER NOT NULL,
-
-    FOREIGN KEY(username)
-        REFERENCES users(username)
-        ON DELETE CASCADE,
-
-    FOREIGN KEY(recipe_id)
-        REFERENCES recipes(recipe_id)
-        ON DELETE CASCADE
-);
-
-
 CREATE TABLE recipes (
     recipe_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_id INTEGER NOT NULL,
+    username VARCHAR(20) NOT NULL,
     name VARCHAR(64) NOT NULL,
     instructions JSON
 );
@@ -32,21 +18,20 @@ CREATE TABLE ingredients(
     ingredient_id INTEGER PRIMARY KEY AUTOINCREMENT,
     ingredient_name VARCHAR(64) NOT NULL,
     pantry_id INTEGER,
-
-    season VARCHAR(64) CHECK (season IN ('spring', 'summer', 'fall', 'winter')) NOT NULL,
-    food_group VARCHAR(64) CHECK (food_group IN ('meat', 'fruit', 'veggies', 'grains')) NOT NULL,
+    season VARCHAR(64) CHECK (season IN ('spring', 'summer', 'fall', 'winter')),
+    food_group VARCHAR(64) CHECK (food_group IN ('protein', 'produce', 'dairy', 'grains')),
 
     FOREIGN KEY(pantry_id)
         REFERENCES pantry(pantry_id)
 );
 
-
-
+-- saved ingredients as json?
+-- parse json later
 CREATE TABLE recipe_ingredients (
     recipe_id INTEGER NOT NULL, 
     ingredient_id INTEGER NOT NULL,
-    quantity DOUBLE(4, 2) NOT NULL, 
-    unit VARCHAR(40) NOT NULL,
+    quantity TEXT, 
+    unit VARCHAR(40),
 
     FOREIGN KEY(recipe_id)
         REFERENCES recipes(recipe_id)
