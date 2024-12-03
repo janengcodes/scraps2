@@ -1,52 +1,118 @@
-body {
-  background-color: beige;
+
+.pantry-header {
+  margin-left: 120px;
 }
 
-h1 {
-  color: blue;
-  width: 300px;
+.main-container {
+  margin-bottom: 100px;
+}
+
+.ingredient-header {
   margin: auto;
-
-
+  margin-left: 5%;
+  font-size: 20px;
 }
 
-p {
-  color: red;
-}
-
-.category h2{
-  width: 300px;
-  margin: auto;
-  color: rgb(135, 85, 93);
-
-
-}
-
-.produce-checkbox1 {
-  font-family: "Be Vietnam Pro", sans-serif;
-  font-weight: 100;
-  font-style: normal;
-  font-size: 27px;
-  background-color: lightpink;
-  padding: 4px;
-  margin: 2px;
-  border: 3px solid rgb(135, 85, 93);
-  border-radius: 10px;
-  justify-content: center;
-  align-items: center;
-}
-
-.outer-grid-container {
+.in-season-box {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: space-around;
+  margin: auto;
+  flex-wrap: wrap;
+  gap: 2%;
+  width: 95%;
+  background-color: rgb(205, 242, 205);
+  border: 2px solid black;
+  border-radius: 7px; 
+  margin-top: 2%;
 }
 
-.grid-container {
-  display: none;
+.ingredient-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  width: 150px;
+  height: 130px;
+  margin: 3%;
+}
 
-  grid-template-columns: 300px 300px 300px;
-  grid-template-rows: 50px 50px; 
-  align-content: space-around;
+.ingredient-container:hover {
+  border-style: solid;
+  border-width: 2px;
+  background-color: rgb(224, 224, 224);
+  transition: border-width 0.1s ease, border-color 0.1s ease, background-color 0.1s ease;;
+  cursor: pointer;
+}
 
-  background-color: #D9EDD7; }
+.ingredient-container:active {
+  cursor: pointer;
+  background-color: rgb(190, 190, 190);
+  transition: background-color 0.3s ease;
+}
+
+.dropdown .btn {
+  background-color: white;
+  border-style: solid;
+  border-width: 2px;
+  border-color: black;
+  color: black;
+  margin-top: 10px;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 5%;
+}
+
+.submit {
+  position: absolute;
+  right: 115px;
+  background-color: black;
+  color: white;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-style: solid;
+  border-color: black;
+  border-radius: 10px;
+  margin-top: 8px;
+  font-size: 18px;
+}
+
+.submit:hover {
+  border-style: solid;
+  border-width: 2px;
+  background-color: rgb(75, 75, 75);
+  transition: border-width 0.1s ease, border-color 0.1s ease, background-color 0.1s ease;;
+  cursor: pointer;
+}
+
+.submit:active {
+  cursor: pointer;
+  background-color: rgb(190, 190, 190);
+  transition: background-color 0.3s ease;
+}
+
+.ingredient-image {
+  width: 100%;            /* Make the image fill the container width */
+  height: auto;           /* Maintain the aspect ratio of the image */
+  border-radius: 8px;     /* Optional: rounded corners for the image */
+}
+
+.ingredient-name {
+  margin-top: 10px;       
+  text-align: center;     
+  font-size: 18px;        
+  color: #333;            
+  font-weight: bold;      
+}

@@ -14,6 +14,8 @@
     "@babel/preset-react": ">=7.22.15",
     "@babel/runtime": ">=7.22.15",
     "@cypress/grep": "^4.0.0",
+    "@playwright/test": "^1.49.0",
+    "@types/node": "^22.9.1",
     "@types/react": ">=18.2.22",
     "@types/react-dom": ">=18.2.7",
     "@typescript-eslint/eslint-plugin": ">=6.7.2",
@@ -56,5 +58,6 @@
   },
   "engines": {
     "node": ">=18.0.0"
-  }
+  },
+  "scripts": {}
 }

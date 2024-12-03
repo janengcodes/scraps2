@@ -6,33 +6,22 @@ app = Flask(__name__)
 
 @scraps.app.route('/saved_recipes/')
 def saved_recipes():
-    # breakfast = [
-    #     {
-    #         "name": "hashbrowns",
-    #         "description": "potato"
-    #     },
-    #     {
-    #         "name": "huevos rancheros",
-    #         "description": "eggs and stuff"
-    #     },
-    #     {
-    #         "name": "huevos rancheros",
-    #         "description": "eggs and stuff"
-    #     }
-    # ]
-        
+
     breakfast = [
         {
-            "name": "burgers and fries",
-            "description": "potato and meat"
+            "name": "Eggs",
+            "description": "Eggs and butter",
+            "time": "30 min"
         },
         {
-            "name": "sandwich",
-            "description": "peanut butter and jelly"
+            "name": "Oatmeal",
+            "description": "Oatmeal and milk",
+            "time": "30 min"
         },
         {
-            "name": "poke",
-            "description": "spicy tuna, mayo, edamame"
+            "name": "Coffee",
+            "description": "Water and coffee grounds",
+            "time": "30 min"
         }
     ]
 
@@ -72,8 +61,8 @@ def saved_recipes():
     logname = flask.session.get('username')
     
     context = {
+        "breakfast": breakfast,
         "lunch": lunch,
-        "breakfast:": breakfast,
         "dinner": dinner,
         "logname": logname
     }

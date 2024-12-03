@@ -10,7 +10,7 @@
     <title>Scraps</title>
   </head>
   <body>
-    <div class="reactEntry">Loading...</div>
+    <div class="reactEntry"></div>
     <!-- Load JavaScript -->
     <script
       type="text/javascript"
@@ -23,30 +23,10 @@
       crossorigin="anonymous"
     />
     <div id="header">
-      <div id="date-range">
-        <!--TODO: add date range UI-->
-      </div>
 
     </div>
-    <form action="/accounts/logout/" method="post">
-      <button type="submit">Logout</button>
-    </form>
-    {{logname}}
-    <div class="profile"> 
-      
-      <div class="circle"></div>
-      EDIT PROFILE
-    </div>
-    <div class="header">
-    <div class="grid-container">
-      <div class="grid-item">MON</div>
-      <div class="grid-item">TUES</div>
-      <div class="grid-item">WED</div>
-      <div class="grid-item">THURS</div>
-      <div class="grid-item">FRI</div>
-      <div class="grid-item">SAT</div>
-      <div class="grid-item">SUN</div>
-    </div>
-  </div>
+
+    <h1>Welcome, {{logname}}!</h1>
+
   </body>
 </html>

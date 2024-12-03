@@ -16,8 +16,7 @@ def get_services():
     """Return list of services."""
     context = {
         "saved_recipes": "/api/v1/saved_recipes/",
-        # "calendar": "/api/v1/calendar/",
-        "url": "/api/v1"
-        
+        "url": "/api/v1",
+        "pantry": "api/v1/pantry"
     }
     return flask.jsonify(**context)

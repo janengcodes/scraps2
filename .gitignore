@@ -42,3 +42,7 @@ scraps/views/__pycache__/results.cpython-312.pyc
 scraps/views/__pycache__/saved_recipes.cpython-312.pyc
 scraps/views/__pycache__/user.cpython-312.pyc
 scraps/views/__pycache__/user_ingredients.cpython-312.pyc
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

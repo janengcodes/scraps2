@@ -16,20 +16,24 @@ def check_login():
 
     connection = scraps.model.get_db()
     # Grab the name of the current user
-    full_name_row2 = {}
     full_name_row = connection.execute('''
-        SELECT fullname
+        SELECT first_name
         FROM users
         WHERE username = ?
     ''', (logname,)).fetchone()
 
-    if full_name_row is not None:
-        full_name = full_name_row["fullname"]
-    else:
+    if logname is None or full_name_row is None:
+        print("logname is none")
         return flask.redirect('/accounts/login')
 
-
     context = {
-        "fullname": full_name,
+        "username": logname,
     } 
     return flask.jsonify(**context), 201
+
+@scraps.app.route('/api/logout', methods=['POST'])
+def api_logout():
+    # Clear the session data
+    if 'username' in flask.session:
+        flask.session.clear()
+    return flask.render_template("login.html", **{})
