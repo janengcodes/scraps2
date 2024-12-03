@@ -28,13 +28,8 @@ def api_saved_recipes():
     json_string = flask.request.form['json_data']
     data_dict = json.loads(json_string)
 
-
     serialized_instructions = json.dumps(data_dict['instructions'])
     ingredients_list = data_dict["ingredients_list"]
-    # print(ingredients_list)
-
-    # season = data_dict['season']
-    # food_groups = data_dict['food_groups']
 
     # Prepare the context for the response
     context = {
@@ -54,16 +49,12 @@ def api_saved_recipes():
     ''', (logname, data_dict['name'], serialized_instructions,))
     recipe_id = cursor.lastrowid
 
-    # # get pantry id
-    # cursor = connection.execute('''
-    #     SELECT pantry_id FROM pantry WHERE user = ?
-    # ''', (logname,)).fetchone()
+    # get pantry id
     cursor = connection.execute('''
-        INSERT INTO pantry(username)
-        VALUES (?)
-    ''', (logname,))
+        SELECT pantry_id FROM pantry WHERE username = ?
+    ''', (logname,)).fetchone()
 
-    pantry_id = cursor.lastrowid
+    pantry_id = cursor["pantry_id"]
 
     # insert ingredients into DB
     for item in ingredients_list:
