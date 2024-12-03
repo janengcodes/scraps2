@@ -34,7 +34,7 @@ CREATE TABLE ingredients(
     pantry_id INTEGER,
 
     season VARCHAR(64) CHECK (season IN ('spring', 'summer', 'fall', 'winter')) NOT NULL,
-    food_group VARCHAR(64) CHECK (food_group IN ('meat', 'fruit', 'veggies', 'grains')) NOT NULL,
+    food_group VARCHAR(64) CHECK (food_group IN ('meat', 'fruit', 'veggies', 'grains', 'protein')) NOT NULL,
 
     FOREIGN KEY(pantry_id)
         REFERENCES pantry(pantry_id)
