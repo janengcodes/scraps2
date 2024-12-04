@@ -10,7 +10,7 @@ import requests  # Assuming you're using requests for HTTP requests
 
 
 # flask --app scraps --debug run --host 0.0.0.0 --port 8000
-GOOGLE_API_KEY = 'AIzaSyDGLjSn7rKYIX_L990wAeMcYiWrmkzm3Mk'
+GOOGLE_API_KEY = 'AIzaSyCxuN1FprvZUniX814NWgmxdtoetoAkeSY'
 
 model = None
 

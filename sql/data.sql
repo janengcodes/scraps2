@@ -51,3 +51,6 @@ VALUES('Beets', 1, 'winter', 'veggies');
 
 INSERT INTO ingredients(ingredient_name, pantry_id, season, food_group) 
 VALUES('Leeks', 1, 'winter', 'veggies');
+
+INSERT INTO ingredients(ingredient_name, pantry_id, season, food_group) 
+VALUES('Leeks', 1, 'winter', 'veggies');

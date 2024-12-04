@@ -7,6 +7,9 @@
     height: 400px;
 }
 
+h1 {
+    text-align: center;
+}
 
 .header{
     grid-area: header;
