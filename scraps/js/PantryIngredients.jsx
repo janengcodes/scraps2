@@ -91,9 +91,10 @@ export default function UserPantryIngredients() {
                     </div>
                 ))}
             </div>
-
         
-        <button type="submit" class="submit">Add to My Pantry</button>
+            <button type="submit" class="submit">Add to My Pantry</button>
+            <h2 class="ingredient-header">Your Ingredients</h2>
+            
         </div>
 
     );

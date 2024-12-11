@@ -35,8 +35,8 @@ def get_pantry(username):
     ingredients = connection.execute('''
         SELECT ingredient_name, season, food_group
         FROM ingredients
-        WHERE pantry_id = ?
-    ''', (pantry_id,)).fetchall()
+        WHERE season = 'winter'
+    ''',).fetchall()
 
     print("INGREDIENTS ARE", ingredients)
 

@@ -1,20 +1,7 @@
-function printMessage(message) {
-  console.log(message);
-}
-
-printMessage("This is a message printed to the console.");
-
-// get all the buttons
-
-// var elements = new Map();
-// elements.set("produceButton", ["produce", "produceHeading"]);
-// elements.set("proteinButton", ["protein", "proteinHeading"]);
-// elements.set("dairyButton", ["dairy", "dairyHeading"]);
-// elements.set("grainsButton", ["grains", "grainsHeading"]);
-
 function deleteGrids(clickedButton) {
   var elements = new Map();
-  elements.set("produceButton", ["produce", "produceHeading"]);
+  elements.set("fruitButton", ["fruit", "fruitHeading"]);
+  elements.set("veggiesButton", ["veggies", "veggiesHeading"]);
   elements.set("proteinButton", ["protein", "proteinHeading"]);
   elements.set("dairyButton", ["dairy", "dairyHeading"]);
   elements.set("grainsButton", ["grains", "grainsHeading"]);
@@ -37,6 +24,7 @@ function deleteGrids(clickedButton) {
       ingredient.style.display = "grid";
       heading.style.display = "block";
     } else {
+      console.log("Hiding ingredient:", value[0]);
       ingredient.style.display = "none";
       heading.style.display = "none";
     }

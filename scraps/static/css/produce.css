@@ -12,21 +12,6 @@ h2 {
   text-align: left;
 }
 
-
-/* .container {
-  display: flex;
-
-  flex-wrap: wrap;
-  /* justify-content: start; */
-/* align-items: stretch;
-  /* gap: 10px; */
-/* gap: 10px 20px; */
-/* column-gap: 20px;
-  /* grid-row: 20px; */
-/* flex-direction: column */
-/* | row-reverse | column | column-reverse; */
-/*}  */
-
 .outer-grid-container {
   display: flex;
   justify-content: center;
@@ -44,7 +29,11 @@ h2 {
   padding: 1%;
 }
 
-.produce-checkbox1 {
+.init-grid-container {
+  display: grid;
+}
+
+.checkbox-class {
   display: flex;
   background-color: white;
   margin: 8px;
@@ -54,8 +43,7 @@ h2 {
   border-radius: 5px;
 }
 
-
-.produce-checkbox1 label {
+.checkbox-class label {
   margin-left: 10px; 
 }
 
@@ -86,7 +74,7 @@ h2 {
   display: block; 
 }
 
-.produce-checkbox1 input[type="checkbox"] {
+.checkbox-class input[type="checkbox"] {
   appearance: none; /* Remove default style */
   width: 25px; 
   height: 25px;
@@ -97,11 +85,11 @@ h2 {
   transition: all 300ms;
 }
 
-.produce-checkbox1 input[type="checkbox"]:checked {
+.checkbox-class input[type="checkbox"]:checked {
   
   background-color: black; 
 }
 
-.produce-checkbox1:has(input[type="checkbox"]:checked) {
+.checkbox-class:has(input[type="checkbox"]:checked) {
   background-color: #75B09C; /* New color for parent */
 }
