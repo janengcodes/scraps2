@@ -71,8 +71,6 @@ def recipe():
         SELECT ingredient_id FROM pantry_ingredients WHERE pantry_id = ?
     ''', (pantry_id,)).fetchall()
 
-    print("PANTRY INGREDIENTS CHECK", pantry_ingredients)
-
     if (len(ingredients) != 0):
         response = model.generate_content("generate a recipe around these specific ingredients: "+ str(ingredients))
         print(response)

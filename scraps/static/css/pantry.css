@@ -21,7 +21,7 @@
   margin-left: 3%;
   margin-right: 10%;
   width: 90%;
-  gap: 2%;
+  gap: 3%;
 }
 
 .grains-pantry {
@@ -43,7 +43,7 @@
   margin-left: 5%;
   margin-right: 10%;
   border: #27302d 2px solid;
-  min-height: 60%;
+  min-height: 50%;
 }
 
 .pantry-ingredient {

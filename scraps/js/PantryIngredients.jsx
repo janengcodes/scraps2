@@ -70,58 +70,63 @@ export default function UserPantryIngredients() {
             });
     }, [username]);
 
-    const buttonActive2 = (index, ingredientName) => {
+    const buttonActive2 = (index, ingredientID) => {
         setActiveContainers((prev) => {
           if (Array.isArray(prev)) {
             const updated = [...prev];
             updated[index] = !updated[index]; // Toggle active state
             return updated;
           } else {
-            return [ingredientName]; // Handle the case where it's not an array
+            return [ingredientID]; // Handle the case where it's not an array
           }
         });
       
         setActiveIngredients((prev) => {
           if (Array.isArray(prev)) {
             if (activeContainers[index]) {
-              return prev.filter((name) => name !== ingredientName); // Remove ingredient
+              return prev.filter((name) => name !== ingredientID); // Remove ingredient
             } else {
-              return [...prev, ingredientName]; // Add ingredient
+              return [...prev, ingredientID]; // Add ingredient
             }
           } else {
-            return [ingredientName]; // Handle the case where it's not an array
+            return [ingredientID]; // Handle the case where it's not an array
           }
         });
-      };
+    };
       
     
     const handleSubmit = () => {
-    // Send active ingredients to the API
-    console.log("handleSubmit called");
-    fetch(`/api/add-to-pantry/${username}`, {
-        method: "POST",
-        headers: {
-        "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ingredients: activeIngredients }),
-    })
+        console.log("handleSubmit called");
+    
+        fetch(`/api/add-to-pantry/${username}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ ingredients: activeIngredients }),
+        })
         .then((response) => {
-        if (!response.ok) throw new Error("Failed to add ingredients");
-        return response.json();
+            if (!response.ok) throw new Error("Failed to add ingredients");
+            return response.json();
         })
         .then((data) => {
-        console.log("Ingredients added successfully:", data);
+            console.log("Ingredients added successfully:", data);
+    
+            // Assuming the backend returns the updated pantry ingredients
+            setPantryIngredients((prev) => [...prev, ...data.pantry_ingredients]);
+
         })
         .catch((error) => {
-        console.error("Error:", error);
+            console.error("Error:", error);
         });
     };
+    
 
 
     return (
 
         <div className="main-container"> 
-            <h2 className="ingredient-header">In Season Ingredients for California, USA</h2>
+            <h2 className="ingredient-header">In Season Ingredients</h2>
 
             <div className="ingredient-header dropdown">
                 <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
@@ -141,7 +146,7 @@ export default function UserPantryIngredients() {
                     className={`ingredient-container ${
                         activeContainers[index] ? "active" : ""
                     }`}
-                    onClick={() => buttonActive2(index, ingredient.ingredient_name)}
+                    onClick={() => buttonActive2(index, ingredient.ingredient_id)}
                     >
                         <div>{ingredient.ingredient_name}</div>
                     </div>

@@ -1,6 +1,6 @@
 """REST API for Pantry."""
 import hashlib
-from flask import jsonify
+from flask import request, jsonify
 import flask
 import scraps
 
@@ -33,7 +33,7 @@ def get_pantry(username):
     print("PANTRY ID 2", pantry_id)
 
     seasonal_ingredients = connection.execute('''
-        SELECT ingredient_name, season, food_group
+        SELECT ingredient_id, ingredient_name, season, food_group
         FROM ingredients
         WHERE season = 'winter'
     ''',).fetchall()
@@ -41,6 +41,7 @@ def get_pantry(username):
     # Converst ingredients into a list of dictionaries in order to jsonify the data
     ingredients_list = [
         {
+            'ingredient_id': ingredient['ingredient_id'],
             'ingredient_name': ingredient['ingredient_name'],
             'season': ingredient['season'],
             'food_group': ingredient['food_group']
@@ -53,9 +54,6 @@ def get_pantry(username):
     pantry_ingredients = connection.execute('''
         SELECT ingredient_id FROM pantry_ingredients WHERE pantry_id = ?
     ''', (pantry_id,)).fetchall()
-
-    print("PANTRY INGREDIENTS CHECK 2", pantry_ingredients)
-    # PANTRY INGREDIENTS CHECK 2 [{'ingredient_id': 2}, {'ingredient_id': 6}, {'ingredient_id': 9}, {'ingredient_id': 12}]
 
     pantry_ingredients_list = []
 
@@ -74,8 +72,6 @@ def get_pantry(username):
                 'ingredient_name': ingredient['ingredient_name'],
                 'food_group': ingredient['food_group']
             })
-    print("PANTRY INGREDIENTS", pantry_ingredients_list)
-
     return flask.jsonify({'pantry_id': pantry_id, 'ingredients': ingredients_list, 'pantry_ingredients':pantry_ingredients_list}), 200
 
 
@@ -85,6 +81,65 @@ def add_to_pantry(username):
 
     if 'username' not in flask.session:
         return flask.redirect(flask.url_for('show_accounts_login'))
-    print("add to pantry")
-    context = {}
-    return flask.jsonify(**context), 201
+    try:
+
+        data = request.get_json()
+        ingredients = data.get('ingredients', [])  # Retrieve the 'ingredients' list from the JSON
+
+        print(f"User {username} is adding the following ingredients: {ingredients}")
+
+        connection = scraps.model.get_db()
+        # Insert the ingredients into the pantry
+        pantry = connection.execute('''
+            SELECT pantry_id
+            FROM pantry
+            WHERE username = ?
+        ''', (username,)).fetchone()
+        pantry_id = pantry['pantry_id']
+        pantry_ingredients_list = []
+
+        for ingredient_id in ingredients:
+            try:
+                # Execute the insert statement
+                cursor = connection.execute('''
+                    INSERT INTO pantry_ingredients (pantry_id, ingredient_id)
+                    VALUES (?, ?)
+                ''', (pantry_id, ingredient_id))
+
+                # Check if any row was inserted
+                if cursor.rowcount > 0:
+                    print(f"Added ingredient {ingredient_id} to pantry.")
+                else:
+                    print(f"Failed to add ingredient {ingredient_id} to pantry.")
+
+                ingredient = connection.execute('''
+                    SELECT ingredient_name, food_group
+                    FROM ingredients
+                    WHERE ingredient_id = ?
+                ''', (ingredient_id,)).fetchone()
+
+                # Append ingredient details as a dictionary
+                if ingredient:  # Ensure ingredient is not None
+                    pantry_ingredients_list.append({
+                        'ingredient_name': ingredient['ingredient_name'],
+                        'food_group': ingredient['food_group']
+                    })
+
+            except Exception as e:
+                print(f"Error inserting ingredient {ingredient}: {e}")
+
+        # Check if ingredients are provided
+        if not ingredients:
+            return jsonify({"error": "No ingredients provided"}), 400
+
+        print(f"User {username} is adding the following ingredients: {ingredients}")
+
+        # Respond with a success message
+        return jsonify({
+            "message": "Ingredients added successfully",
+            'pantry_ingredients': pantry_ingredients_list,
+            "pantry_id": pantry_id  # Optionally return pantry_id for confirmation
+        }), 200
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
