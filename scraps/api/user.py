@@ -31,9 +31,3 @@ def check_login():
     } 
     return flask.jsonify(**context), 201
 
-@scraps.app.route('/api/logout', methods=['POST'])
-def api_logout():
-    # Clear the session data
-    if 'username' in flask.session:
-        flask.session.clear()
-    return flask.render_template("login.html", **{})

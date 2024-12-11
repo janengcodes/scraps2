@@ -27,12 +27,29 @@ def recipe():
     if 'username' not in flask.session:
         return flask.redirect(flask.url_for('show_accounts_login'))
 
+    username = flask.session.get('username')
+
     initialize_generative_model()
     # global ingredients 
     ingredients = flask.request.form.getlist('ingredient')
-    print(ingredients)
+    print("INGREDIENTS", ingredients)
     output = ""
     json_string = []
+    # Put the ingredients into the user's pantry 
+    # Create a connection to the database 
+
+    connection = scraps.model.get_db()
+    # INGREDIENTS ['Tomatoes', 'Arugula']
+    # Insert into ingredients table with connection to user's pantry
+    # Get the pantry id using the username 
+    user_pantry = connection.execute('''
+        SELECT pantry_id FROM pantry WHERE username = ?
+    ''', (username,)).fetchone()
+
+    
+
+
+
     if (len(ingredients) != 0):
         response = model.generate_content("generate a recipe around these specific ingredients: "+ str(ingredients))
         print(response)

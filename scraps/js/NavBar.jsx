@@ -39,19 +39,25 @@ export default function LoggedInNavBar() {
   };
   }, []);
 
-  const handleLogout = () => {
-    fetch("/api/logout", { method: "POST", credentials: "same-origin" })
-      .then((response) => {
-        if (response.ok) {
-          setUser(""); // Clear the user state
-          localStorage.removeItem("user"); // Remove user info from local storage
-        } else {
-          console.error("Failed to log out");
-        }
-      })
-      .catch((error) => console.log("Logout error:", error));
+  const handleLogout = async () => {
+    setUser(""); // Clear the user state
+    localStorage.removeItem("user"); // Remove user info from local storage
+    try {
+      const response = await fetch('/accounts/logout/', {
+        method: 'POST', // Use GET if the server expects it
+        credentials: 'same-origin', // Include credentials if needed
+      });
+  
+      if (response.ok) {
+        console.log("Logged out successfully");
+        window.location.href = '/'; // Redirect after logout
+      } else {
+        console.error("Logout failed");
+      }
+    } catch (error) {
+      console.error("An error occurred during logout:", error);
+    }
   };
-
   return (
     <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
       <Container>
@@ -73,7 +79,7 @@ export default function LoggedInNavBar() {
                 <Nav.Link eventKey={4} href={`/user/${user}`}>
                   My Profile
                 </Nav.Link>
-                <Button class="btn btn-light" onClick={handleLogout}>
+                <Button className="btn btn-light btn-logout" onClick={handleLogout} href="/accounts/logout/">
                   Log Out
                 </Button>
               </>

@@ -48,3 +48,15 @@ CREATE TABLE recipe_ingredients (
         ON DELETE CASCADE
 );
 
+CREATE TABLE pantry_ingredients (
+    pantry_id INTEGER NOT NULL, 
+    ingredient_id INTEGER NOT NULL,
+
+    FOREIGN KEY(pantry_id)
+        REFERENCES pantry(pantry_id)
+        ON DELETE CASCADE,
+    FOREIGN KEY(ingredient_id)
+        REFERENCES ingredients(ingredient_id)
+        ON DELETE CASCADE 
+);
+
