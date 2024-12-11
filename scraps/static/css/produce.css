@@ -1,11 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap")
-.checkboxes {
-  display: block;
-  /* in javascript: set display to None if you're not tabbed on it */
-  background-color: lightpink;
-  /* margin-top: 10%; */
-  font-family: Arial, Helvetica, sans-serif;
-}
+
 
 h1 {
   font-size: 50px;
@@ -38,17 +31,16 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
 .grid-container {
   display: none;
-  background-color: #D9EDD7;
+  background-color: #A0CA92;
   grid-template-columns: 250px 250px 250px;
   border-radius: 10px;
   justify-items: center; /* Centers items horizontally within their cells */
   align-items: center; /* Centers items vertically within their cells */
-  /* grid-template-rows: 50px 50px; */
+  padding: 1%;
 }
 
 .produce-checkbox1 {
@@ -95,4 +87,22 @@ h2 {
 
 #produceHeading {
   display: block; 
+}
+
+.produce-checkbox1 input[type="checkbox"] {
+  appearance: none; /* Remove default style */
+  width: 25px; 
+  height: 25px;
+  border: 1px solid black; /* Customize border */
+  border-radius: 4px; /* Optional: rounded corners */
+  background-color: white; /* Unchecked background */
+  cursor: pointer;
+}
+
+.produce-checkbox1 input[type="checkbox"]:checked {
+  background-color: #998650; 
+}
+
+.produce-checkbox1:has(input[type="checkbox"]:checked) {
+  background-color: #75B09C; /* New color for parent */
 }
