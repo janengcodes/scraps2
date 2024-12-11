@@ -30,7 +30,8 @@
     <br>
 
     <div class="buttons">
-      <div><button class="button-2 produce-init" onclick="deleteGrids(this)" id = "produceButton"><h5>Produce</h5></button></div>
+      <div><button class="button-2 produce-init" onclick="deleteGrids(this)" id = "produceButton"><h5>Fruits</h5></button></div>
+      <div><button class="button-2" onclick="deleteGrids(this)" id = "veggiesButton"><h5>Veggies</h5></button></div>
       <div><button class="button-2" onclick="deleteGrids(this)" id = "proteinButton"><h5>Protein</h5></button></div>
       <div><button class="button-2" onclick="deleteGrids(this)" id = "dairyButton"><h5>Dairy</h5></button></div>
       <div><button class="button-2" onclick="deleteGrids(this)" id = "grainsButton"><h5>Grains</h5></button></div>
@@ -38,6 +39,8 @@
 
         
         <form action="/recipe/" method="post">
+
+          
           <h1 id = "produceHeading"></h1>
           <div class="outer-grid-container">
             <div class="grid-container" id = "produce">
