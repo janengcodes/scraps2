@@ -55,12 +55,13 @@
 
 </div>
 
-  <div >
-    <form action="/api/v1/saved_recipes/" method="post">
-    <input type="hidden" name="json_data" value="{{ json }}">
-    <button type="submit">Save Recipe</button>
-    </form>
-
+  <div class="submit-form">
+    <div>
+      <form action="/api/v1/saved_recipes/" method="post">
+        <input type="hidden" name="json_data" value="{{ json }}">
+        <button type="submit">Save Recipe</button>
+      </form>
+    </div>
   </div>
 </body>
 </html>

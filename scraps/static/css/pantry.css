@@ -30,6 +30,7 @@
 }
 .pantry-ingredient-box {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   padding: 1%;
@@ -56,6 +57,7 @@
   border: 1px solid #27302d;
   min-width: 15%;
   text-align: center;
+  margin:1%;
 }
 
 .in-season-box {

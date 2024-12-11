@@ -2,6 +2,11 @@
   font-family: "Be Vietnam Pro", sans-serif;
 }
 
+.submit-form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 /* CSS */
 .button-2 {
