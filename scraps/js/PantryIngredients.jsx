@@ -20,6 +20,9 @@ export default function UserPantryIngredients() {
     // State for the filtered ingredients based on dropdown
     const [filteredIngredients, setFilteredIngredients] = useState([])
 
+    // State for pantry ingredients
+    const [pantryIngredients, setPantryIngredients] = useState([])
+
     // State for the dropdown
     const [selectedFoodGroup, setSelectedFoodGroup] = useState("");
 
@@ -55,6 +58,9 @@ export default function UserPantryIngredients() {
                 // Ingredients are the response data 
                 const { ingredients } = response.data
                 setIngredients(ingredients || [])
+                const { pantry_ingredients } = response.data
+                setPantryIngredients(pantry_ingredients || [])
+                console.log("Pantry Ingredients:", pantryIngredients); // Log the state to check its value
             })
             .catch((error) => {
                 console.error('Error fetching pantry data:', error);
@@ -74,27 +80,32 @@ export default function UserPantryIngredients() {
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <li><a class="dropdown-item" href="#" onClick={() => dropDownClicked("veggies")}>Vegetables</a></li>
                     <li><a class="dropdown-item" href="#" onClick={() => dropDownClicked("fruit")}>Fruits</a></li>
-                    <li><a class="dropdown-item" href="#" onClick={() => dropDownClicked("protein")}>Protein</a></li>
                 </ul>
             </div>
 
-        
             <div className="in-season-box">
-                {Array.isArray(filteredIngredients) && filteredIngredients.map((ingredient, index) => (
+                {Array.isArray(filteredIngredients) &&
+                filteredIngredients.map((ingredient, index) => (
                     <div
-                        key={index}
-                        // Append the active class if the ingredient container is clicked
-                        className={`ingredient-container ${activeContainers[index] ? 'active' : ''}`}
-                        onClick={() => buttonActive(index)}
+                    key={index}
+                    className={`ingredient-container ${
+                        activeContainers[index] ? "active" : ""
+                    }`}
+                    onClick={() => buttonActive(index)}
                     >
-                        <p>{ingredient.ingredient_name}</p>
+                    <p>{ingredient.ingredient_name}</p>
                     </div>
                 ))}
             </div>
         
             <button type="submit" class="submit">Add to My Pantry</button>
             <h2 class="ingredient-header">Your Ingredients</h2>
-            
+
+                {Array.isArray(pantryIngredients) && pantryIngredients.map((ingredient, index) => (
+                    <p key={index}>{ingredient.ingredient_name}</p>
+                ))}
+
+
         </div>
 
     );

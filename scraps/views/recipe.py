@@ -32,23 +32,46 @@ def recipe():
     initialize_generative_model()
     # global ingredients 
     ingredients = flask.request.form.getlist('ingredient')
-    print("INGREDIENTS", ingredients)
     output = ""
     json_string = []
     # Put the ingredients into the user's pantry 
     # Create a connection to the database 
 
     connection = scraps.model.get_db()
+
+
     # INGREDIENTS ['Tomatoes', 'Arugula']
-    # Insert into ingredients table with connection to user's pantry
-    # Get the pantry id using the username 
     user_pantry = connection.execute('''
         SELECT pantry_id FROM pantry WHERE username = ?
     ''', (username,)).fetchone()
+    pantry_id = user_pantry['pantry_id']
 
+    print("PANTRY ID", pantry_id)
+
+    # Create an array of ingredient ids 
+    ingredient_ids = []
+    for ingredient in ingredients:
+        ingredient_id = connection.execute('''
+            SELECT ingredient_id FROM ingredients WHERE ingredient_name = ?
+        ''', (ingredient,)).fetchone()
+        ingredient_ids.append(ingredient_id['ingredient_id'])
     
+    print("INGREDIENTS", ingredients)
+    print("INGREDIENT IDS", ingredient_ids)
 
+    # Insert the ingredients into the pantry
+    for ingredient_id in ingredient_ids:
+        connection.execute('''
+            INSERT OR IGNORE INTO pantry_ingredients(pantry_id, ingredient_id)
+            VALUES (?, ?)
+        ''', (pantry_id, ingredient_id))
+    
+    # Check that the ingredients were added to the pantry
+    pantry_ingredients = connection.execute('''
+        SELECT ingredient_id FROM pantry_ingredients WHERE pantry_id = ?
+    ''', (pantry_id,)).fetchall()
 
+    print("PANTRY INGREDIENTS CHECK", pantry_ingredients)
 
     if (len(ingredients) != 0):
         response = model.generate_content("generate a recipe around these specific ingredients: "+ str(ingredients))

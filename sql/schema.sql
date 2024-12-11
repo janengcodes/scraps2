@@ -26,11 +26,11 @@ CREATE TABLE recipes (
 );
 
 CREATE TABLE ingredients(
-    ingredient_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    ingredient_name VARCHAR(64) NOT NULL,
+    ingredient_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    ingredient_name VARCHAR(64),
     pantry_id INTEGER,
     season VARCHAR(64) CHECK (season IN ('spring', 'summer', 'fall', 'winter')),
-    food_group VARCHAR(64) CHECK (food_group IN ('protein', 'produce', 'dairy', 'grains', 'fruit', 'veggies')) NOT NULL,
+    food_group VARCHAR(64) CHECK (food_group IN ('protein', 'produce', 'dairy', 'grains', 'fruit', 'veggies')),
     FOREIGN KEY (pantry_id) REFERENCES pantry (pantry_id) ON DELETE CASCADE 
 );
 
@@ -57,6 +57,8 @@ CREATE TABLE pantry_ingredients (
         ON DELETE CASCADE,
     FOREIGN KEY(ingredient_id)
         REFERENCES ingredients(ingredient_id)
-        ON DELETE CASCADE 
+        ON DELETE CASCADE,
+
+    CONSTRAINT unique_pantry_ingredient UNIQUE (pantry_id, ingredient_id)
 );
 
