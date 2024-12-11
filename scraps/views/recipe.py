@@ -26,8 +26,6 @@ def initialize_generative_model():
 def recipe():
     if 'username' not in flask.session:
         return flask.redirect(flask.url_for('show_accounts_login'))
-    
-    logname = flask.session.get('username')
 
     initialize_generative_model()
     # global ingredients 
