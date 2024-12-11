@@ -12,8 +12,13 @@ h1 {
 }
 
 .buttons {
-    margin-left:350px;
-    margin-bottom:0px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    gap: 1%;
 }
 
 /* CSS */
