@@ -77,3 +77,14 @@ def get_pantry(username):
     print("PANTRY INGREDIENTS", pantry_ingredients_list)
 
     return flask.jsonify({'pantry_id': pantry_id, 'ingredients': ingredients_list, 'pantry_ingredients':pantry_ingredients_list}), 200
+
+
+@scraps.app.route('/api/add-to-pantry/<username>', methods=['POST'])
+def add_to_pantry(username):
+    logname = check_auth()
+
+    if 'username' not in flask.session:
+        return flask.redirect(flask.url_for('show_accounts_login'))
+    print("add to pantry")
+    context = {}
+    return flask.jsonify(**context), 201

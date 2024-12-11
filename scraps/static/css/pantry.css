@@ -14,48 +14,90 @@
   font-size: 20px;
 }
 
+.outer-pantry {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  margin-left: 3%;
+  margin-right: 10%;
+  width: 90%;
+  gap: 2%;
+}
+
+.grains-pantry {
+  grid-row: 2;
+  grid-column: 2;
+}
+.pantry-ingredient-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  gap: 5%;
+  background-color: #a0ca92;
+  width: 95%;
+  border-radius: 7px;
+  margin-top: 2%;
+  margin-left: 5%;
+  margin-right: 10%;
+  border: #27302d 2px solid;
+  min-height: 60%;
+}
+
+.pantry-ingredient {
+  background-color: black;
+  color: white;
+  padding:5px;
+  padding-left: 7px;
+  padding-right: 7px;
+  border-radius: 10px;
+  border: 1px solid #27302d;
+  min-width: 15%;
+  text-align: center;
+}
+
 .in-season-box {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: left;
+  gap: 5%;
+  padding: 1%;
   flex-wrap: wrap;
-  gap: 2%;
-  width: 90%;
-  background-color: rgb(205, 242, 205);
-  border: 2px solid black;
+  background-color: #75b09c;
   border-radius: 7px; 
   margin-top: 2%;
   margin-left: 5%;
   margin-right: 10%;
+  width: 90%;
 }
 
 .ingredient-container {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
+  border: 1px solid black;
+  padding: 5px;
+  padding-left: 7px;
+  padding-right: 7px;
+  min-width: 10%;
   background-color: white;
   color: black;
   border-radius: 10px;
-  width: 150px;
-  height: 130px;
-  margin: 3%;
+  display: flex; /* Enable flexbox */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
 }
 
+
 .ingredient-container:hover {
-  border-style: solid;
-  border-width: 2px;
-  background-color: rgb(224, 224, 224);
-  transition: border-width 0.1s ease, border-color 0.1s ease, background-color 0.1s ease;;
+  background-color: #a0ca92;
+  border-radius: 10px;
+  transition: border-width 0.1s ease, border-color 0.1s ease, background-color 0.1s ease;
   cursor: pointer;
 }
 
 .ingredient-container.active {
-  border-style: solid;
-  border-width: 2px;
-  background-color: rgb(224, 224, 224);
-  border-color: black;
+  background-color: #a0ca92;
+  border-radius: 10px;
 }
 
 .dropdown .btn {
@@ -111,8 +153,7 @@
   border-radius: 8px;     /* Optional: rounded corners for the image */
 }
 
-.ingredient-name {
-  margin-top: 10px;       
+.ingredient-name {     
   text-align: center;     
   font-size: 18px;        
   color: #333;            

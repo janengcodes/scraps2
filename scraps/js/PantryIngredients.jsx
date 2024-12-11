@@ -23,6 +23,9 @@ export default function UserPantryIngredients() {
     // State for pantry ingredients
     const [pantryIngredients, setPantryIngredients] = useState([])
 
+    // State for active ingredients
+    const [activeIngredients, setActiveIngredients] = useState([])
+
     // State for the dropdown
     const [selectedFoodGroup, setSelectedFoodGroup] = useState("");
 
@@ -67,19 +70,66 @@ export default function UserPantryIngredients() {
             });
     }, [username]);
 
+    const buttonActive2 = (index, ingredientName) => {
+        setActiveContainers((prev) => {
+          if (Array.isArray(prev)) {
+            const updated = [...prev];
+            updated[index] = !updated[index]; // Toggle active state
+            return updated;
+          } else {
+            return [ingredientName]; // Handle the case where it's not an array
+          }
+        });
+      
+        setActiveIngredients((prev) => {
+          if (Array.isArray(prev)) {
+            if (activeContainers[index]) {
+              return prev.filter((name) => name !== ingredientName); // Remove ingredient
+            } else {
+              return [...prev, ingredientName]; // Add ingredient
+            }
+          } else {
+            return [ingredientName]; // Handle the case where it's not an array
+          }
+        });
+      };
+      
+    
+    const handleSubmit = () => {
+    // Send active ingredients to the API
+    console.log("handleSubmit called");
+    fetch(`/api/add-to-pantry/${username}`, {
+        method: "POST",
+        headers: {
+        "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ingredients: activeIngredients }),
+    })
+        .then((response) => {
+        if (!response.ok) throw new Error("Failed to add ingredients");
+        return response.json();
+        })
+        .then((data) => {
+        console.log("Ingredients added successfully:", data);
+        })
+        .catch((error) => {
+        console.error("Error:", error);
+        });
+    };
+
 
     return (
 
-        <div class="main-container"> 
-            <h2 class="ingredient-header">In Season Ingredients for California, USA</h2>
+        <div className="main-container"> 
+            <h2 className="ingredient-header">In Season Ingredients for California, USA</h2>
 
-            <div class="ingredient-header dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+            <div className="ingredient-header dropdown">
+                <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                     Select Ingredient Type
                 </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <li><a class="dropdown-item" href="#" onClick={() => dropDownClicked("veggies")}>Vegetables</a></li>
-                    <li><a class="dropdown-item" href="#" onClick={() => dropDownClicked("fruit")}>Fruits</a></li>
+                <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <li><a className="dropdown-item" href="#" onClick={() => dropDownClicked("veggies")}>Vegetables</a></li>
+                    <li><a className="dropdown-item" href="#" onClick={() => dropDownClicked("fruit")}>Fruits</a></li>
                 </ul>
             </div>
 
@@ -91,19 +141,73 @@ export default function UserPantryIngredients() {
                     className={`ingredient-container ${
                         activeContainers[index] ? "active" : ""
                     }`}
-                    onClick={() => buttonActive(index)}
+                    onClick={() => buttonActive2(index, ingredient.ingredient_name)}
                     >
-                    <p>{ingredient.ingredient_name}</p>
+                        <div>{ingredient.ingredient_name}</div>
                     </div>
                 ))}
             </div>
         
-            <button type="submit" class="submit">Add to My Pantry</button>
-            <h2 class="ingredient-header">Your Ingredients</h2>
+            <button
+                type="submit"
+                className="submit"
+                onClick={handleSubmit}
+            >
+                Add to My Pantry
+            </button>
 
-                {Array.isArray(pantryIngredients) && pantryIngredients.map((ingredient, index) => (
-                    <p key={index}>{ingredient.ingredient_name}</p>
-                ))}
+
+
+            <h2 className="ingredient-header">Your Ingredients</h2>
+            <div className="outer-pantry">
+                <div className="veggies-pantry">
+                    <h2 className="ingredient-header">Veggies</h2>
+                    <div className="pantry-ingredient-box">
+                        {Array.isArray(pantryIngredients) && pantryIngredients
+                            .filter((ingredient) => ingredient.food_group === "veggies") // Filter ingredients by food group
+                            .map((ingredient, index) => (
+                            <div className="pantry-ingredient">{ingredient.ingredient_name}</div>
+                        ))}
+                    </div>
+                </div>
+                <div className="fruits-pantry">
+                    <h2 className="ingredient-header">Fruits</h2>
+                    <div className="pantry-ingredient-box">
+                        {Array.isArray(pantryIngredients) &&
+                            pantryIngredients
+                                .filter((ingredient) => ingredient.food_group === "fruit") // Filter ingredients by food group
+                                .map((ingredient, index) => (
+                                    <div key={index} className="pantry-ingredient">
+                                        {ingredient.ingredient_name}
+                                    </div>
+                                ))}
+                    </div>
+                </div>
+                <div className="protein-pantry">
+                    <h2 className="ingredient-header">Proteins</h2>
+                    <div className="pantry-ingredient-box">
+                        {Array.isArray(pantryIngredients) && pantryIngredients
+                            .filter((ingredient) => ingredient.food_group === "protein") // Filter ingredients by food group
+                            .map((ingredient, index) => (
+                            <div className="pantry-ingredient">{ingredient.ingredient_name}</div>
+                        ))}
+                    </div>
+                </div>
+                <div className="grains-pantry">
+                    <h2 className="ingredient-header">Grains</h2>
+                    <div className="pantry-ingredient-box">
+                        {Array.isArray(pantryIngredients) && pantryIngredients
+                            .filter((ingredient) => ingredient.food_group === "grains") // Filter ingredients by food group
+                            .map((ingredient, index) => (
+                            <div className="pantry-ingredient">{ingredient.ingredient_name}</div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+
+
+                
 
 
         </div>
