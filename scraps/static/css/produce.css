@@ -31,6 +31,7 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 0.5%;
 }
 
 .grid-container {
@@ -97,10 +98,12 @@ h2 {
   border-radius: 4px; /* Optional: rounded corners */
   background-color: white; /* Unchecked background */
   cursor: pointer;
+  transition: all 300ms;
 }
 
 .produce-checkbox1 input[type="checkbox"]:checked {
-  background-color: #998650; 
+  
+  background-color: black; 
 }
 
 .produce-checkbox1:has(input[type="checkbox"]:checked) {
