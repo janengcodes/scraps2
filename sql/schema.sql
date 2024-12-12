@@ -1,7 +1,7 @@
 PRAGMA foreign_keys = ON;
 
 CREATE TABLE users(
-    username VARCHAR(20) NOT NULL,  /* VARCHAR means it can be any number of characters up to the num in parenthesis */
+    username VARCHAR(20) NOT NULL,
     first_name VARCHAR(40) NOT NULL,
     last_name VARCHAR(40) NOT NULL,
     email VARCHAR(40) NOT NULL,
@@ -31,7 +31,7 @@ CREATE TABLE ingredients(
     pantry_id INTEGER,
     season VARCHAR(64) CHECK (season IN ('spring', 'summer', 'fall', 'winter')),
     food_group VARCHAR(64) CHECK (food_group IN ('protein', 'produce', 'dairy', 'grains', 'fruit', 'veggies')),
-    FOREIGN KEY (pantry_id) REFERENCES pantry (pantry_id) ON DELETE CASCADE 
+    FOREIGN KEY (pantry_id) REFERENCES pantry (pantry_id)
 );
 
 CREATE TABLE recipe_ingredients (

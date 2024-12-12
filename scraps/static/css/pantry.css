@@ -13,6 +13,29 @@
   margin-left: 5%;
   font-size: 20px;
 }
+.cuisine-match-box {
+  background-color: #75b09c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 20%;
+  margin: 1%;
+  margin-left: 5%;
+  margin-bottom: 5%;
+  
+  padding: 5px;
+  border-radius: 7px;
+  border: #27302d 2px solid;
+}
+.cuisine {
+  margin: auto;
+  margin-top: 2px;
+  margin-left: 5%;
+  font-size: 15px;
+  text-transform: capitalize;
+}
+
 
 .outer-pantry {
   display: grid;

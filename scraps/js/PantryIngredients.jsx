@@ -29,6 +29,9 @@ export default function UserPantryIngredients() {
     // State for the dropdown
     const [selectedFoodGroup, setSelectedFoodGroup] = useState("");
 
+    // State for cuisine match
+    const [cuisineMatch, setCuisineMatch] = useState([]);
+
     const username = localStorage.getItem("user");
 
     const inSeasonFoodGroup = "";
@@ -64,26 +67,24 @@ export default function UserPantryIngredients() {
                 const { pantry_ingredients } = response.data
                 setPantryIngredients(pantry_ingredients || [])
                 console.log("Pantry Ingredients:", pantryIngredients); // Log the state to check its value
+                setCuisineMatch(response.data.recs || [])
             })
             .catch((error) => {
                 console.error('Error fetching pantry data:', error);
             });
     }, [username]);
 
-    const buttonActive2 = (index, ingredientID) => {
-        setActiveContainers((prev) => {
-          if (Array.isArray(prev)) {
-            const updated = [...prev];
-            updated[index] = !updated[index]; // Toggle active state
-            return updated;
-          } else {
-            return [ingredientID]; // Handle the case where it's not an array
-          }
-        });
+    const buttonActive2 = (ingredientID) => {
+        setActiveContainers((prev) => ({
+            ...prev,
+            [ingredientID]: !prev[ingredientID], // Toggle active state by ID
+        }));
       
         setActiveIngredients((prev) => {
           if (Array.isArray(prev)) {
-            if (activeContainers[index]) {
+            // Use the `prev` value of `setActiveContainers` to determine the toggle logic
+            const isCurrentlyActive = prev.includes(ingredientID); // Check current ingredient state
+            if (isCurrentlyActive) {
               return prev.filter((name) => name !== ingredientID); // Remove ingredient
             } else {
               return [...prev, ingredientID]; // Add ingredient
@@ -92,7 +93,7 @@ export default function UserPantryIngredients() {
             return [ingredientID]; // Handle the case where it's not an array
           }
         });
-    };
+      };
       
     
     const handleSubmit = () => {
@@ -114,6 +115,7 @@ export default function UserPantryIngredients() {
     
             // Assuming the backend returns the updated pantry ingredients
             setPantryIngredients((prev) => [...prev, ...data.pantry_ingredients]);
+            setCuisineMatch(data.recs || []);
 
         })
         .catch((error) => {
@@ -142,11 +144,11 @@ export default function UserPantryIngredients() {
                 {Array.isArray(filteredIngredients) &&
                 filteredIngredients.map((ingredient, index) => (
                     <div
-                    key={index}
+                    key={ingredient.ingredient_id}
                     className={`ingredient-container ${
-                        activeContainers[index] ? "active" : ""
+                        activeContainers[ingredient.ingredient_id] ? "active" : ""
                     }`}
-                    onClick={() => buttonActive2(index, ingredient.ingredient_id)}
+                    onClick={() => buttonActive2(ingredient.ingredient_id)}
                     >
                         <div>{ingredient.ingredient_name}</div>
                     </div>
@@ -163,7 +165,7 @@ export default function UserPantryIngredients() {
 
 
 
-            <h2 className="ingredient-header">Your Ingredients</h2>
+            <h2 className="ingredient-header">Ingredients</h2>
             <div className="outer-pantry">
                 <div className="veggies-pantry">
                     <h2 className="ingredient-header">Veggies</h2>
@@ -208,6 +210,16 @@ export default function UserPantryIngredients() {
                         ))}
                     </div>
                 </div>
+            </div>
+
+            <h2 className="ingredient-header">Cuisine Matches</h2>
+            <div className="cuisine-match-box">
+                {Array.isArray(cuisineMatch) &&
+                cuisineMatch.map((match, index) => (
+                    <div key={index} className="cuisine">
+                        {match.cuisine} - {match.probability}%
+                    </div>
+                ))}
             </div>
 
 
