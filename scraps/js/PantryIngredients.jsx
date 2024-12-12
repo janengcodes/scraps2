@@ -116,6 +116,8 @@ export default function UserPantryIngredients() {
             // Assuming the backend returns the updated pantry ingredients
             setPantryIngredients((prev) => [...prev, ...data.pantry_ingredients]);
             setCuisineMatch(data.recs || []);
+            setActiveContainers({});
+            setActiveIngredients([]);
 
         })
         .catch((error) => {
