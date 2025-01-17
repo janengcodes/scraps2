@@ -1,7 +1,7 @@
 PRAGMA foreign_keys = ON;
 
 CREATE TABLE users(
-    username VARCHAR(20) NOT NULL,
+    username VARCHAR(20) UNIQUE NOT NULL,
     first_name VARCHAR(40) NOT NULL,
     last_name VARCHAR(40) NOT NULL,
     email VARCHAR(40) NOT NULL,
@@ -46,6 +46,8 @@ CREATE TABLE recipe_ingredients (
     FOREIGN KEY(ingredient_id) 
         REFERENCES ingredients(ingredient_id)
         ON DELETE CASCADE
+
+    CONSTRAINT unique_recipe_ingredient UNIQUE (recipe_id, ingredient_id)
 );
 
 CREATE TABLE pantry_ingredients (

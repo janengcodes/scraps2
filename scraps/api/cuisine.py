@@ -83,11 +83,11 @@ def practice_model():
 def load_and_prepare_data():
     data = get_data(file_path)
 
-    # Convert the json into a dataframe, a 2D table structure 
+    # have a table with columns id, cuisine, ingredients
     c = ["id", "cuisine", "ingredients"]
     train_df = pd.DataFrame(data, columns=c)
 
-    # Join the ingredients list into a string
+    # for each row, join the ingredients into a string
     for i in range(train_df.shape[0]):
         train_df.at[i, 'ingredients'] = " ".join(train_df.loc[i, 'ingredients'])
 
@@ -96,11 +96,15 @@ def load_and_prepare_data():
 def train_model():
     train_df = load_and_prepare_data()
 
-    # Split data into training and testing sets
+    # split data into training and testing sets
     x_train, x_test, y_train, y_test = train_test_split(
         train_df['ingredients'], train_df['cuisine'], test_size=0.25, random_state=42
     )
-    
+
+    # create a model pipeline
+    # 1. convert text data to sparse matrix of word counts
+    # 2. multinmoial naive bayes - calculate likelihoods of cuisine given ingredients
+    # 3. fit the model 
     model = make_pipeline(CountVectorizer(), MultinomialNB())
     model.fit(x_train, y_train)
 

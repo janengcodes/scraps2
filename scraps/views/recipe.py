@@ -116,14 +116,14 @@ def recipe():
     return render_template('recipe.html', **context)
             
 def clean(input_text):
-    # Remove newline (\n) and carriage return (\r) characters
+    # remove newline (\n) and carriage return (\r) characters
     cleaned_text = input_text.replace('\n', '').replace('\r', '').replace('\\', '')
 
-    # Find the start and end indices of the content within curly braces ({})
+    # find the start and end indices of the content within curly braces ({})
     start_index = cleaned_text.find('{')
     end_index = cleaned_text.rfind('}') + 1
 
-    # Extract the text within curly braces
+    # extract the text within curly braces
     extracted_text = cleaned_text[start_index:end_index].strip()
 
     return extracted_text

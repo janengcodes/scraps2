@@ -61,7 +61,6 @@ def get_pantry(username):
 
     pantry_ingredients_list = []
 
-    # Get the ingredients associated with the ingredient ids
     for pantry_ingredient in pantry_ingredients:
         ingredient_id = pantry_ingredient['ingredient_id']
         ingredient = connection.execute('''
@@ -70,13 +69,11 @@ def get_pantry(username):
             WHERE ingredient_id = ?
         ''', (ingredient_id,)).fetchone()
 
-        # Append ingredient details as a dictionary
         if ingredient:  # Ensure ingredient is not None
             pantry_ingredients_list.append({
                 'ingredient_name': ingredient['ingredient_name'],
                 'food_group': ingredient['food_group']
             })
-    # Get a cuisine match for the ingredients in the pantry
 
     top_cuisines = []
 
@@ -124,7 +121,7 @@ def add_to_pantry(username):
     try:
 
         data = request.get_json()
-        ingredients = data.get('ingredients', [])  # Retrieve the 'ingredients' list from the JSON
+        ingredients = data.get('ingredients', []) 
 
         print(f"User {username} is adding the following ingredients: {ingredients}")
 
@@ -140,13 +137,13 @@ def add_to_pantry(username):
 
         for ingredient_id in ingredients:
             try:
-                # Execute the insert statement
+
                 cursor = connection.execute('''
                     INSERT INTO pantry_ingredients (pantry_id, ingredient_id)
                     VALUES (?, ?)
                 ''', (pantry_id, ingredient_id))
 
-                # Check if any row was inserted
+        
                 if cursor.rowcount > 0:
                     print(f"Added ingredient {ingredient_id} to pantry.")
                 else:
@@ -158,8 +155,8 @@ def add_to_pantry(username):
                     WHERE ingredient_id = ?
                 ''', (ingredient_id,)).fetchone()
 
-                # Append ingredient details as a dictionary
-                if ingredient:  # Ensure ingredient is not None
+       
+                if ingredient:  
                     pantry_ingredients_list.append({
                         'ingredient_name': ingredient['ingredient_name'],
                         'food_group': ingredient['food_group']
@@ -169,7 +166,6 @@ def add_to_pantry(username):
             except Exception as e:
                 print(f"Error inserting ingredient {ingredient}: {e}")
 
-        # Check if ingredients are provided
         if not ingredients:
             return jsonify({"error": "No ingredients provided"}), 400
 
@@ -200,7 +196,6 @@ def add_to_pantry(username):
             'probability': cuisine['probability']
         } for cuisine in top_cuisines]
 
-        # Respond with a success message
         return jsonify({
             "message": "Ingredients added successfully",
             'pantry_ingredients': pantry_ingredients_list,
