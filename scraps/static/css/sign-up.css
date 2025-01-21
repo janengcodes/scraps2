@@ -1,6 +1,62 @@
-form {
-  background-color: aliceblue;
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+* {
+  font-family: "Be Vietnam Pro", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.sign-up-container {
+  display: grid;
   margin-left: auto;
   margin-right: auto;
-  
+  place-items: center;
+  width: 40%;
+  grid-template-rows: 3fr;
+  row-gap: 7%;
+  margin-top: 7%;
+}
+
+.sign-up-heading {
+  margin-bottom: 2%;
+}
+
+input[type=text] {
+  margin-top: 5%;
+  width: 100%;
+  display: inline-block;
+  border: 2px solid #6E5941;
+  border-radius: 30px;
+  box-sizing: border-box;
+  padding: 10px;
+  padding-left: 22px;
+  background-color: #FFF8EA;
+}
+
+input[type=submit] {
+  margin-top: 10%;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: inline-block;
+  border: 2px solid #6E5941;
+  border-radius: 4px;
+  box-sizing: border-box;
+  padding: 8px;
+  background-color: #DEEFB3;
+}
+
+.have-account {
+  margin-top: 4%;
+  text-align: center;
+  font-size: 14px;
+}
+
+input[type=text]:focus {
+  background-color: white;
+  border: 2px solid black ;
+}
+
+.log-in-nav {
+  font-weight: 9qA00;
 }

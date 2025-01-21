@@ -1,47 +1,52 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="/static/css/globals.css" />
     <link rel="stylesheet" href="/static/css/styleguide.css" />
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+    crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="/static/css/sign-up.css" />
+    <link rel="stylesheet" href="/static/css/globals.css" />
   </head>
   <body>
 
     <div class="reactEntry"></div>
-    <!-- Load JavaScript -->
-    <script
-      type="text/javascript"
-      src="{{ url_for('static', filename='js/bundle.js') }}"
-    ></script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-      crossorigin="anonymous"
-    />
 
     <div class="sign-up-container">
-      <form action="/accounts/?target=/" method="post"
-      enctype="multipart/form-data">
-          <input type="text" name="first_name" required
-          placeholder="First Name"/><br>
-          <input type="text" name="last_name" required
-          placeholder="Last Name"/><br>
-          <input type="text" name="username" required
-          placeholder="Username"/><br>
-          <input type="text" name="email" required
-          placeholder="Email"/><br>
-          <input type="password" name="password" required
-          placeholder="Password"/><br>
-          <input type="submit" name="signup" value="sign up"/>
-          <input type="hidden" name="operation" value="create"/>
-      </form>
+      <div class="sign-up-heading">
+        <h1 class="h1-be-vietnam-pro">Sign Up</h1>
+      </div>
+      <div class="be-vietnam-pro">
+        <form action="/accounts/?target=/" method="post"
+        enctype="multipart/form-data">
+            <input class="space-mono-regular" type="text" name="first_name" required
+            placeholder="first name"/><br>
+            <input class="space-mono-regular" type="text" name="last_name" required
+            placeholder="last name"/><br>
+            <input class="space-mono-regular" type="text" name="username" required
+            placeholder="username"/><br>
+            <input class="space-mono-regular" type="text" name="email" required
+            placeholder="email"/><br>
+            <input class="space-mono-regular" type="text" name="password" required
+            placeholder="password"/><br>
+            <div>
+              <p class="be-vietnam-pro have-account">Already have an account? <a class="be-vietnam-pro" href="/accounts/login/"><div class=".log-in-nav">Log In.</div></a> </p>
+            </div>
+            <input class="submit-button space-mono-regular" type="submit" name="signup" value="Sign up"/>
+            <input type="hidden" name="operation" value="create"/>
+        </form>
+      </div>
+      
     </div>
     
-
-
-
-    <p>Have an account? <a href="/accounts/login/">Login</a></p>
+    
 
   </body>
+  <script
+  type="text/javascript"
+  src="{{ url_for('static', filename='js/bundle.js') }}"
+  ></script>
 </html>
