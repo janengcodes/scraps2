@@ -1,5 +1,5 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
-@import url("https://fonts.googleapis.com/css?family=Lusitana:400|IBM+Plex+Sans:500,400");
+
 * {
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
@@ -36,8 +36,28 @@ body {
   font-size: 50px;
 }
 
+.be-vietnam-pro-bold {
+  font-family: "Be Vietnam Pro", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
 .space-mono-regular {
   font-family: "Space Mono", serif;
   font-weight: 400;
   font-style: normal;
+}
+
+.space-mono-bold {
+  font-family: "Space Mono", serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.space-mono-nav {
+  font-family: "Space Mono", serif;
+  font-weight: 800;
+  font-style: bold;
+  font-size: 40px;
+  line-height: 40;
 }

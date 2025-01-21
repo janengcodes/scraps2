@@ -4,6 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Button } from "react-bootstrap";
 import '../static/css/navbar.css'
+import '../static/css/globals.css'
 
 export default function LoggedInNavBar() {
   console.log("nav bar called")
@@ -59,16 +60,16 @@ export default function LoggedInNavBar() {
     }
   };
   return (
-    <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
-      <Container>
-        <Navbar.Brand href="/">SCRAPS</Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="ms-auto gap-3">
+    <Navbar collapseOnSelect expand="lg" className="beige-background">
+      <Container className="beige-background">
+        <Navbar.Brand href="/">scraps</Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav beige-background" />
+        <Navbar.Collapse id="responsive-navbar-nav" className="beige-background">
+          <Nav className="ms-auto gap-3 beige-background">
             {user ? (
               <>
                 <Nav.Link eventKey={1} href="/select_ingredients">
-                  Select Ingredients
+                  Generate Recipe
                 </Nav.Link>
                 <Nav.Link eventKey={2} href={`/pantry/${user}`}>
                   Pantry
@@ -85,11 +86,11 @@ export default function LoggedInNavBar() {
               </>
             ) : (
               <>
-                <Button variant="primary" href="/accounts/login/" className="me-2">
+                <Button href="/accounts/login/" className="space-mono-regular">
                   Log In
                 </Button>
-                <Button variant="outline-primary" href="/accounts/signup/">
-                  Sign Up
+                <Button href="/accounts/signup/" className="space-mono-regular">
+                  Get Started
                 </Button>
               </>
             )}
