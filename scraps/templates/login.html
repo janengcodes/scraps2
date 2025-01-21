@@ -12,47 +12,30 @@
     <link rel="stylesheet" href="/static/css/globals.css" />
     <link rel="stylesheet" href="/static/css/styleguide.css" />
     <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="stylesheet" href="/static/css/sign-up.css" />
     <link rel="stylesheet" href="/static/css/sign-in.css" />
     <title>Log In</title>
 </head>
 <body>
     <div class="reactEntry"></div>
-    <!-- Load JavaScript -->
-    <div class="log-in-page">
-        <div class="div">
-            <div class="group">
-                <div class="overlap-group">
-                    <div class="social-button-groups">
-                    <div class="social-button-2">
-                        <div class="text-2">Sign in</div>
-                    </div>
-                    </div>
-                    <div class="text-wrapper-3">
-                        Log-In
-                    </div>
-                    <form action="/accounts/?target=/" method="post" enctype="multipart/form-data" class="styled-form">
-                        <div class="overlap">
-                            <div class="text-wrapper-4">
-                                <input type="text" name="username" required placeholder="username" class="styled-input"/>
-                            </div>
-                        </div>
-                        <div class="div-wrapper">
-                            <div class="text-wrapper-4">
-                                <input type="password" name="password" required placeholder="password" class="styled-input"/>
-                            </div>
-                        </div>
-                        <div class="login">
-                            <input type="submit" value="Login" class="social-button-2"/>
-                            <input type="hidden" name="operation" value="login"/>
-                        </div>
-                    </form>
+    <div class="sign-up-container">
+
+        <div class="sign-up-heading">
+            <h1 class="h1-be-vietnam-pro">Log In</h1>
+        </div>
+
+        <div class="be-vietnam-pro">
+            <form action="/accounts/?target=/" method="post" enctype="multipart/form-data" class="styled-form">
+
+                <input class="space-mono-regular" type="text" name="username" required placeholder="username"/>
+                <input class="space-mono-regular" type="text" name="password" required placeholder="password"/>
+                <div>
+                    <p class="space-mono-regular have-account">Don't have an account? <a class="space-mono-bold" href="/accounts/signup/">Sign up.</a> </p>
                 </div>
-                <div class="text-wrapper-5">New to Scraps?</div>
-                <div class="text-wrapper-6">
-                    <a href="/accounts/signup/">Join Now!</a>
-                </div>
-            </div>
-        </div>   
+                <input type="submit" value="Log In" class="submit-button space-mono-regular"/>
+                <input type="hidden" name="operation" value="login"/>
+            </form>
+        </div>
     </div>
 </body>
 <script

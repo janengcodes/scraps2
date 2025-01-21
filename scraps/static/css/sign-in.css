@@ -1,1 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+input[type=text] {
+    margin-top:5%;
+}
+
+.have-account {
+    margin-top: 5%;
+    text-align: center;
+}
