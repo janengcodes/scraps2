@@ -1,38 +1,18 @@
-.profile{
-    grid-area: profile;
-    background-color: #FFF9E9;
-    padding: 30px;
-    text-align: center;
-    font-size: 40px;
-    height: 400px;
+.welcome {
+    margin-left: 7%; 
+    margin-top: 6%;
 }
 
-h1 {
-    text-align: center;
+.user-info {
+    display: block;
+    margin-left: 7%;
+    margin-top: 2%;
 }
 
-.header{
-    grid-area: header;
-    background-color: #FFF9E9;
-    padding: 30px;
-    text-align: center;
-    font-size: 35px;
-    height: 1300px;
+.user-info p {
+    margin-top: 1%;
 }
 
-
-.grid-container {
-display: grid;
-grid-template-columns: auto auto auto auto auto auto auto;
-border: 2px solid rgba(0, 0, 0, 0.8);
-background-color: #DCD8AB;
-padding: 40px;
-column-gap: 30px;
-grid-template-rows: 200px 300px;
-align-content: space-evenly;
-border-top-left-radius: 10px;
-border-top-right-radius: 10px;
-border-bottom-left-radius: 10px;
-border-bottom-right-radius: 10px;
+.user-info a {
+    margin-top: 1%;
 }
-
