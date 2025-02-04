@@ -80,18 +80,18 @@ export default function LoggedInNavBar() {
                 <Nav.Link eventKey={4} href={`/user/${user}`}>
                   My Profile
                 </Nav.Link>
-                <Button className="btn btn-light btn-logout" onClick={handleLogout} href="/accounts/logout/">
+                <Nav.Link onClick={handleLogout} href="/accounts/logout/">
                   Log Out
-                </Button>
+                </Nav.Link>
               </>
             ) : (
               <>
-                <Button href="/accounts/login/" className="space-mono-regular">
+                <Nav.Link href="/accounts/login/" className="space-mono-regular">
                   Log In
-                </Button>
-                <Button href="/accounts/signup/" className="space-mono-regular">
+                </Nav.Link>
+                <Nav.Link href="/accounts/signup/" className="space-mono-regular">
                   Get Started
-                </Button>
+                </Nav.Link>
               </>
             )}
           </Nav>
