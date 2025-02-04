@@ -13,20 +13,19 @@
     <link rel="stylesheet" href="/static/css/ingredient-selection.css" />
     <link rel="stylesheet" href="/static/css/globals.css" />
     <link rel="stylesheet" href="/static/css/style.css" />
-    <link rel="stylesheet" href="/static/css/produce.css" />
+    <link rel="stylesheet" href="/static/css/generate_recipe.css" />
     <script src="/static/js/ingredients.js"></script>
-    <!-- scraps/static/js/ingredients.js -->
+    
   </head>
   <body>
     <div class="reactEntry"></div>
-    <!-- Load JavaScript -->
 
     <br>
-    <h1 class="h1-be-vietnam-pro">Generate a recipe.</h1>
+     <h1 class="h1-be-vietnam-pro main-title">Generate a recipe.</h1>
     <br>
 
-    <div class="buttons">
-      <div><button class="button-2 produce-init" onclick="deleteGrids(this)" id = "fruitButton"><h5>Fruits</h5></button></div>
+    <div class="buttons be-vietnam-pro">
+      <div><button class="button-2 produce-init be-vietnam-pro" onclick="deleteGrids(this)" id = "fruitButton"><h5>Fruits</h5></button></div>
       <div><button class="button-2" onclick="deleteGrids(this)" id = "veggiesButton"><h5>Veggies</h5></button></div>
       <div><button class="button-2" onclick="deleteGrids(this)" id = "proteinButton"><h5>Protein</h5></button></div>
       <div><button class="button-2" onclick="deleteGrids(this)" id = "dairyButton"><h5>Dairy</h5></button></div>
@@ -37,7 +36,7 @@
         <form action="/recipe/" method="post">
           <h1 id = "fruitHeading"></h1>
           <div class="outer-grid-container">
-            <div class="grid-container init-grid-container" id ="fruit">
+            <div class="grid-container init-grid-container checkbox-be-vietnam-pro" id ="fruit">
                   {% for ingredient in context['fruit'] %}
                     <div class="checkbox-class">
                       <!-- Set ID dynamically based on ingredient_id -->
@@ -55,7 +54,7 @@
 
             <h1 id = "veggiesHeading"></h1>
             <div class="outer-grid-container">
-              <div class="grid-container" id ="veggies">
+              <div class="grid-container checkbox-be-vietnam-pro" id ="veggies">
                     {% for ingredient in context['veggies'] %}
                       <div class="checkbox-class">
                         <!-- Set ID dynamically based on ingredient_id -->
@@ -73,7 +72,7 @@
 
             <h1 id = "proteinHeading"></h1>
             <div class="outer-grid-container">
-              <div class="grid-container" id ="protein">
+              <div class="grid-container checkbox-be-vietnam-pro" id ="protein">
                     {% for ingredient in context['protein'] %}
                       <div class="checkbox-class">
                         <!-- Set ID dynamically based on ingredient_id -->
@@ -92,7 +91,7 @@
 
             <h1 id = "dairyHeading"></h1>
             <div class="outer-grid-container">
-              <div class="grid-container" id ="dairy">
+              <div class="grid-container checkbox-be-vietnam-pro" id ="dairy">
                     {% for ingredient in context['dairy'] %}
                       <div class="checkbox-class">
                         <!-- Set ID dynamically based on ingredient_id -->
@@ -110,7 +109,7 @@
 
             <h1 id = "grainsHeading"></h1>
             <div class="outer-grid-container">
-              <div class="grid-container" id ="grains">
+              <div class="grid-container checkbox-be-vietnam-pro" id ="grains">
                     {% for ingredient in context['grains'] %}
                       <div class="checkbox-class">
                         <!-- Set ID dynamically based on ingredient_id -->
@@ -127,7 +126,7 @@
             </div>
 
 
-            <div class="buttons buttons-bottom">
+            <div class="buttons buttons-bottom be-vietnam-pro">
               <input type="submit" class ="button" value="Submit" />
             </div>
 

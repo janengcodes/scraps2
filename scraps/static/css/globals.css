@@ -30,11 +30,19 @@ body {
   font-style: normal;
 } 
 
+.checkbox-be-vietnam-pro {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  padding-top: 20px;
+} 
+
 .h1-be-vietnam-pro {
   font-family: "Be Vietnam Pro", serif;
   font-weight: 600;
   font-style: normal;
   font-size: 50px;
+  color: black;
 }
 
 .be-vietnam-pro-bold {
@@ -75,4 +83,10 @@ body {
   font-family: "Space Mono", serif;
   font-weight: 800;
   font-style: bold;
+}
+
+.main-title {
+  text-align: center;
+  margin-top: 2%;
+  margin-bottom: 1%;
 }
