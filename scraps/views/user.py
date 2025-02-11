@@ -15,21 +15,24 @@ def show_user(username):
 
     # Query the first_name of the user
     first_name = connect.execute(
-        "SELECT f.first_name "
+        "SELECT f.first_name, f.last_name, f.email "
         "FROM users f "
         "WHERE f.username = ?",
         (username,),
-    ).fetchone()
+    ).fetchall()
 
     if first_name is None:
         print(f"No user found with username: {username}; redirecting to login page.")
         return flask.redirect(flask.url_for('show_accounts_login'))
 
     # Access the first name value
-    first_name_value = first_name['first_name']
+    print(first_name)
 
     # Render the user.html template
     context = {
-        "logname": first_name_value
+        "logname": username,
+        "first_name": first_name[0]['first_name'],
+        "last_name": first_name[0]['last_name'],
+        "email": first_name[0]['email'],
     }
     return flask.render_template('user.html', **context)
