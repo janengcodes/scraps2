@@ -6,7 +6,7 @@ app = Flask(__name__)
 @scraps.app.route('/test/')
 def test():
     context = {
-        'example_variable': 'Hello, World!'
+        'example_variable': 'Helo, World!'
     }
     return render_template('test.html', **context)
 
