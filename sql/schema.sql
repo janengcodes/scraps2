@@ -9,6 +9,23 @@ CREATE TABLE users(
     PRIMARY KEY(username)
 );
 
+CREATE TABLE allergens {
+    allergen_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    allergen_name VARCHAR(40) NOT NULL
+}
+
+CREATE TABLE user_allergies {
+    username VARCHAR(20) NOT NULL,
+    allergen_id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+    FOREIGN KEY(username) 
+        REFERENCES users(username),
+        
+    FOREIGN KEY(allergen_id)
+        REFERENCES allergens(allergen_id)
+    
+}
+
 CREATE TABLE pantry(
     username VARCHAR(20) NOT NULL,
     pantry_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -17,6 +34,8 @@ CREATE TABLE pantry(
         REFERENCES users(username)
         ON DELETE CASCADE
 );
+
+
 
 CREATE TABLE recipes (
     recipe_id INTEGER PRIMARY KEY AUTOINCREMENT,
