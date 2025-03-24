@@ -1,0 +1,12 @@
+.meal-calendar-grid {
+    display: grid;
+    grid-template-columns: 30px 30px 30px 30px;
+    background-color: aqua;
+
+}
+
+.days-grid {
+    grid-template-rows: font-family: "Lusitana", Helvetica;
+}
+
+.dashb
