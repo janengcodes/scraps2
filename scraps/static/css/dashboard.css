@@ -1,12 +1,33 @@
 .meal-calendar-grid {
     display: grid;
-    grid-template-columns: 30px 30px 30px 30px;
-    background-color: aqua;
+    place-items: center;
 
 }
 
-.days-grid {
-    grid-template-rows: font-family: "Lusitana", Helvetica;
+.days-grid  {
+    display: grid;
+    
+    text-align: center;
+    grid-template-columns: 100px 100px 100px 100px 100px 100px 100px 100px;
+    grid-template-rows: 40px 40px 40px 40px 40px;
+    border: black solid 2px;
+    font-size: 25px;
+    margin: 30px;
+    padding: 10px;
+    row-gap: 5px;
+    width: 90%;
+
 }
 
-.dashb
+.breakfast {
+    grid-row: 2;
+    grid-column: 0;
+}
+
+/* .meal-grid{
+    
+} */
+
+.dashboard{
+    font-family: "Lusitana", Helvetica;
+}
