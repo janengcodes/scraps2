@@ -3,24 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="/static/css/recipe.css">
+<link
+rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+crossorigin="anonymous"
+/>
 <link rel="stylesheet" href="/static/css/globals.css">
 <link rel="stylesheet" href="/static/css/style.css">
+<link rel="stylesheet" href="/static/css/recipe.css">
 <title>Scraps</title>
 </head>
 <body>
   <div class="reactEntry"></div>
-  <script
-    type="text/javascript"
-    src="{{ url_for('static', filename='js/bundle.js') }}"
-  ></script>
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-    crossorigin="anonymous"
-  />
-
 <div class="header">
 <h2>{{ name }} </h2>
 </div>
@@ -64,4 +59,11 @@
     </div>
   </div>
 </body>
+
+<script
+type="text/javascript"
+src="{{ url_for('static', filename='js/bundle.js') }}"
+></script>
+
+
 </html>
