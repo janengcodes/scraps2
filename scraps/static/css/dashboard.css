@@ -24,8 +24,14 @@
     grid-column: 0;
     font-size:20px;
 }
+
 .lunch {
     grid-row:3;
+    grid-column:0;
+}
+
+.dinner{
+    grid-row:4;
     grid-column:0;
 }
 
