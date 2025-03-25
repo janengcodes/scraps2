@@ -35,6 +35,11 @@
     grid-column:0;
 }
 
+.snack{
+    grid-row:5;
+    grid-column:0;
+}
+
 .monday{
     grid-row:0; 
     grid-column:2; 
