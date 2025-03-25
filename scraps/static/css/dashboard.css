@@ -22,6 +22,34 @@
 .breakfast {
     grid-row: 2;
     grid-column: 0;
+    font-size:20px;
+}
+.lunch {
+    grid-row:3;
+    grid-column:0;
+}
+
+.monday{
+    grid-row:0; 
+    grid-column:2; 
+}
+.tuesday{
+    grid-column:3;
+}
+.wednesday{
+    grid-column:4;
+}
+.thursday{
+    grid-column: 5;
+}
+.friday{
+    grid-column: 6;
+}
+.saturday{
+    grid-column: 7;
+}
+.sunday{
+    grid-column: 8;
 }
 
 /* .meal-grid{
