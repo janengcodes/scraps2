@@ -18,13 +18,13 @@
   <body>
     <div class="reactEntry"></div>
 
-    <h1 class="h1-be-vietnam-pro welcome">Welcome, {{first_name}} {{last_name}}!</h1>
+    <h1 class="h1-be-vietnam-pro welcome">Edit Profile</h1>
 
     <div class="user-info">
 
       <p class="space-mono-regular">Username: {{logname}}</p>
       <p class="space-mono-regular">Email: {{email}}</p>
-      <div class="get-started">
+      <!-- <div class="get-started">
         <a role="button" href="/">Edit Profile</a>
       </div>
 
@@ -34,8 +34,37 @@
       
       <div class="get-started">
         <a role="button" href="/">Dietary Preferences</a>
+      </div> -->
+    
+
+      <form action="/edit-user-info/" method="post">
+        <div class="get-started">
+          <label for="allergen">Enter Allergen:</label><br>
+          <input type="text" id="allergen" name="allergen"><br>
+      
+          <label for="dietarypref">Enter Dietary Preference:</label><br>
+          <input type="text" id="dietarypref" name="dietarypref"><br>
+      
+          <input type="submit" class="button" value="Submit" />
+        </div>
+      </form>
+      
+      <div class="get-started">  
+        <h3>Selected Allergens and Dietary Preferences:</h3>
+        {% if allergens or dietary_prefs %}
+          <ul>
+            {% for allergen in allergens %}
+              <li>Allergen: {{ allergen }}</li>
+            {% endfor %}
+            {% for pref in dietary_prefs %}
+              <li>Dietary Preference: {{ pref }}</li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p>No preferences selected.</p>
+        {% endif %}
       </div>
-    </div>
+    
 
   </body>
   <script
