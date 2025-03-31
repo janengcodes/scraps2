@@ -62,7 +62,7 @@ export default function LoggedInNavBar() {
   return (
     <Navbar collapseOnSelect expand="lg" className="beige-background">
       <Container className="beige-background">
-        <Navbar.Brand href="/">scraps</Navbar.Brand>
+        <Navbar.Brand href={user ? "/dashboard/" : "/"}>scraps</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav beige-background" />
         <Navbar.Collapse id="responsive-navbar-nav" className="beige-background">
           <Nav className="ms-auto gap-3 beige-background">
