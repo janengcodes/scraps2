@@ -1,6 +1,8 @@
 .meal-calendar-grid {
     display: grid;
-    place-items: center;
+    width: 1350px;
+    height: 852px;
+
 
 }
 
@@ -8,11 +10,11 @@
     display: grid;
     
     text-align: center;
-    grid-template-columns: 100px 100px 100px 100px 100px 100px 100px 100px;
+    grid-template-columns: 100px 150px 150px 150px 150px 150px 150px 150px;
     grid-template-rows: 40px 40px 40px 40px 40px;
     border: black solid 2px;
     font-size: 25px;
-    margin: 30px;
+    margin: 50px;
     padding: 10px;
     row-gap: 5px;
     width: 90%;
@@ -28,16 +30,19 @@
 .lunch {
     grid-row:3;
     grid-column:0;
+    font-size:20px;
 }
 
 .dinner{
     grid-row:4;
     grid-column:0;
+    font-size:20px;
 }
 
-.snack{
+.snacks{
     grid-row:5;
     grid-column:0;
+    font-size:20px;
 }
 
 .monday{
