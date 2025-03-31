@@ -30,6 +30,7 @@
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+
 }
 
   .header{
@@ -45,33 +46,52 @@
 .buttons {
     margin-left:350px;
     margin-bottom:0px;
+    
 }
 
 .card{
 
   display:grid;
   grid-template-columns: 1fr 1fr;
-  border: 5px solid #4B2F0E;
+  border: 10px solid #e7dcff;
   border-radius: 30px;
   padding:0;
   margin-left:100px;
   margin-right:100px;
+  background-color: #e7dcff;
+
+  
+ 
 }
 
 .ingredients, .instructions{
   /* background-color: #e7dcff; */
-  background-color: white;
+  background-color: #e7dcff;
+  border-radius: 30px;
+  padding: 30px
+  
+
 
 }
 .ingredients, .instructions, .disclaimer{
-  padding: 30px;
+  padding: 15px;
+  font-family: "Be Vietnam Pro";
+  font-size: 14px;
+  font-weight: 200;
+  line-height: 20px
+
+ 
+
+  
 }
 
 .button{
   margin-top:30px;
   margin-left:100px;
+ 
 }
 
 .disclaimer{
-  background-color: lightblue;
+  background-color: aliceblue;
+  border-radius: 30px;
 }
