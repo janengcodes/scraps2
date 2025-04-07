@@ -2,6 +2,59 @@ import flask
 import scraps
 
 @scraps.app.route('/accounts/edit/<username>', methods=['GET'])
+def show_edit_profile(username):
+    if 'username' not in flask.session:
+        print("User is not logged in; redirecting to login page.")
+        return flask.redirect(flask.url_for('show_accounts_login'))
+    
+    if 'username' not in flask.session:
+        return flask.redirect(flask.url_for('show_accounts_login'))
+    
+    username = flask.session.get('username')
+    
+#    connection to sqlite
+    connection = scraps.model.get_db()
+
+    # form data
+    allergen_name = flask.request.form.get('allergen')
+    dietary_pref = flask.request.form.get('dietary_pref')
+
+# get all updated allergens
+    allergens_list = connection.execute('''
+        SELECT username, allergen_id
+        FROM user_allergens
+        WHERE username = ?
+    ''', (username,)).fetchall()
+    
+    allegen_ids = []
+    allergens = []
+
+    for allergen in allergens_list:
+        allegen_ids.append(allergen['allergen_id'])
+
+
+
+    for id in allegen_ids:
+        allergen_name = connection.execute('''
+            SELECT allergen_name
+            FROM allergens
+            WHERE allergen_id = ?
+        ''', (id,)).fetchone()
+        print(allergen_name)
+        allergens.append(allergen_name)
+
+
+    context = {
+        "logname": username,
+        "allergens": allergens,
+        # "dietary_prefs": dietary_prefs,
+    }
+
+    return flask.render_template('edit-profile.html', **context)
+
+
+
+@scraps.app.route('/accounts/edit/<username>', methods=['POST'])
 def edit(username):
     # Check if user is logged in
     if 'username' not in flask.session:
