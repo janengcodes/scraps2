@@ -7,19 +7,21 @@ def show_edit_profile(username):
         print("User is not logged in; redirecting to login page.")
         return flask.redirect(flask.url_for('show_accounts_login'))
     
-    if 'username' not in flask.session:
-        return flask.redirect(flask.url_for('show_accounts_login'))
-    
     username = flask.session.get('username')
     
-#    connection to sqlite
+#   connection to sqlite
     connection = scraps.model.get_db()
 
     # form data
+    # email = flask.request.form.get('email')
+    # first_name = flask.request.form.get('first_name')
+    # last_name = flask.request.form.get('last_name')
+    # password = flask.request.form.get('password')
+    # username = flask.request.form.get('username')
     allergen_name = flask.request.form.get('allergen')
     dietary_pref = flask.request.form.get('dietary_pref')
 
-# get all updated allergens
+#   get all updated allergens
     allergens_list = connection.execute('''
         SELECT username, allergen_id
         FROM user_allergens
@@ -32,8 +34,6 @@ def show_edit_profile(username):
     for allergen in allergens_list:
         allegen_ids.append(allergen['allergen_id'])
 
-
-
     for id in allegen_ids:
         allergen_name = connection.execute('''
             SELECT allergen_name
@@ -42,8 +42,7 @@ def show_edit_profile(username):
         ''', (id,)).fetchone()
         print(allergen_name)
         allergens.append(allergen_name)
-
-
+        
     context = {
         "logname": username,
         "allergens": allergens,
