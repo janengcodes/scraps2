@@ -55,7 +55,6 @@ def create():
     connection = scraps.model.get_db()
     first_name = flask.request.form["first_name"]
     last_name = flask.request.form["last_name"]
-    print(" received is", first_name, last_name)
     email = flask.request.form["email"]
     username = flask.request.form["username"]
     password = flask.request.form["password"]
