@@ -1,3 +1,12 @@
+.table {
+    border-spacing: 0;
+    border-collapse: separate;
+    border-radius: 10px;
+    border: 2px solid black;
+    width: 98%;
+    margin-left: 10px
+  }
+
 .center {
     text-align: center;
 }
@@ -18,7 +27,8 @@
     color: black;
 }
 
-.container {
+.header {
     display: grid;
     grid-template-columns: auto auto auto auto auto auto auto;
+    margin-left: 95px;
 }
