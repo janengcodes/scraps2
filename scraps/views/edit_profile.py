@@ -174,3 +174,72 @@ def edit_user_info():
     return flask.render_template('edit-profile.html', **context)
     # edited_user_info = flask.request.form.getlist('ingredient')
 
+# original is above, modified is below(modified should allow allergens across multiple users) 
+# def edit_user_info():
+#     if 'username' not in flask.session:
+#         return flask.redirect(flask.url_for('show_accounts_login'))
+    
+#     username = flask.session.get('username')
+#     connection = scraps.model.get_db()
+
+#     # Get form data
+#     allergen_name = flask.request.form.get('allergen')
+#     dietary_pref = flask.request.form.get('dietary_pref')
+   
+#     # Skip processing if no allergen provided
+#     if allergen_name:
+#         # Check if allergen exists in the allergens table
+#         allergen_record = connection.execute('''
+#             SELECT allergen_id
+#             FROM allergens
+#             WHERE allergen_name = ?
+#         ''', (allergen_name,)).fetchone()
+        
+#         # Get allergen_id (create allergen if it doesn't exist)
+#         if allergen_record:
+#             allergen_id = allergen_record['allergen_id']
+#         else:
+#             # Insert new allergen into database
+#             connection.execute('''
+#                 INSERT INTO allergens(allergen_name)
+#                 VALUES (?)
+#             ''', (allergen_name,))
+            
+#             # Get the ID of the newly created allergen
+#             allergen_id = connection.execute('''
+#                 SELECT allergen_id
+#                 FROM allergens
+#                 WHERE allergen_name = ?
+#             ''', (allergen_name,)).fetchone()['allergen_id']
+        
+#         # Check if user already has this allergen
+#         user_allergen = connection.execute('''
+#             SELECT COUNT(*)
+#             FROM user_allergens
+#             WHERE username = ? AND allergen_id = ?
+#         ''', (username, allergen_id)).fetchone()
+        
+#         # Only add if user doesn't already have this allergen
+#         if user_allergen['COUNT(*)'] == 0:
+#             connection.execute('''
+#                 INSERT INTO user_allergens(username, allergen_id)
+#                 VALUES (?, ?)
+#             ''', (username, allergen_id))
+#         else:
+#             print(f"User {username} already has allergen {allergen_name}")
+
+#     # Get all updated allergens for the user
+#     allergens_list = connection.execute('''
+#         SELECT a.allergen_name
+#         FROM user_allergens ua
+#         JOIN allergens a ON ua.allergen_id = a.allergen_id
+#         WHERE ua.username = ?
+#     ''', (username,)).fetchall()
+    
+#     context = {
+#         "logname": username,
+#         "allergens": allergens_list,
+#         # "dietary_prefs": dietary_prefs,
+#     }
+
+#     return flask.render_template('edit-profile.html', **context)
