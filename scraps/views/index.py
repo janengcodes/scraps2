@@ -8,6 +8,8 @@ def index():
     context = {
         'example_variable': 'Hello, World!'
     }
+    # check if a user is logged in to display the dashboard
+
     return render_template('index.html', **context)
 
 

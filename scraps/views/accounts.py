@@ -45,7 +45,7 @@ def post_account():
     #     update_password()
     elif operation == 'login':
         login()
-    target = flask.request.args.get('target', '/')
+    target = flask.request.args.get('target', '/dashboard/')
     return flask.redirect(target)
 
 
@@ -167,10 +167,9 @@ def login():
     context = {
         'logname': logname,
     }
-    print("logname is", logname)
-    # target = flask.request.args.get('target', '/')
-    # return flask.redirect(target)
-    return render_template('index.html', **context)
+
+    target = flask.request.args.get('target', '/dashboard/')
+    return flask.redirect(target)
 
 
 

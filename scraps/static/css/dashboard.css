@@ -1,77 +1,34 @@
-.meal-calendar-grid {
-    display: grid;
-    width: 1350px;
-    height: 852px;
+.table {
+    border-spacing: 0;
+    border-collapse: separate;
+    border-radius: 10px;
+    border: 2px solid black;
+    width: 98%;
+    margin-left: 10px
+  }
 
-
-}
-
-.days-grid  {
-    display: grid;
-    
+.center {
     text-align: center;
-    grid-template-columns: 100px 150px 150px 150px 150px 150px 150px 150px;
-    grid-template-rows: 40px 40px 40px 40px 40px;
-    border: black solid 2px;
-    font-size: 25px;
-    margin: 50px;
-    padding: 10px;
-    row-gap: 5px;
-    width: 90%;
-
 }
 
-.breakfast {
-    grid-row: 2;
-    grid-column: 0;
-    font-size:20px;
+.date-be-vietnam-pro {
+    font-family: "Be Vietnam Pro", serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 30px;
+    color: black;
+  }
+
+.calendar-labels-be-vietnam-pro {
+    font-family: "Be Vietnam Pro", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 20px;
+    color: black;
 }
 
-.lunch {
-    grid-row:3;
-    grid-column:0;
-    font-size:20px;
-}
-
-.dinner{
-    grid-row:4;
-    grid-column:0;
-    font-size:20px;
-}
-
-.snacks{
-    grid-row:5;
-    grid-column:0;
-    font-size:20px;
-}
-
-.monday{
-    grid-row:0; 
-    grid-column:2; 
-}
-.tuesday{
-    grid-column:3;
-}
-.wednesday{
-    grid-column:4;
-}
-.thursday{
-    grid-column: 5;
-}
-.friday{
-    grid-column: 6;
-}
-.saturday{
-    grid-column: 7;
-}
-.sunday{
-    grid-column: 8;
-}
-
-/* .meal-grid{
-    
-} */
-
-.dashboard{
-    font-family: "Lusitana", Helvetica;
+.header {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto;
+    margin-left: 95px;
 }
