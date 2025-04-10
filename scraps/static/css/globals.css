@@ -21,9 +21,9 @@ a {
   color: black;
 }
 
-body {
+/* body {
   background-color: #FFFCE9;
-} 
+}  */
 
 .center-heading {
   text-align: center;
@@ -49,6 +49,15 @@ body {
   font-size: 50px;
   color: black;
 }
+
+.h2-be-vietnam-pro {
+  font-family: "Be Vietnam Pro", serif;
+  font-weight: 530;
+  font-style: normal;
+  font-size: 38px;
+  color: black;
+}
+
 
 .be-vietnam-pro-bold {
   font-family: "Be Vietnam Pro", serif;

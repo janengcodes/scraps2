@@ -1,22 +1,128 @@
+body {
+  background-color: white;
+}
+
+.dashboard-heading {
+  margin-top: 3%
+}
+
+.meal-calendar {
+  display: grid;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 3%;
+  border: 2px solid black;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 3fr;
+  border-radius: 4px;
+}
+.meal-calendar-body {
+  background-color: #FFFDF1;
+}
+.meal-calendar-dates {
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+.meal-calendar-header{
+  background-color: white;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-bottom: 2px solid black;
+}
+
 .table {
-    border-spacing: 0;
-    border-collapse: separate;
-    border-radius: 10px;
-    border: 2px solid black;
-    width: 98%;
-    margin-left: 10px
-  }
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1.5%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 1%;
+  width: 91%;
+  height: 100%;
+}
+
+.meal-calendar-text {
+  margin: 2%;
+}
 
 .center {
     text-align: center;
 }
 
+.day {
+  margin-top: 4%;
+  padding-top: 12%;
+  border-radius: 4px;
+  font-family: "Space Mono", serif;
+  font-weight: 450;
+  font-style: normal;
+  height: 80%;
+  background-color: #FFFDF1;
+  padding: 2.5%;
+}
+
+.day:hover {
+  margin-top: 4%;
+  padding-top: 12%;
+  border: 0.5px solid black;
+  border-radius: 4px;
+  font-family: "Space Mono", serif;
+  font-weight: 450;
+  font-style: normal;
+  height: 80%;
+  transition: background-color 0.5s ease;
+  background-color: #DFF5FF;
+  padding: 2.5%;
+  
+}
+
+.meal {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 4px;
+  border: 0.5px solid black;
+  margin-top: 14%;
+  margin-bottom: 2%;
+  padding: 1%;
+}
+
+.meal-type {
+  font-family: "Space Mono", serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 18px;
+  color: black;
+}
+
+.meal-name {
+  font-family: "Be Vietnam Pro", serif;
+  font-weight: 450;
+  font-style: normal;
+  font-size: 15px;
+}
+
+.recipe-link {
+  text-decoration: none;
+  margin-top: 1%;
+  background-color: #DFF5FF;
+}
+
+.recipe-link {
+  font-family: "Be Vietnam Pro", serif;
+  font-weight: 450;
+  font-style: normal;
+  font-size: 15px;
+}
 .date-be-vietnam-pro {
     font-family: "Be Vietnam Pro", serif;
     font-weight: 600;
     font-style: normal;
     font-size: 30px;
     color: black;
+    
   }
 
 .calendar-labels-be-vietnam-pro {
@@ -27,8 +133,9 @@
     color: black;
 }
 
-.header {
-    display: grid;
-    grid-template-columns: auto auto auto auto auto auto auto;
-    margin-left: 95px;
+
+.shopping-list-header {
+  margin-top: 3%;
+  margin-bottom: 3%;
+  margin-left: 5%;
 }

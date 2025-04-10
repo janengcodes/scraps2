@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { Button } from "react-bootstrap";
 import '../static/css/navbar.css'
 import '../static/css/globals.css'
 
@@ -60,12 +59,12 @@ export default function LoggedInNavBar() {
     }
   };
   return (
-    <Navbar collapseOnSelect expand="lg" className="beige-background">
-      <Container className="beige-background">
+    <Navbar collapseOnSelect expand="lg" className="">
+      <Container >
         <Navbar.Brand href={user ? "/dashboard/" : "/"}>scraps</Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav beige-background" />
-        <Navbar.Collapse id="responsive-navbar-nav" className="beige-background">
-          <Nav className="ms-auto gap-3 beige-background">
+        <Navbar.Toggle aria-controls="responsive-navbar-nav " />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="ms-auto gap-3">
             {user ? (
               <>
                 <Nav.Link eventKey={1} href="/select_ingredients">
