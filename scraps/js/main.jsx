@@ -29,14 +29,14 @@ mealCalElements.forEach((element) => {
 });
 
 
-// // Render the LoggedInNavBar 
-// const pantry_elements = document.querySelectorAll(".pantryReactEntry");
-// pantry_elements.forEach((element) => {
-//   const root = createRoot(element);
-//   root.render(
-//     <StrictMode>
-//       <LoggedInNavBar />
-//       <UserPantryIngredients />
-//     </StrictMode>
-//   );
-// });
+// Render the LoggedInNavBar 
+const pantry_elements = document.querySelectorAll(".pantryReactEntry");
+pantry_elements.forEach((element) => {
+  const root = createRoot(element);
+  root.render(
+    <StrictMode>
+      <LoggedInNavBar />
+      <UserPantryIngredients />
+    </StrictMode>
+  );
+});

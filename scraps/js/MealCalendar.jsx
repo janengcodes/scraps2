@@ -10,16 +10,32 @@ import axios from 'axios';
 
 export default function MealCalendar() {
   const [selectedDay, setSelectedDay] = useState(null);
-  const [formValues, setFormValues] = useState({ mealType: "", mealName: "" });
+  const [formValues, setFormValues] = useState({ mealType: "", mealName: "", selectedRecipe: ""});
+  const [recipes, setRecipes] = useState([]);
+
+
+  useEffect(() => {
+    axios.get('/api/saved_recipes/')
+      .then((res) => {
+        setRecipes(res.data); // assuming Flask returns a list (not an object with a key)
+      })
+      .catch((err) => {
+        console.error("Error fetching recipes:", err);
+      });
+  }, []);
 
   const handleDayClick = (day) => {
-    setSelectedDay(day === selectedDay ? null : day); // Toggle form
+    setSelectedDay(
+      day = day
+    ); 
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues(prev => ({ ...prev, [name]: value }));
   };
+
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,32 +44,70 @@ export default function MealCalendar() {
     setSelectedDay(null);
     setFormValues({ mealType: "", mealName: "" });
   };
+
+  const renderNewMeal = () => (
+    console.log("Saving new meal...")
+    // {/* <div className="center day">
+    //   <p className="center">Sunday</p>
+    //   <div className="meal">
+    //     <h4 className="meal-type">Breakfast</h4>
+    //     <p className="meal-name">Blueberry Pancakes</p>
+    //     <div className="recipe-link-container">
+    //       <p className="recipe-link">View Recipe</p>
+    //     </div>
+    //   </div>
+    // </div> */}
+  );
+
   const renderForm = () => (
-    <form onSubmit={handleSubmit} className="meal-form mt-2">
-      <div className="form-group mb-2">
-        <label>Meal Type</label>
+    <form onSubmit={handleSubmit} className="meal-form">
+      
+      {/* Meal Type */}
+      <div className="">
         <input
           type="text"
           name="mealType"
-          className="form-control"
+          className="form-control meal-form-input"
           value={formValues.mealType}
           onChange={handleChange}
-          placeholder="e.g. Breakfast"
+          placeholder="Meal Type"
         />
       </div>
-      <div className="form-group mb-2">
-        <label>Meal Name</label>
+
+      {/* Meal Name */}
+      <div className="">
         <input
           type="text"
           name="mealName"
-          className="form-control"
+          className="form-control meal-form-input"
           value={formValues.mealName}
           onChange={handleChange}
-          placeholder="e.g. Blueberry Pancakes"
+          placeholder="Recipe Name"
         />
       </div>
-      <button type="submit" className="btn btn-primary">Save Meal</button>
+
+      {/* Dropdown */}
+      <select
+        name="selectedRecipe"
+        className="meal-form-input meal-form-dropdown"
+        onChange={handleChange}
+      >
+        <option value="">Select Recipe</option>
+        {recipes && recipes.map((recipe) => (
+          <option key={recipe.recipe_id} value={recipe.name}>
+            {recipe.name}
+          </option>
+        ))}
+
+      </select>
+
+      <button 
+        type="submit" 
+        className="submit-meal-form"
+        onClick={() => renderNewMeal()}
+      >Save</button>
     </form>
+
   );
 
   return (
@@ -70,8 +124,8 @@ export default function MealCalendar() {
 
         <div className="meal-calendar-body">
           <div className="table">
-            <div className="center day">
-              <th>Sunday</th>
+            {/* <div className="center day">
+              <p className="center">Sunday</p>
               <div className="meal">
                 <h4 className="meal-type">Breakfast</h4>
                 <p className="meal-name">Blueberry Pancakes</p>
@@ -79,14 +133,14 @@ export default function MealCalendar() {
                   <p className="recipe-link">View Recipe</p>
                 </div>
               </div>
-            </div>
+            </div> */}
 
-            {["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"].map(
+            {["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"].map(
               (day) => (
                 <div className="center day" 
                       key={day}
                       onClick={() => handleDayClick(day)}>
-                  <th>{day}</th>
+                  <p className="center">{day}</p>
                   {selectedDay === day && renderForm()}
                 </div>
               )
@@ -94,12 +148,6 @@ export default function MealCalendar() {
           </div>
         </div>
       </div>
-
-     
-        <div className="selected-day-details mt-4">
-          <h2 className="h2-be-vietnam-pro">{selectedDay}'s Details</h2>
-          <p className="space-mono-regular">You clicked on <strong>{selectedDay}</strong>. Here you can show more meal info.</p>
-        </div>
       
 
       <h2 className="h2-be-vietnam-pro shopping-list-header">Shopping List</h2>

@@ -7,14 +7,30 @@ import json
 from scraps.api.exceptions import AuthException
 from scraps.api.user import check_login
 
-# GET method for the saved recipes 
-@scraps.app.route('/api/v1/saved/saved_recipes/', methods=['GET'])
+
+@scraps.app.route('/api/saved_recipes/', methods=['GET'])
 def get_saved_recipes():
-    print("Get saved recipes called")
-    ''' 
-    Get all recipes in the database that have the same user id as the user
-    Get all ingredients associated with the recipe 
+    logname = flask.session.get('username')
+    check_login()
+
+    connection = scraps.model.get_db()
+
+    query = ''' 
+    SELECT recipe_id, name
+    FROM recipes
+    WHERE username = ?
     '''
+    recipes = connection.execute(query, (logname,)).fetchall()
+
+    recipe_list = [
+        {"recipe_id": row["recipe_id"], "name": row["name"]}
+        for row in recipes
+    ]
+    print("RECIPE LIST")
+    print(recipe_list)
+    return flask.jsonify(recipe_list)
+
+    
 
 
 # POST method for the saved recipes 
