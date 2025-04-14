@@ -6,7 +6,7 @@ import '../static/css/navbar.css'
 import '../static/css/globals.css'
 
 export default function LoggedInNavBar() {
-  console.log("nav bar called")
+
   const [user, setUser] = useState("");
 
   useEffect(() => {

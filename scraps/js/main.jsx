@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import { StrictMode } from "react";
 import LoggedInNavBar from "./NavBar";
 import UserPantryIngredients from "./PantryIngredients";
+import MealCalendar from "./MealCalendar";
 
 // Render the LoggedInNavBar 
 const elements = document.querySelectorAll(".reactEntry");
@@ -12,6 +13,17 @@ elements.forEach((element) => {
   root.render(
     <StrictMode>
       <LoggedInNavBar />
+    </StrictMode>
+  );
+});
+
+// Render the MealCalendar 
+const mealCalElements = document.querySelectorAll(".reactEntryDashboard");
+mealCalElements.forEach((element) => {
+  const root = createRoot(element);
+  root.render(
+    <StrictMode>
+      <MealCalendar />
     </StrictMode>
   );
 });
