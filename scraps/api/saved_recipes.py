@@ -26,8 +26,6 @@ def get_saved_recipes():
         {"recipe_id": row["recipe_id"], "name": row["name"]}
         for row in recipes
     ]
-    print("RECIPE LIST")
-    print(recipe_list)
     return flask.jsonify(recipe_list)
 
     

@@ -13,9 +13,48 @@ import numpy as np
 
 model = train_model()
 
+@scraps.app.route('/api/currentPantry/<username>', methods=['GET'])
+def current_pantry(username):
+    """Check if a user is logged in"""
+    print("GETTING THE CURRENT PANTRY")
+    logname = check_auth()
+
+    if 'username' not in flask.session:
+        return flask.redirect(flask.url_for('show_accounts_login'))
+
+    # Get all pantry ingredients and render into a JSON file 
+    connection = scraps.model.get_db()
+
+    pantry = connection.execute('''
+        SELECT pantry_id
+        FROM pantry
+        WHERE username = ?
+    ''', (username,)).fetchone()
+    pantry_id = pantry['pantry_id']
+
+    # Get all the ingredients in the pantry
+    pantry_ingredients = connection.execute('''
+        SELECT ingredient_id, ingredient_name
+        FROM ingredients WHERE pantry_id = ?
+    ''', (pantry_id,)).fetchall()
+    # Convert into a list 
+    pantry_ingredients_list = []    
+    for pantry_ingredient in pantry_ingredients:
+        pantry_ingredients_list.append({
+            'ingredient_id': pantry_ingredient['ingredient_id'],
+            'ingredient_name': pantry_ingredient['ingredient_name']
+        })
+
+    
+    
+
+
+  
+
 @scraps.app.route('/api/pantry/<username>', methods=['GET'])
 def get_pantry(username):
     """Check if a user is logged in"""
+    print("GETTING THE CURRENT PANTRY")
     logname = check_auth()
 
     if 'username' not in flask.session:
@@ -34,7 +73,6 @@ def get_pantry(username):
     # 2. Get ingredients associated with the pantry id 
 
     pantry_id = pantry['pantry_id']
-    print("PANTRY ID 2", pantry_id)
 
     seasonal_ingredients = connection.execute('''
         SELECT ingredient_id, ingredient_name, season, food_group
@@ -106,9 +144,7 @@ def get_pantry(username):
     # If pantry ingredients list is empty, make recs empty
     if not pantry_ingredients_list or not pantry_ingredients_list[0]['ingredient_name']:
         recs = []
-
-    print("RECS", recs)
-
+    print(pantry_ingredients_list)
     return flask.jsonify({'pantry_id': pantry_id, 'ingredients': ingredients_list, 'pantry_ingredients':pantry_ingredients_list, 'recs':recs}), 200
 
 

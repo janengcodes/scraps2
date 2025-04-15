@@ -5,6 +5,7 @@ import { StrictMode } from "react";
 import LoggedInNavBar from "./NavBar";
 import UserPantryIngredients from "./PantryIngredients";
 import MealCalendar from "./MealCalendar";
+import ShoppingList from "./ShoppingList";
 
 // Render the LoggedInNavBar 
 const elements = document.querySelectorAll(".reactEntry");
@@ -37,6 +38,16 @@ pantry_elements.forEach((element) => {
     <StrictMode>
       <LoggedInNavBar />
       <UserPantryIngredients />
+    </StrictMode>
+  );
+});
+
+const shopping_list_elements = document.querySelectorAll(".shoppingListReactEntry");
+shopping_list_elements.forEach((element) => {
+  const root = createRoot(element);
+  root.render(
+    <StrictMode>
+      <ShoppingList />
     </StrictMode>
   );
 });

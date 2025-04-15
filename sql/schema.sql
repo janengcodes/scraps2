@@ -13,8 +13,6 @@ CREATE TABLE allergens (
     allergen_id INTEGER PRIMARY KEY AUTOINCREMENT,
     allergen_name VARCHAR(40) NOT NULL
 );
-
--- CREATE TABLE dietary_preferences (
     
 
 CREATE TABLE user_allergens (
@@ -24,6 +22,22 @@ CREATE TABLE user_allergens (
     FOREIGN KEY(username) REFERENCES users(username),
     FOREIGN KEY(allergen_id) REFERENCES allergens(allergen_id)
 );
+
+
+
+CREATE TABLE dietary_prefs (
+    dietary_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    dietary_name VARCHAR(40) NOT NULL
+);
+
+CREATE TABLE user_dietary_prefs (
+    username VARCHAR(20) NOT NULL,
+    dietary_id INTEGER NOT NULL,
+    PRIMARY KEY(username, dietary_id),
+    FOREIGN KEY(username) REFERENCES users(username),
+    FOREIGN KEY(dietary_id) REFERENCES dietary_prefs(dietary_id)
+);
+
 
 
 CREATE TABLE pantry(
@@ -82,4 +96,22 @@ CREATE TABLE pantry_ingredients (
 
     CONSTRAINT unique_pantry_ingredient UNIQUE (pantry_id, ingredient_id)
 );
+
+CREATE TABLE meal_calendar_users {
+    meal_calendar_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username VARCHAR(20) NOT NULL,
+    FOREIGN KEY(username) REFERENCES users(username)
+};
+
+CREATE TABLE meal_calendar_item {
+    meal_calendar_item_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    meal_calendar_id INTEGER NOT NULL,
+    recipe_id INTEGER NOT NULL,
+    recipe_link VARCHAR(40),
+    meal_type VARCHAR(40),
+    meal_name VARCHAR(40),
+    
+    FOREIGN KEY(recipe_id) REFERENCES recipes(recipe_id),
+    FOREIGN KEY(meal_calendar_id) REFERENCES meal_calendar_users(meal_calendar_id)
+};
 

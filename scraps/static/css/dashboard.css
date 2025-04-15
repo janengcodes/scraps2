@@ -12,13 +12,16 @@ body {
   margin-left: 5%;
   margin-right: 5%;
   margin-top: 3%;
+  margin-bottom: 3%;
   border: 2px solid black;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 3fr;
   border-radius: 4px;
+
 }
 .meal-calendar-body {
   background-color: #FFFDF1;
+  overflow-y: scroll;
 }
 .meal-calendar-dates {
   margin-top: 1%;
@@ -62,6 +65,8 @@ body {
   background-color: #FFFDF1;
   padding: 3.5%;
   text-align: center;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .day:hover {
@@ -97,6 +102,7 @@ body {
   font-style: normal;
   font-size: 18px;
   color: black;
+  margin-top: 2%;
 }
 
 .meal-name {
@@ -104,23 +110,39 @@ body {
   font-weight: 450;
   font-style: normal;
   font-size: 12px;
+  margin-top: 6%;
 }
 
 .recipe-link-container {
+  margin-top: 6%;
+  margin-bottom: 6%;
   background-color: #DFF5FF;
-  width: 80%;
+  max-width: 100%;
+  width: 100%;
+  overflow: hidden;
   text-align: left;
+
+  border-radius: 2px;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 3%;
+  border: 0.5px solid black;
 }
 .recipe-link {
   font-family: "Be Vietnam Pro", serif;
   font-weight: 450;
   font-style: normal;
-  font-size: 13px;
+  font-size: 12px;
   background-color: #DFF5FF;
-  padding: 8%;
-  padding-left: 6%;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  margin: 2%;
+  line-height: 130%;
+  
 }
 
 
@@ -167,6 +189,7 @@ body {
   padding-top: 2.5%;
   padding-bottom: 2.5%;
   font-size: 12px;
+  max-width: 100%;
 }
 
 form .submit-meal-form {
@@ -192,5 +215,5 @@ form .submit-meal-form:hover {
   background-color: #D9EDD7;
   line-height: 1;
   height: auto;
-
+  max-width: 100%;
 }

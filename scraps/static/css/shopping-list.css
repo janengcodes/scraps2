@@ -1,0 +1,157 @@
+/* .shopping-list-grid {
+    display: grid;
+    place-items: center;
+} */
+
+.shopping-list-grid {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    font-family: 'Be Vietnam Pro', sans-serif;
+  }
+
+
+/* Title styling */
+.shopping-list-grid h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+  
+  /* The list itself */
+  .shopping-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* Each list item */
+  .shopping-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+    color: #333;
+  }
+  
+/* Checkbox and label */
+.shopping-list input[type="checkbox"] {
+    margin-right: 0.5rem;
+    transform: scale(1.2);
+    cursor: pointer;
+  }
+
+
+  /* Optional: Strike-through when checked */
+.shopping-list input[type="checkbox"]:checked + span {
+    text-decoration: line-through;
+    color: #999;
+  }
+
+
+  /* all from chatgpt above, attempting to make checklist */
+
+.days-grid  {
+    display: grid;
+    grid-template-columns: 100px repeat(6, 1fr);
+    grid-auto-rows: 50% 50%;
+    border: 2px solid black;
+    border-radius: 16px;
+    font-size: 25px;
+    margin: 30px;
+    padding: 20px;
+    gap: 10px;
+    width: 100%;
+    background-color: #fff7e6;
+
+}
+
+.day-label,
+.meal-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    text-align: center;
+}
+
+.day-label{
+    font-weight: bold;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 25px;
+
+
+}
+
+ .meal-label{
+    font-weight: bold;
+    background-color: #f9f9f9;
+    text-align: center;
+    padding: 10px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    border: 1px solid black;
+    border-radius: 10px;
+    /* font-weight: bold;
+    background-color: #f9f9f9;
+    text-align: center;
+    padding: 10px 0; */
+}
+
+ .meal-box {
+
+    width: 100%;
+    height: 100%;
+    padding: 8px;
+    border: 1px solid black;
+    resize: none;
+    overflow-y: auto;
+    font-size: 14px;
+    background-color: transparent;
+    text-align: left;
+    border-radius: 10px;
+    /* border: 1px solid #ccc;
+    padding: 5px;
+    text-align: center; */
+  }
+
+/* optional: make meal boxes look nicer on focus */
+  .meal-box:focus {
+    outline: none;
+    border-color: #6c63ff;
+    box-shadow: 0 0 5px rgba(108, 99, 255, 0.5);
+}
+
+
+.dashboard{
+    font-family: "Lusitana", Helvetica;
+
+    max-width: 1000px; /* keeps it like a widget */
+    margin: 40px auto;  /* center horizontally */
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+
+}
+
+
+/* Color backgrounds using nth-child trick for grid items */
+.days-grid > *:nth-child(n+9):nth-child(-n+16) {
+  background-color: #fff0cc; /* breakfast row */
+}
+.days-grid > *:nth-child(n+17):nth-child(-n+24) {
+  background-color: #ffd980; /* lunch row */
+}
+.days-grid > *:nth-child(n+25):nth-child(-n+32) {
+  background-color: #ffba1a; /* dinner row */
+}
+.days-grid > *:nth-child(n+33):nth-child(-n+40) {
+  background-color: #cc8f00; /* snack row */
+}

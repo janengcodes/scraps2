@@ -65,14 +65,28 @@ def recipe():
             INSERT OR IGNORE INTO pantry_ingredients(pantry_id, ingredient_id)
             VALUES (?, ?)
         ''', (pantry_id, ingredient_id))
+
+    
     
     # Check that the ingredients were added to the pantry
     pantry_ingredients = connection.execute('''
         SELECT ingredient_id FROM pantry_ingredients WHERE pantry_id = ?
     ''', (pantry_id,)).fetchall()
 
+
+    #connor working on allergen stuff here:
+    # Check allergens for the user
+    user_allergens = connection.execute('''
+        SELECT allergen_name FROM allergens
+        JOIN user_allergens ON allergens.allergen_id = user_allergens.allergen_id
+        WHERE user_allergens.username = ?
+    ''', (username,)).fetchall()
+    allergens = [row['allergen_name'] for row in user_allergens]
+
+
+
     if (len(ingredients) != 0):
-        response = model.generate_content("generate a recipe around these specific ingredients: "+ str(ingredients))
+        response = model.generate_content("generate a recipe around these specific ingredients: "+ str(ingredients) + ". Avoid using any of these allergens: " + ', '.join(allergens) + ".")
         print(response)
         output = response.text
         # generate a json object based 

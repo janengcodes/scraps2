@@ -42,11 +42,44 @@ def show_edit_profile(username):
         ''', (id,)).fetchone()
         print(allergen_name)
         allergens.append(allergen_name)
-        
+    
+    # #dietary pref stuff
+    # if dietary_pref:
+    #     dietary_record = connection.execute('''
+    #         SELECT dietary_id FROM dietary_prefs WHERE dietary_name = ?
+    #     ''', (dietary_pref,)).fetchone()
+
+    #     if not dietary_record:
+    #         connection.execute('''
+    #             INSERT INTO dietary_prefs (dietary_name) VALUES (?)
+    #         ''', (dietary_pref,))
+    #         dietary_record = connection.execute('''
+    #             SELECT dietary_id FROM dietary_prefs WHERE dietary_name = ?
+    #         ''', (dietary_pref,)).fetchone()
+
+    #     # Link user to dietary preference if not already linked
+    #     exists = connection.execute('''
+    #         SELECT COUNT(*) FROM user_dietary_prefs WHERE username = ? AND dietary_id = ?
+    #     ''', (username, dietary_record['dietary_id'])).fetchone()
+
+    #     if exists['COUNT(*)'] == 0:
+    #         connection.execute('''
+    #             INSERT INTO user_dietary_prefs (username, dietary_id) VALUES (?, ?)
+    #         ''', (username, dietary_record['dietary_id']))
+
+    # user_dietary_prefs = connection.execute('''
+    #     SELECT d.dietary_name
+    #     FROM dietary_prefs d
+    #     JOIN user_dietary_prefs udp ON d.dietary_id = udp.dietary_id
+    #     WHERE udp.username = ?
+    # ''', (username,)).fetchall()
+    # dietary_prefs = [row['dietary_name'] for row in user_dietary_prefs]
+
+    
     context = {
         "logname": username,
         "allergens": allergens,
-        # "dietary_prefs": dietary_prefs,
+       # "dietary_prefs": dietary_prefs,
     }
 
     return flask.render_template('edit-profile.html', **context)
@@ -101,7 +134,7 @@ def edit_user_info():
 
     # form data
     allergen_name = flask.request.form.get('allergen')
-    dietary_pref = flask.request.form.get('dietary_pref')
+    dietary_prefs = flask.request.form.get('dietary_pref')
    
 #    # check if allergen is in allergens table
     check_allergens = connection.execute('''
@@ -163,13 +196,44 @@ def edit_user_info():
         print(allergen_name)
         allergens.append(allergen_name)
 
+# check_dietary = connection.execute('''
+#     SELECT COUNT(*)
+#     FROM dietary_prefs
+#     WHERE dietary_name = ?
+# ''', (dietary_name,)).fetchone()
+
+# if dietary_name and not check_dietary['COUNT(*)']:
+#     # Insert new dietary preference
+#     connection.execute('''
+#         INSERT INTO dietary_prefs (dietary_name)
+#         VALUES (?)
+#     ''', (dietary_name,))
+    
+#     dietary_id = connection.execute('''
+#         SELECT dietary_id
+#         FROM dietary_prefs
+#         WHERE dietary_name = ?
+#     ''', (dietary_name,)).fetchone()['dietary_id']
+
+#     connection.execute('''
+#         INSERT INTO user_dietary_prefs (username, dietary_id)
+#         VALUES (?, ?)
+#     ''', (username, dietary_id))
+
+#     user_dietary_prefs = connection.execute('''
+#         SELECT d.dietary_name
+#         FROM dietary_prefs d
+#         JOIN user_dietary_prefs udp ON d.dietary_id = udp.dietary_id
+#         WHERE udp.username = ?
+#     ''', (username,)).fetchall()
+#     dietary_prefs = [row['dietary_name'] for row in user_dietary_prefs]
+
+
     context = {
         "logname": username,
         "allergens": allergens,
-        # "dietary_prefs": dietary_prefs,
+        #"dietary_prefs": dietary_prefs,
     }
-
-
 
     return flask.render_template('edit-profile.html', **context)
     # edited_user_info = flask.request.form.getlist('ingredient')

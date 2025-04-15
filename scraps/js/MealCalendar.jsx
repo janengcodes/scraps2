@@ -12,6 +12,8 @@ export default function MealCalendar() {
   const [selectedDay, setSelectedDay] = useState(null);
   const [formValues, setFormValues] = useState({ mealType: "", mealName: "", selectedRecipe: ""});
   const [recipes, setRecipes] = useState([]);
+  const [meals, setMeals] = useState([]); 
+
 
 
   useEffect(() => {
@@ -36,28 +38,49 @@ export default function MealCalendar() {
   };
 
   
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(`Submitted for ${selectedDay}:`, formValues);
-    // Optionally reset or close form
-    setSelectedDay(null);
-    setFormValues({ mealType: "", mealName: "" });
+    if (!selectedDay) return;
+    const newMeal = {
+      day: selectedDay,
+      mealType: formValues.mealType,
+      mealName: formValues.mealName,
+      selectedRecipe: formValues.selectedRecipe
+    };
+
+    // Add the new meal to the list
+    setMeals((prevMeals) => [...prevMeals, newMeal]);
+
+    // Reset form values after submission
+    setFormValues({
+      mealType: '',
+      mealName: '',
+      selectedRecipe: ''
+    });
+
+    console.log("New meal added: ", newMeal);
   };
 
-  const renderNewMeal = () => (
-    console.log("Saving new meal...")
-    // {/* <div className="center day">
-    //   <p className="center">Sunday</p>
-    //   <div className="meal">
-    //     <h4 className="meal-type">Breakfast</h4>
-    //     <p className="meal-name">Blueberry Pancakes</p>
-    //     <div className="recipe-link-container">
-    //       <p className="recipe-link">View Recipe</p>
-    //     </div>
-    //   </div>
-    // </div> */}
-  );
+  const renderNewMeal = (day) => {
+    // filter out the meals
+    const mealsForDay = meals.filter(meal => meal.day === day)
+
+    return (
+      <div className="meal-list">
+        {mealsForDay.map((meal, index) => (
+          <div key={index} className="meal">
+            <h4 className="meal-type">{meal.mealType}</h4>
+            <p className="meal-name">{meal.mealName}</p>
+
+            <div className="recipe-link-container">
+              <p className="recipe-link">{meal.selectedRecipe}</p>
+              
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  };
 
   const renderForm = () => (
     <form onSubmit={handleSubmit} className="meal-form">
@@ -110,6 +133,25 @@ export default function MealCalendar() {
 
   );
 
+  const getCurrentWeek = () => {
+    const today = new Date();
+    const dayOfWeek = today.getDay(); // 0 (Sunday) to 6 (Saturday)
+  
+    const start = new Date(today);
+    start.setDate(today.getDate() - dayOfWeek); // Set to Sunday
+  
+    const end = new Date(today);
+    end.setDate(today.getDate() + (6 - dayOfWeek)); // Set to Saturday
+  
+    const options = { month: 'long', day: 'numeric' };
+  
+    const startStr = start.toLocaleDateString('en-US', options);
+    const endStr = end.toLocaleDateString('en-US', options);
+  
+    return `${startStr} - ${endStr}`;
+  } 
+
+
   return (
     <div className="container-fluid p-4">
       <h1 className="h1-be-vietnam-pro text-center dashboard-heading">Dashboard</h1>
@@ -118,29 +160,20 @@ export default function MealCalendar() {
         <div className="meal-calendar-header">
           <div className="meal-calendar-text">
             <h2 className="h2-be-vietnam-pro">Meal Calendar</h2>
-            <h3 className="space-mono-bold meal-calendar-dates">April 1 - April 8</h3>
+            <h3 className="space-mono-bold meal-calendar-dates">{getCurrentWeek()}</h3>
           </div>
         </div>
 
         <div className="meal-calendar-body">
           <div className="table">
-            {/* <div className="center day">
-              <p className="center">Sunday</p>
-              <div className="meal">
-                <h4 className="meal-type">Breakfast</h4>
-                <p className="meal-name">Blueberry Pancakes</p>
-                <div className="recipe-link-container">
-                  <p className="recipe-link">View Recipe</p>
-                </div>
-              </div>
-            </div> */}
-
             {["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"].map(
               (day) => (
                 <div className="center day" 
                       key={day}
                       onClick={() => handleDayClick(day)}>
                   <p className="center">{day}</p>
+                  
+                  {renderNewMeal(day)}
                   {selectedDay === day && renderForm()}
                 </div>
               )
