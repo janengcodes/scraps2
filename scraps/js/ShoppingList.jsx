@@ -45,9 +45,9 @@ export default function ShoppingList() {
 
     return (
 
-    <div className = "dashboard">
+   
     <div className="shopping-list-grid">
-        <h2 className="be-vietnam-pro-bold">🛒 Shopping List</h2>
+        {/* <h2 className="be-vietnam-pro-bold">🛒 Shopping List</h2> */}
         {shoppingListIngredients.length === 0 ? (
             <p>You're all set! ✅</p>
         ) : (
@@ -62,8 +62,8 @@ export default function ShoppingList() {
             ))}
             </ul>
         )}
-        </div>
 
+{/* 
 
     <div className="days-grid be-vietnam-pro-bold">
         <div className="day-label">Sunday</div>
@@ -83,7 +83,7 @@ export default function ShoppingList() {
         <div className="day-label">SAT</div>
     
     
-        </div>    
+        </div>     */}
 </div>
         
 
