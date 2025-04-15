@@ -1,5 +1,6 @@
 env/
 scraps/.env
+.env
 *.pyc
 *.DS_Store
 node_modules/
