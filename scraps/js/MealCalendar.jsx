@@ -13,6 +13,7 @@ export default function MealCalendar() {
   const [formValues, setFormValues] = useState({ mealType: "", mealName: "", selectedRecipe: ""});
   const [recipes, setRecipes] = useState([]);
   const [meals, setMeals] = useState([]); 
+  const username = localStorage.getItem("user");
 
   const handleSubmit = async (e) => {
     e.preventDefault();

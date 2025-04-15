@@ -86,7 +86,10 @@ def recipe():
 
 
     if (len(ingredients) != 0):
-        response = model.generate_content("generate a recipe around these specific ingredients: "+ str(ingredients) + ". Avoid using any of these allergens: " + ', '.join(allergens) + ".")
+        if allergens:
+            response = model.generate_content("Please generate a recipe around these specific ingredients: "+ str(ingredients) + ". Avoid using any of these allergens: " + ', '.join(allergens) + ".")
+        else:
+            response = model.generate_content("Please generate a recipe around these specific ingredients: "+ str(ingredients) + ".")
         print(response)
         output = response.text
         # generate a json object based 
