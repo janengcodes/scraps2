@@ -48,7 +48,9 @@ def current_pantry(username):
         SELECT ingredient_id, ingredient_name
         FROM ingredients WHERE pantry_id = ?
     ''', (pantry_id,)).fetchall()
-    print(f"Pantry ingredients fetched: {pantry_ingredients}")
+    # print pantry ingredient names
+    pantry_ingredients = [ingredient['ingredient_name'] for ingredient in pantry_ingredients]
+    print(f"Pantry ingredient names: {pantry_ingredients}")
 
     # Get the current meal calendar id
     meal_calendar_id = connection.execute('''
@@ -70,13 +72,11 @@ def current_pantry(username):
         SELECT recipe_id, meal_name
         FROM meal_calendar_item WHERE meal_calendar_id = ?
     ''', (meal_calendar_id,)).fetchall()
-    print(f"Meal calendar recipes: {meal_calendar_recipes}")
 
     meal_calendar_recipe_ids = [
         recipe['recipe_id'] for recipe in meal_calendar_recipes
     ]
-
-    print(f"Meal calendar recipe IDs: {meal_calendar_recipe_ids}")
+    meal_calendar_recipe_ids = list(set(meal_calendar_recipe_ids))
 
     if not meal_calendar_recipe_ids:
         print("No recipes found in meal calendar.")
@@ -96,14 +96,18 @@ def current_pantry(username):
     meal_calendar_ingredient_ids = [ingredient['ingredient_id'] for ingredient in meal_calendar_ingredients]
     print(f"Meal calendar ingredient IDs: {meal_calendar_ingredient_ids}")
 
-    difference = set(pantry_ingredient_ids) - set(meal_calendar_ingredient_ids)
-    print(f"Difference between pantry and meal calendar: {difference}")
+    diff = []
+    for meal_cal_id in meal_calendar_ingredient_ids:
+        if meal_cal_id not in pantry_ingredient_ids:
+            diff.append(meal_cal_id)
+
+    print(f"Difference between pantry and meal calendar: {diff}")
 
     # Get the ingredient names for the IDs in the difference
     ingredient_names = connection.execute('''
         SELECT ingredient_name
         FROM ingredients WHERE ingredient_id IN ({})
-    '''.format(','.join('?' * len(difference))), list(difference)).fetchall()
+    '''.format(','.join('?' * len(diff))), list(diff)).fetchall()
     
     # Convert the result to a list of names
     ingredient_names = [ingredient['ingredient_name'] for ingredient in ingredient_names]
