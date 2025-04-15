@@ -80,16 +80,16 @@ def api_saved_recipes():
     # insert ingredients into DB
     for item in data_dict['ingredients']:
         cursor = connection.execute('''
-            INSERT INTO ingredients(ingredient_name, pantry_id)
-            VALUES (?, ?)
-        ''', (item, pantry_id,))
+            INSERT INTO ingredients(ingredient_name)
+            VALUES (?)
+        ''', (item,))
         
         ingredient_id = cursor.lastrowid
         
         cursor = connection.execute('''
         INSERT INTO recipe_ingredients(recipe_id, ingredient_id)
         VALUES (?, ?)
-    ''', (recipe_id, ingredient_id))
+        ''', (recipe_id, ingredient_id))
 
     # Commit the changes to the database
     connection.commit()

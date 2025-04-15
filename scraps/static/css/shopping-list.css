@@ -2,7 +2,7 @@
 .shopping-list-grid {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 5% 1fr;
+    grid-template-rows: auto 1fr;
     width: 90%;
     margin-left: 5%;
     border-radius: 4px;

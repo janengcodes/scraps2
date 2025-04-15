@@ -40,8 +40,6 @@ def get_meal_cal(username):
             'selectedRecipe': meal_cal_item['recipe_link']
         })
     # Return the meal calendar items as JSON
-    print("Meal calendar items:")
-    print(meal_cal_items_list)
     return flask.jsonify(meal_cal_items_list), 200
 
 

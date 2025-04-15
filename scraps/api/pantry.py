@@ -49,8 +49,7 @@ def current_pantry(username):
         FROM ingredients WHERE pantry_id = ?
     ''', (pantry_id,)).fetchall()
     # print pantry ingredient names
-    pantry_ingredients = [ingredient['ingredient_name'] for ingredient in pantry_ingredients]
-    print(f"Pantry ingredient names: {pantry_ingredients}")
+    pantry_ingredient_ids = [ingredient['ingredient_id'] for ingredient in pantry_ingredients]
 
     # Get the current meal calendar id
     meal_calendar_id = connection.execute('''
@@ -77,6 +76,7 @@ def current_pantry(username):
         recipe['recipe_id'] for recipe in meal_calendar_recipes
     ]
     meal_calendar_recipe_ids = list(set(meal_calendar_recipe_ids))
+    print(f"Meal calendar recipe IDs: {meal_calendar_recipe_ids}")
 
     if not meal_calendar_recipe_ids:
         print("No recipes found in meal calendar.")
@@ -87,14 +87,16 @@ def current_pantry(username):
         SELECT ingredient_id
         FROM recipe_ingredients WHERE recipe_id IN ({})
     '''.format(','.join('?' * len(meal_calendar_recipe_ids))), meal_calendar_recipe_ids).fetchall()
-    print(f"Meal calendar ingredients: {meal_calendar_ingredients}")
 
-    # Find the difference between the two lists
-    pantry_ingredient_ids = [ingredient['ingredient_id'] for ingredient in pantry_ingredients]
-    print(f"Pantry ingredient IDs: {pantry_ingredient_ids}")
-    
+    # meal_calendar_ingredients = connection.execute('''
+    #     SELECT ingredient_id
+    #     FROM recipe_ingredients WHERE recipe_id = ?
+    # ''',(4,)).fetchall()
+
+
     meal_calendar_ingredient_ids = [ingredient['ingredient_id'] for ingredient in meal_calendar_ingredients]
     print(f"Meal calendar ingredient IDs: {meal_calendar_ingredient_ids}")
+    print(f"Pantry ingredient IDs: {pantry_ingredient_ids}")
 
     diff = []
     for meal_cal_id in meal_calendar_ingredient_ids:
