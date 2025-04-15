@@ -40,23 +40,30 @@ def api_saved_recipes():
 
     # Parse the incoming JSON data
     json_string = flask.request.form['json_data']
-    data_dict = json.loads(json_string)
+    print("json_string api", json_string)
+    
+    # Safely parse JSON string to Python dict
+    try:
+        data_dict = json.loads(json_string)
+    except json.JSONDecodeError:
+        flask.abort(400, description="Invalid JSON data")
+    
+    print("data_dict api", data_dict)
 
-    serialized_instructions = json.dumps(data_dict['instructions'])
-    ingredients_list = data_dict["ingredients_list"]
 
-    # Prepare the context for the response
-    context = {
-        "name": data_dict["name"],
-        "ingredients_readable": data_dict["ingredients"],
-        "instructions": data_dict["instructions"],
-        "measurements": data_dict["measurements"],
-        "items": data_dict["ingredients_list"]  # Ensure this is JSON serializable
-    }
+    # # Prepare the context for the response
+    # context = {
+    #     "name": data_dict["name"],
+    #     "ingredients_readable": data_dict["ingredients"],
+    #     "instructions": data_dict["instructions"],
+    #     "measurements": data_dict["measurements"],
+    #     "items": data_dict["ingredients_list"]  # Ensure this is JSON serializable
+    # }
 
     # Insert recipe into the database
     connection = scraps.model.get_db()
     # NEED TO RESET DB
+    serialized_instructions = json.dumps(data_dict['instructions'])
     cursor = connection.execute('''
         INSERT INTO recipes(username, name, instructions)
         VALUES (?, ?, ?)
@@ -71,7 +78,7 @@ def api_saved_recipes():
     pantry_id = cursor["pantry_id"]
 
     # insert ingredients into DB
-    for item in ingredients_list:
+    for item in data_dict['ingredients']:
         cursor = connection.execute('''
             INSERT INTO ingredients(ingredient_name, pantry_id)
             VALUES (?, ?)

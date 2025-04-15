@@ -6,13 +6,15 @@ import google.generativeai as genai
 app = Flask(__name__)
 from dotenv import load_dotenv
 import os
+import re 
 
 from google.api_core.exceptions import InternalServerError
 import requests  # Assuming you're using requests for HTTP requests
 
 
 load_dotenv()
-GOOGLE_API_KEY = os.getenv("GEMINI_API_KEY")
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+# print(GOOGLE_API_KEY)
 
 model = None
 
@@ -82,69 +84,78 @@ def recipe():
     allergens = [row['allergen_name'] for row in user_allergens]
 
 
+    if len(ingredients) != 0:
+        # Base prompt for recipe generation
+        base_prompt = f"""
+        Your task is to generate a recipe using the following ingredients: {', '.join(ingredients)}.
+        """
 
-    if (len(ingredients) != 0):
         if allergens:
-            response = model.generate_content("Please generate a recipe around these specific ingredients: "+ str(ingredients) + ". Avoid using any of these allergens: " + ', '.join(allergens) + ".")
-        else:
-            response = model.generate_content("Please generate a recipe around these specific ingredients: "+ str(ingredients) + ".")
-        print(response)
+            base_prompt += f"Avoid using any of these allergens: {', '.join(allergens)}.\n"
+
+        base_prompt += """
+        Your response must be a JSON object in **exactly** this format:
+
+        {
+            "name": "Recipe name here",
+            "ingredients": ["ingredient 1", "ingredient 2", "..."],
+            "instructions": ["step 1", "step 2", "..."]
+        }
+
+        - Use a valid JSON format, no markdown or extra characters.
+        - Do not include '*', '#', or additional formatting in the ingredient or instruction values.
+        """
+
+        response = model.generate_content(base_prompt)
         output = response.text
-        # generate a json object based 
+        print(response)
+
         if response:
-            try: 
-                db_json = model.generate_content("Based on this recipe: " + str(response) + ", separate the recipe information into the format of a JSON object. the keys are 'name', 'instructions', and 'ingredients'. the values for 'ingredients' and 'instructions' should be formatted as a python list. do not add any extra characters that are '*', '#' or quotes for the value ")
-                # separate measurements from ingredients
-                json_string = db_json.text
-                print(json_string)
-                json_string = model.generate_content("Please add a two new keys called 'measurements' and 'ingredients_list' to this existing json: " + json_string +" The measurement list should contain the numerical amount of each respective ingredient.")
-                # jsonify in api 
-                json_data = json_string.text
-                print(json_data)
-                # clean text and pass relevant information into context
-                json_data = clean(json_data)
-                data_dict = json.loads(json_data)
+            try:
+                cleaned_output = clean(output)
+                data_dict = json.loads(cleaned_output)
+                print("DATA DICTIONARY")
                 print(data_dict)
 
-            except InternalServerError as e:
-                db_json = model.generate_content("Based on this recipe: " + str(response) + ", separate the recipe information into the format of a JSON object. the keys are 'name', 'instructions', and 'ingredients'. the values for 'ingredients' and 'instructions' should be formatted as a python list. do not add any extra characters that are '*', '#' or quotes for the value ")
-                # classify the meal 
-                json_string = db_json.text
-                json_string = model.generate_content("Please add a two new keys called 'measurements' and 'ingredients_list' to this existing json: " + json_string +" Each measurement and it's unit of measurement (if there is one) should match its respective ingredient at each index. the ingredients_list should not include any measurements or units of measurement.")
-                # jsonify in api 
-                json_data = json_string.text
-                print(json_data)
-                # clean text and pass relevant information into context
-                json_data = clean(json_data)
-                data_dict = json.loads(json_data)
-                print(data_dict)    
-    
-    context = {
-        "name": data_dict["name"],
-        "ingredients_list": data_dict["ingredients"],
-        "instructions_list": data_dict["instructions"],
-        'json': json_data,
-        'output': output
-    }
-    return render_template('recipe.html', **context)
+            except InternalServerError:
+                # Retry with a more detailed instruction in case of an error
+                retry_output = model.generate_content(
+                    f"Based on this recipe: {output}, separate the recipe information into the format of a JSON object. "
+                    "The keys are 'name', 'instructions', and 'ingredients'. The values for 'ingredients' and 'instructions' "
+                    "should be formatted as a Python list. Do not add any extra characters such as '*', '#' or quotes for the value."
+                )         
+                data_dict = json.loads(clean(retry_output))
+                print("DATA DICTIONARY")
+                print(data_dict)
+  
+
+        context = {
+            "name": data_dict["name"],
+            "ingredients_list": data_dict["ingredients"],
+            "instructions_list": data_dict["instructions"],
+            "json": json.dumps(data_dict),
+            "output": output,
+        }
+
+        return render_template('recipe.html', **context)
             
-def clean(input_text):
-    # Remove backticks and markdown formatting
-    input_text = input_text.replace("```json", "").replace("```", "").strip()
+def clean(text):
+    # Remove markdown bullets or extra formatting
+    text = re.sub(r'[*#`]', '', text)
     
-    # Remove newline and backslash characters
-    cleaned_text = input_text.replace('\n', '').replace('\r', '').replace('\\', '')
+    # Replace smart quotes with normal quotes
+    text = text.replace('“', '"').replace('”', '"').replace("‘", "'").replace("’", "'")
+    
+    # Remove leading/trailing whitespace
+    text = text.strip()
 
-    # Find JSON object boundaries
-    start_index = cleaned_text.find('{')
-    end_index = cleaned_text.rfind('}') + 1
+    # Make sure it starts and ends with braces
+    if not text.startswith('{'):
+        text = text[text.find('{'):]
+    if not text.endswith('}'):
+        text = text[:text.rfind('}') + 1]
 
-    # Safely extract only the JSON part
-    if start_index != -1 and end_index != -1:
-        extracted_text = cleaned_text[start_index:end_index]
-        return extracted_text
-    return cleaned_text  # fallback
-
+    return text
 def show_recipe(json_data):
     context = {
         "json_data": json_data
