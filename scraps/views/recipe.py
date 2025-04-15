@@ -13,7 +13,7 @@ import requests  # Assuming you're using requests for HTTP requests
 
 
 load_dotenv()
-GOOGLE_API_KEY = "AIzaSyBR6I4jWemlklfjrkbadGelz15GJWrlXDM"
+GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
 # print(GOOGLE_API_KEY)
 
 model = None
