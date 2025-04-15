@@ -12,7 +12,6 @@ import axios from 'axios';
 
 export default function ShoppingList() {
     const [ingredients, setIngredients] = useState([])
-    const [pantryIngredients, setPantryIngredients] = useState([])
     const [shoppingListIngredients, setShoppingListIngredients] = useState([])
     const username = localStorage.getItem("user");
     // fetch the user's pantry data
@@ -20,22 +19,13 @@ export default function ShoppingList() {
         // Fetch the user's pantry data 
         // axiosHTTP requests to REST endpoints
         axios 
-            .get(`/api/pantry/${username}`)
+            .get(`/api/currentPantry/${username}`)
             .then((response) => {
-                // Ingredients are the response data 
-                const { ingredients } = response.data
-                setIngredients(ingredients || [])
-                const { pantry_ingredients } = response.data
-                setPantryIngredients(pantry_ingredients || [])
-
-                console.log("Pantry Ingredients:", pantryIngredients); // Log the state to check its value
-
-                // ✅ Get list of pantry ingredient IDs
-                const pantryIds = pantry_ingredients.map(i => i.ingredient_id);
-                // ✅ Filter ingredients to find what's still needed
-                const needed = ingredients.filter(item => !pantryIds.includes(item.ingredient_id));
-                // ✅ Update shopping list state
-                setShoppingListIngredients(needed);
+                const { ingredient_names } = response.data;
+                const formatted = ingredient_names.map((name) => ({ ingredient_name: name }));
+                setIngredients(formatted || []);
+                setShoppingListIngredients(formatted || []);
+                console.log('Fetched ingredient names:', formatted);
             })
             .catch((error) => {
                 console.error('Error fetching pantry data:', error);

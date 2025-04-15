@@ -68,3 +68,10 @@ input[type=text]:focus {
 .bold {
   font-weight: bold;
 }
+
+html, body {
+  background-color: #FFFCE9 !important;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}

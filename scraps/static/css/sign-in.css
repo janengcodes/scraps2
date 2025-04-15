@@ -8,3 +8,10 @@ input[type=text] {
     margin-top: 5%;
     text-align: center;
 }
+
+html, body {
+    background-color: #FFFCE9 !important;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
