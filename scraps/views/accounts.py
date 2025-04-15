@@ -113,6 +113,12 @@ def create():
         VALUES (?)
     ''', (username,))
 
+    # create a meal calendar for new user
+    connection.execute('''
+        INSERT INTO meal_calendar_users(username)
+        VALUES (?)
+    ''', (username,))
+
 
 
 def login():

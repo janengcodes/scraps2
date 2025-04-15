@@ -14,7 +14,33 @@ export default function MealCalendar() {
   const [recipes, setRecipes] = useState([]);
   const [meals, setMeals] = useState([]); 
 
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!selectedDay) return;
+  
+    const newMeal = {
+      day: selectedDay,
+      mealType: formValues.mealType,
+      mealName: formValues.mealName,
+      selectedRecipe: formValues.selectedRecipe
+    };
+  
+    try {
+      const response = await axios.post(`/api/add-to-meal-cal/${username}`, newMeal);
+      console.log('Meal saved to database:', response.data);
+  
+      setMeals((prevMeals) => [...prevMeals, newMeal]);
+  
+      setFormValues({
+        mealType: '',
+        mealName: '',
+        selectedRecipe: ''
+      });
+    } catch (error) {
+      console.error('Error saving meal:', error);
+    }
+  };
+  
 
   useEffect(() => {
     axios.get('/api/saved_recipes/')
@@ -38,28 +64,9 @@ export default function MealCalendar() {
   };
 
   
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!selectedDay) return;
-    const newMeal = {
-      day: selectedDay,
-      mealType: formValues.mealType,
-      mealName: formValues.mealName,
-      selectedRecipe: formValues.selectedRecipe
-    };
 
-    // Add the new meal to the list
-    setMeals((prevMeals) => [...prevMeals, newMeal]);
 
-    // Reset form values after submission
-    setFormValues({
-      mealType: '',
-      mealName: '',
-      selectedRecipe: ''
-    });
-
-    console.log("New meal added: ", newMeal);
-  };
+  
 
   const renderNewMeal = (day) => {
     // filter out the meals

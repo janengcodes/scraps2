@@ -97,14 +97,14 @@ CREATE TABLE pantry_ingredients (
     CONSTRAINT unique_pantry_ingredient UNIQUE (pantry_id, ingredient_id)
 );
 
-CREATE TABLE meal_calendar_users {
+CREATE TABLE meal_calendar_users (
     meal_calendar_id INTEGER PRIMARY KEY AUTOINCREMENT,
     username VARCHAR(20) NOT NULL,
     FOREIGN KEY(username) REFERENCES users(username)
         ON DELETE CASCADE
-};
+);
 
-CREATE TABLE meal_calendar_item {
+CREATE TABLE meal_calendar_item (
     meal_calendar_item_id INTEGER PRIMARY KEY AUTOINCREMENT,
     meal_calendar_id INTEGER NOT NULL,
     recipe_id INTEGER NOT NULL,
@@ -115,5 +115,5 @@ CREATE TABLE meal_calendar_item {
     FOREIGN KEY(recipe_id) REFERENCES recipes(recipe_id),
     FOREIGN KEY(meal_calendar_id) REFERENCES meal_calendar_users(meal_calendar_id)
         ON DELETE CASCADE
-};
+);
 
