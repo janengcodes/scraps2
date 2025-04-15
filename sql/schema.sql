@@ -101,6 +101,7 @@ CREATE TABLE meal_calendar_users {
     meal_calendar_id INTEGER PRIMARY KEY AUTOINCREMENT,
     username VARCHAR(20) NOT NULL,
     FOREIGN KEY(username) REFERENCES users(username)
+        ON DELETE CASCADE
 };
 
 CREATE TABLE meal_calendar_item {
@@ -113,5 +114,6 @@ CREATE TABLE meal_calendar_item {
     meal_day VARCHAR(40) CHECK (meal_day IN ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday')),
     FOREIGN KEY(recipe_id) REFERENCES recipes(recipe_id),
     FOREIGN KEY(meal_calendar_id) REFERENCES meal_calendar_users(meal_calendar_id)
+        ON DELETE CASCADE
 };
 
