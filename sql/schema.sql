@@ -110,7 +110,7 @@ CREATE TABLE meal_calendar_item {
     recipe_link VARCHAR(40),
     meal_type VARCHAR(40),
     meal_name VARCHAR(40),
-    
+    meal_day VARCHAR(40) CHECK (meal_day IN ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday')),
     FOREIGN KEY(recipe_id) REFERENCES recipes(recipe_id),
     FOREIGN KEY(meal_calendar_id) REFERENCES meal_calendar_users(meal_calendar_id)
 };
