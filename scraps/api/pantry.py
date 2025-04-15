@@ -16,7 +16,7 @@ model = train_model()
 @scraps.app.route('/api/currentPantry/<username>', methods=['GET'])
 def current_pantry(username):
     """Check if a user is logged in"""
-    print("GETTING THE CURRENT PANTRY")
+
     logname = check_auth()
 
     if 'username' not in flask.session:
@@ -54,7 +54,6 @@ def current_pantry(username):
 @scraps.app.route('/api/pantry/<username>', methods=['GET'])
 def get_pantry(username):
     """Check if a user is logged in"""
-    print("GETTING THE CURRENT PANTRY")
     logname = check_auth()
 
     if 'username' not in flask.session:

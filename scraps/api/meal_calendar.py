@@ -26,7 +26,7 @@ def get_meal_cal(username):
     meal_cal_id = meal_cal['meal_calendar_id']
     # Get all the recipes in the meal calendar
     meal_cal_items = connection.execute('''
-        SELECT meal_day, meal_type, meal_name, recipe_name
+        SELECT meal_day, meal_type, meal_name, recipe_link
         FROM meal_calendar_item
         WHERE meal_calendar_id = ?
     ''', (meal_cal_id,)).fetchall()
@@ -35,11 +35,13 @@ def get_meal_cal(username):
     for meal_cal_item in meal_cal_items:
         meal_cal_items_list.append({
             'meal_day': meal_cal_item['meal_day'],
-            'meal_type': meal_cal_item['meal_type'],
-            'meal_name': meal_cal_item['meal_name'],
-            'recipe_name': meal_cal_item['recipe_name']
+            'mealType': meal_cal_item['meal_type'],
+            'mealName': meal_cal_item['meal_name'],
+            'selectedRecipe': meal_cal_item['recipe_link']
         })
     # Return the meal calendar items as JSON
+    print("Meal calendar items:")
+    print(meal_cal_items_list)
     return flask.jsonify(meal_cal_items_list), 200
 
 
@@ -56,7 +58,7 @@ def add_to_meal_cal(username):
     meal_day = data.get('day')
     meal_type = data.get('mealType')
     meal_name = data.get('mealName')
-    recipe_name = data.get('selectedRecipe')  # assuming this is the recipe name
+    recipe_link = data.get('selectedRecipe')  # assuming this is the recipe name
 
 
     # find the meal calendar id
@@ -76,15 +78,17 @@ def add_to_meal_cal(username):
         SELECT recipe_id
         FROM recipes
         WHERE name = ?
-        ''', (recipe_name,)
+        ''', (recipe_link,)
     ).fetchone()
     if recipe is None:
         return flask.jsonify({"error": "Recipe not found"}), 404
     # insert into meal_calendar_item
     connection.execute('''
-        INSERT INTO meal_calendar_item (meal_calendar_id, recipe_id, meal_day, meal_type)
-        VALUES (?, ?, ?, ?)
-    ''', (meal_cal_id, recipe['recipe_id'], meal_day, meal_type))
+        INSERT INTO meal_calendar_item (meal_calendar_id, recipe_id, recipe_link, meal_day, meal_type, meal_name)
+        VALUES (?, ?, ?, ?, ?, ?)
+    ''', (meal_cal_id, recipe['recipe_id'], recipe_link, meal_day, meal_type, meal_name))
+    print("recipe information")
+    print(meal_cal_id, recipe['recipe_id'], recipe_link, meal_day, meal_type, meal_name)
 
     # check the meal calendar item
     meal_cal_item = connection.execute('''

@@ -112,7 +112,9 @@ body {
   font-size: 12px;
   margin-top: 6%;
 }
-
+.meal-name-db {
+  margin-top: 0%;
+}
 .recipe-link-container {
   margin-top: 6%;
   margin-bottom: 6%;
@@ -128,6 +130,12 @@ body {
   padding: 3%;
   border: 0.5px solid black;
 }
+
+.recipe-link-container-db {
+  margin-top: 0%;
+  padding: 0%;
+}
+
 .recipe-link {
   font-family: "Be Vietnam Pro", serif;
   font-weight: 450;
@@ -142,9 +150,11 @@ body {
   max-width: 100%;
   margin: 2%;
   line-height: 130%;
-  
 }
 
+.recipe-link-db {
+
+}
 
 .date-be-vietnam-pro {
     font-family: "Be Vietnam Pro", serif;

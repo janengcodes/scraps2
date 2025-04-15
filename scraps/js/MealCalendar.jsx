@@ -53,6 +53,19 @@ export default function MealCalendar() {
       });
   }, []);
 
+  useEffect(() => {
+    const fetchMeals = async () => {
+      try {
+        const res = await axios.get(`/api/add-to-meal-cal/${username}`);
+        setMeals(res.data);
+      } catch (err) {
+        console.error("Error fetching meals:", err);
+      }
+    };
+
+    fetchMeals();
+  }, [username]);
+
   const handleDayClick = (day) => {
     setSelectedDay(
       day = day
@@ -159,6 +172,54 @@ export default function MealCalendar() {
     return `${startStr} - ${endStr}`;
   } 
 
+  // const renderMealsForDay = (day) => {
+  //   return meals
+  //     .filter(meal => meal.meal_day === day)
+  //   // // filter out the meals
+  //   // const mealsForDay = meals.filter(meal => meal.day === day)
+
+  //   // return (
+  //   //   <div className="meal-list">
+  //   //     {mealsForDay.map((meal, index) => (
+  //   //       <div key={index} className="meal">
+  //   //         <h4 className="meal-type">{meal.mealType}</h4>
+  //   //         <p className="meal-name">{meal.mealName}</p>
+
+  //   //         <div className="recipe-link-container">
+  //   //           <p className="recipe-link">{meal.selectedRecipe}</p>
+              
+  //   //         </div>
+  //   //       </div>
+  //   //     ))}
+  //   //   </div>
+  //   // );
+  //     .map((meal, index) => (
+  //         <div key={index} className="meal">
+  //           <h4 className="meal-type ">{meal.mealType}</h4>
+  //           <p className="meal-name meal-name-db">{meal.mealName}</p>
+  //           <div className="recipe-link-container recipe-link-container-db">
+  //             <p className="recipe-link">{meal.selectedRecipe}</p>
+  //           </div>
+  //       </div>
+  //     ));
+  // };
+
+  const renderMealsForDay = (day) => {
+    const mealsForDay = meals.filter(meal => meal.meal_day === day);
+    return (
+      <div className="meal-list">
+        {mealsForDay.map((meal, index) => (
+          <div key={index} className="meal">
+            <h4 className="meal-type ">{meal.mealType}</h4>
+            <p className="meal-name">{meal.mealName}</p>
+            <div className="recipe-link-container">
+              <p className="recipe-link">{meal.selectedRecipe}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  };
 
   return (
     <div className="container-fluid p-4">
@@ -174,18 +235,20 @@ export default function MealCalendar() {
 
         <div className="meal-calendar-body">
           <div className="table">
-            {["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"].map(
-              (day) => (
-                <div className="center day" 
-                      key={day}
-                      onClick={() => handleDayClick(day)}>
-                  <p className="center">{day}</p>
-                  
-                  {renderNewMeal(day)}
-                  {selectedDay === day && renderForm()}
-                </div>
-              )
-            )}
+          {["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"].map(
+          (day) => (
+            <div className="center day" key={day} onClick={() => handleDayClick(day)}>
+              <p className="center">{day}</p>
+
+              {/* Display existing meals from DB */}
+              {renderMealsForDay(day)}
+
+              {/* New meal preview or form */}
+              {renderNewMeal(day)}
+              {selectedDay === day && renderForm()}
+            </div>
+          )
+          )}
           </div>
         </div>
       </div>

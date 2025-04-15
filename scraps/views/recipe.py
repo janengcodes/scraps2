@@ -46,8 +46,6 @@ def recipe():
     ''', (username,)).fetchone()
     pantry_id = user_pantry['pantry_id']
 
-    print("PANTRY ID", pantry_id)
-
     # Create an array of ingredient ids 
     ingredient_ids = []
     for ingredient in ingredients:
@@ -56,8 +54,6 @@ def recipe():
         ''', (ingredient,)).fetchone()
         ingredient_ids.append(ingredient_id['ingredient_id'])
     
-    print("INGREDIENTS", ingredients)
-    print("INGREDIENT IDS", ingredient_ids)
 
     # Insert the ingredients into the pantry
     for ingredient_id in ingredient_ids:
@@ -106,7 +102,6 @@ def recipe():
                 # clean text and pass relevant information into context
                 json_data = clean(json_data)
                 data_dict = json.loads(json_data)
-                print("dict")
                 print(data_dict)
 
             except InternalServerError as e:
@@ -120,7 +115,6 @@ def recipe():
                 # clean text and pass relevant information into context
                 json_data = clean(json_data)
                 data_dict = json.loads(json_data)
-                print("dict")
                 print(data_dict)    
     
     context = {
