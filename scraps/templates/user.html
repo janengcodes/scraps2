@@ -20,13 +20,15 @@
     <div class="reactEntry"></div>
 
     <h1 class="h1-be-vietnam-pro welcome">Welcome, {{first_name}} {{last_name}}</h1>
+    <div class="profile-elements">
+        <p class="space-mono-bigger">Username: {{logname}}</p>
+        <br>
+        <p class="space-mono-bigger">Email: {{email}}</p>
+        <div class="get-started">
+          <a role="button" href="/accounts/edit/{{ logname }}">Edit Profile</a>
+        </div>
+    </div>
 
-
-      <p class="space-mono-regular">Username: {{logname}}</p>
-      <p class="space-mono-regular">Email: {{email}}</p>
-      <div class="get-started">
-        <a role="button" href="/accounts/edit/{{ logname }}">Edit Profile</a>
-      </div>
 
       <!-- <div class="get-started">
         <a role="button" href="/">Allergens</a>

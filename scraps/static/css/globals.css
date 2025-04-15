@@ -58,6 +58,11 @@ a {
   color: black;
 }
 
+.be-vietnam-pro-boldish {
+  font-family: "Be Vietnam Pro", serif;
+  font-weight: 530;
+  font-style: normal;
+}
 
 .be-vietnam-pro-bold {
   font-family: "Be Vietnam Pro", serif;
@@ -68,6 +73,21 @@ a {
 .space-mono-regular {
   font-family: "Space Mono", serif;
   font-weight: 400;
+  font-style: normal;
+}
+
+.space-mono-regular-big {
+  font-family: "Space Mono", serif;
+  font-weight: 530;
+  font-size: 20px;
+  font-style: normal;
+  line-height: 24px;
+}
+
+.space-mono-bigger {
+  font-family: "Space Mono", serif;
+  font-weight: 600;
+  font-size: 18px;
   font-style: normal;
 }
 
@@ -99,6 +119,12 @@ a {
   font-style: bold;
 }
 
+.edit-prof-submit {
+  margin-top: 0%;
+  max-width: 10%;
+  font-size: 16px;
+  padding: 1%;
+}
 .main-title {
   text-align: center;
   margin-top: 2%;

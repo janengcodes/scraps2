@@ -42,6 +42,13 @@ def show_edit_profile(username):
         ''', (id,)).fetchone()
         print(allergen_name)
         allergens.append(allergen_name)
+    # get the user's email
+    user_info = connection.execute(
+        "SELECT f.email "
+        "FROM users f "
+        "WHERE f.username = ?",
+        (username,),
+    ).fetchall()
     
     # #dietary pref stuff
     # if dietary_pref:
@@ -79,6 +86,7 @@ def show_edit_profile(username):
     context = {
         "logname": username,
         "allergens": allergens,
+        "email": user_info[0]['email'],
        # "dietary_prefs": dietary_prefs,
     }
 

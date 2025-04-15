@@ -44,47 +44,37 @@ export default function ShoppingList() {
 
 
     return (
+    <div className="container-fluid p-4">
+        <div className="shopping-list-grid">
+            <div className="shopping-list-header">
+                <div className="shopping-list-text">
+                    <h2 className="h2-be-vietnam-pro shopping-list-heading-text">Shopping List</h2>
+                </div>
+                
+            </div>
+            <div>
+                {shoppingListIngredients.length === 0 ? (
+                    <p>You're all set! ✅</p>
+                ) : (
+                    <ul className="shopping-list-items">
+                    
+                    {shoppingListIngredients.map((item, index) => (
+                        <li key={index} className="shopping-list-item">
+                        <label>
+                            <input type="checkbox" />
+                            <span>{item.ingredient_name}</span>
+                        </label>
+                        </li>
+                    ))}
+                    </ul>
+                )}
+            </div>
+
+        </div>
+    </div>
 
    
-    <div className="shopping-list-grid">
-        {/* <h2 className="be-vietnam-pro-bold">🛒 Shopping List</h2> */}
-        {shoppingListIngredients.length === 0 ? (
-            <p>You're all set! ✅</p>
-        ) : (
-            <ul className="shopping-list">
-            {shoppingListIngredients.map((item, index) => (
-                <li key={index}>
-                <label>
-                    <input type="checkbox" />
-                    <span>{item.ingredient_name}</span>
-                </label>
-                </li>
-            ))}
-            </ul>
-        )}
 
-{/* 
-
-    <div className="days-grid be-vietnam-pro-bold">
-        <div className="day-label">Sunday</div>
-        <div className="day-label">Monday</div>
-        <div className="day-label">Tuesday</div>
-        <div className="day-label">Wednesday</div>
-        <div className="day-label">Thursday</div>
-        <div className="day-label">Friday</div>
-        <div className="day-label">Saturday</div>
-        
-
-        <div className="day-label">MON</div>
-        <div className="day-label">TUES</div>
-        <div className="day-label">WED</div>
-        <div className="day-label">THURS</div>
-        <div className="day-label">FRI</div>
-        <div className="day-label">SAT</div>
-    
-    
-        </div>     */}
-</div>
         
 
     );

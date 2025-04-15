@@ -20,3 +20,36 @@
 body {
   background-color: #FFFCE9;
 } 
+
+.profile-elements {
+    margin-left: 7%;
+    margin-top: 4%;
+}
+
+.edit-profile-form {
+    background-color: #D8ECFF;
+    padding: 3%;
+    width: 80%;
+    margin-left: auto;
+    margin-right: 12%;
+    margin-bottom: 2%;
+    margin-top: 5%;
+    border-radius: 4px;
+    border: 2px solid black;
+}
+input[type="text"] {
+    margin-bottom: 1.5%;
+    padding: 0.5%;
+    font-family: "Space Mono", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.saved-allergens {
+    margin-left: 8%;
+    margin-top: 4%;
+}
+
+.allergen {
+    margin-top: 1%;
+}

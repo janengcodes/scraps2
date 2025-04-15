@@ -252,9 +252,6 @@ export default function MealCalendar() {
           </div>
         </div>
       </div>
-      
-
-      <h2 className="h2-be-vietnam-pro shopping-list-header">Shopping List</h2>
     </div>
   );
 }

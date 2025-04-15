@@ -4,13 +4,15 @@ import scraps
 import json
 import google.generativeai as genai
 app = Flask(__name__)
+from dotenv import load_dotenv
+import os
 
 from google.api_core.exceptions import InternalServerError
 import requests  # Assuming you're using requests for HTTP requests
 
 
-# flask --app scraps --debug run --host 0.0.0.0 --port 8000
-GOOGLE_API_KEY = 'AIzaSyAVn-iA_a0wmmnNGs2sYKO8kfOw9odhc8o'
+load_dotenv()
+GOOGLE_API_KEY = os.getenv("GEMINI_API_KEY")
 
 model = None
 
@@ -127,17 +129,21 @@ def recipe():
     return render_template('recipe.html', **context)
             
 def clean(input_text):
-    # remove newline (\n) and carriage return (\r) characters
+    # Remove backticks and markdown formatting
+    input_text = input_text.replace("```json", "").replace("```", "").strip()
+    
+    # Remove newline and backslash characters
     cleaned_text = input_text.replace('\n', '').replace('\r', '').replace('\\', '')
 
-    # find the start and end indices of the content within curly braces ({})
+    # Find JSON object boundaries
     start_index = cleaned_text.find('{')
     end_index = cleaned_text.rfind('}') + 1
 
-    # extract the text within curly braces
-    extracted_text = cleaned_text[start_index:end_index].strip()
-
-    return extracted_text
+    # Safely extract only the JSON part
+    if start_index != -1 and end_index != -1:
+        extracted_text = cleaned_text[start_index:end_index]
+        return extracted_text
+    return cleaned_text  # fallback
 
 def show_recipe(json_data):
     context = {

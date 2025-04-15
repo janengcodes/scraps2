@@ -2,6 +2,7 @@ import flask
 from flask import redirect, render_template, Flask
 import scraps
 app = Flask(__name__)
+import json
 
 
 @scraps.app.route('/saved_recipes/')
@@ -26,9 +27,22 @@ def saved_recipes():
     seen_names = set()
     recipe_counter = 0
     for entry in saved_recipes:
+        instructions = entry['instructions']
+        if isinstance(instructions, str):
+            try:
+                instructions = json.loads(instructions)
+            except json.JSONDecodeError:
+                instructions = [instructions]  # fallback if not valid JSON
+
+        
         if entry['name'] not in seen_names:
             recipe_counter +=1
-            unique_results.append({'name': entry['name'], 'ingredients': [entry['ingredient_name']], 'instructions': entry['instructions']})
+  
+            unique_results.append({
+                'name': entry['name'],
+                'ingredients': [entry['ingredient_name']],
+                'instructions': instructions 
+            })
             seen_names.add(entry['name'])
         else:
             unique_results[recipe_counter - 1]['ingredients'].append(entry['ingredient_name'])

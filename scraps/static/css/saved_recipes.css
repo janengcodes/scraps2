@@ -2,49 +2,31 @@
   font-family: "Be Vietnam Pro", sans-serif;
 }
 
-
-
 .all_recipes {
   display: flex;
   flex-wrap: wrap;
-  grid-gap: 1em;
-  grid-template-rows: 1fr 1fr 1fr;
-  align-items: start;
+  justify-content: center;       /* centers all the cards */
+  gap: 20px;                     /* adds even spacing between cards */
+  width: 80%;
+  margin: 0 auto;                /* centers the whole container */
+  margin-top: 2%;
 }
 
-.recipe-row {
-  border-radius: 5px;
-  border: 1px black solid;
-  margin-top: 5%;
-  margin-left: 5%;
-  margin-right: 5%;
-}
-
-.recipe-row > h2 {
-  margin-left: 15%;
-}
-
-.recipe-row-container {
-  display: flex;
-  justify-content: center;
-  align-items: space-between;     
-  width: 100%;    
-  margin-left: 1%;
-}
 
 .recipe_card {
-    background-color: rgb(221, 255, 248);
-    padding: 1%;
-    border-radius: 5px;
-    border: 1px black solid;
-    margin: 1%;
-    min-width: 20%;
+  background-color: #D5E8ED;
+  padding: 1%;
+  border-radius: 5px;
+  border: 0.5px black solid;
+  max-width: 30%;
+  box-sizing: border-box;
 }
-
-.recipe_card > h3 {
-  text-align: center;
-}
-
+/* 
 .recipe-clicked {
   min-width: 50%; 
+} */
+
+.center {
+  text-align: center;
+  margin-top: 2%;
 }

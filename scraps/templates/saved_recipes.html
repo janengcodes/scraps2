@@ -22,26 +22,28 @@
       crossorigin="anonymous"
     />
 
+    <div class="center"><h2 class="h2-be-vietnam-pro center">Your Recipes</h2></div>
+
     <div class="all_recipes">
-
-      <div class="recipe-row">
-
-        <div class="recipe-row-container">
-            {% for recipe in recipes %}
-              <div class="recipe_card" onclick="maximizeRecipe(this)">
-                <!-- make name a link -->
-                <h3>{{ recipe.name }}</h3>
-                
-                {% for ingredient in recipe.ingredients %}
-                {{ingredient}},
-                {% endfor %}
-
-              </div>
+      {% for recipe in recipes %}
+        <div class="recipe_card" onclick="maximizeRecipe(this)">
+          <p class="space-mono-regular-big">{{ recipe.name }}<p>
+          <p class="be-vietnam-pro-boldish">Ingredients:</p>
+          <p class="be-vietnam-pro">
+            {% for ingredient in recipe.ingredients %}
+            {{ ingredient|capitalize }}{% if not loop.last %}, {% endif %}
             {% endfor %}
+          </p>
+          <p class="be-vietnam-pro-boldish">Instructions:</p>
+          <p class="be-vietnam-pro">
+            {% for step in recipe.instructions %}
+              <p>{{ loop.index }}. {{ step }}</p>
+            {% endfor %}
+          </p>
         </div>
-      </div>
-    </div>
-
+      {% endfor %}
+  </div>
+  
     <div id="reactEntry2">
       <script src="{{ url_for('static', filename='js/bundle.js') }}"></script>
     </div>
