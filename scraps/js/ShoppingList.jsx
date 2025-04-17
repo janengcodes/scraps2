@@ -38,26 +38,39 @@ export default function ShoppingList() {
         <div className="shopping-list-grid">
             <div className="shopping-list-header">
                 <div className="shopping-list-text">
-                    <h2 className="h2-be-vietnam-pro shopping-list-heading-text">Shopping List</h2>
+                    <h2 className="h2-be-vietnam-pro shopping-list-heading-text">🛒 Shopping List</h2>
                 </div>
                 
             </div>
-            <div>
-                {shoppingListIngredients.length === 0 ? (
-                    <p>You're all set! ✅</p>
-                ) : (
-                    <ul className="shopping-list-items">
-                    
-                    {shoppingListIngredients.map((item, index) => (
-                        <li key={index} className="shopping-list-item">
-                        <label>
-                            <input type="checkbox" />
-                            <span>{item.ingredient_name}</span>
-                        </label>
-                        </li>
-                    ))}
-                    </ul>
-                )}
+            <div className= "grid-system">
+                <div className="label-cell">Meal</div>
+                <div className="day-cell">Mon</div>
+                <div className="day-cell">Tue</div>
+                <div className="day-cell">Wed</div>
+                <div className="day-cell">Thu</div>
+                <div className="day-cell">Fri</div>
+                <div className="day-cell">Sat</div>
+                <div className="day-cell">Sun</div>
+
+                {/* write hardcoded data for some meals */}
+
+                <div>
+                    {shoppingListIngredients.length === 0 ? (
+                        <p>You're all set! ✅</p>
+                    ) : (
+                        <ul className="shopping-list-items">
+                        
+                        {shoppingListIngredients.map((item, index) => (
+                            <li key={index} className="shopping-list-item">
+                            <label>
+                                <input type="checkbox" />
+                                <span>{item.ingredient_name}</span>
+                            </label>
+                            </li>
+                        ))}
+                        </ul>
+                    )}
+                </div>
             </div>
 
         </div>

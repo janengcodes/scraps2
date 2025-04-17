@@ -79,6 +79,8 @@ def api_saved_recipes():
 
     # insert ingredients into DB
     for item in data_dict['ingredients']:
+        # Make sure to check if the ingredient already exists
+        
         cursor = connection.execute('''
             INSERT INTO ingredients(ingredient_name)
             VALUES (?)
