@@ -7,6 +7,7 @@
     margin-left: 5%;
     border-radius: 4px;
     border: 2px solid black; 
+    
 }
 
 .shopping-list-header {
@@ -56,24 +57,48 @@ span {
   margin-left: 8px; /* or whatever you're using */
 }
 
-.grid-system > div{
+/* Nicole: modifications made below */
+
+/* creates the columns */
+.grid-system {
   display:grid;
-  grid-template-columns: 100px repeat(7, 1fr);
+  grid-template-columns: repeat(7, 1fr);
   border:2px solid black;
   padding: 10px;
   gap: 10px;
-  min-height: 50px;
+  height: 100%;
   text-align: center;
+  background-color: #EBDABB;
 
 }
 
-.day-cell{
-  font-weight: bold;
+.day-header {
   text-align: center;
-  padding: 10px 0;
-  font-size: 25px;
+  font-size: 1.1rem;
+}
+/* creates the column borders  */
+.day-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color:#F7F5E9;
+  border: 1px solid #ccc;
+  padding: 10px;
+  
+  min-height: 100%;
+  
+  
 }
 
+/* the types of meals labels (breakfast, lunch dinner, snack) */
+.label-cell{
+  font-weight:bold;
+  padding: 10px; 
+  text-align: center;
+  
+}
+
+/* Nicole: modification are shown above */
 
 /* Checkbox and label */
 .shopping-list input[type="checkbox"] {
