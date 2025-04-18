@@ -8,10 +8,34 @@ from scraps.api.exceptions import AuthException
 from scraps.api.exceptions import check_auth
 import requests
 import numpy as np
+from rapidfuzz import fuzz, process
 
 
 
 model = train_model()
+
+def fuzzy_match_pantry(pantry_items, meal_items, threshold=70):
+    non_matches = {}
+    meal_words = []
+
+    # Build a flat list of words from all meal items
+    for item in meal_items:
+        words = item.lower().replace(',', '').split()
+        meal_words.extend(words)
+
+    meal_words = list(set(meal_words))  # Optional: remove duplicates
+
+    # Compare each pantry item to individual words from meal items
+    for pantry_item in pantry_items:
+        best_match, score, _ = process.extractOne(
+            pantry_item.lower(), meal_words, scorer=fuzz.token_set_ratio
+        )
+        if score <= threshold:
+            non_matches[pantry_item] = (best_match, score)
+
+    final_non_matches = list(non_matches.keys())
+    print(f"Final non-matches: {final_non_matches}")
+    return final_non_matches
 
 def get_ingredients_from_pantry(pantry_id):
     pantry_ingredients_list = []
@@ -54,24 +78,9 @@ def get_shopping_list(pantry_id, meal_calendar_ingredient_ids):
     meal_calendar_ingredients = get_ingredients_from_meal_calendar(meal_calendar_ingredient_ids)
     print(f"Meal calendar ingredients: {meal_calendar_ingredients}")
 
-    print(get_ingredients_from_pantry(pantry_id))
-    # connection = scraps.model.get_db()
-    # pantry_ing = connection.execute('''
-    #     SELECT ingredient_name
-    #     FROM ingredients WHERE pantry_id = ?
-    # ''', (pantry_id,)).fetchall()
-    # # print pantry ingredient names
-    # pantry_ing_names = [ingredient['ingredient_name'] for ingredient in pantry_ing]
-    # meal_cal_ing_names = connection.execute('''
-    #     SELECT ingredient_name
-    #     FROM ingredients WHERE ingredient_id IN ({})
-    # '''.format(','.join('?' * len(meal_calendar_ingredient_ids))), meal_calendar_ingredient_ids).fetchall()
-    # meal_cal_ing_names = [ingredient['ingredient_name'] for ingredient in meal_cal_ing_names]
-    # print("Get shopping list")
-    # print(f"Pantry ingredient names: {pantry_ing_names}")
-    # print(f"Meal calendar ingredient names: {meal_cal_ing_names}")
-    # return 
+    matches = fuzzy_match_pantry(pantry_ingredients, meal_calendar_ingredients)
 
+    
 
 
 
