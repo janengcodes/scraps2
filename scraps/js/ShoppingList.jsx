@@ -14,6 +14,7 @@ export default function ShoppingList({ ingredients, setIngredients, meals }) {
     // const [ingredients, setIngredients] = useState([])
     const [shoppingListIngredients, setShoppingListIngredients] = useState([])
     const username = localStorage.getItem("user");
+    const [cookableMeals, setCookableMeals] = useState({});
     // fetch the user's pantry data
     useEffect(() => {
         // Fetch the user's pantry data 
@@ -30,9 +31,64 @@ export default function ShoppingList({ ingredients, setIngredients, meals }) {
             .catch((error) => {
                 console.error('Error fetching pantry data:', error);
             });
+        
+        axios
+            .get(`/api/cookable-meals/${username}`)
+            .then((response) => {
+                setCookableMeals(response.data || {});
+                console.log("Cookable meals:", response.data);
+            })
+            .catch((error) => console.error('Error fetching cookable meals:', error));
     }, [username]);
 
     const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+    const handleCheckOffIngredient = (ingredientName) => {
+        axios.post(`/api/add-to-pantry-check-box/${username}`, { ingredient_name: ingredientName })
+        .then((response) => {
+            console.log(`${ingredientName} added to pantry`);
+            // Remove the ingredient from the shopping list
+            setShoppingListIngredients(prev =>
+                prev.filter(ingredient => ingredient.ingredient_name !== ingredientName)
+            );
+        })
+        .catch((error) => {
+            console.error(`Failed to add ${ingredientName} to pantry:`, error);
+        });
+    }
+
+
+    const isMealCookable = (meal, pantry) => {
+        console.log("isMealCookable called")
+        // check if any of the meal ingredients are in the shopping list 
+
+        if (!meal.ingredients || meal.ingredients.length === 0) return false;
+        const pantryNames = pantry.map(item => item.ingredient_name.toLowerCase());
+   
+        return meal.ingredients.every(ing =>
+            pantryNames.includes(ing.ingredient_name.toLowerCase())
+        );
+    };
+
+    const renderMealsForDay = (day) => {
+        const mealsForDay = meals.filter(meal => meal.meal_day === day);
+        return (
+            <div className="day-meals">
+                {mealsForDay.map((meal, index) => {
+                    const cookable = cookableMeals[meal.selectedRecipe];
+                    return (
+                        <div
+                            key={index}
+                            className={`meal-shopping-list ${cookable ? 'cookable-meal' : ''}`}
+                        >
+                            <p>{meal.selectedRecipe}</p>
+                        </div>
+                    );
+                })}
+            </div>
+        );
+    };
+    
 
     return (
         <div className="container-fluid p-4">
@@ -48,13 +104,16 @@ export default function ShoppingList({ ingredients, setIngredients, meals }) {
                     <div className="day-column">
                         <h3 className="space-mono-bold weekly-shopping-list">Weekly Shopping List</h3>
                         {shoppingListIngredients.length === 0 ? (
-                                <p>You're all set! ✅</p>
+                                <p className="all-set">You're all set! ✅</p>
                             ) : (
                                 <ul className="shopping-list-items">
                                     {shoppingListIngredients.map((item, i) => (
                                         <li key={i} className="shopping-list-item">
                                             <label>
-                                                <input type="checkbox" />
+                                                <input 
+                                                    type="checkbox" 
+                                                    onChange={() => handleCheckOffIngredient(item.ingredient_name)}
+                                                />
                                                 <span>{item.ingredient_name}</span>
                                             </label>
                                         </li>
@@ -65,6 +124,7 @@ export default function ShoppingList({ ingredients, setIngredients, meals }) {
                     {daysOfWeek.map((day, index) => (
                         <div key={index} className="day-column">
                             <div className="day-cell">{day}</div>
+                            {renderMealsForDay(day)}
                         </div>
                     ))}
                 </div>

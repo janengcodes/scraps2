@@ -15,7 +15,72 @@ from rapidfuzz import fuzz, process
 
 model = train_model()
 
-def fuzzy_match_pantry(pantry_items, meal_cal_items, threshold=70):
+# def check_meal_cookable():
+
+@scraps.app.route("/api/cookable-meals/<username>", methods=["GET"])
+def cookable_meals(username):
+    connection = scraps.model.get_db()
+
+    # Get pantry_id for the given user
+    pantry = connection.execute('''
+        SELECT pantry_id
+        FROM pantry
+        WHERE username = ?
+    ''', (username,)).fetchone()
+    print(f"Pantry record fetched: {pantry}")
+    
+    if pantry is None:
+        return flask.jsonify({'error': 'No pantry found'}), 404
+
+    pantry_id = pantry['pantry_id']
+
+    # Get pantry ingredients
+    pantry_ingredients = get_ingredients_from_pantry(pantry_id)
+
+    # Get meal_calendar_id for the given user
+    meal_calendar = connection.execute('''
+        SELECT meal_calendar_id
+        FROM meal_calendar_users
+        WHERE username = ?
+    ''', (username,)).fetchone()
+
+    if meal_calendar is None:
+        return flask.jsonify({'error': 'No meal calendar found'}), 404
+
+    meal_calendar_id = meal_calendar["meal_calendar_id"]
+
+    # Get all recipes from the meal calendar
+    meals = connection.execute('''
+        SELECT mci.meal_day, r.recipe_id, r.name AS recipe_name
+        FROM meal_calendar_item mci
+        JOIN recipes r ON mci.recipe_id = r.recipe_id
+        WHERE mci.meal_calendar_id = ?
+    ''', (meal_calendar_id,)).fetchall()
+
+    cookable_map = {}
+
+    for meal in meals:
+        # Get ingredients for each recipe
+        ingredient_rows = connection.execute('''
+            SELECT i.ingredient_name
+            FROM recipe_ingredients ri
+            JOIN ingredients i ON ri.ingredient_id = i.ingredient_id
+            WHERE ri.recipe_id = ?
+        ''', (meal["recipe_id"],)).fetchall()
+
+        recipe_ingredient_names = [row["ingredient_name"] for row in ingredient_rows]
+        
+        # Use fuzzy matching to determine if all ingredients are in pantry
+        missing = fuzzy_match_pantry(pantry_ingredients, recipe_ingredient_names)
+        # cookable_map[meal["recipe_name"]] = len(missing) == 0    
+        cookable_map[meal["recipe_name"]] = False
+
+    print(f"Cookable map: {cookable_map}")
+    return flask.jsonify(cookable_map), 200
+
+
+
+def fuzzy_match_pantry(pantry_items, meal_cal_items, threshold=80):
     # Create a dictionary mapping pantry items to their split up words 
     # Keep track of the highest scoring match for each pantry item
     # If the score is below the threshold, add it to the non-matches
@@ -23,6 +88,8 @@ def fuzzy_match_pantry(pantry_items, meal_cal_items, threshold=70):
     scores_map = defaultdict(int)
     pantry_items = [item.lower() for item in pantry_items]
     meal_cal_items = [item.lower() for item in meal_cal_items]
+    print(f"Pantry items: {pantry_items}")
+    print(f"Meal calendar items: {meal_cal_items}")
     non_matches = []
     for meal_cal_item in meal_cal_items:
         words = meal_cal_item.lower().replace(',', '').split()
@@ -41,15 +108,21 @@ def fuzzy_match_pantry(pantry_items, meal_cal_items, threshold=70):
                 scores_map[k] = score
     for k, v in scores_map.items():
         if v < threshold:
+            # threshold 
+
+            print("threshold not met", k)
             pantry_item_found = False
-            for p in pantry_items:
-                p_words = p.lower().replace(',', '').split()
-                for p_word in p_words:
-                    if p_word in k:
-                        pantry_item_found = True
+
+            # for p in pantry_items:
+            #     p_words = p.lower().replace(',', '').split()
+            #     for p_word in p_words:
+            #         if p_word in k:
+            #             pantry_item_found = True
+            
             if not pantry_item_found:
-                print(f"Non-match: {k} with score {v}")
                 non_matches.append(k)
+            
+    print(f"Scores map: {scores_map}")
     print(f"Non-matches: {non_matches}")
     return non_matches
 
@@ -397,3 +470,48 @@ def add_to_pantry(username):
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    
+@scraps.app.route('/api/add-to-pantry-check-box/<username>', methods=['POST'])
+def add_to_pantry_check_box(username):
+    logname = check_auth()
+    data = request.get_json()
+    ingredient_name = data.get('ingredient_name')
+    if not ingredient_name:
+        return jsonify({"error": "Ingredient name is None"}), 400
+    connection = scraps.model.get_db()
+        # Get pantry ID
+    pantry = connection.execute('''
+        SELECT pantry_id
+        FROM pantry
+        WHERE username = ?
+    ''', (username,)).fetchone()
+    print(f"Pantry record fetched: {pantry}")
+    
+    if pantry is None:
+        print("No pantry found for user.")
+        return flask.jsonify({'error': 'No pantry found'}), 404
+
+    pantry_id = pantry['pantry_id']
+    ingredient = connection.execute('''
+        SELECT ingredient_id FROM ingredients WHERE LOWER(ingredient_name) = LOWER(?)
+    ''', (ingredient_name,)).fetchone()
+    if not ingredient:
+        return jsonify({'error': 'Ingredient not found'}), 404
+    ingredient_id = ingredient['ingredient_id']
+
+    # Check if already in pantry
+    exists = connection.execute('''
+        SELECT 1 FROM pantry_ingredients WHERE pantry_id = ? AND ingredient_id = ?
+    ''', (pantry_id, ingredient_id)).fetchone()
+
+    if exists:
+        return jsonify({'message': 'Ingredient already in pantry'}), 200
+
+    # Add to pantry
+    connection.execute('''
+        INSERT INTO pantry_ingredients (pantry_id, ingredient_id) VALUES (?, ?)
+    ''', (pantry_id, ingredient_id))
+    connection.commit()
+
+    return jsonify({'message': 'Ingredient added to pantry'}), 200
+
