@@ -10,8 +10,8 @@ import axios from 'axios';
 // Get the ingredients that the user still needs from the recipe
 
 
-export default function ShoppingList() {
-    const [ingredients, setIngredients] = useState([])
+export default function ShoppingList({ ingredients, setIngredients, meals }) {
+    // const [ingredients, setIngredients] = useState([])
     const [shoppingListIngredients, setShoppingListIngredients] = useState([])
     const username = localStorage.getItem("user");
     // fetch the user's pantry data
@@ -45,12 +45,9 @@ export default function ShoppingList() {
                 {/* all of the days in the week stored into day-column to hold the ingredients
                 (currently on every day) */}
                 <div className="grid-system">
-                    {daysOfWeek.map((day, index) => (
-                        <div key={index} className="day-column">
-                            <div className="day-cell">{day}</div>
-
-                            <div className="label-cell">Breakfast</div>
-                            {shoppingListIngredients.length === 0 ? (
+                    <div className="day-column">
+                        <h3 className="space-mono-bold weekly-shopping-list">Weekly Shopping List</h3>
+                        {shoppingListIngredients.length === 0 ? (
                                 <p>You're all set! ✅</p>
                             ) : (
                                 <ul className="shopping-list-items">
@@ -63,9 +60,11 @@ export default function ShoppingList() {
                                         </li>
                                     ))}
                                 </ul>
-                            )}
-
-                            <div className="label-cell">Lunch</div>
+                        )}
+                    </div>
+                    {daysOfWeek.map((day, index) => (
+                        <div key={index} className="day-column">
+                            <div className="day-cell">{day}</div>
                         </div>
                     ))}
                 </div>

@@ -8,11 +8,11 @@ import '../static/css/style.css'
 import '../static/css/dashboard.css'
 import axios from 'axios';
 
-export default function MealCalendar() {
+export default function MealCalendar({meals, setMeals}) {
   const [selectedDay, setSelectedDay] = useState(null);
   const [formValues, setFormValues] = useState({ mealType: "", mealName: "", selectedRecipe: ""});
   const [recipes, setRecipes] = useState([]);
-  const [meals, setMeals] = useState([]); 
+  // const [meals, setMeals] = useState([]); 
   const username = localStorage.getItem("user");
 
   const handleSubmit = async (e) => {

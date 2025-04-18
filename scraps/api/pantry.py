@@ -1,4 +1,5 @@
 """REST API for Pantry."""
+from collections import defaultdict
 import hashlib
 from flask import request, jsonify
 import flask
@@ -14,28 +15,43 @@ from rapidfuzz import fuzz, process
 
 model = train_model()
 
-def fuzzy_match_pantry(pantry_items, meal_items, threshold=70):
-    non_matches = {}
-    meal_words = []
+def fuzzy_match_pantry(pantry_items, meal_cal_items, threshold=70):
+    # Create a dictionary mapping pantry items to their split up words 
+    # Keep track of the highest scoring match for each pantry item
+    # If the score is below the threshold, add it to the non-matches
+    meal_cal_map = defaultdict(list)
+    scores_map = defaultdict(int)
+    pantry_items = [item.lower() for item in pantry_items]
+    meal_cal_items = [item.lower() for item in meal_cal_items]
+    non_matches = []
+    for meal_cal_item in meal_cal_items:
+        words = meal_cal_item.lower().replace(',', '').split()
+        meal_cal_map[meal_cal_item] = words
+    # initialize the scores_map
+    for meal_cal_item in meal_cal_items:
+        scores_map[meal_cal_item] = 0
 
-    # Build a flat list of words from all meal items
-    for item in meal_items:
-        words = item.lower().replace(',', '').split()
-        meal_words.extend(words)
-
-    meal_words = list(set(meal_words))  # Optional: remove duplicates
-
-    # Compare each pantry item to individual words from meal items
-    for pantry_item in pantry_items:
-        best_match, score, _ = process.extractOne(
-            pantry_item.lower(), meal_words, scorer=fuzz.token_set_ratio
-        )
-        if score <= threshold:
-            non_matches[pantry_item] = (best_match, score)
-
-    final_non_matches = list(non_matches.keys())
-    print(f"Final non-matches: {final_non_matches}")
-    return final_non_matches
+    for k, v in meal_cal_map.items():
+        for meal_cal_word in v:
+            for pantry_word in pantry_items:
+                best_match, score, _ = process.extractOne(
+                    meal_cal_word, pantry_word, scorer=fuzz.token_set_ratio
+                )
+            if score > scores_map[k]:
+                scores_map[k] = score
+    for k, v in scores_map.items():
+        if v < threshold:
+            pantry_item_found = False
+            for p in pantry_items:
+                p_words = p.lower().replace(',', '').split()
+                for p_word in p_words:
+                    if p_word in k:
+                        pantry_item_found = True
+            if not pantry_item_found:
+                print(f"Non-match: {k} with score {v}")
+                non_matches.append(k)
+    print(f"Non-matches: {non_matches}")
+    return non_matches
 
 def get_ingredients_from_pantry(pantry_id):
     pantry_ingredients_list = []
@@ -79,10 +95,7 @@ def get_shopping_list(pantry_id, meal_calendar_ingredient_ids):
     print(f"Meal calendar ingredients: {meal_calendar_ingredients}")
 
     matches = fuzzy_match_pantry(pantry_ingredients, meal_calendar_ingredients)
-
-    
-
-
+    return matches
 
     
 
@@ -93,15 +106,14 @@ def current_pantry(username):
     """Check if a user is logged in"""
     print(f"Request received for user: {username}")
     logname = check_auth()
-    print(f"Authenticated user: {logname}")
+    # print(f"Authenticated user: {logname}")
 
-    if 'username' not in flask.session:
-        print("User not in session. Redirecting to login.")
-        return flask.redirect(flask.url_for('show_accounts_login'))
+    # if 'username' not in flask.session:
+    #     print("User not in session. Redirecting to login.")
+    #     return flask.redirect(flask.url_for('show_accounts_login'))
 
-    # Get all pantry ingredients and render into a JSON file 
+    # # Get all pantry ingredients and render into a JSON file 
     connection = scraps.model.get_db()
-    print("Database connection established.")
 
     # Get pantry ID
     pantry = connection.execute('''
@@ -116,16 +128,16 @@ def current_pantry(username):
         return flask.jsonify({'error': 'No pantry found'}), 404
 
     pantry_id = pantry['pantry_id']
-    print(f"Pantry ID: {pantry_id}")
+    # print(f"Pantry ID: {pantry_id}")
 
-    # Get all the ingredients in the pantry
-    pantry_ingredients = connection.execute('''
-        SELECT ingredient_id, ingredient_name
-        FROM ingredients WHERE pantry_id = ?
-    ''', (pantry_id,)).fetchall()
-    # print pantry ingredient names
-    pantry_ingredient_ids = [ingredient['ingredient_id'] for ingredient in pantry_ingredients]
-    # pantry_ingredient_names = [ingredient['ingredient_name'] for ingredient in pantry_ingredients]
+    # # Get all the ingredients in the pantry
+    # pantry_ingredients = connection.execute('''
+    #     SELECT ingredient_id, ingredient_name
+    #     FROM ingredients WHERE pantry_id = ?
+    # ''', (pantry_id,)).fetchall()
+    # # print pantry ingredient names
+    # pantry_ingredient_ids = [ingredient['ingredient_id'] for ingredient in pantry_ingredients]
+    # # pantry_ingredient_names = [ingredient['ingredient_name'] for ingredient in pantry_ingredients]
 
     # Get the current meal calendar id
     meal_calendar_id = connection.execute('''
@@ -157,41 +169,38 @@ def current_pantry(username):
         print("No recipes found in meal calendar.")
         return flask.jsonify({'ingredient_ids': []}), 200
 
-    # Get all the ingredients in those recipes 
+    # # Get all the ingredients in those recipes 
     meal_calendar_ingredients = connection.execute('''
         SELECT ingredient_id
         FROM recipe_ingredients WHERE recipe_id IN ({})
     '''.format(','.join('?' * len(meal_calendar_recipe_ids))), meal_calendar_recipe_ids).fetchall()
 
-    # meal_calendar_ingredients = connection.execute('''
-    #     SELECT ingredient_id
-    #     FROM recipe_ingredients WHERE recipe_id = ?
-    # ''',(4,)).fetchall()
-
 
     meal_calendar_ingredient_ids = [ingredient['ingredient_id'] for ingredient in meal_calendar_ingredients]
-    # meal_calendar_ingredient_names = [ingredient['ingredient_name'] for ingredient in meal_calendar_ingredients]
-    print(f"Meal calendar ingredient IDs: {meal_calendar_ingredient_ids}")
-    print(f"Pantry ingredient IDs: {pantry_ingredient_ids}")
+    # # meal_calendar_ingredient_names = [ingredient['ingredient_name'] for ingredient in meal_calendar_ingredients]
+    # print(f"Meal calendar ingredient IDs: {meal_calendar_ingredient_ids}")
+    # print(f"Pantry ingredient IDs: {pantry_ingredient_ids}")
 
-    diff = []
-    for meal_cal_id in meal_calendar_ingredient_ids:
-        if meal_cal_id not in pantry_ingredient_ids:
-            diff.append(meal_cal_id)
+    # diff = []
+    # for meal_cal_id in meal_calendar_ingredient_ids:
+    #     if meal_cal_id not in pantry_ingredient_ids:
+    #         diff.append(meal_cal_id)
 
-    print(f"Difference between pantry and meal calendar: {diff}")
+    # print(f"Difference between pantry and meal calendar: {diff}")
 
-    # Get the ingredient names for the IDs in the difference
-    ingredient_names = connection.execute('''
-        SELECT ingredient_name
-        FROM ingredients WHERE ingredient_id IN ({})
-    '''.format(','.join('?' * len(diff))), list(diff)).fetchall()
+    # # Get the ingredient names for the IDs in the difference
+    # ingredient_names = connection.execute('''
+    #     SELECT ingredient_name
+    #     FROM ingredients WHERE ingredient_id IN ({})
+    # '''.format(','.join('?' * len(diff))), list(diff)).fetchall()
     
-    # Convert the result to a list of names
-    ingredient_names = [ingredient['ingredient_name'] for ingredient in ingredient_names]
-    print(f"Ingredient names in difference: {ingredient_names}")
-    # get_shopping_list(meal_calendar_ingredient_ids, pantry_ingredient_ids, pantry_ingredient_names, meal_calendar_ingredient_names)
-    get_shopping_list(pantry_id, meal_calendar_ingredient_ids)
+    # # Convert the result to a list of names
+    # ingredient_names = [ingredient['ingredient_name'] for ingredient in ingredient_names]
+    # print(f"Ingredient names in difference: {ingredient_names}")
+    # # get_shopping_list(meal_calendar_ingredient_ids, pantry_ingredient_ids, pantry_ingredient_names, meal_calendar_ingredient_names)
+    # get_shopping_list(pantry_id, meal_calendar_ingredient_ids)
+    ingredient_names = get_shopping_list(pantry_id, meal_calendar_ingredient_ids)
+    print(f"Ingredient names in shopping list: {ingredient_names}")
     return flask.jsonify({'ingredient_names': ingredient_names}), 200
 
     
