@@ -31,16 +31,29 @@ def get_ingredients_from_pantry(pantry_id):
             WHERE ingredient_id = ?
         ''', (ingredient_id,)).fetchone()
 
-        if ingredient:  # Ensure ingredient is not None
-            pantry_ingredients_list.append({
-                'ingredient_name': ingredient['ingredient_name'],
-                'food_group': ingredient['food_group']
-            })
+        if ingredient: 
+            pantry_ingredients_list.append(ingredient['ingredient_name'].lower())
     return pantry_ingredients_list
+
+def get_ingredients_from_meal_calendar(meal_calendar_ingredient_ids):
+    connection = scraps.model.get_db()
+ 
+    meal_calendar_ingredients_names = connection.execute('''
+        SELECT ingredient_name
+        FROM ingredients WHERE ingredient_id IN ({})
+    '''.format(','.join('?' * len(meal_calendar_ingredient_ids))), meal_calendar_ingredient_ids).fetchall()
+    meal_calendar_ingredient_actual_names = [ingredient['ingredient_name'].lower() for ingredient in meal_calendar_ingredients_names]
+    return meal_calendar_ingredient_actual_names
 
 def get_shopping_list(pantry_id, meal_calendar_ingredient_ids):
     # Get the list of names of ingredients that already in the pantry
     print("Get shopping list function called")
+    pantry_ingredients = get_ingredients_from_pantry(pantry_id)
+    print(f"Pantry ingredients: {pantry_ingredients}")
+    # Get the list of names of ingredients that are in the meal calendar
+    meal_calendar_ingredients = get_ingredients_from_meal_calendar(meal_calendar_ingredient_ids)
+    print(f"Meal calendar ingredients: {meal_calendar_ingredients}")
+
     print(get_ingredients_from_pantry(pantry_id))
     # connection = scraps.model.get_db()
     # pantry_ing = connection.execute('''
