@@ -53,10 +53,11 @@
   display:grid;
   grid-template-columns: 1fr 1fr;
   border: 5px solid #4B2F0E;
-  border-radius: 30px;
-  padding:0;
+  border-radius: 10px;
+  padding:2px;
   margin-left:100px;
   margin-right:100px;
+  margin-bottom:10px;
 }
 
 .ingredients, .instructions{

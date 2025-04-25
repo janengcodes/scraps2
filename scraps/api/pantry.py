@@ -72,8 +72,8 @@ def cookable_meals(username):
         
         # Use fuzzy matching to determine if all ingredients are in pantry
         missing = fuzzy_match_pantry(pantry_ingredients, recipe_ingredient_names)
-        # cookable_map[meal["recipe_name"]] = len(missing) == 0    
-        cookable_map[meal["recipe_name"]] = False
+        cookable_map[meal["recipe_name"]] = len(missing) == 0    
+        # cookable_map[meal["recipe_name"]] = False
 
     print(f"Cookable map: {cookable_map}")
     return flask.jsonify(cookable_map), 200
@@ -485,7 +485,7 @@ def add_to_pantry_check_box(username):
         FROM pantry
         WHERE username = ?
     ''', (username,)).fetchone()
-    print(f"Pantry record fetched: {pantry}")
+
     
     if pantry is None:
         print("No pantry found for user.")
