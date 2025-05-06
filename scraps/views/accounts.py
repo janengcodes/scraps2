@@ -132,6 +132,8 @@ def login():
 
     # If the username or password fields are empty, abort(400).
     if len(username) == 0 or len(password) == 0:
+        target = flask.request.args.get('target', '/')
+        return flask.redirect(target)
         abort(400)
 
     # If username and password authentication fails, abort(403).
@@ -144,6 +146,8 @@ def login():
     ''', (username,),).fetchone()
     # If username doesn't exist
     if username_check['COUNT(*)'] == 0:
+        target = flask.request.args.get('target', '/')
+        return flask.redirect(target)
         abort(403)
     # grab salt
     real_password = connection.execute('''
@@ -165,27 +169,18 @@ def login():
     # real_password['password'] is the password in the database
     # password_db_string is the password inputted in the form
     if password_db_string != real_password['password']:
-        abort(403)
+        target = flask.request.args.get('target', '/')
+        return flask.redirect(target)
+        abort(400)
+
 
     # set a session cookie
     flask.session['username'] = username
-    logname = username
-    context = {
-        'logname': logname,
-    }
-
     target = flask.request.args.get('target', '/dashboard/')
+    print("logging in called")
+
     return flask.redirect(target)
 
 
 
-
-# @scraps.app.route('/accounts/logout/', methods=['POST'])
-# def logout():
-#     if 'username' in flask.session:
-#         flask.session.clear()
-#         flask.session['username'] = None
-#     return flask.redirect(flask.url_for('show_index'))
-#     # target = flask.request.args.get('target', '/')
-#     # return flask.redirect(logout)
 
