@@ -18,20 +18,23 @@
   <body>
     <div class="reactEntry"></div>
 
-    <h1 class="h1-be-vietnam-pro welcome">Edit Profile</h1>
+    <h1 class="h1-be-vietnam-pro welcome center-heading">Edit Profile</h1>
 
     <div class="user-info">
 
-      <p class="space-mono-bigger">Username: {{logname}}</p>
-      <p class="space-mono-bigger">Email: {{email}}</p>
-
-
       <form action="/edit-user-info/" method="post" class="edit-profile-form">
-        <div >
-          <label for="allergen" class="space-mono-bigger">Add a new allergen:</label><br>
+
+        <div class="edit-prof-form-select">
+          <button class="edit-prof-button space-mono-bold" onclick="" id="">User Info</button>
+          <button class="edit-prof-button space-mono-bold margin-top" onclick="" id="">Allergies</button>
+          <button class="edit-prof-button space-mono-bold margin-top" onclick="" id="">Dietary Preferences</button>
+        </div>
+
+        <div class="edit-prof-form-input">
+          <label for="allergen" class="space-mono-bold">Add a new allergen:</label><br>
           <input type="text" id="allergen" name="allergen" placeholder="Allergen"><br>
       
-          <label for="dietarypref" class="space-mono-bigger">Enter Dietary Preference:</label><br>
+          <label for="dietarypref" class="space-mono-bold">Enter Dietary Preference:</label><br>
           <input type="text" id="dietarypref" name="dietarypref" placeholder="Dietary Preference"><br>
       
           <input type="submit" class="button get-started edit-prof-submit" value="Submit" />

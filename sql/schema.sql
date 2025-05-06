@@ -9,11 +9,23 @@ CREATE TABLE users(
     PRIMARY KEY(username)
 );
 
+CREATE TABLE dietary_preferences (
+    dietary_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    dietary_name VARCHAR(40) NOT NULL
+);
+
 CREATE TABLE allergens (
     allergen_id INTEGER PRIMARY KEY AUTOINCREMENT,
     allergen_name VARCHAR(40) NOT NULL
 );
-    
+
+CREATE TABLE user_diet_pref (
+    username VARCHAR(20) NOT NULL,
+    dietary_id INTEGER NOT NULL,
+    PRIMARY KEY(username, dietary_id),
+    FOREIGN KEY(username) REFERENCES users(username),
+    FOREIGN KEY(dietary_id) REFERENCES dietary_preferences(dietary_id)
+);
 
 CREATE TABLE user_allergens (
     username VARCHAR(20) NOT NULL,
