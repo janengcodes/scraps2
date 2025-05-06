@@ -164,10 +164,7 @@ def login():
     hash_obj.update(password_salted.encode('utf-8'))
     password_hash = hash_obj.hexdigest()
     password_db_string = "$".join([algorithm, salt, password_hash])
-    # if the password in the database doesn't match
-    # inputted in the form, abort(403)
-    # real_password['password'] is the password in the database
-    # password_db_string is the password inputted in the form
+
     if password_db_string != real_password['password']:
         target = flask.request.args.get('target', '/')
         return flask.redirect(target)
