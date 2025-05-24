@@ -14,7 +14,7 @@ import scraps
 
 def check_logname_password(logname, password):
     """Check if logname and password are valid."""
-    # Check if user exists
+
     connection = scraps.model.get_db()
     real_password = connection.execute('''
         SELECT password
@@ -29,8 +29,7 @@ def check_logname_password(logname, password):
     if user is None:
         print("user is none")
         raise AuthException('Forbidden', status_code=403)
-    # Check if password matches
-    # Use salt from old password and apply to current password
+    # check password 
     parts = real_password['password'].split('$')
     salt = parts[1]
     algorithm = 'sha512'
@@ -56,15 +55,8 @@ def check_auth():
         password = flask.request.authorization['password']
         check_logname_password(logname, password)
         return logname
-        # password = flask.request.authorization['password']
-        # do this: check password
-    # Else redirect because you're not authenticated
-    flask.redirect('/accounts/login')
-    print("User is not logged in; redirecting to login page.")
+    flask.redirect('/accounts/login/')
     return None
-    # TODO: Raise Exception in other parts of code except navbar 
-    # raise AuthException('Forbidden', status_code=403)
-
 
 class AuthException(Exception):
     """Exception for authentication errors."""

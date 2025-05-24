@@ -15,9 +15,19 @@ import scraps
 def show_accounts_login():
     """Display /accounts/login/ route."""
     # Redirect to index if logged in
+    target = flask.request.args.get('target', '/dashboard/')
     if 'username' in flask.session:
-        return flask.redirect(flask.url_for('index'))
+        return flask.redirect(target)
     return flask.render_template("login.html", **{})
+
+@scraps.app.route("/accounts/login_retry/", methods=["GET"])
+def show_accounts_login_retry():
+    """Display /accounts/login/ route."""
+    # Redirect to index if logged in
+    target = flask.request.args.get('target', '/dashboard/')
+    if 'username' in flask.session:
+        return flask.redirect(target)
+    return flask.render_template("login_retry.html", **{})
 
 
 @scraps.app.route("/accounts/signup/", methods=["GET"])
@@ -132,11 +142,8 @@ def login():
 
     # If the username or password fields are empty, abort(400).
     if len(username) == 0 or len(password) == 0:
-        target = flask.request.args.get('target', '/')
-        return flask.redirect(target)
+        return flask.redirect('/accounts/login/')
         abort(400)
-
-    # If username and password authentication fails, abort(403).
 
     # username authentification
     username_check = connection.execute('''
@@ -146,8 +153,8 @@ def login():
     ''', (username,),).fetchone()
     # If username doesn't exist
     if username_check['COUNT(*)'] == 0:
-        target = flask.request.args.get('target', '/')
-        return flask.redirect(target)
+        print("username check failed")
+        return flask.redirect('/accounts/login/')
         abort(403)
     # grab salt
     real_password = connection.execute('''
@@ -166,15 +173,14 @@ def login():
     password_db_string = "$".join([algorithm, salt, password_hash])
 
     if password_db_string != real_password['password']:
-        target = flask.request.args.get('target', '/')
-        return flask.redirect(target)
+        print("password check failed")
+        return flask.redirect('/accounts/login/')
         abort(400)
 
 
     # set a session cookie
     flask.session['username'] = username
     target = flask.request.args.get('target', '/dashboard/')
-    print("logging in called")
 
     return flask.redirect(target)
 

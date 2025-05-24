@@ -51,7 +51,7 @@ body {
     border: none;
 }
 
-.edit-prof-button:hover {
+.edit-prof-button:active, .edit-prof-button:hover {
     text-decoration: underline;
 }
 
@@ -61,8 +61,9 @@ body {
 
 input[type="text"] {
     margin-bottom: 1.5%;
-    padding: 0.5%;
+    padding: 1%;
     font-family: "Space Mono", serif;
+    font-size: 15px;
     font-weight: 300;
     font-style: normal;
 }
@@ -80,6 +81,6 @@ input[type="text"] {
 .edit-prof-submit {
     margin-top: 0%;
     max-width: 17%;
-    font-size: 16px;
+    font-size: 15px;
     padding: 0.5%;
   }
