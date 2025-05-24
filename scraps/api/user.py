@@ -13,18 +13,21 @@ import requests
 def check_login():
     """Check if a user is logged in"""
     logname = check_auth()
-
+    if logname is None:
+        
+        print("in check login, logname is none")
+        return flask.redirect('/accounts/login_retry')
     connection = scraps.model.get_db()
     # Grab the name of the current user
-    full_name_row = connection.execute('''
-        SELECT first_name
+    full_name_check = connection.execute('''
+        SELECT username
         FROM users
         WHERE username = ?
     ''', (logname,)).fetchone()
 
-    if logname is None or full_name_row is None:
-        print("logname is none")
-        return flask.redirect('/accounts/login')
+    if logname is None or full_name_check is None:
+        print("in check login, logname is none")
+        return flask.redirect('/accounts/login_retry')
 
     context = {
         "username": logname,

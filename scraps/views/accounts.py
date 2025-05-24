@@ -48,7 +48,7 @@ def post_account():
     """Display /accounts/ route."""
     operation = request.form.get('operation')
     if operation == 'create':
-        create()
+        return create()
     # elif operation == 'delete':
     #     delete()
     # elif operation == 'edit_account':
@@ -56,7 +56,7 @@ def post_account():
     # elif operation == 'update_password':
     #     update_password()
     elif operation == 'login':
-        login()
+        return login()
     target = flask.request.args.get('target', '/dashboard/')
     return flask.redirect(target)
 
@@ -135,7 +135,7 @@ def create():
 def login():
     """Login a user."""
     if 'username' in flask.session:
-        flask.redirect('/accounts/dashboard/')
+        return flask.redirect('/accounts/dashboard/')
     connection = scraps.model.get_db()
     # Handle the login form submission
     username = request.form.get('username')

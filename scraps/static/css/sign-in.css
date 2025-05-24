@@ -15,3 +15,7 @@ html, body {
     padding: 0;
     height: 100%;
   }
+
+.login-retry {
+    color: red;
+}
