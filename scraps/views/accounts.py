@@ -130,6 +130,8 @@ def create():
         VALUES (?)
     ''', (username,))
 
+    return flask.redirect(flask.url_for('dashboard'))
+
 
 
 def login():
@@ -181,9 +183,8 @@ def login():
 
     # set a session cookie
     flask.session['username'] = username
-    target = flask.request.args.get('target', '/dashboard/')
 
-    return flask.redirect(target)
+    return flask.redirect(flask.url_for('dashboard'))
 
 
 
