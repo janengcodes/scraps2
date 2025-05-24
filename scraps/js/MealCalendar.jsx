@@ -28,7 +28,7 @@ export default function MealCalendar({meals, setMeals}) {
   
     try {
       const response = await axios.post(`/api/add-to-meal-cal/${username}`, newMeal);
-      console.log('Meal saved to database:', response.data);
+      // console.log('Meal saved to database:', response.data);
   
       setMeals((prevMeals) => [...prevMeals, newMeal]);
   
@@ -137,6 +137,7 @@ export default function MealCalendar({meals, setMeals}) {
         onChange={handleChange}
       >
         <option value="">Select Recipe</option>
+        <option value="none">None</option>
         {recipes && recipes.map((recipe) => (
           <option key={recipe.recipe_id} value={recipe.name}>
             {recipe.name}
@@ -171,38 +172,6 @@ export default function MealCalendar({meals, setMeals}) {
   
     return `${startStr} - ${endStr}`;
   } 
-
-  // const renderMealsForDay = (day) => {
-  //   return meals
-  //     .filter(meal => meal.meal_day === day)
-  //   // // filter out the meals
-  //   // const mealsForDay = meals.filter(meal => meal.day === day)
-
-  //   // return (
-  //   //   <div className="meal-list">
-  //   //     {mealsForDay.map((meal, index) => (
-  //   //       <div key={index} className="meal">
-  //   //         <h4 className="meal-type">{meal.mealType}</h4>
-  //   //         <p className="meal-name">{meal.mealName}</p>
-
-  //   //         <div className="recipe-link-container">
-  //   //           <p className="recipe-link">{meal.selectedRecipe}</p>
-              
-  //   //         </div>
-  //   //       </div>
-  //   //     ))}
-  //   //   </div>
-  //   // );
-  //     .map((meal, index) => (
-  //         <div key={index} className="meal">
-  //           <h4 className="meal-type ">{meal.mealType}</h4>
-  //           <p className="meal-name meal-name-db">{meal.mealName}</p>
-  //           <div className="recipe-link-container recipe-link-container-db">
-  //             <p className="recipe-link">{meal.selectedRecipe}</p>
-  //           </div>
-  //       </div>
-  //     ));
-  // };
 
   const renderMealsForDay = (day) => {
     const mealsForDay = meals.filter(meal => meal.meal_day === day);
