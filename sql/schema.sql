@@ -35,8 +35,6 @@ CREATE TABLE user_allergens (
     FOREIGN KEY(allergen_id) REFERENCES allergens(allergen_id)
 );
 
-
-
 CREATE TABLE dietary_prefs (
     dietary_id INTEGER PRIMARY KEY AUTOINCREMENT,
     dietary_name VARCHAR(40) NOT NULL
@@ -65,7 +63,7 @@ CREATE TABLE pantry(
 
 CREATE TABLE recipes (
     recipe_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    username VARCHAR(20) NOT NULL,
+    username VARCHAR(20),
     name VARCHAR(64) NOT NULL,
     instructions JSON
 );

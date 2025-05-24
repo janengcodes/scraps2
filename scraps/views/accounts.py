@@ -90,6 +90,10 @@ def create():
     ''', (email,)).fetchall()
 
     if check_username[0]['COUNT(*)'] == 1 or check_email[0]['COUNT(*)'] == 1:
+        if check_username[0]['COUNT(*)'] == 1:
+            print("username already exists")
+        if check_email[0]['COUNT(*)'] == 1:
+            print("email already exists")
         abort(409)
 
     # Set up flask session and log the user in
