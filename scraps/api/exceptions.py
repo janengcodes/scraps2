@@ -55,7 +55,7 @@ def check_auth():
         password = flask.request.authorization['password']
         check_logname_password(logname, password)
         return logname
-    flask.redirect('/accounts/login/')
+    flask.redirect('/accounts/login_retry/')
     return None
 
 class AuthException(Exception):

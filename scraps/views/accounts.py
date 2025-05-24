@@ -26,8 +26,10 @@ def show_accounts_login_retry():
     # Redirect to index if logged in
     target = flask.request.args.get('target', '/dashboard/')
     if 'username' in flask.session:
-        return flask.redirect(target)
+        return flask.redirect(flask.url_for('dashboard'))
     return flask.render_template("login_retry.html", **{})
+
+# @scraps.app.route("/accounts/dashboard/", methods=["GET"])
 
 
 @scraps.app.route("/accounts/signup/", methods=["GET"])
@@ -110,7 +112,6 @@ def create():
     password_db_string = scraps.model.gen_password_hash(password)
 
     # Create user in database
-    # TODO: add more values to database entry
 
     connection.execute('''
         INSERT INTO users(username, first_name, last_name, email, password)
@@ -134,7 +135,7 @@ def create():
 def login():
     """Login a user."""
     if 'username' in flask.session:
-        return flask.redirect(flask.url_for('show_index'))
+        flask.redirect('/accounts/dashboard/')
     connection = scraps.model.get_db()
     # Handle the login form submission
     username = request.form.get('username')
@@ -142,7 +143,7 @@ def login():
 
     # If the username or password fields are empty, abort(400).
     if len(username) == 0 or len(password) == 0:
-        return flask.redirect('/accounts/login/')
+        return flask.redirect('/accounts/login_retry/')
         abort(400)
 
     # username authentification
@@ -154,7 +155,7 @@ def login():
     # If username doesn't exist
     if username_check['COUNT(*)'] == 0:
         print("username check failed")
-        return flask.redirect('/accounts/login/')
+        return flask.redirect('/accounts/login_retry/')
         abort(403)
     # grab salt
     real_password = connection.execute('''
@@ -174,7 +175,7 @@ def login():
 
     if password_db_string != real_password['password']:
         print("password check failed")
-        return flask.redirect('/accounts/login/')
+        return flask.redirect('/accounts/login_retry/')
         abort(400)
 
 
