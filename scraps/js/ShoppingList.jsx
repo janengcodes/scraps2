@@ -95,7 +95,7 @@ export default function ShoppingList({ ingredients, setIngredients, meals }) {
             <div className="shopping-list-grid">
                 <div className="shopping-list-header">
                     <div className="shopping-list-text">
-                        <h2 className="h2-be-vietnam-pro shopping-list-heading-text">🛒 Shopping List</h2>
+                        <h2 className="h2-be-vietnam-pro shopping-list-heading-text">Shopping List 🛒</h2>
                     </div>
                 </div>
                 {/* all of the days in the week stored into day-column to hold the ingredients
