@@ -3,6 +3,7 @@ import flask
 from flask import redirect
 import scraps
 import json
+import spacy
 
 from scraps.api.exceptions import AuthException
 from scraps.api.user import check_login
@@ -50,19 +51,12 @@ def api_saved_recipes():
     
     print("data_dict api", data_dict)
 
+    ''' 
+    data_dict api {'name': 'Apricot and Fig Jam', 'ingredients': ['1 lb fresh apricots, pitted and chopped', '1 lb fresh figs, stemmed and chopped', '1 cup granulated sugar', '1/4 cup water', '1 tbsp lemon juice'], 'instructions': ['Combine the chopped apricots, figs, sugar, water, and lemon juice in a large pot over medium heat.', 'Bring the mixture to a boil, stirring constantly.', 'Reduce the heat to low and simmer for 45-60 minutes, or until the jam thickens, stirring occasionally.', 'Remove from heat and let cool slightly.', 'Transfer the jam to sterilized jars and seal tightly.', 'Process in a boiling water bath for 10 minutes to ensure proper sealing (optional).', 'Store in a cool, dark place.']}
+    '''
 
-    # # Prepare the context for the response
-    # context = {
-    #     "name": data_dict["name"],
-    #     "ingredients_readable": data_dict["ingredients"],
-    #     "instructions": data_dict["instructions"],
-    #     "measurements": data_dict["measurements"],
-    #     "items": data_dict["ingredients_list"]  # Ensure this is JSON serializable
-    # }
-
-    # Insert recipe into the database
     connection = scraps.model.get_db()
-    # NEED TO RESET DB
+
     serialized_instructions = json.dumps(data_dict['instructions'])
     cursor = connection.execute('''
         INSERT INTO recipes(username, name, instructions)
@@ -75,7 +69,7 @@ def api_saved_recipes():
         SELECT pantry_id FROM pantry WHERE username = ?
     ''', (logname,)).fetchone()
 
-    pantry_id = cursor["pantry_id"]
+
 
     # insert ingredients into DB
     for item in data_dict['ingredients']:

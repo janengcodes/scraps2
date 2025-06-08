@@ -77,11 +77,26 @@ CREATE TABLE ingredients(
     FOREIGN KEY (pantry_id) REFERENCES pantry (pantry_id)
 );
 
+CREATE TABLE ingredient_measurements (
+    ingredient_measurement_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    ingredient_id INTEGER NOT NULL,
+    ingredient_measurement VARCHAR(200) NOT NULL,
+    FOREIGN KEY(ingredient_id) REFERENCES ingredients(ingredient_id)
+);
+
+
+CREATE TABLE recipe_ingredient_measurements (
+    recipe_id INTEGER NOT NULL,
+    ingredient_measurement_id INTEGER NOT NULL,
+
+    FOREIGN KEY(recipe_id) REFERENCES recipes(recipe_id)
+        ON DELETE CASCADE,
+    FOREIGN KEY(ingredient_measurement_id) REFERENCES ingredient_measurements(ingredient_measurement_id)
+);
+
 CREATE TABLE recipe_ingredients (
     recipe_id INTEGER NOT NULL, 
     ingredient_id INTEGER NOT NULL,
-    quantity TEXT, 
-    unit VARCHAR(40),
 
     FOREIGN KEY(recipe_id)
         REFERENCES recipes(recipe_id)
