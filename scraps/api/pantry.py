@@ -179,12 +179,6 @@ def current_pantry(username):
     """Check if a user is logged in"""
     print(f"Request received for user: {username}")
     logname = check_auth()
-    # print(f"Authenticated user: {logname}")
-
-    # if 'username' not in flask.session:
-    #     print("User not in session. Redirecting to login.")
-    #     return flask.redirect(flask.url_for('show_accounts_login'))
-
     # # Get all pantry ingredients and render into a JSON file 
     connection = scraps.model.get_db()
 
@@ -194,23 +188,12 @@ def current_pantry(username):
         FROM pantry
         WHERE username = ?
     ''', (username,)).fetchone()
-    print(f"Pantry record fetched: {pantry}")
     
     if pantry is None:
         print("No pantry found for user.")
         return flask.jsonify({'error': 'No pantry found'}), 404
 
     pantry_id = pantry['pantry_id']
-    # print(f"Pantry ID: {pantry_id}")
-
-    # # Get all the ingredients in the pantry
-    # pantry_ingredients = connection.execute('''
-    #     SELECT ingredient_id, ingredient_name
-    #     FROM ingredients WHERE pantry_id = ?
-    # ''', (pantry_id,)).fetchall()
-    # # print pantry ingredient names
-    # pantry_ingredient_ids = [ingredient['ingredient_id'] for ingredient in pantry_ingredients]
-    # # pantry_ingredient_names = [ingredient['ingredient_name'] for ingredient in pantry_ingredients]
 
     # Get the current meal calendar id
     meal_calendar_id = connection.execute('''
@@ -250,28 +233,7 @@ def current_pantry(username):
 
 
     meal_calendar_ingredient_ids = [ingredient['ingredient_id'] for ingredient in meal_calendar_ingredients]
-    # # meal_calendar_ingredient_names = [ingredient['ingredient_name'] for ingredient in meal_calendar_ingredients]
-    # print(f"Meal calendar ingredient IDs: {meal_calendar_ingredient_ids}")
-    # print(f"Pantry ingredient IDs: {pantry_ingredient_ids}")
 
-    # diff = []
-    # for meal_cal_id in meal_calendar_ingredient_ids:
-    #     if meal_cal_id not in pantry_ingredient_ids:
-    #         diff.append(meal_cal_id)
-
-    # print(f"Difference between pantry and meal calendar: {diff}")
-
-    # # Get the ingredient names for the IDs in the difference
-    # ingredient_names = connection.execute('''
-    #     SELECT ingredient_name
-    #     FROM ingredients WHERE ingredient_id IN ({})
-    # '''.format(','.join('?' * len(diff))), list(diff)).fetchall()
-    
-    # # Convert the result to a list of names
-    # ingredient_names = [ingredient['ingredient_name'] for ingredient in ingredient_names]
-    # print(f"Ingredient names in difference: {ingredient_names}")
-    # # get_shopping_list(meal_calendar_ingredient_ids, pantry_ingredient_ids, pantry_ingredient_names, meal_calendar_ingredient_names)
-    # get_shopping_list(pantry_id, meal_calendar_ingredient_ids)
     ingredient_names = get_shopping_list(pantry_id, meal_calendar_ingredient_ids)
     print(f"Ingredient names in shopping list: {ingredient_names}")
     return flask.jsonify({'ingredient_names': ingredient_names}), 200

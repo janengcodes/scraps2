@@ -22,9 +22,10 @@ export default function ShoppingList({ ingredients, setIngredients, meals }) {
         axios 
             .get(`/api/currentPantry/${username}`)
             .then((response) => {
+                // get the response data from the API
                 const { ingredient_names } = response.data;
                 const formatted = ingredient_names.map((name) => ({ ingredient_name: name }));
-                setIngredients(formatted || []);
+                // get the shopping list ingredients from the api
                 setShoppingListIngredients(formatted || []);
                 console.log('Fetched ingredient names:', formatted);
             })
@@ -47,10 +48,11 @@ export default function ShoppingList({ ingredients, setIngredients, meals }) {
         axios.post(`/api/add-to-pantry-check-box/${username}`, { ingredient_name: ingredientName })
         .then((response) => {
             console.log(`${ingredientName} added to pantry`);
-            // Remove the ingredient from the shopping list
+            // Remove the ingredient from the user's shopping list
             setShoppingListIngredients(prev =>
                 prev.filter(ingredient => ingredient.ingredient_name !== ingredientName)
             );
+            // Add the ingredient to the user's pantry
         })
         .catch((error) => {
             console.error(`Failed to add ${ingredientName} to pantry:`, error);

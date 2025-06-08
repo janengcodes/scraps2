@@ -137,7 +137,7 @@ export default function MealCalendar({meals, setMeals}) {
         onChange={handleChange}
       >
         <option value="">Select Recipe</option>
-        <option value="none">None</option>
+        {/* need to link the None recipe to each user */}
         {recipes && recipes.map((recipe) => (
           <option key={recipe.recipe_id} value={recipe.name}>
             {recipe.name}
