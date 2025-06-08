@@ -37,9 +37,6 @@ def recipe():
     # global ingredients 
     ingredients = flask.request.form.getlist('ingredient')
     output = ""
-    json_string = []
-    # Put the ingredients into the user's pantry 
-    # Create a connection to the database 
 
     connection = scraps.model.get_db()
 
@@ -67,14 +64,6 @@ def recipe():
         ''', (pantry_id, ingredient_id))
 
     
-    
-    # Check that the ingredients were added to the pantry
-    pantry_ingredients = connection.execute('''
-        SELECT ingredient_id FROM pantry_ingredients WHERE pantry_id = ?
-    ''', (pantry_id,)).fetchall()
-
-
-    #connor working on allergen stuff here:
     # Check allergens for the user
     user_allergens = connection.execute('''
         SELECT allergen_name FROM allergens
@@ -156,6 +145,7 @@ def clean(text):
         text = text[:text.rfind('}') + 1]
 
     return text
+
 def show_recipe(json_data):
     context = {
         "json_data": json_data
