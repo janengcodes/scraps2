@@ -159,14 +159,11 @@ def get_ingredients_from_meal_calendar(meal_calendar_ingredient_ids):
     return meal_calendar_ingredient_actual_names
 
 def get_shopping_list(pantry_id, meal_calendar_ingredient_ids):
-    # Get the list of names of ingredients that already in the pantry
-    print("Get shopping list function called")
+    # get pantry ingredients
     pantry_ingredients = get_ingredients_from_pantry(pantry_id)
-    print(f"Pantry ingredients: {pantry_ingredients}")
-    # Get the list of names of ingredients that are in the meal calendar
+    # get meal calendar ingredeints 
     meal_calendar_ingredients = get_ingredients_from_meal_calendar(meal_calendar_ingredient_ids)
-    print(f"Meal calendar ingredients: {meal_calendar_ingredients}")
-
+    # find the matches
     matches = fuzzy_match_pantry(pantry_ingredients, meal_calendar_ingredients)
     return matches
 
@@ -225,15 +222,14 @@ def current_pantry(username):
         print("No recipes found in meal calendar.")
         return flask.jsonify({'ingredient_ids': []}), 200
 
-    # # Get all the ingredients in those recipes 
+    # get all the ingredients in the recipes that are in the meal calendar  
     meal_calendar_ingredients = connection.execute('''
         SELECT ingredient_id
         FROM recipe_ingredients WHERE recipe_id IN ({})
     '''.format(','.join('?' * len(meal_calendar_recipe_ids))), meal_calendar_recipe_ids).fetchall()
-
-
+    # save all the ingredient ids
     meal_calendar_ingredient_ids = [ingredient['ingredient_id'] for ingredient in meal_calendar_ingredients]
-
+    # get the ingredient names
     ingredient_names = get_shopping_list(pantry_id, meal_calendar_ingredient_ids)
     print(f"Ingredient names in shopping list: {ingredient_names}")
     return flask.jsonify({'ingredient_names': ingredient_names}), 200
