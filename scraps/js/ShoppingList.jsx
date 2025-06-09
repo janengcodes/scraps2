@@ -22,7 +22,7 @@ export default function ShoppingList({ ingredients, setIngredients, meals }) {
         axios 
             .get(`/api/currentPantry/${username}`)
             .then((response) => {
-                // get the response data from the API
+                // get the response data from the
                 const { ingredient_names } = response.data;
                 const formatted = ingredient_names.map((name) => ({ ingredient_name: name }));
                 // get the shopping list ingredients from the api
@@ -95,10 +95,8 @@ export default function ShoppingList({ ingredients, setIngredients, meals }) {
     return (
         <div className="container-fluid p-4">
             <div className="shopping-list-grid">
-                <div className="shopping-list-header">
-                    <div className="shopping-list-text">
-                        <h2 className="h2-be-vietnam-pro shopping-list-heading-text">Shopping List 🛒</h2>
-                    </div>
+                <div className="meal-calendar-text">
+                        <h2 className="h2-be-vietnam-pro">Shopping List</h2>
                 </div>
                 {/* all of the days in the week stored into day-column to hold the ingredients
                 (currently on every day) */}
