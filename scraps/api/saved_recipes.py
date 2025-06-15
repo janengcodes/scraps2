@@ -107,7 +107,7 @@ def api_saved_recipes():
         # Associate the ingredient measurement with the recipe
         ingredient_measurement_id = cursor.lastrowid
         cursor = connection.execute('''
-        INSERT INTO recipe_ingredients(recipe_id, ingredient_id)
+        INSERT INTO recipe_ingredient_measurements(recipe_id, ingredient_measurement_id)
         VALUES (?, ?)
         ''', (recipe_id, ingredient_measurement_id))
 

@@ -15,11 +15,19 @@ def saved_recipes():
 
     connection = scraps.model.get_db()
 
+    # saved_recipes = connection.execute('''
+    #     select r.recipe_name, i.ingredient_name, r.instructions
+    #     from recipes r
+    #     join recipe_ingredients ri on r.recipe_id = ri.recipe_id
+    #     join ingredients i on i.ingredient_id = ri.ingredient_id
+    #     where r.username = ?
+    # ''', (logname,)).fetchall()
+
     saved_recipes = connection.execute('''
-        select r.recipe_name, i.ingredient_name, r.instructions
+        select r.recipe_name, im.ingredient_measurement, r.instructions
         from recipes r
-        join recipe_ingredients ri on r.recipe_id = ri.recipe_id
-        join ingredients i on i.ingredient_id = ri.ingredient_id
+        join recipe_ingredient_measurements rim on r.recipe_id = rim.recipe_id
+        join ingredient_measurements im on im.ingredient_measurement_id = rim.ingredient_measurement_id
         where r.username = ?
     ''', (logname,)).fetchall()
 
@@ -40,12 +48,12 @@ def saved_recipes():
   
             unique_results.append({
                 'recipe_name': entry['recipe_name'],
-                'ingredients': [entry['ingredient_name']],
+                'ingredients': [entry['ingredient_measurement']],
                 'instructions': instructions 
             })
             seen_names.add(entry['recipe_name'])
         else:
-            unique_results[recipe_counter - 1]['ingredients'].append(entry['ingredient_name'])
+            unique_results[recipe_counter - 1]['ingredients'].append(entry['ingredient_measurement'])
 
     print("unique results", unique_results)
     
