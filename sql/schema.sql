@@ -64,7 +64,7 @@ CREATE TABLE pantry(
 CREATE TABLE recipes (
     recipe_id INTEGER PRIMARY KEY AUTOINCREMENT,
     username VARCHAR(20),
-    name VARCHAR(64) NOT NULL,
+    recipe_name VARCHAR(64) NOT NULL,
     instructions JSON
 );
 

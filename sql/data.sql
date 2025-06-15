@@ -127,5 +127,5 @@ VALUES('Quinoa', 'grains');
 INSERT INTO ingredients(ingredient_name, food_group)
 VALUES('Rice', 'grains');
 
-INSERT INTO recipes(name)
+INSERT INTO recipes(recipe_name)
 VALUES('None');

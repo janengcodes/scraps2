@@ -132,9 +132,9 @@ def create():
 
     # create a None recipe for the user
     connection.execute('''
-        INSERT INTO recipes(username, recipe_name, )
+        INSERT INTO recipes(username, recipe_name)
         VALUES (?, ?)
-    ''', (username, 'None'))
+    ''', (username, 'None',))
 
     return flask.redirect(flask.url_for('dashboard'))
 
