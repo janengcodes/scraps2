@@ -8,6 +8,8 @@ import spacy
 from scraps.api.exceptions import AuthException
 from scraps.api.user import check_login
 
+# load spacy model for ingredient extraction
+nlp = spacy.load("en_core_web_sm")
 
 @scraps.app.route('/api/saved_recipes/', methods=['GET'])
 def get_saved_recipes():
@@ -29,7 +31,19 @@ def get_saved_recipes():
     ]
     return flask.jsonify(recipe_list)
 
+
+def extract_noun(text):
+    text = text.lower()
+    # remove commas 
+    text = text.replace(',', '')
+    doc = nlp(text)
+    # extract nouns that aren't units or quantities
+    ingredient = []
+    for chunk in doc.noun_chunks:
+        if not any(tok.like_num or tok.lower_ in ['cup', 'cups', 'tablespoon', 'tablespoons', 'teaspoon', 'teaspoons', 'gram', 'grams', 'ounce', 'ounces'] for tok in chunk):
+            ingredient.append(chunk.text.strip())
     
+    return ' '.join(ingredient)
 
 
 # POST method for the saved recipes 
@@ -76,18 +90,26 @@ def api_saved_recipes():
     # Save the ingredient measurements
     for item in data_dict['ingredients']:
         # First get the main ingredient name using spacy
-        
+        ingredient_noun = extract_noun(item)
+        # Save the main ingredient into the ingredients table 
         cursor = connection.execute('''
             INSERT INTO ingredients(ingredient_name)
             VALUES (?)
-        ''', (item,))
-        
+        ''', (ingredient_noun,))
+        # Get the ingredient id
         ingredient_id = cursor.lastrowid
-        
+        # Save the ingredient measurement into the ingredient_measurements table 
+        cursor = connection.execute('''
+            INSERT INTO ingredient_measurements(ingredient_id, ingredient_measurement)
+            VALUES (?, ?)
+        ''', (ingredient_id, item,))
+
+        # Associate the ingredient measurement with the recipe
+        ingredient_measurement_id = cursor.lastrowid
         cursor = connection.execute('''
         INSERT INTO recipe_ingredients(recipe_id, ingredient_id)
         VALUES (?, ?)
-        ''', (recipe_id, ingredient_id))
+        ''', (recipe_id, ingredient_measurement_id))
 
     # Commit the changes to the database
     connection.commit()
