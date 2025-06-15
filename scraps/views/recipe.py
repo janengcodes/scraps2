@@ -14,7 +14,11 @@ import requests  # Assuming you're using requests for HTTP requests
 
 load_dotenv()
 GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
-# print(GOOGLE_API_KEY)
+
+if not GOOGLE_API_KEY:
+    raise RuntimeError("Missing GOOGLE_API_KEY in environment variables")
+
+genai.configure(api_key=GOOGLE_API_KEY)
 
 model = None
 

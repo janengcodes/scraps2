@@ -39,7 +39,7 @@ def saved_recipes():
             recipe_counter +=1
   
             unique_results.append({
-                'recipe_name': entry['name'],
+                'recipe_name': entry['recipe_name'],
                 'ingredients': [entry['ingredient_name']],
                 'instructions': instructions 
             })
