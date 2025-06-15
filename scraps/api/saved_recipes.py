@@ -58,8 +58,10 @@ def api_saved_recipes():
     connection = scraps.model.get_db()
 
     serialized_instructions = json.dumps(data_dict['instructions'])
+
+    # Save the recipe name and instruct ions into the database for the user
     cursor = connection.execute('''
-        INSERT INTO recipes(username, name, instructions)
+        INSERT INTO recipes(username, recipe_name, instructions)
         VALUES (?, ?, ?)
     ''', (logname, data_dict['name'], serialized_instructions,))
     recipe_id = cursor.lastrowid
@@ -71,9 +73,9 @@ def api_saved_recipes():
 
 
 
-    # insert ingredients into DB
+    # Save the ingredient measurements
     for item in data_dict['ingredients']:
-        # Make sure to check if the ingredient already exists
+        # First get the main ingredient name using spacy
         
         cursor = connection.execute('''
             INSERT INTO ingredients(ingredient_name)

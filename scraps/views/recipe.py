@@ -35,6 +35,8 @@ def recipe():
 
     initialize_generative_model()
     # global ingredients 
+
+    # Get ingredients from the form and enter them into the user's pantry
     ingredients = flask.request.form.getlist('ingredient')
     output = ""
 
@@ -119,7 +121,7 @@ def recipe():
   
 
         context = {
-            "name": data_dict["name"],
+            "recipe_name": data_dict["name"],
             "ingredients_list": data_dict["ingredients"],
             "instructions_list": data_dict["instructions"],
             "json": json.dumps(data_dict),
