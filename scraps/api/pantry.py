@@ -51,7 +51,7 @@ def cookable_meals(username):
 
     # Get all recipes from the meal calendar
     meals = connection.execute('''
-        SELECT mci.meal_day, r.recipe_id, r.name AS recipe_name
+        SELECT mci.meal_day, r.recipe_id, r.recipe_name AS recipe_name
         FROM meal_calendar_item mci
         JOIN recipes r ON mci.recipe_id = r.recipe_id
         WHERE mci.meal_calendar_id = ?

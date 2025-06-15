@@ -17,14 +17,14 @@ def get_saved_recipes():
     connection = scraps.model.get_db()
 
     query = ''' 
-    SELECT recipe_id, name
+    SELECT recipe_id, recipe_name
     FROM recipes
     WHERE username = ?
     '''
     recipes = connection.execute(query, (logname,)).fetchall()
 
     recipe_list = [
-        {"recipe_id": row["recipe_id"], "name": row["name"]}
+        {"recipe_id": row["recipe_id"], "name": row["recipe_name"]}
         for row in recipes
     ]
     return flask.jsonify(recipe_list)
