@@ -9,7 +9,7 @@ from scraps.api.exceptions import AuthException
 from scraps.api.exceptions import check_auth
 import requests
 import numpy as np
-from rapidfuzz import fuzz, process
+# from rapidfuzz import fuzz, process
 
 
 
@@ -80,66 +80,69 @@ def cookable_meals(username):
 
 
 
-def fuzzy_match_pantry(pantry_items, meal_cal_items, threshold=80):
-    # Create a dictionary mapping pantry items to their split up words 
-    # Keep track of the highest scoring match for each pantry item
-    # If the score is below the threshold, add it to the non-matches
-    meal_cal_map = defaultdict(list)
-    scores_map = defaultdict(int)
-    pantry_items = [item.lower() for item in pantry_items]
-    meal_cal_items = [item.lower() for item in meal_cal_items]
-    print(f"Pantry items: {pantry_items}")
-    print(f"Meal calendar items: {meal_cal_items}")
-    non_matches = []
-    for meal_cal_item in meal_cal_items:
-        words = meal_cal_item.lower().replace(',', '').split()
-        meal_cal_map[meal_cal_item] = words
-    # initialize the scores_map
-    for meal_cal_item in meal_cal_items:
-        scores_map[meal_cal_item] = 0
+# def fuzzy_match_pantry(pantry_items, meal_cal_items, threshold=80):
+#     # Create a dictionary mapping pantry items to their split up words 
+#     # Keep track of the highest scoring match for each pantry item
+#     # If the score is below the threshold, add it to the non-matches
+#     meal_cal_map = defaultdict(list)
+#     scores_map = defaultdict(int)
+#     pantry_items = [item.lower() for item in pantry_items]
+#     meal_cal_items = [item.lower() for item in meal_cal_items]
+#     print(f"Pantry items: {pantry_items}")
+#     print(f"Meal calendar items: {meal_cal_items}")
+#     non_matches = []
+#     for meal_cal_item in meal_cal_items:
+#         words = meal_cal_item.lower().replace(',', '').split()
+#         meal_cal_map[meal_cal_item] = words
+#     # initialize the scores_map
+#     for meal_cal_item in meal_cal_items:
+#         scores_map[meal_cal_item] = 0
 
-    for k, v in meal_cal_map.items():
-        for meal_cal_word in v:
-            for pantry_word in pantry_items:
-                best_match, score, _ = process.extractOne(
-                    meal_cal_word, pantry_word, scorer=fuzz.token_set_ratio
-                )
-            if score > scores_map[k]:
-                scores_map[k] = score
-    for k, v in scores_map.items():
-        if v < threshold:
-            # threshold 
+#     for k, v in meal_cal_map.items():
+#         for meal_cal_word in v:
+#             for pantry_word in pantry_items:
+#                 best_match, score, _ = process.extractOne(
+#                     meal_cal_word, pantry_word, scorer=fuzz.token_set_ratio
+#                 )
+#             if score > scores_map[k]:
+#                 scores_map[k] = score
+#     for k, v in scores_map.items():
+#         if v < threshold:
+#             # threshold 
 
-            print("threshold not met", k)
-            pantry_item_found = False
+#             print("threshold not met", k)
+#             pantry_item_found = False
 
-            # for p in pantry_items:
-            #     p_words = p.lower().replace(',', '').split()
-            #     for p_word in p_words:
-            #         if p_word in k:
-            #             pantry_item_found = True
+#             # for p in pantry_items:
+#             #     p_words = p.lower().replace(',', '').split()
+#             #     for p_word in p_words:
+#             #         if p_word in k:
+#             #             pantry_item_found = True
             
-            if not pantry_item_found:
-                non_matches.append(k)
+#             if not pantry_item_found:
+#                 non_matches.append(k)
             
-    print(f"Scores map: {scores_map}")
-    print(f"Non-matches: {non_matches}")
-    return non_matches
+#     print(f"Scores map: {scores_map}")
+#     print(f"Non-matches: {non_matches}")
+#     return non_matches
 
+
+# def get_diff_ingredients(pantry_ingredients, meal_calendar_ingredients):
+    
 def get_ingredients_from_pantry(pantry_id):
     pantry_ingredients_list = []
     connection = scraps.model.get_db()
-
+    # Get the list of pantry ids
     pantry_ingredients = connection.execute('''
         SELECT ingredient_id FROM pantry_ingredients WHERE pantry_id = ?
     ''', (pantry_id,)).fetchall()
 
     pantry_ingredients_list = []
-
+    # Get the ingredient names 
     for pantry_ingredient in pantry_ingredients:
         ingredient_id = pantry_ingredient['ingredient_id']
         ingredient = connection.execute('''
-            SELECT ingredient_name, food_group
+            SELECT ingredient_name
             FROM ingredients
             WHERE ingredient_id = ?
         ''', (ingredient_id,)).fetchone()
@@ -150,7 +153,7 @@ def get_ingredients_from_pantry(pantry_id):
 
 def get_ingredients_from_meal_calendar(meal_calendar_ingredient_ids):
     connection = scraps.model.get_db()
- 
+    # Get meal calendar ingredient names 
     meal_calendar_ingredients_names = connection.execute('''
         SELECT ingredient_name
         FROM ingredients WHERE ingredient_id IN ({})
@@ -159,13 +162,17 @@ def get_ingredients_from_meal_calendar(meal_calendar_ingredient_ids):
     return meal_calendar_ingredient_actual_names
 
 def get_shopping_list(pantry_id, meal_calendar_ingredient_ids):
-    # get pantry ingredients
-    pantry_ingredients = get_ingredients_from_pantry(pantry_id)
-    # get meal calendar ingredeints 
+    # Get meal calendar ingredients 
     meal_calendar_ingredients = get_ingredients_from_meal_calendar(meal_calendar_ingredient_ids)
-    # find the matches
-    matches = fuzzy_match_pantry(pantry_ingredients, meal_calendar_ingredients)
-    return matches
+
+    # Get pantry ingredients
+    pantry_ingredients = get_ingredients_from_pantry(pantry_id)
+    
+    missing_ingredients = set(meal_calendar_ingredients) - set(pantry_ingredients)
+
+    print(f"Missing ingredients: {missing_ingredients}")
+    
+    return missing_ingredients
 
     
 
