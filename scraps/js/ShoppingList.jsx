@@ -112,7 +112,7 @@ export default function ShoppingList({ ingredients, setIngredients, meals }) {
                                             <label>
                                                 <input 
                                                     type="checkbox" 
-                                                    onChange={() => handleCheckOffIngredient(item.ingredient_name)}
+                                                    // onChange={() => handleCheckOffIngredient(item.ingredient_name)}
                                                 />
                                                 <span>{item.ingredient_name}</span>
                                             </label>

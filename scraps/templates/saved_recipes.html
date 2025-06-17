@@ -27,7 +27,7 @@
     <div class="all_recipes">
       {% for recipe in recipes %}
         <div class="recipe_card" onclick="maximizeRecipe(this)">
-          <p class="space-mono-regular-big">{{ recipe.name }}<p>
+          <p class="space-mono-regular-big">{{ recipe.recipe_name }}<p>
           <p class="be-vietnam-pro-boldish">Ingredients:</p>
           <p class="be-vietnam-pro">
             {% for ingredient in recipe.ingredients %}

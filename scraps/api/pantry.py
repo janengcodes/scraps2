@@ -70,8 +70,8 @@ def cookable_meals(username):
 
         recipe_ingredient_names = [row["ingredient_name"] for row in ingredient_rows]
         
-        # Use fuzzy matching to determine if all ingredients are in pantry
-        missing = fuzzy_match_pantry(pantry_ingredients, recipe_ingredient_names)
+        # Determine if all ingredients are in pantry
+        missing = set(recipe_ingredient_names) - set(pantry_ingredients)
         cookable_map[meal["recipe_name"]] = len(missing) == 0    
         # cookable_map[meal["recipe_name"]] = False
 
@@ -172,10 +172,32 @@ def get_shopping_list(pantry_id, meal_calendar_ingredient_ids):
 
     print(f"Missing ingredients: {missing_ingredients}")
     
-    return missing_ingredients
+    return list(missing_ingredients)
 
+
+def get_meal_cal_ingredients(meal_cal_id):
+    # Get the recipes that are in the meal calendar
+    connection = scraps.model.get_db()
+    meal_calendar_recipes = connection.execute('''
+        SELECT recipe_id, meal_name
+        FROM meal_calendar_item WHERE meal_calendar_id = ?
+    ''', (meal_cal_id,)).fetchall()
+
+    meal_calendar_recipe_ids = [
+        recipe['recipe_id'] for recipe in meal_calendar_recipes
+    ]
+    meal_calendar_recipe_ids = list(set(meal_calendar_recipe_ids))
     
+    if not meal_calendar_recipe_ids:
+        print("No recipes found in meal calendar.")
+        return flask.jsonify({'ingredient_ids': []}), 200
 
+    # get all the ingredients in the recipes that are in the meal calendar  
+    meal_calendar_ingredients = connection.execute('''
+        SELECT ingredient_id
+        FROM recipe_ingredients WHERE recipe_id IN ({})
+    '''.format(','.join('?' * len(meal_calendar_recipe_ids))), meal_calendar_recipe_ids).fetchall()
+    return meal_calendar_ingredients
 
 @scraps.app.route('/api/currentPantry/<username>', methods=['GET'])
 def current_pantry(username):
@@ -210,35 +232,13 @@ def current_pantry(username):
     if meal_calendar_id is None:
         print("No meal calendar found for user.")
         return flask.jsonify({'error': 'No meal calendar found'}), 404
-
+    # Get meal calendar ingredient ids
     meal_calendar_id = meal_calendar_id['meal_calendar_id']
-    print(f"Meal calendar ID: {meal_calendar_id}")
-
-    # Get the recipes that are in the meal calendar
-    meal_calendar_recipes = connection.execute('''
-        SELECT recipe_id, meal_name
-        FROM meal_calendar_item WHERE meal_calendar_id = ?
-    ''', (meal_calendar_id,)).fetchall()
-
-    meal_calendar_recipe_ids = [
-        recipe['recipe_id'] for recipe in meal_calendar_recipes
-    ]
-    meal_calendar_recipe_ids = list(set(meal_calendar_recipe_ids))
-    
-    if not meal_calendar_recipe_ids:
-        print("No recipes found in meal calendar.")
-        return flask.jsonify({'ingredient_ids': []}), 200
-
-    # get all the ingredients in the recipes that are in the meal calendar  
-    meal_calendar_ingredients = connection.execute('''
-        SELECT ingredient_id
-        FROM recipe_ingredients WHERE recipe_id IN ({})
-    '''.format(','.join('?' * len(meal_calendar_recipe_ids))), meal_calendar_recipe_ids).fetchall()
-    # save all the ingredient ids
+    meal_calendar_ingredients = get_meal_cal_ingredients(meal_calendar_id)
     meal_calendar_ingredient_ids = [ingredient['ingredient_id'] for ingredient in meal_calendar_ingredients]
-    # get the ingredient names
+    # Get the shopping list 
     ingredient_names = get_shopping_list(pantry_id, meal_calendar_ingredient_ids)
-    print(f"Ingredient names in shopping list: {ingredient_names}")
+    
     return flask.jsonify({'ingredient_names': ingredient_names}), 200
 
     
