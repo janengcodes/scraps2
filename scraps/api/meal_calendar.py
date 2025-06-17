@@ -75,7 +75,7 @@ def add_to_meal_cal(username):
         '''
         SELECT recipe_id
         FROM recipes
-        WHERE name = ?
+        WHERE recipe_name = ?
         ''', (recipe_link,)
     ).fetchone()
     if recipe is None:
