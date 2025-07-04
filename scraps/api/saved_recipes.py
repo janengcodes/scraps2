@@ -4,6 +4,7 @@ from flask import redirect
 import scraps
 import json
 import spacy
+import re
 
 from scraps.api.exceptions import AuthException
 from scraps.api.user import check_login
@@ -32,16 +33,21 @@ def get_saved_recipes():
     ]
     return flask.jsonify(recipe_list)
 
-
 def extract_noun(text):
     text = text.lower()
-    # remove commas 
+    # Remove anything in parentheses
+    text = re.sub(r'\([^)]*\)', '', text)
+    # Remove commas
     text = text.replace(',', '')
     doc = nlp(text)
-    # extract nouns that aren't units or quantities
+    # Extract nouns that aren't units or quantities
     ingredient = []
     for chunk in doc.noun_chunks:
-        if not any(tok.like_num or tok.lower_ in ['cup', 'cups', 'tablespoon', 'tablespoons', 'teaspoon', 'teaspoons', 'gram', 'grams', 'ounce', 'ounces'] for tok in chunk):
+        if not any(tok.like_num or tok.lower_ in [
+            'cup', 'cups', 'tablespoon', 'tablespoons',
+            'teaspoon', 'teaspoons', 'gram', 'grams',
+            'ounce', 'ounces', 'optional', 'chopped', 'boneless'
+        ] for tok in chunk):
             ingredient.append(chunk.text.strip())
     
     return ' '.join(ingredient)
@@ -87,11 +93,12 @@ def api_saved_recipes():
     ''', (logname,)).fetchone()
 
 
-
+    ingredient_nouns = []
     # Save the ingredient measurements
     for item in data_dict['ingredients']:
         # First get the main ingredient name using spacy
         ingredient_noun = extract_noun(item)
+        ingredient_nouns.append(ingredient_nouns)
         # Save the main ingredient into the ingredients table 
         cursor = connection.execute('''
             INSERT INTO ingredients(ingredient_name)
@@ -119,7 +126,7 @@ def api_saved_recipes():
         INSERT INTO recipe_ingredient_measurements(recipe_id, ingredient_measurement_id)
         VALUES (?, ?)
         ''', (recipe_id, ingredient_measurement_id))
-
+    print(f"Ingredient nouns: {ingredient_nouns}")
     # Commit the changes to the database
     connection.commit()
 

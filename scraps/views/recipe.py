@@ -99,6 +99,8 @@ def recipe():
 
         - Use a valid JSON format, no markdown or extra characters.
         - Do not include '*', '#', or additional formatting in the ingredient or instruction values.
+        - Do not use descriptors or adjectives for the ingredients except for the necessary measurements in the following list: 'cup', 'cups', 'tablespoon', 'tablespoons', 'teaspoon', 'teaspoons', 'gram', 'grams', 'ounce', 'ounces'
+        - Do not combine salt and pepper into one ingredient, list them separately instead 
         """
 
         response = model.generate_content(base_prompt)

@@ -15,14 +15,7 @@ def saved_recipes():
     logname = flask.session.get('username')
 
     connection = scraps.model.get_db()
-
-    # saved_recipes = connection.execute('''
-    #     select r.recipe_name, i.ingredient_name, r.instructions
-    #     from recipes r
-    #     join recipe_ingredients ri on r.recipe_id = ri.recipe_id
-    #     join ingredients i on i.ingredient_id = ri.ingredient_id
-    #     where r.username = ?
-    # ''', (logname,)).fetchall()
+ 
 
     saved_recipes = connection.execute('''
         select r.recipe_name, im.ingredient_measurement, r.instructions
