@@ -67,67 +67,20 @@ def cookable_meals(username):
             JOIN ingredients i ON ri.ingredient_id = i.ingredient_id
             WHERE ri.recipe_id = ?
         ''', (meal["recipe_id"],)).fetchall()
+        recipe_ingredient_names = [row["ingredient_name"].lower() for row in ingredient_rows]
 
-        recipe_ingredient_names = [row["ingredient_name"] for row in ingredient_rows]
-        
         # Determine if all ingredients are in pantry
+        # See if any of the ingredients for the recipe aren't in the panty 
         missing = set(recipe_ingredient_names) - set(pantry_ingredients)
         cookable_map[meal["recipe_name"]] = len(missing) == 0    
+        if not cookable_map[meal["recipe_name"]]:
+            
+            print(f"Missing ingredients for cool{missing}")
         # cookable_map[meal["recipe_name"]] = False
 
     print(f"Cookable map: {cookable_map}")
     return flask.jsonify(cookable_map), 200
 
-
-
-# def fuzzy_match_pantry(pantry_items, meal_cal_items, threshold=80):
-#     # Create a dictionary mapping pantry items to their split up words 
-#     # Keep track of the highest scoring match for each pantry item
-#     # If the score is below the threshold, add it to the non-matches
-#     meal_cal_map = defaultdict(list)
-#     scores_map = defaultdict(int)
-#     pantry_items = [item.lower() for item in pantry_items]
-#     meal_cal_items = [item.lower() for item in meal_cal_items]
-#     print(f"Pantry items: {pantry_items}")
-#     print(f"Meal calendar items: {meal_cal_items}")
-#     non_matches = []
-#     for meal_cal_item in meal_cal_items:
-#         words = meal_cal_item.lower().replace(',', '').split()
-#         meal_cal_map[meal_cal_item] = words
-#     # initialize the scores_map
-#     for meal_cal_item in meal_cal_items:
-#         scores_map[meal_cal_item] = 0
-
-#     for k, v in meal_cal_map.items():
-#         for meal_cal_word in v:
-#             for pantry_word in pantry_items:
-#                 best_match, score, _ = process.extractOne(
-#                     meal_cal_word, pantry_word, scorer=fuzz.token_set_ratio
-#                 )
-#             if score > scores_map[k]:
-#                 scores_map[k] = score
-#     for k, v in scores_map.items():
-#         if v < threshold:
-#             # threshold 
-
-#             print("threshold not met", k)
-#             pantry_item_found = False
-
-#             # for p in pantry_items:
-#             #     p_words = p.lower().replace(',', '').split()
-#             #     for p_word in p_words:
-#             #         if p_word in k:
-#             #             pantry_item_found = True
-            
-#             if not pantry_item_found:
-#                 non_matches.append(k)
-            
-#     print(f"Scores map: {scores_map}")
-#     print(f"Non-matches: {non_matches}")
-#     return non_matches
-
-
-# def get_diff_ingredients(pantry_ingredients, meal_calendar_ingredients):
     
 def get_ingredients_from_pantry(pantry_id):
     pantry_ingredients_list = []
@@ -167,11 +120,8 @@ def get_shopping_list(pantry_id, meal_calendar_ingredient_ids):
 
     # Get pantry ingredients
     pantry_ingredients = get_ingredients_from_pantry(pantry_id)
-    
-    missing_ingredients = set(meal_calendar_ingredients) - set(pantry_ingredients)
-
-    print(f"Missing ingredients: {missing_ingredients}")
-    
+    # Get the missing ingredients 
+    missing_ingredients = list(set(meal_calendar_ingredients) - set(pantry_ingredients))    
     return list(missing_ingredients)
 
 
