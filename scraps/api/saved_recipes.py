@@ -1,4 +1,4 @@
-"""REST API for likes."""
+"""REST API for retrieving saved recipes for React."""
 import flask
 from flask import redirect
 import scraps
@@ -10,6 +10,7 @@ from scraps.api.user import check_login
 
 # load spacy model for ingredient extraction
 nlp = spacy.load("en_core_web_sm")
+
 
 @scraps.app.route('/api/saved_recipes/', methods=['GET'])
 def get_saved_recipes():
@@ -96,8 +97,16 @@ def api_saved_recipes():
             INSERT INTO ingredients(ingredient_name)
             VALUES (?)
         ''', (ingredient_noun,))
-        # Get the ingredient id
+        # Create an ingredient ID
         ingredient_id = cursor.lastrowid
+        # Associate the ingredient name with the recipe 
+
+        temp_cursor = connection.execute (
+            '''
+            INSERT INTO recipe_ingredients(recipe_id, ingredient_id)
+            VALUES (?, ?)
+            ''', (recipe_id, ingredient_id))
+
         # Save the ingredient measurement into the ingredient_measurements table 
         cursor = connection.execute('''
             INSERT INTO ingredient_measurements(ingredient_id, ingredient_measurement)

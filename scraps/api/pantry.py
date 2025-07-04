@@ -61,6 +61,7 @@ def cookable_meals(username):
 
     for meal in meals:
         # Get ingredients for each recipe
+        # Get the ingredient names from recipe_ingredients table 
         ingredient_rows = connection.execute('''
             SELECT i.ingredient_name
             FROM recipe_ingredients ri
@@ -72,10 +73,11 @@ def cookable_meals(username):
         # Determine if all ingredients are in pantry
         # See if any of the ingredients for the recipe aren't in the panty 
         missing = set(recipe_ingredient_names) - set(pantry_ingredients)
-        cookable_map[meal["recipe_name"]] = len(missing) == 0    
-        if not cookable_map[meal["recipe_name"]]:
-            
-            print(f"Missing ingredients for cool{missing}")
+        cookable_map[meal["recipe_name"]] = len(missing) == 0
+
+        # Check recipe ingredient names compared to the pantry ingredient names 
+        print(f"Recipe ingredient names: {recipe_ingredient_names}, Pantry ingredient names: {pantry_ingredients}")    
+
         # cookable_map[meal["recipe_name"]] = False
 
     print(f"Cookable map: {cookable_map}")

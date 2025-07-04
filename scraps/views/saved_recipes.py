@@ -1,3 +1,4 @@
+"""View for the user's saved recipes."""
 import flask
 from flask import redirect, render_template, Flask
 import scraps
