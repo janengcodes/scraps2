@@ -41,11 +41,13 @@ import inflect
 nlp = spacy.load("en_core_web_sm")
 p = inflect.engine()
 
+
+# Extract the noun to compare against ingredients in the database 
 def extract_noun(text):
     text = text.lower()
     text = re.sub(r'\([^)]*\)', '', text)  # Remove anything in parentheses
     text = text.replace(',', '')           # Remove commas
-    doc = nlp(text)
+    doc = nlp(text) 
 
     ignore_words = {
         'cup', 'cups', 'tablespoon', 'tablespoons',

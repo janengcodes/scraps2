@@ -2,37 +2,22 @@ PRAGMA foreign_keys = ON;
 
 
 INSERT INTO ingredients(ingredient_name, season, food_group)
-VALUES('Apple', 'fall', 'fruit');
+VALUES('Apples', 'fall', 'fruit');
 
 INSERT INTO ingredients(ingredient_name, season, food_group)
-VALUES('Apricot', 'spring', 'fruit');
+VALUES('Apricots', 'spring', 'fruit');
 
 INSERT INTO ingredients(ingredient_name, season, food_group)
-VALUES('Cherry', 'spring', 'fruit');
+VALUES('Cherries', 'spring', 'fruit');
 
 INSERT INTO ingredients(ingredient_name, season, food_group)
-VALUES('Cranberry', 'fall', 'fruit');
+VALUES('Lemons', 'spring', 'fruit');
 
 INSERT INTO ingredients(ingredient_name, season, food_group)
-VALUES('Fig', 'fall', 'fruit');
+VALUES('Peaches', 'summer', 'fruit');
 
 INSERT INTO ingredients(ingredient_name, season, food_group)
-VALUES('Grapefruit', 'winter', 'fruit');
-
-INSERT INTO ingredients(ingredient_name, season, food_group)
-VALUES('Kumquat', 'winter', 'fruit');
-
-INSERT INTO ingredients(ingredient_name, season, food_group)
-VALUES('Lemon', 'spring', 'fruit');
-
-INSERT INTO ingredients(ingredient_name, season, food_group)
-VALUES('Peach', 'summer', 'fruit');
-
-INSERT INTO ingredients(ingredient_name, season, food_group)
-VALUES('Persimmon', 'winter', 'fruit');
-
-INSERT INTO ingredients(ingredient_name, season, food_group)
-VALUES('Strawberry', 'summer', 'fruit');
+VALUES('Strawberries', 'summer', 'fruit');
 
 INSERT INTO ingredients(ingredient_name, season, food_group)
 VALUES('Watermelon', 'summer', 'fruit');
@@ -50,7 +35,7 @@ INSERT INTO ingredients(ingredient_name, season, food_group)
 VALUES('Cabbage', 'winter', 'veggies');
 
 INSERT INTO ingredients(ingredient_name, season, food_group)
-VALUES('Carrot', 'winter', 'veggies');
+VALUES('Carrots', 'winter', 'veggies');
 
 INSERT INTO ingredients(ingredient_name, season, food_group)
 VALUES('Chili', 'summer', 'veggies');
@@ -71,7 +56,7 @@ INSERT INTO ingredients(ingredient_name, season, food_group)
 VALUES('Squash', 'fall', 'veggies');
 
 INSERT INTO ingredients(ingredient_name, season, food_group)
-VALUES('Turnip', 'fall', 'veggies');
+VALUES('Turnips', 'fall', 'veggies');
 
 INSERT INTO ingredients(ingredient_name, food_group)
 VALUES('Butter', 'dairy');
@@ -98,7 +83,7 @@ INSERT INTO ingredients(ingredient_name, food_group)
 VALUES('Chicken Breast', 'protein');
 
 INSERT INTO ingredients(ingredient_name, food_group)
-VALUES('Ground Beef', 'protein');
+VALUES('Beef', 'protein');
 
 INSERT INTO ingredients(ingredient_name, food_group)
 VALUES('Salmon', 'protein');
