@@ -43,11 +43,12 @@ p = inflect.engine()
 
 
 # Extract the noun to compare against ingredients in the database 
+
 def extract_noun(text):
     text = text.lower()
-    text = re.sub(r'\([^)]*\)', '', text)  # Remove anything in parentheses
-    text = text.replace(',', '')           # Remove commas
-    doc = nlp(text) 
+    text = re.sub(r'\([^)]*\)', '', text)
+    text = text.replace(',', '')
+    doc = nlp(text)
 
     ignore_words = {
         'cup', 'cups', 'tablespoon', 'tablespoons',
@@ -63,10 +64,7 @@ def extract_noun(text):
         for tok in chunk:
             if tok.like_num or tok.lower_ in ignore_words:
                 continue
-            if tok.pos_ in ['NOUN', 'PROPN']:
-                singular = p.singular_noun(tok.text)
-                tokens.append(singular if singular else tok.text)
-            elif tok.pos_ == 'ADJ':
+            if tok.pos_ in ['NOUN', 'PROPN', 'ADJ']:
                 tokens.append(tok.text)
         if tokens:
             ingredients.append(' '.join(tokens))
