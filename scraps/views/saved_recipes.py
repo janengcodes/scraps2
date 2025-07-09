@@ -49,7 +49,7 @@ def saved_recipes():
         else:
             unique_results[recipe_counter - 1]['ingredients'].append(entry['ingredient_measurement'])
 
-    print("unique results", unique_results)
+    # print("unique results", unique_results)
     
     context = {
         "recipes": unique_results

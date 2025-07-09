@@ -5,13 +5,14 @@ import scraps
 import json
 import spacy
 import re
+import inflect
 
 from scraps.api.exceptions import AuthException
 from scraps.api.user import check_login
 
 # load spacy model for ingredient extraction
 nlp = spacy.load("en_core_web_sm")
-
+p = inflect.engine()
 
 @scraps.app.route('/api/saved_recipes/', methods=['GET'])
 def get_saved_recipes():
@@ -33,24 +34,43 @@ def get_saved_recipes():
     ]
     return flask.jsonify(recipe_list)
 
+import re
+import spacy
+import inflect
+
+nlp = spacy.load("en_core_web_sm")
+p = inflect.engine()
+
 def extract_noun(text):
     text = text.lower()
-    # Remove anything in parentheses
-    text = re.sub(r'\([^)]*\)', '', text)
-    # Remove commas
-    text = text.replace(',', '')
+    text = re.sub(r'\([^)]*\)', '', text)  # Remove anything in parentheses
+    text = text.replace(',', '')           # Remove commas
     doc = nlp(text)
-    # Extract nouns that aren't units or quantities
-    ingredient = []
+
+    ignore_words = {
+        'cup', 'cups', 'tablespoon', 'tablespoons',
+        'teaspoon', 'teaspoons', 'gram', 'grams',
+        'ounce', 'ounces', 'optional', 'chopped', 'boneless',
+        'sliced', 'diced', 'fresh', 'large', 'small'
+    }
+
+    ingredients = []
+
     for chunk in doc.noun_chunks:
-        if not any(tok.like_num or tok.lower_ in [
-            'cup', 'cups', 'tablespoon', 'tablespoons',
-            'teaspoon', 'teaspoons', 'gram', 'grams',
-            'ounce', 'ounces', 'optional', 'chopped', 'boneless'
-        ] for tok in chunk):
-            ingredient.append(chunk.text.strip())
-    
-    return ' '.join(ingredient)
+        tokens = []
+        for tok in chunk:
+            if tok.like_num or tok.lower_ in ignore_words:
+                continue
+            if tok.pos_ in ['NOUN', 'PROPN']:
+                singular = p.singular_noun(tok.text)
+                tokens.append(singular if singular else tok.text)
+            elif tok.pos_ == 'ADJ':
+                tokens.append(tok.text)
+        if tokens:
+            ingredients.append(' '.join(tokens))
+
+    return ' '.join(ingredients)
+
 
 
 # POST method for the saved recipes 
@@ -98,6 +118,7 @@ def api_saved_recipes():
     for item in data_dict['ingredients']:
         # First get the main ingredient name using spacy
         ingredient_noun = extract_noun(item)
+        print(f"Ingredient: {item}, Ingredient Noun: {ingredient_noun}")
         ingredient_nouns.append(ingredient_nouns)
         # Save the main ingredient into the ingredients table 
         cursor = connection.execute('''
@@ -126,7 +147,7 @@ def api_saved_recipes():
         INSERT INTO recipe_ingredient_measurements(recipe_id, ingredient_measurement_id)
         VALUES (?, ?)
         ''', (recipe_id, ingredient_measurement_id))
-    print(f"Ingredient nouns: {ingredient_nouns}")
+    # print(f"Ingredient nouns: {ingredient_nouns}")
     # Commit the changes to the database
     connection.commit()
 
