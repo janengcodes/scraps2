@@ -90,6 +90,13 @@ export default function ShoppingList({ ingredients, setIngredients, meals }) {
             </div>
         );
     };
+
+    function toTitleCase(str) {
+    return str.replace(/\w\S*/g, (txt) => {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        });
+    }
+
     
 
     return (
@@ -110,14 +117,13 @@ export default function ShoppingList({ ingredients, setIngredients, meals }) {
                                     {shoppingListIngredients.map((item, i) => (
                                         <li key={i} className="shopping-list-item">
                                             <label>
-                                                <input 
-                                                    type="checkbox" 
-                                                />
-                                                <span>{item.ingredient_name}</span>
+                                                <input type="checkbox" />
+                                                <span>{toTitleCase(item.ingredient_name)}</span>
                                             </label>
                                         </li>
                                     ))}
                                 </ul>
+
                         )}
                     </div>
                     {daysOfWeek.map((day, index) => (

@@ -68,7 +68,10 @@ def cookable_meals(username):
             JOIN ingredients i ON ri.ingredient_id = i.ingredient_id
             WHERE ri.recipe_id = ?
         ''', (meal["recipe_id"],)).fetchall()
-        recipe_ingredient_names = [row["ingredient_name"].lower() for row in ingredient_rows]
+        recipe_ingredient_names = []
+        for row in ingredient_rows:
+            if row["ingredient_name"]:
+                recipe_ingredient_names.append(row["ingredient_name"].lower())
 
         # Determine if all ingredients are in pantry
         # See if any of the ingredients for the recipe aren't in the panty 

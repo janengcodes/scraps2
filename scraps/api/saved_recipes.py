@@ -54,7 +54,8 @@ def extract_noun(text):
         'cup', 'cups', 'tablespoon', 'tablespoons',
         'teaspoon', 'teaspoons', 'gram', 'grams',
         'ounce', 'ounces', 'optional', 'chopped', 'boneless',
-        'sliced', 'diced', 'fresh', 'large', 'small'
+        'sliced', 'diced', 'fresh', 'large', 'small', 
+        'pound', 'pounds', 'kilograms', 'kilogram', 'all', 'purpose'
     }
 
     ingredients = []
