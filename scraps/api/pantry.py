@@ -301,7 +301,7 @@ def get_pantry(username):
 @scraps.app.route('/api/add-to-pantry/<username>', methods=['POST'])
 def add_to_pantry(username):
     logname = check_auth()
-
+    print("in add to pantry function")
     if 'username' not in flask.session:
         return flask.redirect(flask.url_for('show_accounts_login'))
     try:
@@ -395,11 +395,13 @@ def add_to_pantry(username):
 def add_to_pantry_check_box(username):
     logname = check_auth()
     data = request.get_json()
-    ingredient_name = data.get('ingredient_name')
+    
+    ingredient_name = data.get('ingredient_name')['ingredient_name']
+    print("Ingredient name called is", ingredient_name)
     if not ingredient_name:
         return jsonify({"error": "Ingredient name is None"}), 400
     connection = scraps.model.get_db()
-        # Get pantry ID
+    # Get pantry ID
     pantry = connection.execute('''
         SELECT pantry_id
         FROM pantry

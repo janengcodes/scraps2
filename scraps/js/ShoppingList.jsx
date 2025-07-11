@@ -44,20 +44,19 @@ export default function ShoppingList({ ingredients, setIngredients, meals }) {
 
     const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
+    // Handle checking of the ingredient: add it to the pantry move it to the bottom of the checklist
+    // Have something that can clear the checklist
     const handleCheckOffIngredient = (ingredientName) => {
-        axios.post(`/api/add-to-pantry-check-box/${username}`, { ingredient_name: ingredientName })
+        axios.post(`/api/add-to-pantry-check-box/${username}`, {
+            ingredient_name: ingredientName
+        })
         .then((response) => {
             console.log(`${ingredientName} added to pantry`);
-            // Remove the ingredient from the user's shopping list
-            setShoppingListIngredients(prev =>
-                prev.filter(ingredient => ingredient.ingredient_name !== ingredientName)
-            );
-            // Add the ingredient to the user's pantry
         })
         .catch((error) => {
             console.error(`Failed to add ${ingredientName} to pantry:`, error);
         });
-    }
+    };
 
 
     const isMealCookable = (meal, pantry) => {
@@ -117,7 +116,10 @@ export default function ShoppingList({ ingredients, setIngredients, meals }) {
                                     {shoppingListIngredients.map((item, i) => (
                                         <li key={i} className="shopping-list-item">
                                             <label>
-                                                <input type="checkbox" />
+                                                <input 
+                                                    type="checkbox" 
+                                                    onChange = {(e) => handleCheckOffIngredient(item)}
+                                                />
                                                 <span>{toTitleCase(item.ingredient_name)}</span>
                                             </label>
                                         </li>
