@@ -10,7 +10,7 @@ import axios from 'axios';
 // Get the ingredients that the user still needs from the recipe
 
 
-export default function ShoppingList({ ingredients, setIngredients, meals }) {
+export default function ShoppingList({ ingredients, setIngredients, meals, refreshTrigger }) {
     // const [ingredients, setIngredients] = useState([])
     const [shoppingListIngredients, setShoppingListIngredients] = useState([])
     const username = localStorage.getItem("user");
@@ -40,7 +40,7 @@ export default function ShoppingList({ ingredients, setIngredients, meals }) {
                 console.log("Cookable meals:", response.data);
             })
             .catch((error) => console.error('Error fetching cookable meals:', error));
-    }, [username]);
+    }, [refreshTrigger], [username]);
 
     const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 

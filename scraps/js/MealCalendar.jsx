@@ -8,7 +8,7 @@ import '../static/css/style.css'
 import '../static/css/dashboard.css'
 import axios from 'axios';
 
-export default function MealCalendar({meals, setMeals}) {
+export default function MealCalendar({meals, setMeals, refreshTrigger, triggerRefresh}) {
   const [selectedDay, setSelectedDay] = useState(null);
   const [formValues, setFormValues] = useState({ mealType: "", mealName: "", selectedRecipe: ""});
   const [recipes, setRecipes] = useState([]);
@@ -28,10 +28,12 @@ export default function MealCalendar({meals, setMeals}) {
   
     try {
       const response = await axios.post(`/api/add-to-meal-cal/${username}`, newMeal);
-      // console.log('Meal saved to database:', response.data);
-  
+
       setMeals((prevMeals) => [...prevMeals, newMeal]);
-  
+
+      // Trigger both MealCalendar and ShoppingList to refresh
+      triggerRefresh();
+
       setFormValues({
         mealType: '',
         mealName: '',
@@ -40,6 +42,7 @@ export default function MealCalendar({meals, setMeals}) {
     } catch (error) {
       console.error('Error saving meal:', error);
     }
+
   };
   
 
@@ -54,17 +57,18 @@ export default function MealCalendar({meals, setMeals}) {
   }, []);
 
   useEffect(() => {
-    const fetchMeals = async () => {
-      try {
-        const res = await axios.get(`/api/add-to-meal-cal/${username}`);
-        setMeals(res.data);
-      } catch (err) {
-        console.error("Error fetching meals:", err);
-      }
-    };
+  const fetchMeals = async () => {
+    try {
+      const res = await axios.get(`/api/add-to-meal-cal/${username}`);
+      setMeals(res.data);
+    } catch (err) {
+      console.error("Error fetching meals:", err);
+    }
+  };
 
-    fetchMeals();
-  }, [username]);
+      fetchMeals();
+  }, [refreshTrigger, username]); // re-fetch on toggle
+
 
   const handleDayClick = (day) => {
     setSelectedDay(
