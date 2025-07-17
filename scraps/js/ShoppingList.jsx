@@ -15,6 +15,8 @@ export default function ShoppingList({ ingredients, setIngredients, meals, refre
     const [shoppingListIngredients, setShoppingListIngredients] = useState([])
     const username = localStorage.getItem("user");
     const [cookableMeals, setCookableMeals] = useState({});
+    const [refreshTrigger2, setRefreshTrigger2] = useState(false);
+
     // fetch the user's pantry data
     useEffect(() => {
         // Fetch the user's pantry data 
@@ -40,23 +42,25 @@ export default function ShoppingList({ ingredients, setIngredients, meals, refre
                 console.log("Cookable meals:", response.data);
             })
             .catch((error) => console.error('Error fetching cookable meals:', error));
-    }, [refreshTrigger], [username]);
+    }, [refreshTrigger, refreshTrigger2, username]);
 
     const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
     // Handle checking of the ingredient: add it to the pantry move it to the bottom of the checklist
     // Have something that can clear the checklist
     const handleCheckOffIngredient = (ingredientName) => {
-        axios.post(`/api/add-to-pantry-check-box/${username}`, {
-            ingredient_name: ingredientName
-        })
-        .then((response) => {
-            console.log(`${ingredientName} added to pantry`);
-        })
-        .catch((error) => {
-            console.error(`Failed to add ${ingredientName} to pantry:`, error);
-        });
+    axios.post(`/api/add-to-pantry-check-box/${username}`, {
+        ingredient_name: ingredientName
+    })
+    .then((response) => {
+        console.log(`${ingredientName} added to pantry`);
+        setRefreshTrigger2(prev => !prev); // 🔁 toggle to refresh
+    })
+    .catch((error) => {
+        console.error(`Failed to add ${ingredientName} to pantry:`, error);
+    });
     };
+
 
 
     const isMealCookable = (meal, pantry) => {
