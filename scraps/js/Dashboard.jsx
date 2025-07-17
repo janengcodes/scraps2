@@ -6,6 +6,8 @@ import ShoppingList from "./ShoppingList";
 export default function Dashboard() {
   const [meals, setMeals] = useState([]);
   const [ingredients, setIngredients] = useState([]);
+  // watch for changes to meals and then update ingredients accordingly
+  // useEffect that updates ingredients based on meals 
 
   return (
     <>
