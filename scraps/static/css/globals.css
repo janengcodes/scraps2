@@ -35,6 +35,13 @@ a {
   font-style: normal;
 } 
 
+.be-vietnam-pro-smaller {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-weight: 350;
+  font-style: normal;
+  font-size: 14px;
+} 
+
 .checkbox-be-vietnam-pro {
   font-family: 'Be Vietnam Pro', sans-serif;
   font-weight: 400;

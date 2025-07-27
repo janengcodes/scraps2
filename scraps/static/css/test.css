@@ -1,17 +1,20 @@
+body {
+    background-color: white;
+}
 .pantry-layout {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
     grid-template-rows: 1fr;
-    background-color: lightblue;
-    width: 80%;
+    /* background-color: lightblue; */
+    width: 90%;
     height: 100%;
-    margin-left: 3%;
+    margin-left: 5%;
     margin-top: 5%;
     gap: 1%;
 }
 
 .ingredients-cell {
-    background-color: lightcoral;
+    /* background-color: lightcoral; */
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
@@ -20,12 +23,9 @@
 
 }
 
-.ingredient-section {
-    background-color: bisque;
-}
 
 .ingredient-section:hover{
-    background-color: #F1F1F1;
+    background-color: #D9D9D9;
     border-radius: 2%;
 }
 
@@ -34,18 +34,23 @@
     padding: 3%;
 }
 
+li {
+    margin-top: 1.5%;
+}
+.ingredient-list {
+    margin-top: 5%;
+    margin-left: 15%;
+}
+
 .pantry-info-cell {
-    background-color: pink;
+    background-color: #F1F1F1;
     display: grid;
-    height: 100%;
+    height: 80%;
     width: 100%;
     grid-template-rows: 1fr 1fr;
     grid-template-columns: 1fr;
 }
 
-.pie-chart {
-    background-color: blueviolet;
-}
 
 .pie-chart-heading {
     padding: 3%;
@@ -58,12 +63,13 @@
 .isi-heading {
     padding: 3%;
 }
-.cuisine-matches {
-    background-color: pink;
-
-}
 
 .in-season-ingredients-cell {
-    background-color: yellow;
+    /* background-color: yellow; */
+    background-color: #DDF3A4;
+    height: 80%;
 }
 
+ul.a {
+  list-style-type: circle;
+}
