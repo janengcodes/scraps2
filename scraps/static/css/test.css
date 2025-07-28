@@ -43,7 +43,7 @@ body {
 }
 
 li {
-    margin-top: 1.5%;
+    margin-top: 2%;
 }
 .ingredient-list {
     margin-top: 5%;
@@ -83,20 +83,23 @@ ul.a {
 }
 
 
-input {
-    margin-top: 2%;
-}
-
 
 input[type=text] {
+    margin-top: 2%;
     border: none;
     border-bottom: 1px solid black;
-    background-color: #D9D9D9;
+    background-color: white;
     opacity: 1;
 	animation-name: fadeInOpacity;
 	animation-iteration-count: 1;
 	animation-timing-function: ease-in;
 	animation-duration: 0.5s;
+}
+
+input:focus {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid black;
 }
 
 
@@ -108,3 +111,14 @@ input[type=text] {
 		opacity: 1;
 	}
 } 
+
+
+input[type="submit"] {
+    
+}
+
+.my-form, 
+.my-form * {
+  all: unset;       /* Remove all inherited/default styles */
+  display: revert;  /* Reset display to default */
+}
