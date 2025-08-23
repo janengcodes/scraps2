@@ -17,10 +17,21 @@ body {
     /* background-color: lightcoral; */
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 0.25fr 1fr 1fr 1fr;
+    grid-template-areas: 
+        "main-form main-form"
+        "veggies fruit"
+        "protein grains"
+        "other1 other2"
+    ;
     max-height: 80%;
-    gap: 1%;
+    gap: 5%;
 
+
+}
+
+.main-ingredient-form {
+    grid-area: main-form;
 }
 
 
@@ -39,7 +50,7 @@ body {
 
 .ingredient-heading {
     background-color: #DDF3A4;
-    padding: 3%;
+    padding: 4%;
 }
 
 li {
@@ -88,7 +99,7 @@ input[type=text] {
     margin-top: 2%;
     border: none;
     border-bottom: 1px solid black;
-    background-color: white;
+    background-color: none;
     opacity: 1;
 	animation-name: fadeInOpacity;
 	animation-iteration-count: 1;
@@ -114,7 +125,7 @@ input:focus {
 
 
 input[type="submit"] {
-    
+    visibility: hidden;
 }
 
 .my-form, 
