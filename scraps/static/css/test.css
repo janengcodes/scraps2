@@ -144,6 +144,8 @@ input:focus {
 }
 
 .submit-main {
+    all: unset;       /* remove everything */
+    display: revert;  /* keep it visible */
     margin-left: auto;
     color: white;
     background-color: black;
@@ -155,4 +157,54 @@ input:focus {
 .label-main {
     font-size: 12px;
     font-weight: 450;
+}
+
+.submit-main:hover {
+    color: black;
+    background-color: white;
+    cursor: pointer;
+}
+
+.submit-main:active {
+    color: black;
+    background-color: white;
+    transform: scale(0.95);
+    border: none;
+}
+
+.submit-main:focus {
+    outline: none;  
+    border: none;
+}
+
+.ingredient-form-block {
+    display: flex;
+    justify-content: space-between;
+}
+
+.submit-not-main {
+    text-align: center;
+    margin-right: 30%;
+    margin-left: 4%;
+    margin-bottom: 1%;
+    border-radius: 4px;
+    padding: 1%;
+}
+
+.submit-not-main:hover {
+    color: black;
+    background-color: white;
+    cursor: pointer;
+}
+
+.submit-not-main:active {
+    color: black;
+    background-color: white;
+    transform: scale(0.95);
+    border: none;
+}
+
+.submit-not-main:focus {
+    outline: none;  
+    border: none;
 }
