@@ -1,6 +1,20 @@
 body {
     background-color: white;
 }
+
+
+
+.my-form * {
+  all: unset;       /* Remove all inherited/default styles */
+  display: revert;  /* Reset display to default */
+    font-family: 'Be Vietnam Pro', sans-serif;
+  font-weight: 350;
+  font-style: normal;
+  font-size: 14px;
+
+}
+
+
 .pantry-layout {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
@@ -10,7 +24,7 @@ body {
     height: 100%;
     margin-left: 5%;
     margin-top: 5%;
-    gap: 1%;
+    gap: 3%;
 }
 
 .ingredients-cell {
@@ -32,14 +46,11 @@ body {
 
 .main-ingredient-form {
     grid-area: main-form;
-    background-color: #F3EDF7;
+    background-color: #D5E8ED;
     padding: 2%;
     border-bottom: 1px solid black;
 }
 
-#fingredientmain {
-    background-color: #F3EDF7;
-}
 
 .ingredient-section:hover{
     background-color: #D9D9D9;
@@ -128,15 +139,20 @@ input:focus {
 	}
 } 
 
-
-
-.my-form, 
-.my-form * {
-  all: unset;       /* Remove all inherited/default styles */
-  display: revert;  /* Reset display to default */
+.form-input-fields {
+    display: flex;
 }
 
+.submit-main {
+    margin-left: auto;
+    color: white;
+    background-color: black;
+    border-radius: 4px;
+    padding: 1.5%;
+    font-weight: 450;
+}
 
-input[type=text] {
-    background-color: none;
+.label-main {
+    font-size: 12px;
+    font-weight: 450;
 }
