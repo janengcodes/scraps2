@@ -5,6 +5,7 @@ import { StrictMode } from "react";
 import LoggedInNavBar from "./NavBar";
 import UserPantryIngredients from "./PantryIngredients";
 import Dashboard from "./Dashboard";
+import UserPantryTable from "./PantryTable";
 // Render the LoggedInNavBar 
 const elements = document.querySelectorAll(".reactEntry");
 elements.forEach((element) => {
