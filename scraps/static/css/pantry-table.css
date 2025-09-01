@@ -1,0 +1,210 @@
+body {
+    background-color: white;
+}
+
+
+
+.my-form * {
+  all: unset;       /* Remove all inherited/default styles */
+  display: revert;  /* Reset display to default */
+    font-family: 'Be Vietnam Pro', sans-serif;
+  font-weight: 350;
+  font-style: normal;
+  font-size: 14px;
+
+}
+
+
+.pantry-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    /* background-color: lightblue; */
+    width: 90%;
+    height: 100%;
+    margin-left: 5%;
+    margin-top: 5%;
+    gap: 3%;
+}
+
+.ingredients-cell {
+    /* background-color: lightcoral; */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 0.25fr 1fr 1fr 1fr;
+    grid-template-areas: 
+        "main-form main-form"
+        "veggies fruit"
+        "protein grains"
+        "other1 other2"
+    ;
+    max-height: 80%;
+    gap: 5%;
+
+
+}
+
+.main-ingredient-form {
+    grid-area: main-form;
+    background-color: #D5E8ED;
+    padding: 2%;
+    border-bottom: 1px solid black;
+}
+
+
+.ingredient-section:hover{
+    background-color: #D9D9D9;
+    border-radius: 2%;
+}
+
+.ingredient-form {
+    display: none;
+}
+
+.ingredient-section:hover .ingredient-form {
+    display: block;
+}
+
+.ingredient-heading {
+    background-color: #DDF3A4;
+    padding: 4%;
+}
+
+li {
+    margin-top: 2%;
+}
+.ingredient-list {
+    margin-top: 5%;
+    margin-left: 15%;
+}
+
+.pantry-info-cell {
+    background-color: #D9D9D9;
+    display: grid;
+    height: 80%;
+    width: 100%;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr;
+}
+
+
+.pie-chart-heading {
+    padding: 3%;
+}
+
+.cuisine-matches-heading {
+    padding: 3%;
+}
+
+.isi-heading {
+    padding: 3%;
+}
+
+.in-season-ingredients-cell {
+    /* background-color: yellow; */
+    background-color: #DDF3A4;
+    height: 80%;
+}
+
+ul.a {
+  list-style-type: circle;
+}
+
+
+
+input[type=text] {
+    margin-top: 2%;
+    border: none;
+    border-bottom: 1px solid black;
+    opacity: 1;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: 0.5s;
+}
+
+input:focus {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid black;
+}
+
+
+@keyframes fadeInOpacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+} 
+
+.form-input-fields {
+    display: flex;
+}
+
+.submit-main {
+    all: unset;       /* remove everything */
+    display: revert;  /* keep it visible */
+    margin-left: auto;
+    color: white;
+    background-color: black;
+    border-radius: 4px;
+    padding: 1.5%;
+    font-weight: 450;
+}
+
+.label-main {
+    font-size: 12px;
+    font-weight: 450;
+}
+
+.submit-main:hover {
+    color: black;
+    background-color: white;
+    cursor: pointer;
+}
+
+.submit-main:active {
+    color: black;
+    background-color: white;
+    transform: scale(0.95);
+    border: none;
+}
+
+.submit-main:focus {
+    outline: none;  
+    border: none;
+}
+
+.ingredient-form-block {
+    display: flex;
+    justify-content: space-between;
+}
+
+.submit-not-main {
+    text-align: center;
+    margin-right: 30%;
+    margin-left: 4%;
+    margin-bottom: 1%;
+    border-radius: 4px;
+    padding: 1%;
+}
+
+.submit-not-main:hover {
+    color: black;
+    background-color: white;
+    cursor: pointer;
+}
+
+.submit-not-main:active {
+    color: black;
+    background-color: white;
+    transform: scale(0.95);
+    border: none;
+}
+
+.submit-not-main:focus {
+    outline: none;  
+    border: none;
+}

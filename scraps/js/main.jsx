@@ -41,3 +41,17 @@ pantry_elements.forEach((element) => {
   );
 });
 
+// Render the Pantry 
+const pantryElements = document.querySelectorAll(".reactEntryPantryTable");
+pantryElements.forEach((element) => {
+  const root = createRoot(element);
+  root.render(
+    <StrictMode>
+      <UserPantryTable/>
+    </StrictMode>
+  );
+});
+
+
+
+
