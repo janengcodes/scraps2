@@ -223,7 +223,7 @@ def get_pantry(username):
     # 2. Get ingredients associated with the pantry id 
 
     pantry_id = pantry['pantry_id']
-
+    # TODO: default is just winter, change later
     seasonal_ingredients = connection.execute('''
         SELECT ingredient_id, ingredient_name, season, food_group
         FROM ingredients

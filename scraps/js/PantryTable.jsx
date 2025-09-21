@@ -68,9 +68,11 @@ const username = localStorage.getItem("user");
           </div>
           <div className="ingredient-list">
             <ul className="a be-vietnam-pro-smaller">
-              <li>Cabbage</li>
-              <li>Romaine</li>
-
+                {Array.isArray(pantryIngredients) && pantryIngredients
+                    .filter((ingredient) => ingredient.food_group === "veggies") // Filter ingredients by food group
+                    .map((ingredient, index) => (
+                    <div className="pantry-ingredient">{ingredient.ingredient_name}</div>
+                ))}
               <li>
                 <form
                   action=""
@@ -106,7 +108,45 @@ const username = localStorage.getItem("user");
           <div className="ingredient-heading">
             <p className="space-mono-bold">Fruits</p>
           </div>
+          <div className="ingredient-list">
+            <ul className="a be-vietnam-pro-smaller">
+                {Array.isArray(pantryIngredients) && pantryIngredients
+                    .filter((ingredient) => ingredient.food_group === "fruit") // Filter ingredients by food group
+                    .map((ingredient, index) => (
+                    <div className="pantry-ingredient">{ingredient.ingredient_name}</div>
+                ))}
+              <li>
+                <form
+                  action=""
+                  className="ingredient-form fade-in my-form"
+                >
+                  {/* <label htmlFor="ingredient">Ingredient:</label> */}
+                  <div className="ingredient-form-block">
+                    <ul className="a">
+                      <li>
+                        <input
+                          type="text"
+                          id="fingredient"
+                          className="be-vietnam-pro-smaller"
+                          name="fingredient"
+                        />
+                        <br />
+                        <br />
+                      </li>
+                    </ul>
+                    <input
+                      type="submit"
+                      value="Add"
+                      className="submit-not-main"
+                    />
+                  </div>
+                </form>
+              </li>
+            </ul>
+          </div>
         </div>
+
+  
 
         <div className="ingredient-section">
           <div className="ingredient-heading">
