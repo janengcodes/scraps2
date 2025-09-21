@@ -294,6 +294,7 @@ def get_pantry(username):
     # If pantry ingredients list is empty, make recs empty
     if not pantry_ingredients_list or not pantry_ingredients_list[0]['ingredient_name']:
         recs = []
+    print("test pantry")
     print(pantry_ingredients_list)
     return flask.jsonify({'pantry_id': pantry_id, 'ingredients': ingredients_list, 'pantry_ingredients':pantry_ingredients_list, 'recs':recs}), 200
 

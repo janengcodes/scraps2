@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import "../static/css/globals.css";
 import "../static/css/style.css";
@@ -6,10 +6,39 @@ import "../static/css/pantry-table.css";
 import axios from "axios";
 
 export default function UserPantryTable() {
-  console.log("Pantry table called");
+// Ingredient data
+const [ingredients, setIngredients] = useState([]);
+// Pantry ingredients 
+const [pantryIngredients, setPantryIngredients] = useState([]); 
+// Username 
+const username = localStorage.getItem("user");
+
+// Fetch user's pantry data from the API 
+  useEffect(() => {
+      // Fetch the user's pantry data 
+      // axiosHTTP requests to REST endpoints
+      axios 
+          .get(`/api/pantry/${username}`)
+          .then((response) => {
+              // Ingredients are the response data 
+              const { ingredients } = response.data
+              setIngredients(ingredients || [])
+              const { pantry_ingredients } = response.data
+              setPantryIngredients(pantry_ingredients || [])
+
+          })
+          .catch((error) => {
+              console.error('Error fetching pantry data:', error);
+          });
+  }, [username]);
+
+  // Values check, keep separate so that we don't see old pantry ingredients 
+  useEffect(() => {
+    console.log("Pantry Ingredients updated:", pantryIngredients);
+  }, [pantryIngredients]);
+
   return (
     <>
-  
     <div className="pantry-layout">
       <div className="ingredients-cell">
         <div className="main-ingredient-form">
