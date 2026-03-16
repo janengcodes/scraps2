@@ -81,6 +81,30 @@ export default function MealCalendar({meals, setMeals, refreshTrigger, triggerRe
     setFormValues(prev => ({ ...prev, [name]: value }));
   };
 
+  const handleDeleteMeal = async (mealIndex, day) => {
+    try {
+      // Remove from state
+      const updatedMeals = meals.filter((meal, index) => {
+        if (meal.meal_day === day || meal.day === day) {
+          const mealsForDay = meals.filter(m => m.meal_day === day || m.day === day);
+          return !(mealsForDay.indexOf(meal) === mealIndex);
+        }
+        return true;
+      });
+      
+      setMeals(updatedMeals);
+
+      // Delete from database
+      await axios.delete(`/api/delete-meal/${username}`, {
+        data: { day, mealIndex }
+      });
+
+      triggerRefresh();
+    } catch (error) {
+      console.error('Error deleting meal:', error);
+    }
+  };
+
   
 
 
@@ -94,8 +118,19 @@ export default function MealCalendar({meals, setMeals, refreshTrigger, triggerRe
       <div className="meal-list">
         {mealsForDay.map((meal, index) => (
           <div key={index} className="meal">
-            <h4 className="meal-type">{meal.mealType}</h4>
-            <p className="meal-name">{meal.mealName}</p>
+            <div className="meal-header">
+              <div>
+                <h4 className="meal-type">{meal.mealType}</h4>
+                <p className="meal-name">{meal.mealName}</p>
+              </div>
+              <button 
+                className="delete-meal-btn"
+                onClick={() => handleDeleteMeal(index, day)}
+                title="Delete meal"
+              >
+                ✕
+              </button>
+            </div>
 
             <div className="recipe-link-container">
               <p className="recipe-link">{meal.selectedRecipe}</p>
@@ -183,8 +218,19 @@ export default function MealCalendar({meals, setMeals, refreshTrigger, triggerRe
       <div className="meal-list">
         {mealsForDay.map((meal, index) => (
           <div key={index} className="meal">
-            <h4 className="meal-type ">{meal.mealType}</h4>
-            <p className="meal-name">{meal.mealName}</p>
+            <div className="meal-header">
+              <div>
+                <h4 className="meal-type ">{meal.mealType}</h4>
+                <p className="meal-name">{meal.mealName}</p>
+              </div>
+              <button 
+                className="delete-meal-btn"
+                onClick={() => handleDeleteMeal(index, day)}
+                title="Delete meal"
+              >
+                ✕
+              </button>
+            </div>
             <div className="recipe-link-container">
               <p className="recipe-link">{meal.selectedRecipe}</p>
             </div>

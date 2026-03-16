@@ -94,6 +94,28 @@ body {
   align-items: flex-start;
 }
 
+.meal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.delete-meal-btn {
+  background: none;
+  border: none;
+  color: #d32f2f;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0;
+  margin-left: auto;
+  transition: color 0.2s ease;
+}
+
+.delete-meal-btn:hover {
+  color: #b71c1c;
+}
+
 .meal-type {
   font-family: "Space Mono", serif;
   font-weight: 600;

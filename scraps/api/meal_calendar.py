@@ -104,3 +104,50 @@ def add_to_meal_cal(username):
     return flask.jsonify({"success": True}), 200
 
 
+@scraps.app.route('/api/delete-meal/<username>', methods=['DELETE'])
+def delete_meal(username):
+    """Delete a meal from the meal calendar."""
+    # Ensure that the user is logged in 
+    check_auth()
+
+    # connection to the database
+    connection = scraps.model.get_db()
+    data = request.get_json()
+    day = data.get('day')
+    meal_index = data.get('mealIndex')
+
+    # find the meal calendar id
+    meal_cal = connection.execute('''
+        SELECT meal_calendar_id
+        FROM meal_calendar_users
+        WHERE username = ?
+    ''', (username,)).fetchone()
+
+    if meal_cal is None:
+        return flask.jsonify({"error": "Meal calendar not found"}), 404
+    
+    meal_cal_id = meal_cal['meal_calendar_id']
+    
+    # Get all meals for that day
+    meals_for_day = connection.execute('''
+        SELECT meal_calendar_item_id, meal_day
+        FROM meal_calendar_item
+        WHERE meal_calendar_id = ? AND meal_day = ?
+        ORDER BY meal_calendar_item_id
+    ''', (meal_cal_id, day)).fetchall()
+    
+    if meal_index >= len(meals_for_day):
+        return flask.jsonify({"error": "Meal not found"}), 404
+    
+    meal_to_delete = meals_for_day[meal_index]
+    
+    # Delete the meal
+    connection.execute('''
+        DELETE FROM meal_calendar_item
+        WHERE meal_calendar_item_id = ?
+    ''', (meal_to_delete['meal_calendar_item_id'],))
+    
+    connection.commit()
+    return flask.jsonify({"success": True}), 200
+
+
